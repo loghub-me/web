@@ -1,0 +1,14 @@
+# Editor
+.idea/
+.vscode/
+.zed/
+
+# macOS
+.DS_Store
+
+# node_modules
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
