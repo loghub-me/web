@@ -14,7 +14,6 @@ interface CustomJwtPayload {
   email: string;
   username: string;
   nickname: string;
-  avatar: string;
   role: UserRole;
 }
 

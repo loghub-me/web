@@ -41,7 +41,6 @@ function extractSession(res: KyResponse): Session {
     email: decodedToken.email,
     username: decodedToken.username,
     nickname: decodedToken.nickname,
-    avatar: decodedToken.avatar,
     role: decodedToken.role,
   } as Session;
 }
