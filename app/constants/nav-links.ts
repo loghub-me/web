@@ -1,6 +1,6 @@
 import { FileQuestionIcon, PaperclipIcon } from 'lucide-react';
 
-export const headerNavLinks = [
+export const navLinks = [
   { name: '아티클', to: '/search/articles', icon: PaperclipIcon },
   { name: '질문', to: '/search/questions', icon: FileQuestionIcon },
 ];

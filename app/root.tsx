@@ -3,6 +3,8 @@ import './app.css';
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
+import { Toaster } from '~/components/ui/sonner';
+import AuthProvider from '~/providers/auth-provider';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -27,9 +29,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <GlobalHeader />
-        {children}
-        <GlobalFooter />
+        <AuthProvider>
+          <GlobalHeader />
+          {children}
+          <GlobalFooter />
+          <Toaster position={'top-center'} richColors />
+        </AuthProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -55,7 +60,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="container mx-auto p-4 pt-16">
+    <main className="container mx-auto p-4 pt-18 min-h-screen">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (

@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import Logo from '~/components/global/logo';
 import { Separator } from '~/components/ui/separator';
-import { footerNavLinks } from '~/constants/header-nav-links';
+import { footerNavLinks } from '~/constants/nav-links';
 
 export default function GlobalFooter() {
   return (

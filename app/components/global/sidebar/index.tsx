@@ -5,7 +5,7 @@ import SidebarAuthMenu from '~/components/global/sidebar/auth-menu';
 import SidebarNavLink from '~/components/global/sidebar/nav-link';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
-import { headerNavLinks } from '~/constants/header-nav-links';
+import { navLinks } from '~/constants/nav-links';
 
 export default function GlobalSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function GlobalSidebar() {
         </SheetTitle>
         <hr className="my-2" />
         <nav className="flex flex-col gap-2">
-          {headerNavLinks.map((navLink) => (
+          {navLinks.map((navLink) => (
             <SidebarNavLink key={navLink.to} {...navLink} closeSheet={closeSheet} />
           ))}
         </nav>
