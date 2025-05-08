@@ -18,18 +18,19 @@ export default function GlobalSidebar() {
           <MenuIcon />
         </Button>
       </SheetTrigger>
-      <SheetContent className="p-4 pt-6">
-        <SheetTitle>
+      <SheetContent className="gap-0">
+        <SheetTitle className="p-6">
           <Logo />
         </SheetTitle>
-        <hr className="my-2" />
-        <nav className="flex flex-col gap-2">
+        <hr className="mx-6 my-2" />
+        <nav className="px-6 py-4 flex flex-col gap-2">
           {navLinks.map((navLink) => (
             <SidebarNavLink key={navLink.to} {...navLink} closeSheet={closeSheet} />
           ))}
         </nav>
-        <hr className="my-2" />
-        <SidebarAuthMenu />
+        <nav className="absolute bottom-0 w-full p-6">
+          <SidebarAuthMenu />
+        </nav>
       </SheetContent>
     </Sheet>
   );

@@ -13,7 +13,7 @@ export default function AuthRequestLayout({ loaderData }: Route.ComponentProps) 
 
   return (
     <div className="w-full h-screen flex">
-      <section className="justify-center w-full h-screen border-r bg-secondary hidden sm:flex">
+      <section className="justify-center w-full h-screen border-r bg-secondary hidden md:flex">
         <Quote {...quote} />
       </section>
       <section className="w-full h-screen flex items-center justify-center pb-10">
