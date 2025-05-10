@@ -3,7 +3,7 @@ import { Toaster as Sonner, type ToasterProps } from 'sonner';
 const Toaster = ({ ...props }: ToasterProps) => {
   // TODO: Implement useTheme
   // const { theme = 'system' } = useTheme();
-  const theme = 'system';
+  const theme = 'light';
 
   return (
     <Sonner

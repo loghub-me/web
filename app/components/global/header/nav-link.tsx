@@ -12,14 +12,18 @@ export default function HeaderNavLink({ name, to }: Readonly<HeaderNavLinkProps>
     <NavLink
       to={to}
       className={({ isActive, isPending }) =>
-        cn('relative flex items-center justify-center h-9', isActive && 'text-primary', isPending && 'animate-pulse')
+        cn(
+          'relative font-medium flex items-center justify-center h-9',
+          isActive ? 'text-primary' : 'text-muted-foreground',
+          isPending && 'animate-pulse'
+        )
       }
     >
       {({ isActive }) => (
         <>
           <span>{name}</span>
           {isActive && (
-            <motion.hr layoutId="underbar" className="absolute bottom-0 w-2/3 rounded-full border-2 border-primary" />
+            <motion.hr layoutId="underbar" className="absolute bottom-0 w-2/3 rounded-full border-2 border-border" />
           )}
         </>
       )}
