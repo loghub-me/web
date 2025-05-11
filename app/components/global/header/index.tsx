@@ -6,7 +6,7 @@ import { navLinks } from '~/constants/nav-links';
 
 export default function GlobalHeader() {
   return (
-    <header className="absolute top-0 left-0 w-full h-16 border-b bg-card">
+    <header className="absolute top-0 left-0 z-50 w-full h-16 border-b bg-card">
       <div className="container mx-auto px-4 h-16 flex items-center gap-8">
         <Logo />
         <nav className="md:flex hidden gap-4">

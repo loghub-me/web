@@ -9,4 +9,5 @@ export default [
     route('login/confirm', 'routes/auth/login/confirm.tsx'),
   ]),
   ...prefix('search', [layout('routes/search/layout.tsx', [route('articles', 'routes/search/articles.tsx')])]),
+  ...prefix('articles', [route(':username/:slug', 'routes/articles/detail.tsx')]),
 ] satisfies RouteConfig;
