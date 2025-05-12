@@ -1,18 +1,19 @@
 import type { Route } from './+types/detail';
-import { getArticle } from '~/apis/server/articles';
 import {
   ArticleDetailAside,
   ArticleDetailContent,
   ArticleDetailHeader,
   ArticleDetailHero,
-} from '~/components/articles';
+} from 'app/components/articles';
+import { getArticle } from '~/apis/server/articles';
+import ArticleComments from '~/components/articles/comments';
 import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
 import { parseMarkdown, parseToc } from '~/lib/markdown/parse';
 import { parseParams } from '~/lib/parse';
-import { articlesDetailSchema } from '~/schemas/articles';
+import { articleDetailSchema } from '~/schemas/articles';
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const { username, slug } = parseParams(params, articlesDetailSchema);
+  const { username, slug } = parseParams(params, articleDetailSchema);
   const article = await getArticle(username, slug);
   return { article };
 }
@@ -25,12 +26,13 @@ export default function ArticleDetailRoute({ loaderData }: Route.ComponentProps)
     <>
       <ArticleDetailHeader {...article} />
       <ScrollProgressBar />
-      <main className="container mx-auto px-2 pb-4 min-h-screen">
+      <main className="container mx-auto px-2 py-4 min-h-screen space-y-4">
         <ArticleDetailHero {...article} />
         <div className="flex gap-4">
           <ArticleDetailContent html={html} {...article} />
           <ArticleDetailAside toc={toc} {...article} />
         </div>
+        <ArticleComments articleId={article.id} />
       </main>
     </>
   );

@@ -1,4 +1,4 @@
-interface Article {
+interface Article extends Timestamps {
   id: number;
   slug: string;
   title: string;
@@ -6,8 +6,6 @@ interface Article {
   stats: ArticleStats;
   writerUsername: string;
   topics: Topic[];
-  createdAt: string;
-  updatedAt: string;
 }
 
 interface ArticleDetail extends Article {
@@ -18,6 +16,15 @@ interface ArticleDetail extends Article {
 interface ArticleStats {
   starCount: number;
   commentCount: number;
+}
+
+interface ArticleComment extends Timestamps {
+  id: number;
+  content: string;
+  deleted: boolean;
+  replyCount: number;
+  mention: User | null;
+  writer: User;
 }
 
 type ArticleSort = 'latest' | 'oldest' | 'trending';

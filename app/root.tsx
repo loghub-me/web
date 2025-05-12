@@ -5,6 +5,7 @@ import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
 import { Toaster } from '~/components/ui/sonner';
 import AuthProvider from '~/providers/auth-provider';
+import QueryProvider from '~/providers/query-provider';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -29,12 +30,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <AuthProvider>
-          <GlobalHeader />
-          {children}
-          <GlobalFooter />
-          <Toaster position={'top-center'} richColors />
-        </AuthProvider>
+        <QueryProvider>
+          <AuthProvider>
+            <GlobalHeader />
+            {children}
+            <GlobalFooter />
+            <Toaster position={'top-center'} richColors />
+          </AuthProvider>
+        </QueryProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

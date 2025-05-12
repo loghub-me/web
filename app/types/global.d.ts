@@ -9,4 +9,9 @@ interface Toc {
   slug: string;
 }
 
+interface Timestamps {
+  createdAt: string;
+  updatedAt: string;
+}
+
 type Sort = ArticleSort;

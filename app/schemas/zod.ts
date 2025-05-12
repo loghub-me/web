@@ -24,3 +24,10 @@ export const compositeKeySchema = z.object({
     .transform((value) => value.replace('@', '')), // replace('@', '')
   slug: z.string().trim(),
 });
+
+export const idZod = z.number().positive();
+export const commentContentZod = z
+  .string()
+  .trim()
+  .min(1, { message: '댓글을 입력해주세요.' })
+  .max(255, { message: '댓글은 최대 255자까지 입력할 수 있습니다.' });
