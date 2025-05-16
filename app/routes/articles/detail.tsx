@@ -1,13 +1,9 @@
 import type { Route } from './+types/detail';
-import {
-  ArticleDetailAside,
-  ArticleDetailContent,
-  ArticleDetailHeader,
-  ArticleDetailHero,
-} from 'app/components/articles';
+import { ArticleDetailAside, ArticleDetailContent, ArticleDetailHero } from 'app/components/articles';
 import { getArticle } from '~/apis/server/articles';
+import { ArticleDetailHeader } from '~/components/articles';
 import ArticleComments from '~/components/articles/comments';
-import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
+import { Card } from '~/components/ui/card';
 import { parseMarkdown, parseToc } from '~/lib/markdown/parse';
 import { parseParams } from '~/lib/parse';
 import ReplyProvider from '~/providers/reply-provider';
@@ -24,19 +20,18 @@ export default function ArticleDetailRoute({ loaderData }: Route.ComponentProps)
   const [html, toc] = [parseMarkdown(article.content), parseToc(article.content)];
 
   return (
-    <>
-      <ArticleDetailHeader {...article} />
-      <ScrollProgressBar />
-      <main className="container mx-auto px-2 py-4 min-h-screen space-y-4">
-        <ArticleDetailHero {...article} />
-        <div className="flex gap-4">
+    <main className="container mx-auto px-2 pt-20 pb-4 min-h-screen space-y-4">
+      <ArticleDetailHero {...article} />
+      <div className="flex gap-4">
+        <Card className="w-full pt-0">
+          <ArticleDetailHeader {...article} />
           <ArticleDetailContent html={html} {...article} />
-          <ArticleDetailAside toc={toc} {...article} />
-        </div>
-        <ReplyProvider>
-          <ArticleComments articleId={article.id} />
-        </ReplyProvider>
-      </main>
-    </>
+        </Card>
+        <ArticleDetailAside toc={toc} {...article} />
+      </div>
+      <ReplyProvider>
+        <ArticleComments articleId={article.id} />
+      </ReplyProvider>
+    </main>
   );
 }
