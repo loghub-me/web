@@ -10,6 +10,7 @@ import ArticleComments from '~/components/articles/comments';
 import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
 import { parseMarkdown, parseToc } from '~/lib/markdown/parse';
 import { parseParams } from '~/lib/parse';
+import ReplyProvider from '~/providers/reply-provider';
 import { articleDetailSchema } from '~/schemas/articles';
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -32,7 +33,9 @@ export default function ArticleDetailRoute({ loaderData }: Route.ComponentProps)
           <ArticleDetailContent html={html} {...article} />
           <ArticleDetailAside toc={toc} {...article} />
         </div>
-        <ArticleComments articleId={article.id} />
+        <ReplyProvider>
+          <ArticleComments articleId={article.id} />
+        </ReplyProvider>
       </main>
     </>
   );

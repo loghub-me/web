@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getCommentReplies } from '~/apis/client/articles';
+import { getArticleCommentReplies } from '~/apis/client/articles';
 import ArticleCommentList from '~/components/articles/comments/list';
 import ArticleCommentListItem from '~/components/articles/comments/list-item';
 import { Button } from '~/components/ui/button';
@@ -19,7 +19,7 @@ export default function ArticleCommentReplies({
   const [loaded, setLoaded] = useState(false);
   const { data: replies, status } = useQuery({
     queryKey: ['article-comment-replies', articleId, commentId],
-    queryFn: () => getCommentReplies(articleId, commentId),
+    queryFn: () => getArticleCommentReplies(articleId, commentId),
     enabled: loaded,
   });
 
@@ -37,7 +37,9 @@ export default function ArticleCommentReplies({
 
   return (
     <ArticleCommentList className="pt-4">
-      {replies?.map((reply) => <ArticleCommentListItem key={reply.id} articleId={articleId} comment={reply} />)}
+      {replies?.map((reply) => (
+        <ArticleCommentListItem key={reply.id} articleId={articleId} parentId={commentId} comment={reply} />
+      ))}
     </ArticleCommentList>
   );
 }

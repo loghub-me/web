@@ -1,32 +1,48 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { DotIcon, ReplyIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { deleteComment } from '~/apis/client/articles';
+import { deleteArticleComment } from '~/apis/client/articles';
 import ArticleCommentReplies from '~/components/articles/comments/replies';
 import { Button } from '~/components/ui/button';
 import { UserInline, UserMention } from '~/components/users';
 import { useAuth } from '~/hooks/use-auth';
+import { useReply } from '~/hooks/use-reply';
 import { handleMessageError } from '~/lib/error';
 import { parseRelativeTime } from '~/lib/parse';
 import { cn } from '~/lib/utils';
 
 interface ArticleCommentListItemProps {
+  parentId?: number;
   articleId: number;
   comment: ArticleComment;
 }
 
-export default function ArticleCommentListItem({ articleId, comment }: Readonly<ArticleCommentListItemProps>) {
-  const { writer, createdAt, content, replyCount, mention, deleted } = comment;
+export default function ArticleCommentListItem({
+  parentId,
+  articleId,
+  comment,
+}: Readonly<ArticleCommentListItemProps>) {
+  const { id, writer, createdAt, content, replyCount, mention, deleted } = comment;
   const { session } = useAuth();
+  const { replyTo, setReplyTo, setParentId, clear } = useReply();
+  const isReplying = replyTo?.id === id;
   const queryClient = useQueryClient();
 
-  function onDeleteComment() {
-    deleteComment(articleId, comment.id)
+  function onDeleteButtonClick() {
+    deleteArticleComment(articleId, comment.id)
       .then(({ message }) => {
         toast.success(message);
         return queryClient.invalidateQueries({ queryKey: ['article-comments', articleId] });
       })
       .catch(handleMessageError);
+  }
+
+  function onReplyButtonClick() {
+    if (isReplying) {
+      return clear();
+    }
+    setParentId(parentId);
+    setReplyTo(comment);
   }
 
   return (
@@ -38,14 +54,19 @@ export default function ArticleCommentListItem({ articleId, comment }: Readonly<
           <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
         </div>
         {session && (
-          <div>
+          <div className="flex gap-1">
             {session.username === writer.username && !deleted && (
-              <Button variant={'ghost'} size={'icon'} className="size-6 rounded-full" onClick={onDeleteComment}>
+              <Button variant={'ghost'} size={'icon'} className="size-6 rounded-full" onClick={onDeleteButtonClick}>
                 <XIcon className="size-3" />
               </Button>
             )}
             {!deleted && (
-              <Button variant={'ghost'} size={'icon'} className="size-6 rounded-full">
+              <Button
+                variant={isReplying ? 'secondary' : 'ghost'}
+                size={'icon'}
+                className="size-6 rounded-full"
+                onClick={onReplyButtonClick}
+              >
                 <ReplyIcon className="size-3" />
               </Button>
             )}

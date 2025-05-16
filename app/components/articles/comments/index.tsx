@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getComments } from '~/apis/client/articles';
+import { getArticleComments } from '~/apis/client/articles';
 import ArticleCommentForm from '~/components/articles/comments/form';
 import ArticleCommentList from '~/components/articles/comments/list';
 import ArticleCommentListItem from '~/components/articles/comments/list-item';
@@ -12,7 +12,7 @@ interface ArticleCommentsProps {
 export default function ArticleComments({ articleId }: Readonly<ArticleCommentsProps>) {
   const { data: comments, status } = useQuery({
     queryKey: ['article-comments', articleId],
-    queryFn: () => getComments(articleId),
+    queryFn: () => getArticleComments(articleId),
   });
 
   return (
