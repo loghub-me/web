@@ -3,6 +3,7 @@ import { getArticleComments } from '~/apis/client/articles';
 import ArticleCommentForm from '~/components/articles/comments/form';
 import ArticleCommentList from '~/components/articles/comments/list';
 import ArticleCommentListItem from '~/components/articles/comments/list-item';
+import CommentSkeleton from '~/components/common/comments/skeleton';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
 
 interface ArticleCommentsProps {
@@ -20,9 +21,9 @@ export default function ArticleComments({ articleId }: Readonly<ArticleCommentsP
       <CardHeader className="border-b">
         <ArticleCommentForm articleId={articleId} />
       </CardHeader>
-      {status === 'pending' && <span>TODO</span>}
       <CardContent>
         <ArticleCommentList>
+          {status === 'pending' && <CommentSkeleton size={2} />}
           {comments?.content.map((comment) => (
             <ArticleCommentListItem key={comment.id} articleId={articleId} comment={comment} />
           ))}

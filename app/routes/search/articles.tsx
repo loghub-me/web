@@ -1,7 +1,9 @@
 import type { Route } from './+types/articles';
+import { Suspense } from 'react';
 import { Await } from 'react-router';
 import { searchArticles } from '~/apis/server/articles';
-import { ArticleList, ArticleListItem } from '~/components/articles';
+import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/articles';
+import { PageNavSkeleton } from '~/components/common/page-nav';
 import PageNav from '~/components/search/page-nav';
 import { parseSearchParams } from '~/lib/parse';
 import { articlesSearchSchema } from '~/schemas/articles';
@@ -24,19 +26,23 @@ export default function SearchArticleRoute({ loaderData }: Route.ComponentProps)
   return (
     <main className="space-y-4">
       <ArticleList>
-        <Await resolve={articles}>
-          {(resolved) => resolved.content.map((article) => <ArticleListItem key={article.id} article={article} />)}
-        </Await>
+        <Suspense fallback={<ArticleListSkeleton size={4} />}>
+          <Await resolve={articles}>
+            {(resolved) => resolved.content.map((article) => <ArticleListItem key={article.id} article={article} />)}
+          </Await>
+        </Suspense>
       </ArticleList>
-      <Await resolve={articles}>
-        {(resolved) => (
-          <PageNav
-            to={`${pathname}?query=${query}&sort=${sort}&page=`}
-            currentPage={page}
-            totalPages={resolved.page.totalPages}
-          />
-        )}
-      </Await>
+      <Suspense fallback={<PageNavSkeleton />}>
+        <Await resolve={articles}>
+          {(resolved) => (
+            <PageNav
+              to={`${pathname}?query=${query}&sort=${sort}&page=`}
+              currentPage={page}
+              totalPages={resolved.page.totalPages}
+            />
+          )}
+        </Await>
+      </Suspense>
     </main>
   );
 }

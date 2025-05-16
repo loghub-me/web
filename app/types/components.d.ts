@@ -1,0 +1,3 @@
+interface SkeletonProps {
+  size?: number;
+}

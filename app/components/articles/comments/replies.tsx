@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { getArticleCommentReplies } from '~/apis/client/articles';
 import ArticleCommentList from '~/components/articles/comments/list';
 import ArticleCommentListItem from '~/components/articles/comments/list-item';
+import CommentSkeleton from '~/components/common/comments/skeleton';
 import { Button } from '~/components/ui/button';
 
 interface ArticleCommentRepliesProps {
@@ -31,12 +32,9 @@ export default function ArticleCommentReplies({
     );
   }
 
-  if (status === 'pending') {
-    return <span>TODO</span>;
-  }
-
   return (
     <ArticleCommentList className="pt-4">
+      {status === 'pending' && <CommentSkeleton size={2} />}
       {replies?.map((reply) => (
         <ArticleCommentListItem key={reply.id} articleId={articleId} parentId={commentId} comment={reply} />
       ))}
