@@ -23,7 +23,7 @@ export default function HeaderNavLink({ name, to }: Readonly<HeaderNavLinkProps>
         <>
           <span>{name}</span>
           {isActive && (
-            <motion.hr layoutId="underbar" className="absolute bottom-0 w-2/3 rounded-full border-2 border-border" />
+            <motion.hr layoutId="underbar" className="absolute bottom-0 w-2/3 rounded-full border-2 border-primary" />
           )}
         </>
       )}

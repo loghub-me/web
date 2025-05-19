@@ -11,9 +11,11 @@ export async function handleMessageError(err: Error) {
 
   const body = await err.response.json<ErrorResponseBody>();
 
-  if (body.message) {
-    toast.error(body.message);
+  if (!body.message) {
+    toast.error(ErrorMessage.UNKNOWN);
+    return;
   }
+  toast.error(body.message);
 }
 
 export async function handleFormError(err: Error, setError: UseFormSetError<any>) {
@@ -29,7 +31,9 @@ export async function handleFormError(err: Error, setError: UseFormSetError<any>
     }
   }
 
-  if (body.message) {
-    toast.error(body.message);
+  if (!body.message) {
+    toast.error(ErrorMessage.UNKNOWN);
+    return;
   }
+  toast.error(body.message);
 }

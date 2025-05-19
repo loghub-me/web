@@ -7,6 +7,7 @@ export default [
     route('join/confirm', 'routes/auth/join/confirm.tsx'),
     route('login', 'routes/auth/login/request.tsx'),
     route('login/confirm', 'routes/auth/login/confirm.tsx'),
+    route('logout', 'routes/auth/logout.tsx'),
   ]),
   ...prefix('search', [layout('routes/search/layout.tsx', [route('articles', 'routes/search/articles.tsx')])]),
   ...prefix('post', [
