@@ -15,3 +15,5 @@ interface Timestamps {
 }
 
 type Sort = ArticleSort;
+
+type EditorMode = 'edit' | 'preview' | 'preview-edit';

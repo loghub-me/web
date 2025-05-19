@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { Await } from 'react-router';
 import { searchArticles } from '~/apis/server/articles';
 import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/articles';
-import { PageNavSkeleton } from '~/components/common/page-nav';
+import { PageNavSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
 import { parseSearchParams } from '~/lib/parse';
 import { articlesSearchSchema } from '~/schemas/articles';
@@ -16,7 +16,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { articles, url, searchParams };
 }
 
-export default function SearchArticleRoute({ loaderData }: Route.ComponentProps) {
+export default function SearchArticlesRoute({ loaderData }: Route.ComponentProps) {
   const {
     articles,
     url: { pathname },

@@ -12,6 +12,15 @@ interface MethodResponseBody extends ResponseBody {
   message: string;
 }
 
+interface RedirectResponseBody extends ResponseBody {
+  pathname: string;
+  message: string;
+}
+
+interface DataResponseBody<T> extends ResponseBody {
+  data: T;
+}
+
 interface ErrorResponseBody extends ResponseBody {
   message?: string;
   fieldErrors?: Record<string, string>;

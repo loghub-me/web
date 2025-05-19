@@ -11,7 +11,7 @@ interface ArticleDetailHeroProps {
 export default function ArticleDetailHero({ title, writer, createdAt }: Readonly<ArticleDetailHeroProps>) {
   return (
     <div className="p-16 space-y-4">
-      <h2 className="text-center font-medium text-2xl">{title}</h2>
+      <h2 className="text-center font-semibold text-2xl">{title}</h2>
       <div className="mt-auto flex items-center gap-1 justify-center">
         <UserInline username={writer.username} />
         <DotIcon className="text-muted-foreground" />

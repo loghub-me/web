@@ -1,22 +1,19 @@
 import type { Route } from './+types/root';
-import './app.css';
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import '~/app.css';
 import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
 import { Toaster } from '~/components/ui/sonner';
 import AuthProvider from '~/providers/auth-provider';
+import ImageUploadProvider from '~/providers/image-upload-provider';
 import QueryProvider from '~/providers/query-provider';
+import '~/styles/easymde.css';
+import '~/styles/markdown-it.css';
 
 export const links: Route.LinksFunction = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: 'anonymous',
-  },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css',
   },
 ];
 
@@ -32,10 +29,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <QueryProvider>
           <AuthProvider>
-            <GlobalHeader />
-            {children}
-            <GlobalFooter />
-            <Toaster position={'top-center'} richColors />
+            <ImageUploadProvider>
+              <GlobalHeader />
+              {children}
+              <GlobalFooter />
+              <Toaster position={'top-center'} richColors />
+            </ImageUploadProvider>
           </AuthProvider>
         </QueryProvider>
         <ScrollRestoration />

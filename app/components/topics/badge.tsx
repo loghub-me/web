@@ -12,7 +12,7 @@ export default function TopicBadge({ topic, linkify = false }: Readonly<TopicBad
   return (
     <Badge
       variant={'outline'}
-      className={cn('h-7 rounded-sm p-1', linkify && 'transition-colors hover:bg-accent hover:cursor-pointer')}
+      className={cn('h-7 rounded-sm p-1', linkify && 'transition-colors hover:bg-accent cursor-pointer')}
       asChild={linkify}
     >
       {linkify ? (

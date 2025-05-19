@@ -14,7 +14,7 @@ export const nicknameZod = z
 export const otpZod = z.string().trim().min(6, '인증번호는 6자리여야 합니다.').max(6, '인증번호는 6자리여야 합니다.');
 
 export const queryZod = z.string().trim().optional().default('');
-export const sortZod = z.enum(['latest', 'oldest', 'trending']).default('latest');
+export const sortZod = z.enum(['latest', 'oldest', 'relevant', 'trending']).default('latest');
 export const pageZod = z.coerce.number().int().min(1).default(1);
 export const compositeKeySchema = z.object({
   username: z

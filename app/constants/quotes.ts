@@ -80,3 +80,8 @@ export const quotes = [
     by: '백업의 미스터리',
   },
 ];
+
+export function getRandomQuote() {
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  return quotes[randomIndex];
+}

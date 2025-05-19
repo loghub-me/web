@@ -27,4 +27,4 @@ interface ArticleComment extends Timestamps {
   writer: User;
 }
 
-type ArticleSort = 'latest' | 'oldest' | 'trending';
+type ArticleSort = 'latest' | 'oldest' | 'relevant' | 'trending';

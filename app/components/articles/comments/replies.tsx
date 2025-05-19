@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { getArticleCommentReplies } from '~/apis/client/articles';
 import ArticleCommentList from '~/components/articles/comments/list';
 import ArticleCommentListItem from '~/components/articles/comments/list-item';
-import CommentSkeleton from '~/components/common/comments/skeleton';
+import { CommentSkeleton } from '~/components/common/skeletons';
 import { Button } from '~/components/ui/button';
 
 interface ArticleCommentRepliesProps {
@@ -26,7 +26,7 @@ export default function ArticleCommentReplies({
 
   if (!loaded) {
     return (
-      <Button variant={'link'} className="px-0" onClick={() => setLoaded(true)}>
+      <Button variant={'link'} className="p-0 h-7 text-xs" onClick={() => setLoaded(true)}>
         {replyCount}개의 답글
       </Button>
     );

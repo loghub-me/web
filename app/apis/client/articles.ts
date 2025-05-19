@@ -1,6 +1,15 @@
 import { clientAPI } from './instance';
 import { z } from 'zod';
-import type { articleCommentPostSchema } from '~/schemas/articles';
+import { type articleCommentPostSchema, articlePostSchema } from '~/schemas/articles';
+
+export const postArticle = (json: z.infer<typeof articlePostSchema>) =>
+  clientAPI.post(`articles`, { json }).json<RedirectResponseBody>();
+
+export const editArticle = (articleId: number, json: z.infer<typeof articlePostSchema>) =>
+  clientAPI.put(`articles/${articleId}`, { json }).json<RedirectResponseBody>();
+
+export const removeArticle = (articleId: number) =>
+  clientAPI.delete(`articles/${articleId}`).json<MessageResponseBody>();
 
 export const getArticleComments = (articleId: number, page = 1) =>
   clientAPI.get(`articles/${articleId}/comments`, { searchParams: { page } }).json<Page<ArticleComment>>();
@@ -17,5 +26,14 @@ export const postArticleCommentReply = (
   json: z.infer<typeof articleCommentPostSchema>
 ) => postArticleComment(articleId, { ...json, parentId });
 
-export const deleteArticleComment = (articleId: number, commentId: number) =>
+export const removeArticleComment = (articleId: number, commentId: number) =>
   clientAPI.delete(`articles/${articleId}/comments/${commentId}`).json<MethodResponseBody>();
+
+export const existsArticleStar = (articleId: number) =>
+  clientAPI.get(`articles/star/${articleId}`).json<DataResponseBody<boolean>>();
+
+export const addArticleStar = (articleId: number) =>
+  clientAPI.post(`articles/star/${articleId}`).json<MethodResponseBody>();
+
+export const removeArticleStar = (articleId: number) =>
+  clientAPI.delete(`articles/star/${articleId}`).json<MessageResponseBody>();

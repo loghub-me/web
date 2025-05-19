@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { DotIcon, ReplyIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { deleteArticleComment } from '~/apis/client/articles';
+import { removeArticleComment } from '~/apis/client/articles';
 import ArticleCommentReplies from '~/components/articles/comments/replies';
 import { Button } from '~/components/ui/button';
 import { UserInline, UserMention } from '~/components/users';
@@ -29,7 +29,7 @@ export default function ArticleCommentListItem({
   const queryClient = useQueryClient();
 
   function onDeleteButtonClick() {
-    deleteArticleComment(articleId, comment.id)
+    removeArticleComment(articleId, comment.id)
       .then(({ message }) => {
         toast.success(message);
         return queryClient.invalidateQueries({ queryKey: ['article-comments', articleId] });
@@ -46,7 +46,7 @@ export default function ArticleCommentListItem({
   }
 
   return (
-    <div className="space-y-2">
+    <div>
       <div className="flex items-center gap-2">
         <div className="flex items-center">
           <UserInline {...writer} />
@@ -73,8 +73,8 @@ export default function ArticleCommentListItem({
           </div>
         )}
       </div>
-      <div className="pl-7">
-        <p className="leading-6">
+      <div className="pl-7.5">
+        <p className="leading-6 text-sm">
           {mention && <UserMention {...mention} />}
           <span className={cn(deleted && 'text-muted-foreground')}>{content}</span>
         </p>

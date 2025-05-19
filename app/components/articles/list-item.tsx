@@ -21,11 +21,13 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
         />
       </div>
       <h3 className="font-medium line-clamp-2">{title}</h3>
-      <div className="flex gap-1 flex-wrap">
-        {topics.map((topic) => (
-          <TopicBadge key={topic.slug} topic={topic} />
-        ))}
-      </div>
+      {topics.length > 0 && (
+        <div className="flex gap-1 flex-wrap">
+          {topics.map((topic) => (
+            <TopicBadge key={topic.slug} topic={topic} />
+          ))}
+        </div>
+      )}
       <div className="mt-auto flex items-center gap-2 justify-between">
         <UserInline username={writerUsername} />
         <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>

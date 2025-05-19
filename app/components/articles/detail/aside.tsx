@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Card } from '~/components/ui/card';
+import { UserCard } from '~/components/users';
 import { cn } from '~/lib/utils';
 
 interface ArticleDetailAsideProps {
   title: string;
   toc: Toc[];
+  writer: User;
 }
 
-export default function ArticleDetailAside({ title, toc }: Readonly<ArticleDetailAsideProps>) {
+export default function ArticleDetailAside({ title, toc, writer }: Readonly<ArticleDetailAsideProps>) {
   const [activeSlug, setActiveSlug] = useState<string>('');
   const headingRefs = useRef<Record<string, HTMLHeadingElement | null>>({});
 
@@ -37,25 +39,28 @@ export default function ArticleDetailAside({ title, toc }: Readonly<ArticleDetai
   }, [toc]);
 
   return (
-    <Card className="sticky top-20 hidden lg:block max-w-xs w-full h-fit p-4 space-y-4">
-      <h5 className="font-semibold text-lg">{title}</h5>
-      <ul className="space-y-2">
-        {toc.map((item) => {
-          return (
-            <li key={item.slug}>
-              <a
-                href={`#${item.slug}`}
-                className={cn(
-                  'px-2 py-1 text-sm text-muted-foreground text-nowrap rounded-md transition-all hover:bg-accent',
-                  item.slug === activeSlug && 'bg-accent font-bold text-foreground'
-                )}
-              >
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </Card>
+    <aside className="sticky top-4 hidden lg:block max-w-xs w-full h-fit space-y-4">
+      <Card className="p-4">
+        <h5 className="font-semibold text-lg">{title}</h5>
+        <ul className="space-y-2">
+          {toc.map((item) => {
+            return (
+              <li key={item.slug}>
+                <a
+                  href={`#${item.slug}`}
+                  className={cn(
+                    'px-2 py-1 text-sm text-muted-foreground text-nowrap rounded-md transition-all hover:bg-accent',
+                    item.slug === activeSlug && 'bg-accent font-bold text-foreground'
+                  )}
+                >
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </Card>
+      <UserCard user={writer} title={'작성자 정보'} />
+    </aside>
   );
 }

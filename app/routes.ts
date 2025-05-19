@@ -9,5 +9,11 @@ export default [
     route('login/confirm', 'routes/auth/login/confirm.tsx'),
   ]),
   ...prefix('search', [layout('routes/search/layout.tsx', [route('articles', 'routes/search/articles.tsx')])]),
-  ...prefix('articles', [route(':username/:slug', 'routes/articles/detail.tsx')]),
+  ...prefix('post', [
+    layout('routes/post/layout.tsx', [index('routes/post/index.tsx'), route('articles', 'routes/post/articles.tsx')]),
+  ]),
+  ...prefix('articles', [
+    route(':username/:slug', 'routes/articles/detail.tsx'),
+    route(':username/:slug/edit', 'routes/articles/edit.tsx'),
+  ]),
 ] satisfies RouteConfig;
