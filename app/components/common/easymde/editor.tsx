@@ -87,7 +87,7 @@ export default function EasyMDEEditor({
         easyMDERef.current = null;
       }
     };
-  }, [textareaRef, previewRef]);
+  }, [textareaRef, previewRef, defaultValue]);
 
   return (
     <div className="w-full h-full max-h-full flex flex-col">
@@ -111,8 +111,8 @@ export default function EasyMDEEditor({
         </ToggleGroup>
         <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
         <div className="flex gap-2">
+          <input {...inputFileProps} />
           <Button type="button" variant="outline" size="icon" onClick={() => inputFileRef.current?.click()}>
-            <input {...inputFileProps} />
             <ImageUpIcon />
           </Button>
           {children}
