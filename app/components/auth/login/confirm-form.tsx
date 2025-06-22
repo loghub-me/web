@@ -74,7 +74,7 @@ export default function LoginConfirmForm({ email }: Readonly<LoginConfirmFormPro
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           <MailIcon /> 이메일로 로그인
         </Button>
       </form>

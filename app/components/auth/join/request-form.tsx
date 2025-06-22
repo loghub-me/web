@@ -77,7 +77,7 @@ export default function JoinRequestForm() {
             )}
           />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           <MailIcon /> 이메일로 회원가입
         </Button>
       </form>
