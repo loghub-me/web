@@ -24,7 +24,7 @@ export default function SearchLayout({ loaderData: { pathname, searchParams } }:
       <Form action={pathname} className="flex gap-2">
         <SearchSort to={`${pathname}?query=${query}&sort=`} currentSort={sort} sortOptions={SORT_OPTIONS[pathname]} />
         <IconInput icon={SearchIcon} type="text" name="query" placeholder="검색..." />
-        <Button type={'submit'} variant={'ghost'}>
+        <Button type="submit" variant={'ghost'}>
           <ChevronRightIcon />
         </Button>
       </Form>

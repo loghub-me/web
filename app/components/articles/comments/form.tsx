@@ -80,7 +80,7 @@ export default function ArticleCommentForm({ articleId }: Readonly<ArticleCommen
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           <MessageSquareMoreIcon /> 작성
         </Button>
       </form>

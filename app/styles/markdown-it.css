@@ -80,7 +80,7 @@
     }
 
     pre {
-      @apply bg-code rounded-md border p-4;
+      @apply bg-code rounded-md border p-4 overflow-x-auto;
 
       code {
         @apply text-sm;

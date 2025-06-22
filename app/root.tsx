@@ -4,17 +4,21 @@ import '~/app.css';
 import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
 import { Toaster } from '~/components/ui/sonner';
+import { fonts } from '~/constants/fonts';
 import AuthProvider from '~/providers/auth-provider';
-import ImageUploadProvider from '~/providers/image-upload-provider';
 import QueryProvider from '~/providers/query-provider';
 import '~/styles/easymde.css';
 import '~/styles/markdown-it.css';
 
 export const links: Route.LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css',
-  },
+  { rel: 'preconnect', href: fonts.sans.origin, crossOrigin: 'anonymous' },
+  { rel: 'preload', href: `${fonts.sans.origin}${fonts.sans.path}`, as: 'style', crossOrigin: 'anonymous' },
+  { rel: 'stylesheet', href: `${fonts.sans.origin}${fonts.sans.path}`, crossOrigin: 'anonymous' },
+
+  // TODO: Implement mono font
+  // { rel: 'preconnect', href: fonts.mono.origin, crossOrigin: 'anonymous' },
+  // { rel: 'preload', href: `${fonts.mono.origin}${fonts.mono.path}`, as: 'style', crossOrigin: 'anonymous' },
+  // { rel: 'stylesheet', href: `${fonts.mono.origin}${fonts.mono.path}`, crossOrigin: 'anonymous' },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -29,12 +33,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <QueryProvider>
           <AuthProvider>
-            <ImageUploadProvider>
-              <GlobalHeader />
-              {children}
-              <GlobalFooter />
-              <Toaster position={'top-center'} richColors />
-            </ImageUploadProvider>
+            <GlobalHeader />
+            {children}
+            <GlobalFooter />
+            <Toaster position={'top-center'} richColors />
           </AuthProvider>
         </QueryProvider>
         <ScrollRestoration />

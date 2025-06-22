@@ -1,6 +1,5 @@
 import {
   commentContentZod as commentContent,
-  compositeKeySchema,
   idZod as id,
   pageZod as page,
   queryZod as query,
@@ -9,8 +8,6 @@ import {
 import { z } from 'zod';
 
 export const articlesSearchSchema = z.object({ query, sort, page });
-
-export const articleDetailSchema = compositeKeySchema;
 
 export const articlePostSchema = z.object({
   title: z.string().min(1).max(128),

@@ -3,6 +3,11 @@ interface Page<T> {
   page: { totalPages: number };
 }
 
+interface Content {
+  html: string;
+  markdown: string;
+}
+
 interface Toc {
   level: number;
   title: string;

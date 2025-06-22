@@ -4,11 +4,16 @@ import { CardContent } from '~/components/ui/card';
 interface ArticleDetailContentProps {
   topics: Topic[];
   title: string;
+  content: { html: string };
   thumbnail: string;
-  html: string;
 }
 
-export default function ArticleDetailContent({ topics, title, thumbnail, html }: Readonly<ArticleDetailContentProps>) {
+export default function ArticleDetailContent({
+  topics,
+  title,
+  thumbnail,
+  content,
+}: Readonly<ArticleDetailContentProps>) {
   return (
     <CardContent className="space-y-4">
       {topics.length > 0 && (
@@ -19,7 +24,7 @@ export default function ArticleDetailContent({ topics, title, thumbnail, html }:
         </div>
       )}
       <img src={`${import.meta.env.VITE_BUCKET_HOST}/${thumbnail}`} alt={title} className="w-full border rounded-md" />
-      <div className="markdown-it" dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
     </CardContent>
   );
 }

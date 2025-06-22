@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '~/component
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
-import { useImageUpload } from '~/hooks/use-image-upload';
 import { handleMessageError } from '~/lib/error';
 import { articlePostSchema } from '~/schemas/articles';
 
@@ -23,7 +22,6 @@ interface ArticleEditFormProps {
 
 export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormProps>) {
   const navigate = useNavigate();
-  const { inputRef, uploadedPath } = useImageUpload();
   const [topics, setTopics] = useState(getTopicBySlugs(form.getValues('topicSlugs')));
 
   function onSubmit(values: z.infer<typeof articlePostSchema>) {
@@ -34,12 +32,6 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
       })
       .catch(handleMessageError);
   }
-
-  useEffect(() => {
-    if (uploadedPath) {
-      form.setValue('thumbnail', uploadedPath);
-    }
-  }, [uploadedPath]);
 
   useEffect(() => {
     form.setValue(
@@ -71,7 +63,7 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
           name="thumbnail"
           render={({ field }) => (
             <FormItem className="space-y-2">
-              <ThumbnailFormControl inputRef={inputRef} value={field.value} />
+              <ThumbnailFormControl value={field.value} setValue={(value) => form.setValue('thumbnail', value)} />
               <FormControl>
                 <input type="hidden" placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
@@ -80,13 +72,14 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
           )}
         />
         <TopicSlugsFormControl topics={topics} setTopics={setTopics} />
+        <FormField control={form.control} name="content" render={({ field }) => <FormMessage />} />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <DialogClose asChild>
             <Button type="button" variant="ghost">
               <XIcon /> 취소하기
             </Button>
           </DialogClose>
-          <Button type="submit">
+          <Button type="submit" disabled={form.formState.isSubmitting}>
             <CloudUploadIcon /> 수정하기
           </Button>
         </div>

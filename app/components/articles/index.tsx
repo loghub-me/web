@@ -4,6 +4,7 @@ export { default as ArticleListSkeleton } from '~/components/articles/list-skele
 export { default as ArticleDetailHeader } from '~/components/articles/detail/header';
 export { default as ArticleDetailHero } from '~/components/articles/detail/hero';
 export { default as ArticleDetailContent } from '~/components/articles/detail/content';
+export { default as ArticleDetailFooter } from '~/components/articles/detail/footer';
 export { default as ArticleDetailAside } from '~/components/articles/detail/aside';
 export { default as ArticlePostDialog } from '~/components/articles/post/dialog';
 export { default as ArticlePostForm } from '~/components/articles/post/form';

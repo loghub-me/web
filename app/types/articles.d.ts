@@ -9,7 +9,7 @@ interface Article extends Timestamps {
 }
 
 interface ArticleDetail extends Article {
-  content: string;
+  content: Content;
   writer: User;
 }
 
@@ -28,3 +28,5 @@ interface ArticleComment extends Timestamps {
 }
 
 type ArticleSort = 'latest' | 'oldest' | 'relevant' | 'trending';
+type QuestionSort = 'latest' | 'oldest' | 'relevant' | 'trending';
+type QuestionFilter = 'all' | 'open' | 'closed' | 'solved';
