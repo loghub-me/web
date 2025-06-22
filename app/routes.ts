@@ -9,12 +9,25 @@ export default [
     route('login/confirm', 'routes/auth/login/confirm.tsx'),
     route('logout', 'routes/auth/logout.tsx'),
   ]),
-  ...prefix('search', [layout('routes/search/layout.tsx', [route('articles', 'routes/search/articles.tsx')])]),
+  ...prefix('search', [
+    layout('routes/search/layout.tsx', [
+      route('articles', 'routes/search/articles.tsx'),
+      route('questions', 'routes/search/questions.tsx'),
+    ]),
+  ]),
   ...prefix('post', [
-    layout('routes/post/layout.tsx', [index('routes/post/index.tsx'), route('articles', 'routes/post/articles.tsx')]),
+    layout('routes/post/layout.tsx', [
+      index('routes/post/index.tsx'),
+      route('articles', 'routes/post/articles.tsx'),
+      route('questions', 'routes/post/questions.tsx'),
+    ]),
   ]),
   ...prefix('articles', [
     route(':username/:slug', 'routes/articles/detail.tsx'),
     route(':username/:slug/edit', 'routes/articles/edit.tsx'),
+  ]),
+  ...prefix('questions', [
+    route(':username/:slug', 'routes/questions/detail.tsx'),
+    route(':username/:slug/edit', 'routes/questions/edit.tsx'),
   ]),
 ] satisfies RouteConfig;
