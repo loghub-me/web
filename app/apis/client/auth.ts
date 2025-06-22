@@ -14,7 +14,9 @@ export const confirmLogin = (json: z.infer<typeof loginConfirmSchema>) =>
   clientAPI.post(`auth/login/confirm`, { json }).then(extractSession);
 
 export const refreshToken = () =>
-  ky.post('/api/auth/refresh', { credentials: 'include', keepalive: true }).then(extractSession);
+  ky
+    .post(`${import.meta.env.VITE_API_HOST}/auth/refresh`, { credentials: 'include', keepalive: true })
+    .then(extractSession);
 
 export const logout = () =>
   clientAPI

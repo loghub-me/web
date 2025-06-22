@@ -39,7 +39,6 @@ export default function ArticleStarButton({
       queryClient.setQueryData(['existsArticleStar', articleId], context?.prevExists);
       toast.error(ErrorMessage.UNKNOWN);
     },
-    onSuccess: ({ message }) => toast.success(message),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ['existsArticleStar', articleId] }),
   });
 
