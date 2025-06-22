@@ -44,7 +44,7 @@ export default function QuestionCloseButton({ id }: Readonly<QuestionCloseButton
       <DialogContent>
         <DialogHeader>
           <DialogTitle>정말로 질문을 닫겠습니까?</DialogTitle>
-          <DialogDescription>질문을 닫겠된 질문은 복구할 수 없습니다. 정말로 질문을 닫겠습니까?</DialogDescription>
+          <DialogDescription>닫힌 질문은 복구할 수 없습니다. 정말로 질문을 닫겠습니까?</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>
