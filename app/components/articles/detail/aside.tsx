@@ -40,9 +40,11 @@ export default function ArticleDetailAside({ title, toc, writer }: Readonly<Arti
 
   return (
     <aside className="sticky top-4 hidden lg:block max-w-xs w-full h-fit space-y-4">
-      <Card className="p-4">
-        <h5 className="font-semibold text-lg">{title}</h5>
-        <ul className="space-y-2">
+      <Card className="pt-0">
+        <div className="p-4 min-h-16 border-b">
+          <h5 className="font-semibold text-lg">{title}</h5>
+        </div>
+        <ul className="px-4 space-y-2">
           {toc.map((item) => {
             return (
               <li key={item.slug}>

@@ -1,22 +1,22 @@
 import { DotIcon, MessagesSquareIcon, StarIcon } from 'lucide-react';
 import { Link } from 'react-router';
+import Timestamp from '~/components/common/timestamp';
 import { QuestionStatusBadge } from '~/components/questions';
 import { TopicBadge } from '~/components/topics';
 import { Badge } from '~/components/ui/badge';
 import { UserInline } from '~/components/users';
-import { parseRelativeTime } from '~/lib/parse';
 
 interface QuestionListItemProps {
   question: Question;
 }
 
 export default function QuestionListItem({ question }: Readonly<QuestionListItemProps>) {
-  const { status, stats, slug, title, topics, createdAt, writerUsername } = question;
+  const { status, stats, slug, title, topics, writerUsername } = question;
   const to = `/questions/@${writerUsername}/${slug}`;
 
   return (
-    <Link to={to} className="flex flex-col gap-2 p-4 rounded-lg transition-colors border hover:bg-accent">
-      <div className="flex flex-col md:flex-row gap-2">
+    <Link to={to} className="flex flex-col gap-4 p-4 rounded-lg transition-colors border bg-card hover:bg-accent">
+      <div className="flex flex-col md:flex-row items-start gap-2">
         <h3 className="font-medium line-clamp-2">{title}</h3>
         <div className="flex items-center gap-1">
           <QuestionStatusBadge status={status} />
@@ -41,9 +41,9 @@ export default function QuestionListItem({ question }: Readonly<QuestionListItem
           </div>
         )}
         <div className="flex items-center self-end">
-          <UserInline size="xs" username={writerUsername} />
+          <UserInline username={writerUsername} />
           <DotIcon className="size-4 text-muted-foreground" />
-          <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
+          <Timestamp {...question} />
         </div>
       </div>
     </Link>

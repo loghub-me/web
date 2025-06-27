@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { postArticle } from '~/apis/client/articles';
-import { ThumbnailFormControl, TopicSlugsFormControl } from '~/components/common/form-control';
+import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
+import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
@@ -45,13 +46,10 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
           control={form.control}
           name="title"
           render={({ field }) => (
-            <FormItem className="flex gap-2">
+            <FormItem>
               <FormControl>
                 <IconInput icon={LetterTextIcon} placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
-              <GlowButton type="button" variant="outline" size="icon">
-                <WandSparklesIcon />
-              </GlowButton>
               <FormMessage />
             </FormItem>
           )}
@@ -60,7 +58,7 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
           control={form.control}
           name="thumbnail"
           render={({ field }) => (
-            <FormItem className="space-y-2">
+            <FormItem>
               <ThumbnailFormControl value={field.value} setValue={(value) => form.setValue('thumbnail', value)} />
               <FormControl>
                 <input type="hidden" placeholder="제목을 입력해주세요" {...field} />
@@ -77,6 +75,9 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
               <XIcon /> 취소하기
             </Button>
           </DialogClose>
+          <GlowButton type="button" variant="outline">
+            <WandSparklesIcon /> 자동완성
+          </GlowButton>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             <CloudUploadIcon /> 게시하기
           </Button>

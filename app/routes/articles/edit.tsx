@@ -8,7 +8,7 @@ import { ArticleEditDialog, ArticleEditForm } from '~/components/articles';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
-import { articlePostSchema } from '~/schemas/articles';
+import { articleEditSchema } from '~/schemas/articles';
 import { compositeKeySchema } from '~/schemas/zod';
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -22,8 +22,8 @@ export default function ArticleEditRoute({ loaderData }: Route.ComponentProps) {
   const { title, content, thumbnail } = article;
 
   const easyMDERef = useRef<EasyMDE>(null);
-  const form = useForm<z.infer<typeof articlePostSchema>>({
-    resolver: zodResolver(articlePostSchema),
+  const form = useForm<z.infer<typeof articleEditSchema>>({
+    resolver: zodResolver(articleEditSchema),
     defaultValues: {
       title,
       content: content.markdown,

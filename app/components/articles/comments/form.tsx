@@ -9,7 +9,7 @@ import { postArticleComment, postArticleCommentReply } from '~/apis/client/artic
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
 import { Textarea } from '~/components/ui/textarea';
-import { UserInline } from '~/components/users';
+import { UserInline, UserLink } from '~/components/users';
 import { useAuth } from '~/hooks/use-auth';
 import { useReply } from '~/hooks/use-reply';
 import { handleMessageError } from '~/lib/error';
@@ -60,12 +60,12 @@ export default function ArticleCommentForm({ articleId }: Readonly<ArticleCommen
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex items-center gap-2">
-          <UserInline username={session.username} />
+          <UserLink username={session.username} />
           {replyTo && (
-            <>
+            <Button type="button" variant="outline" onClick={() => clear()}>
               <ChevronRightIcon className="size-3" />
               <UserInline username={replyTo.writer.username} />
-            </>
+            </Button>
           )}
         </div>
         <FormField

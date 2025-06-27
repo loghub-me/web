@@ -10,6 +10,7 @@ interface QuestionStatusFilterProps {
 export default function QuestionStatusFilter({ filter, query, sort }: Readonly<QuestionStatusFilterProps>) {
   return (
     <div className="flex items-center gap-2">
+      <input type="hidden" name="filter" value={filter} />
       <Button className="rounded-full" variant={filter === 'all' ? 'secondary' : 'ghost'} asChild>
         <Link to={`/search/questions?query=${query}&sort=${sort}&filter=all`}>ALL</Link>
       </Button>

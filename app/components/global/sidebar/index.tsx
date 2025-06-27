@@ -1,5 +1,6 @@
 import { MenuIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
 import SidebarAuthMenu from '~/components/global/sidebar/auth-menu';
 import SidebarNavLink from '~/components/global/sidebar/nav-link';
@@ -10,6 +11,11 @@ import { navLinks } from '~/constants/nav-links';
 export default function GlobalSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const closeSheet = () => setIsOpen(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -25,7 +31,7 @@ export default function GlobalSidebar() {
         <hr className="mx-6 my-2" />
         <nav className="px-6 py-4 flex flex-col gap-2">
           {navLinks.map((navLink) => (
-            <SidebarNavLink key={navLink.to} {...navLink} closeSheet={closeSheet} />
+            <SidebarNavLink key={navLink.to} {...navLink} />
           ))}
         </nav>
         <nav className="absolute bottom-0 w-full p-6">

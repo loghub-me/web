@@ -13,7 +13,7 @@ export default function PostIndex() {
           글은 Markdown으로 작성할 수 있습니다.
         </p>
         <Button asChild>
-          <Link to={'/how-to-use-markdown'}>
+          <Link to={'/how-to-use/markdown'}>
             <KeyboardIcon /> 마크다운 사용법
           </Link>
         </Button>

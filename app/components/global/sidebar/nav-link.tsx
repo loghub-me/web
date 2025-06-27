@@ -6,12 +6,11 @@ interface SidebarNavLinkProps {
   name: string;
   to: string;
   icon: LucideIcon;
-  closeSheet: () => void;
 }
 
-export default function SidebarNavLink({ name, to, icon: Icon, closeSheet }: Readonly<SidebarNavLinkProps>) {
+export default function SidebarNavLink({ name, to, icon: Icon }: Readonly<SidebarNavLinkProps>) {
   return (
-    <NavLink to={to} onClick={closeSheet}>
+    <NavLink to={to}>
       {({ isActive }) => (
         <Button variant={isActive ? 'secondary' : 'ghost'} className="w-full justify-start">
           <Icon className="size-3" />

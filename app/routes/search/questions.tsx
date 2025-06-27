@@ -1,10 +1,13 @@
 import type { Route } from './+types/questions';
-import { Suspense } from 'react';
-import { Await } from 'react-router';
+import { Suspense, useRef } from 'react';
+import { Await, Form } from 'react-router';
 import { searchQuestions } from '~/apis/server/questions';
+import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/questions';
+import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
+import { QUESTION_SORT_OPTIONS } from '~/constants/sorts';
 import { parseSearchParams } from '~/lib/parse';
 import { questionsSearchSchema } from '~/schemas/questions';
 
@@ -22,16 +25,31 @@ export default function SearchQuestionsRoute({ loaderData }: Route.ComponentProp
     url: { pathname },
     searchParams: { query, sort, filter, page },
   } = loaderData;
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
-    <main className="space-y-4">
-      <QuestionStatusFilter filter={filter} query={query} sort={sort} />
+    <main className="container mx-auto p-4 pt-20 min-h-screen space-y-4">
+      <Form action={pathname} ref={formRef} className="space-y-2">
+        <div className="flex gap-2">
+          <SearchSort
+            submit={() => formRef.current?.requestSubmit()}
+            currentSort={sort}
+            sortOptions={QUESTION_SORT_OPTIONS}
+          />
+          <SearchQuery />
+          <SearchSubmit />
+        </div>
+        <QuestionStatusFilter filter={filter} query={query} sort={sort} />
+      </Form>
       <QuestionList>
         <Suspense fallback={<QuestionListSkeleton size={4} />}>
           <Await resolve={questions}>
-            {(resolved) =>
-              resolved.content.map((question, index) => <QuestionListItem key={question.id} question={question} />)
-            }
+            {(resolved) => {
+              if (resolved.content.length === 0) {
+                return <ListEmpty message="검색된 질문이 없습니다." />;
+              }
+              return resolved.content.map((question) => <QuestionListItem key={question.id} question={question} />);
+            }}
           </Await>
         </Suspense>
       </QuestionList>
@@ -39,7 +57,7 @@ export default function SearchQuestionsRoute({ loaderData }: Route.ComponentProp
         <Await resolve={questions}>
           {(resolved) => (
             <PageNav
-              to={`${pathname}?query=${query}&sort=${sort}&page=`}
+              to={`${pathname}?query=${query}&sort=${sort}&filter=${filter}&page=`}
               currentPage={page}
               totalPages={resolved.page.totalPages}
             />

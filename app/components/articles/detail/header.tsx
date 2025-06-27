@@ -1,8 +1,6 @@
-import { Link } from 'react-router';
 import { ArticleEditLink, ArticleRemoveButton, ArticleStarButton } from '~/components/articles';
-import { Button } from '~/components/ui/button';
 import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
-import { UserInline } from '~/components/users';
+import { UserLink } from '~/components/users';
 import { useAuth } from '~/hooks/use-auth';
 
 interface ArticleDetailHeaderProps {
@@ -22,13 +20,9 @@ export default function ArticleDetailHeader({
 
   return (
     <div className="sticky top-0 z-40 px-4 w-full h-16 bg-card/70 backdrop-blur flex items-center justify-end gap-2 rounded-t-xl border-b">
-      <Button variant={'ghost'} className="mr-auto px-2" asChild>
-        <Link to={`/@${username}`}>
-          <UserInline username={username} />
-        </Link>
-      </Button>
+      <UserLink username={username} className={'mr-auto'} />
       {session?.username === username && (
-        <div className="overflow-hidden">
+        <div>
           <ArticleEditLink username={username} slug={slug} />
           <ArticleRemoveButton id={id} />
         </div>

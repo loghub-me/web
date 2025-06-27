@@ -8,7 +8,7 @@ import { EasyMDEEditor } from '~/components/common/easymde';
 import { QuestionEditDialog, QuestionEditForm } from '~/components/questions';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
-import { questionPostSchema } from '~/schemas/questions';
+import { questionEditSchema } from '~/schemas/questions';
 import { compositeKeySchema } from '~/schemas/zod';
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -22,8 +22,8 @@ export default function QuestionEditRoute({ loaderData }: Route.ComponentProps) 
   const { title, content } = question;
 
   const easyMDERef = useRef<EasyMDE>(null);
-  const form = useForm<z.infer<typeof questionPostSchema>>({
-    resolver: zodResolver(questionPostSchema),
+  const form = useForm<z.infer<typeof questionEditSchema>>({
+    resolver: zodResolver(questionEditSchema),
     defaultValues: {
       title,
       content: content.markdown,

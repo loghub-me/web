@@ -49,7 +49,7 @@ export default function ArticleCommentListItem({
     <div>
       <div className="flex items-center gap-2">
         <div className="flex items-center">
-          <UserInline {...writer} />
+          <UserInline username={writer.username} />
           <DotIcon className="text-muted-foreground" />
           <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
         </div>

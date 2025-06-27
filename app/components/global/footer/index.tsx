@@ -5,7 +5,7 @@ import { footerNavLinks } from '~/constants/nav-links';
 
 export default function GlobalFooter() {
   const { pathname } = useLocation();
-  const isPostEditPage = pathname.startsWith('/post') || pathname.endsWith('/edit');
+  const isPostEditPage = pathname.startsWith('/post/') || pathname.endsWith('/edit/');
 
   return (
     !isPostEditPage && (

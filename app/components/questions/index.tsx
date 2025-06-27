@@ -1,6 +1,7 @@
 export { default as QuestionList } from '~/components/questions/list';
 export { default as QuestionListItem } from '~/components/questions/list-item';
 export { default as QuestionListSkeleton } from '~/components/questions/list-skeleton';
+export { default as QuestionStatusDot } from '~/components/questions/status/dot';
 export { default as QuestionStatusBadge } from '~/components/questions/status/badge';
 export { default as QuestionStatusFilter } from '~/components/questions/status/filter';
 export { default as QuestionDetailHero } from '~/components/questions/detail/hero';

@@ -9,11 +9,7 @@ interface QuestionEditLinkProps {
 
 export default function QuestionEditLink({ username, slug }: Readonly<QuestionEditLinkProps>) {
   return (
-    <Button
-      className="rounded-none first:rounded-l-full last:rounded-r-full not-first:border-l-0"
-      variant="outline"
-      asChild
-    >
+    <Button className="rounded-l-full border-r-0" variant="outline" asChild>
       <Link to={`/questions/@${username}/${slug}/edit`}>
         <PencilIcon className="ml-0.5" />
       </Link>

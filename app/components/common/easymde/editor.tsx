@@ -90,19 +90,19 @@ export default function EasyMDEEditor({
   }, [textareaRef, previewRef, defaultValue]);
 
   return (
-    <div className="w-full h-full max-h-full flex flex-col">
-      <div className={cn('h-full max-h-full overflow-hidden grid', mode === 'preview-edit' && 'grid-cols-2')}>
+    <div className="w-full h-full max-w-full max-h-full">
+      <div className={cn('h-[calc(100%-theme(space.16))] grid', mode === 'preview-edit' && 'grid-cols-2')}>
         <div className={cn('h-full max-h-full overflow-hidden', mode === 'preview' && 'hidden')}>
           <textarea className="w-full h-full resize-none bg-card border-r" ref={textareaRef} />
         </div>
         <div ref={previewRef} className={cn('markdown-it p-6 overflow-auto', mode === 'edit' && 'hidden')} />
       </div>
-      <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 gap-2">
+      <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">
         <ToggleGroup type={'single'} value={mode} onValueChange={onModeChange}>
-          <ToggleGroupItem value={'edit'}>
+          <ToggleGroupItem value={'update'}>
             <PencilIcon />
           </ToggleGroupItem>
-          <ToggleGroupItem value={'preview-edit'}>
+          <ToggleGroupItem value={'preview-update'}>
             <Columns2Icon />
           </ToggleGroupItem>
           <ToggleGroupItem value={'preview'}>

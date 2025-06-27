@@ -1,11 +1,11 @@
 import { clientAPI } from './instance';
 import { z } from 'zod';
-import { answerPostSchema, type questionPostSchema } from '~/schemas/questions';
+import { answerPostSchema, questionEditSchema, type questionPostSchema } from '~/schemas/questions';
 
 export const postQuestion = (json: z.infer<typeof questionPostSchema>) =>
   clientAPI.post(`questions`, { json }).json<RedirectResponseBody>();
 
-export const editQuestion = (questionId: number, json: z.infer<typeof questionPostSchema>) =>
+export const editQuestion = (questionId: number, json: z.infer<typeof questionEditSchema>) =>
   clientAPI.put(`questions/${questionId}`, { json }).json<RedirectResponseBody>();
 
 export const removeQuestion = (questionId: number) =>

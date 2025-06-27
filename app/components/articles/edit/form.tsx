@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { editArticle } from '~/apis/client/articles';
-import { ThumbnailFormControl, TopicSlugsFormControl } from '~/components/common/form-control';
+import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
+import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
@@ -13,10 +14,10 @@ import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
 import { handleMessageError } from '~/lib/error';
-import { articlePostSchema } from '~/schemas/articles';
+import { articleEditSchema } from '~/schemas/articles';
 
 interface ArticleEditFormProps {
-  form: UseFormReturn<z.infer<typeof articlePostSchema>>;
+  form: UseFormReturn<z.infer<typeof articleEditSchema>>;
   id: number;
 }
 
@@ -24,7 +25,7 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
   const navigate = useNavigate();
   const [topics, setTopics] = useState(getTopicBySlugs(form.getValues('topicSlugs')));
 
-  function onSubmit(values: z.infer<typeof articlePostSchema>) {
+  function onSubmit(values: z.infer<typeof articleEditSchema>) {
     editArticle(id, values)
       .then(({ pathname, message }) => {
         toast.success(message);
@@ -47,13 +48,10 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
           control={form.control}
           name="title"
           render={({ field }) => (
-            <FormItem className="flex gap-2">
+            <FormItem>
               <FormControl>
                 <IconInput icon={LetterTextIcon} placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
-              <GlowButton type="button" variant="outline" size="icon">
-                <WandSparklesIcon />
-              </GlowButton>
               <FormMessage />
             </FormItem>
           )}
@@ -62,7 +60,7 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
           control={form.control}
           name="thumbnail"
           render={({ field }) => (
-            <FormItem className="space-y-2">
+            <FormItem>
               <ThumbnailFormControl value={field.value} setValue={(value) => form.setValue('thumbnail', value)} />
               <FormControl>
                 <input type="hidden" placeholder="제목을 입력해주세요" {...field} />
@@ -79,6 +77,9 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
               <XIcon /> 취소하기
             </Button>
           </DialogClose>
+          <GlowButton type="button" variant="outline">
+            <WandSparklesIcon /> 자동완성
+          </GlowButton>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             <CloudUploadIcon /> 수정하기
           </Button>

@@ -70,7 +70,7 @@ export default function AnswerListItem({
           </Badge>
         )}
         {accepted && (
-          <Badge variant="solved" className="rounded-full">
+          <Badge variant="success" className="rounded-full">
             <CheckIcon /> 채택 완료
           </Badge>
         )}

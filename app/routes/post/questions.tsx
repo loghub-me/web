@@ -11,7 +11,7 @@ export default function PostQuestionsRoute() {
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof questionPostSchema>>({
     resolver: zodResolver(questionPostSchema),
-    defaultValues: { title: '', content: '', topicSlugs: [] },
+    defaultValues: { title: '', content: '', topicSlugs: [], requestBotAnswer: false },
   });
 
   function onDialogOpenChange(open: boolean) {

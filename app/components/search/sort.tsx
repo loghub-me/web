@@ -1,25 +1,33 @@
-import { CheckIcon, ChevronDownIcon, type LucideIcon } from 'lucide-react';
-import { Link } from 'react-router';
+import { ChevronDownIcon, type LucideIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
 
 interface SearchSortProps {
-  to: string;
+  submit: () => void;
   currentSort: Sort;
   sortOptions: Record<Sort, { icon: LucideIcon; label: string }>;
 }
 
-export default function SearchSort({ to, currentSort, sortOptions }: Readonly<SearchSortProps>) {
+export default function SearchSort({ submit, currentSort, sortOptions }: Readonly<SearchSortProps>) {
   const { icon: Icon, label } = sortOptions[currentSort];
+  const [sort, setSort] = useState(currentSort);
+
+  useEffect(() => {
+    if (sort !== currentSort) {
+      submit();
+    }
+  }, [sort]);
 
   return (
     <DropdownMenu>
-      <input type="hidden" name={'sort'} value={currentSort} />
+      <input type="hidden" name={'sort'} value={sort} />
       <DropdownMenuTrigger asChild>
         <Button variant={'outline'}>
           <Icon />
@@ -28,15 +36,14 @@ export default function SearchSort({ to, currentSort, sortOptions }: Readonly<Se
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {Object.entries(sortOptions).map(([key, { icon: Icon, label }]) => (
-          <DropdownMenuItem key={key} asChild>
-            <Link to={`${to}${key}`} className="flex items-center">
+        <DropdownMenuRadioGroup value={sort} onValueChange={(value) => setSort(value as Sort)}>
+          {Object.entries(sortOptions).map(([key, { icon: Icon, label }]) => (
+            <DropdownMenuRadioItem key={key} value={key}>
               <Icon />
               <span>{label}</span>
-              {currentSort === key && <CheckIcon className="ml-auto" />}
-            </Link>
-          </DropdownMenuItem>
-        ))}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -10,13 +10,6 @@ interface Question {
   updatedAt: string;
 }
 
-interface QuestionSimple {
-  id: number;
-  slug: string;
-  title: string;
-  writerUsername: string;
-}
-
 interface QuestionDetail {
   id: number;
   slug: string;

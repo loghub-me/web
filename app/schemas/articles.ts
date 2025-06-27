@@ -15,6 +15,7 @@ export const articlePostSchema = z.object({
   thumbnail: z.string(),
   topicSlugs: z.array(z.string()),
 });
+export const articleEditSchema = articlePostSchema;
 
 export const articleCommentPostSchema = z.object({
   content: commentContent,

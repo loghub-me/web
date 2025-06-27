@@ -11,9 +11,14 @@ function GlowButton({
   ...props
 }: React.ComponentProps<'button'> & VariantProps<typeof buttonVariants> & { asChild?: boolean }) {
   return (
-    <div className="relative">
-      <GlowEffect mode="rotate" blur="soft" scale={0.9} />
-      <Button {...props} className={cn(className, 'relative')} variant={variant} size={size} asChild={asChild} />
+    <div className="relative group">
+      <GlowEffect
+        className="transition-opacity ease-in opacity-0 group-hover:opacity-100"
+        mode="rotate"
+        blur="soft"
+        scale={0.9}
+      />
+      <Button {...props} className={cn(className, 'relative w-full')} variant={variant} size={size} asChild={asChild} />
     </div>
   );
 }
