@@ -8,7 +8,7 @@ export default function ArticleListSkeleton({ size = 1 }: Readonly<SkeletonProps
         <Skeleton className="h-7 w-1/3" />
       </div>
       <div className="flex justify-between gap-2">
-        <div className="flex items-center ap-1">
+        <div className="flex items-center gap-1">
           <Skeleton className="size-6 rounded-full" />
           <Skeleton className="w-12 h-4" />
         </div>

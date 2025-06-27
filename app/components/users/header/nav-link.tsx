@@ -13,8 +13,7 @@ export default function UserHeaderNavLink({ name, to, icon: Icon }: Readonly<Use
     <NavLink to={to} end>
       {({ isActive }) => (
         <Button variant={isActive ? 'secondary' : 'ghost'}>
-          <Icon className="size-3" />
-          <span>{name}</span>
+          <Icon /> {name}
         </Button>
       )}
     </NavLink>
