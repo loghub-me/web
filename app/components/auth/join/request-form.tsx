@@ -55,7 +55,7 @@ export default function JoinRequestForm() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>유저명</FormLabel>
+                <FormLabel>유저네임</FormLabel>
                 <FormControl>
                   <Input placeholder="username" {...field} />
                 </FormControl>

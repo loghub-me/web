@@ -29,7 +29,7 @@ export default function GlobalSidebar() {
           ))}
         </nav>
         <nav className="absolute bottom-0 w-full p-6">
-          <SidebarAuthMenu />
+          <SidebarAuthMenu closeSheet={closeSheet} />
         </nav>
       </SheetContent>
     </Sheet>

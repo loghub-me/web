@@ -12,3 +12,7 @@
 # React Router
 /.react-router/
 /build/
+
+# .env
+.env
+.env.*

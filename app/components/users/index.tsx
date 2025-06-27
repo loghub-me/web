@@ -1,4 +1,12 @@
 export { default as UserCard } from '~/components/users/card';
+export { default as UserLink } from '~/components/users/link';
 export { default as UserAvatar } from '~/components/users/avatar';
 export { default as UserInline } from '~/components/users/inline';
 export { default as UserMention } from '~/components/users/mention';
+export { default as UserDetailAside } from '~/components/users/detail/aside';
+export { default as UserAvatarUpdateDialog } from '~/components/users/avatar/update/dialog';
+export { default as UserAvatarUpdateForm } from '~/components/users/avatar/update/form';
+export { default as UserProfileUpdateForm } from '~/components/users/profile/update/form';
+export { default as UserPrivacyUpdateForm } from '~/components/users/privacy/update/form';
+export { default as UsernameEditDialog } from '~/components/users/username/update/dialog';
+export { default as UsernameEditForm } from '~/components/users/username/update/form';

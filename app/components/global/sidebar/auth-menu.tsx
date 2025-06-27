@@ -5,7 +5,11 @@ import { Button } from '~/components/ui/button';
 import { Skeleton } from '~/components/ui/skeleton';
 import { useAuth } from '~/hooks/use-auth';
 
-export default function SideAuthMenu() {
+interface SideAuthMenuProps {
+  closeSheet: () => void;
+}
+
+export default function SideAuthMenu({ closeSheet }: Readonly<SideAuthMenuProps>) {
   const { status } = useAuth();
 
   switch (status) {
@@ -14,7 +18,7 @@ export default function SideAuthMenu() {
     case 'unauthenticated':
       return <GuestNav />;
     case 'authenticated':
-      return <MemberNav type="sidebar" />;
+      return <MemberNav type="sidebar" closeSheet={closeSheet} />;
   }
 }
 

@@ -7,13 +7,10 @@ export default [
     route('join/confirm', 'routes/auth/join/confirm.tsx'),
     route('login', 'routes/auth/login/request.tsx'),
     route('login/confirm', 'routes/auth/login/confirm.tsx'),
-    route('logout', 'routes/auth/logout.tsx'),
   ]),
   ...prefix('search', [
-    layout('routes/search/layout.tsx', [
-      route('articles', 'routes/search/articles.tsx'),
-      route('questions', 'routes/search/questions.tsx'),
-    ]),
+    route('articles', 'routes/search/articles.tsx'),
+    route('questions', 'routes/search/questions.tsx'),
   ]),
   ...prefix('post', [
     layout('routes/post/layout.tsx', [
@@ -29,5 +26,21 @@ export default [
   ...prefix('questions', [
     route(':username/:slug', 'routes/questions/detail.tsx'),
     route(':username/:slug/edit', 'routes/questions/edit.tsx'),
+  ]),
+  ...prefix(':username', [
+    layout('routes/users/layout.tsx', [
+      index('routes/users/index.tsx'),
+      route('articles', 'routes/users/articles.tsx'),
+      route('questions', 'routes/users/questions.tsx'),
+      route('stars', 'routes/users/stars.tsx'),
+    ]),
+  ]),
+  ...prefix('settings', [
+    layout('routes/settings/layout.tsx', [
+      index('routes/settings/index.tsx'),
+      route('account', 'routes/settings/account.tsx'),
+      route('profile', 'routes/settings/profile.tsx'),
+      route('privacy', 'routes/settings/privacy.tsx'),
+    ]),
   ]),
 ] satisfies RouteConfig;
