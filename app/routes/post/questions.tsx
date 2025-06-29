@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { EasyMDEEditor } from '~/components/common/easymde';
-import { QuestionPostDialog, QuestionPostForm } from '~/components/questions';
+import { QuestionPostDialog, QuestionPostForm } from '~/components/question';
 import { questionPostSchema } from '~/schemas/questions';
 
 export default function PostQuestionsRoute() {

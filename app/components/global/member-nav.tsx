@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-import { UserInline } from '~/components/users';
+import { UserInline } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
 import { cn } from '~/lib/utils';

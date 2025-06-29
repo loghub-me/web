@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import SettingHeader from '~/components/settings/header';
+import SettingHeader from '~/components/setting/header';
 import AuthGuard from '~/guards/auth-guard';
 
 export default function SettingLayout() {

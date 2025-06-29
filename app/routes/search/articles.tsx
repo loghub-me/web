@@ -2,7 +2,7 @@ import type { Route } from './+types/articles';
 import { Suspense, useRef } from 'react';
 import { Await, Form } from 'react-router';
 import { searchArticles } from '~/apis/server/articles';
-import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/articles';
+import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/article';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
@@ -43,7 +43,7 @@ export default function SearchArticlesRoute({ loaderData }: Route.ComponentProps
           <Await resolve={articles}>
             {(resolved) => {
               if (resolved.content.length === 0) {
-                return <ListEmpty message="검색된 아티클이 없습니다." />;
+                return <ListEmpty className="col-span-4" message="검색된 아티클이 없습니다." />;
               }
               return resolved.content.map((article) => <ArticleListItem key={article.id} article={article} />);
             }}

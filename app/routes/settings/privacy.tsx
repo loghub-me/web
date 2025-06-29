@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSelfPrivacy } from '~/apis/client/users';
-import { UserPrivacyUpdateForm } from '~/components/users';
+import { UserPrivacyUpdateForm } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 
 export default function SettingPrivacyRoute() {

@@ -5,7 +5,7 @@ import { getUserStars } from '~/apis/server/users';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
-import { StarList, StarListItem, StarListSkeleton } from '~/components/stars';
+import { StarList, StarListItem, StarListSkeleton } from '~/components/star';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import { pageSchema, usernameSchema } from '~/schemas/zod';
 

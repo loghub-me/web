@@ -1,7 +1,7 @@
 import { TagIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
-import { TopicTag } from '~/components/topics';
+import { TopicTag } from '~/components/topic';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '~/components/ui/command';
 import { ErrorMessage } from '~/constants/error-messages';
 import { ALL_TOPICS } from '~/constants/topics';

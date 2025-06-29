@@ -1,4 +1,4 @@
-import { MenuIcon } from 'lucide-react';
+import { FileQuestionIcon, MenuIcon, PaperclipIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
@@ -6,7 +6,11 @@ import SidebarAuthMenu from '~/components/global/sidebar/auth-menu';
 import SidebarNavLink from '~/components/global/sidebar/nav-link';
 import { Button } from '~/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
-import { navLinks } from '~/constants/nav-links';
+
+export const navLinks = [
+  { name: '아티클', to: '/search/articles', icon: PaperclipIcon },
+  { name: '질문', to: '/search/questions', icon: FileQuestionIcon },
+];
 
 export default function GlobalSidebar() {
   const [isOpen, setIsOpen] = useState(false);

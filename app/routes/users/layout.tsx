@@ -1,8 +1,8 @@
 import type { Route } from './+types/layout';
 import { Outlet } from 'react-router';
 import { getUser } from '~/apis/server/users';
-import { UserDetailAside } from '~/components/users';
-import UserHeader from '~/components/users/header';
+import { UserDetailAside } from '~/components/user';
+import UserHeader from '~/components/user/header';
 import { parseParams } from '~/lib/parse';
 import { usernameSchema } from '~/schemas/zod';
 

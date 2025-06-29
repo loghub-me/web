@@ -30,6 +30,8 @@ interface QuestionStats {
 }
 
 type QuestionStatus = 'OPEN' | 'CLOSED' | 'SOLVED';
+type QuestionSort = 'latest' | 'oldest' | 'relevant' | 'trending';
+type QuestionFilter = 'all' | 'open' | 'closed' | 'solved';
 
 interface Answer {
   id: number;

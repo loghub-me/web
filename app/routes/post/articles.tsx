@@ -1,10 +1,10 @@
-import type { Route } from './+types/articles';
+import type { Route } from './+types/article';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type EasyMDE from 'easymde';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { ArticlePostDialog, ArticlePostForm } from '~/components/articles';
+import { ArticlePostDialog, ArticlePostForm } from '~/components/article';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { articlePostSchema } from '~/schemas/articles';
 

@@ -4,7 +4,7 @@ import { Await, Form } from 'react-router';
 import { searchUserQuestions } from '~/apis/server/users';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
-import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/questions';
+import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/question';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { QUESTION_SORT_OPTIONS } from '~/constants/sorts';

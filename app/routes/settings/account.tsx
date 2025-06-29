@@ -1,8 +1,8 @@
 import { MailIcon, UserXIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import UsernameUpdateDialog from '~/components/users/username/update/dialog';
-import UsernameUpdateForm from '~/components/users/username/update/form';
+import UsernameUpdateDialog from '~/components/user/username/update/dialog';
+import UsernameUpdateForm from '~/components/user/username/update/form';
 import { useAuth } from '~/hooks/use-auth';
 
 export default function SettingAccountRoute() {

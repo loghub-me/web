@@ -19,14 +19,6 @@ export default [
       route('questions', 'routes/post/questions.tsx'),
     ]),
   ]),
-  ...prefix('articles', [
-    route(':username/:slug', 'routes/articles/detail.tsx'),
-    route(':username/:slug/edit', 'routes/articles/edit.tsx'),
-  ]),
-  ...prefix('questions', [
-    route(':username/:slug', 'routes/questions/detail.tsx'),
-    route(':username/:slug/edit', 'routes/questions/edit.tsx'),
-  ]),
   ...prefix(':username', [
     layout('routes/users/layout.tsx', [
       index('routes/users/index.tsx'),
@@ -34,6 +26,10 @@ export default [
       route('questions', 'routes/users/questions.tsx'),
       route('stars', 'routes/users/stars.tsx'),
     ]),
+    route('articles/:slug', 'routes/users/articles/detail.tsx'),
+    route('articles/:slug/edit', 'routes/users/articles/edit.tsx'),
+    route('questions/:slug', 'routes/users/questions/detail.tsx'),
+    route('questions/:slug/edit', 'routes/users/questions/edit.tsx'),
   ]),
   ...prefix('settings', [
     layout('routes/settings/layout.tsx', [
