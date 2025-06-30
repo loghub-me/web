@@ -2,7 +2,7 @@ import { ImageIcon, UploadIcon, XIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { uploadAvatar } from '~/apis/client/task';
+import { updateSelfAvatar } from '~/apis/client/users';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
@@ -36,7 +36,7 @@ export default function UserAvatarUpdateForm({ username }: Readonly<UserAvatarUp
       return;
     }
 
-    uploadAvatar(avatarFile)
+    updateSelfAvatar(avatarFile)
       .then(() => {
         toast.success('프로필 사진이 성공적으로 변경되었습니다.');
         setAvatarSrc(`${defaultAvatarSrc}?t=${Date.now()}`); // Avoid caching issues
