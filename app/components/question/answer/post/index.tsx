@@ -1,4 +1,4 @@
-import { AnswerPostClosed, AnswerPostForm, AnswerPostLink } from '~/components/question/answers';
+import { QuestionAnswerPostClosed, QuestionAnswerPostForm, QuestionAnswerPostLink } from '~/components/question';
 import { useAuth } from '~/hooks/use-auth';
 
 interface AnswerPostProps {
@@ -11,8 +11,12 @@ export default function AnswerPost({ questionId, questionStatus }: Readonly<Answ
 
   switch (questionStatus) {
     case 'OPEN':
-      return status === 'authenticated' ? <AnswerPostForm questionId={questionId} /> : <AnswerPostLink />;
+      return status === 'authenticated' ? (
+        <QuestionAnswerPostForm questionId={questionId} />
+      ) : (
+        <QuestionAnswerPostLink />
+      );
     default:
-      return <AnswerPostClosed />;
+      return <QuestionAnswerPostClosed />;
   }
 }

@@ -1,13 +1,15 @@
 import type { Route } from './+types/detail';
 import { getQuestion } from '~/apis/server/question';
 import {
+  QuestionAnswerList,
+  QuestionAnswerListItem,
+  QuestionAnswerPost,
   QuestionDetailAside,
   QuestionDetailContent,
   QuestionDetailHeader,
   QuestionDetailHero,
   QuestionSummaryCard,
 } from '~/components/question';
-import { AnswerList, AnswerListItem, AnswerPost } from '~/components/question/answers';
 import { Card } from '~/components/ui/card';
 import { useAuth } from '~/hooks/use-auth';
 import { parseParams } from '~/lib/parse';
@@ -32,8 +34,8 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
             <QuestionDetailHeader {...question} />
             <QuestionDetailContent {...question} />
           </Card>
-          <AnswerList>
-            <AnswerPost questionId={question.id} questionStatus={question.status} />
+          <QuestionAnswerList>
+            <QuestionAnswerPost questionId={question.id} questionStatus={question.status} />
             {question.answers.map((answer) => {
               const permission = {
                 isWriter: question.writer.username === answer.writer.username,
@@ -47,10 +49,15 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
                   question.status === 'OPEN' && question.writer && session?.username === answer.writer.username,
               } satisfies AnswerPermission;
               return (
-                <AnswerListItem key={answer.id} answer={answer} questionId={question.id} permission={permission} />
+                <QuestionAnswerListItem
+                  key={answer.id}
+                  answer={answer}
+                  questionId={question.id}
+                  permission={permission}
+                />
               );
             })}
-          </AnswerList>
+          </QuestionAnswerList>
         </div>
         <QuestionDetailAside>
           <QuestionSummaryCard {...question} />

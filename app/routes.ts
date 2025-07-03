@@ -10,12 +10,14 @@ export default [
   ]),
   ...prefix('search', [
     route('articles', 'routes/search/articles.tsx'),
+    route('books', 'routes/search/books.tsx'),
     route('questions', 'routes/search/questions.tsx'),
   ]),
   ...prefix('post', [
     layout('routes/post/layout.tsx', [
       index('routes/post/index.tsx'),
       route('articles', 'routes/post/articles.tsx'),
+      route('books', 'routes/post/books.tsx'),
       route('questions', 'routes/post/questions.tsx'),
     ]),
   ]),
@@ -23,11 +25,21 @@ export default [
     layout('routes/users/layout.tsx', [
       index('routes/users/index.tsx'),
       route('articles', 'routes/users/articles.tsx'),
+      route('books', 'routes/users/books.tsx'),
       route('questions', 'routes/users/questions.tsx'),
       route('stars', 'routes/users/stars.tsx'),
     ]),
+
     route('articles/:slug', 'routes/users/articles/detail.tsx'),
     route('articles/:slug/edit', 'routes/users/articles/edit.tsx'),
+
+    layout('routes/users/books/layout.tsx', [
+      route('books/:slug', 'routes/users/books/detail.tsx'),
+      route('books/:slug/:sequence', 'routes/users/books/chapters/detail.tsx'),
+    ]),
+    route('books/:slug/edit', 'routes/users/books/edit.tsx'),
+    route('books/:slug/:sequence/edit', 'routes/users/books/chapters/edit.tsx'),
+
     route('questions/:slug', 'routes/users/questions/detail.tsx'),
     route('questions/:slug/edit', 'routes/users/questions/edit.tsx'),
   ]),

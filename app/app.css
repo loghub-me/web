@@ -8,6 +8,8 @@
     -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard Variable', Pretendard, Roboto, 'Noto Sans KR',
     'Segoe UI', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 
+  --aspect-book : 3 / 4;
+
   --animate-swing: swing 0.5s ease-in-out;
   @keyframes swing {
     0% {

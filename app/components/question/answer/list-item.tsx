@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { acceptAnswer, removeAnswer } from '~/apis/client/question';
-import { AnswerEditForm } from '~/components/question/answers';
+import { QuestionAnswerEditForm } from '~/components/question';
 import { Badge } from '~/components/ui/badge';
 import { Button, ButtonLink } from '~/components/ui/button';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
@@ -45,7 +45,7 @@ export default function AnswerListItem({ answer, questionId, permission }: Reado
       </CardHeader>
       <CardContent className="p-0">
         {isEditing ? (
-          <AnswerEditForm
+          <QuestionAnswerEditForm
             questionId={questionId}
             answerId={answer.id}
             defaultContent={content.markdown}

@@ -4,11 +4,16 @@ import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
 import { cn } from '~/lib/utils';
 
 interface ThumbnailFormControlProps {
+  aspect?: 'video' | 'book';
   value: string;
   setValue: (value: string) => void;
 }
 
-export default function ThumbnailFormControl({ value, setValue }: Readonly<ThumbnailFormControlProps>) {
+export default function ThumbnailFormControl({
+  aspect = 'video',
+  value,
+  setValue,
+}: Readonly<ThumbnailFormControlProps>) {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const inputFileProps = {
@@ -22,7 +27,10 @@ export default function ThumbnailFormControl({ value, setValue }: Readonly<Thumb
 
   return (
     <div
-      className={cn('group border aspect-video rounded-lg bg-secondary overflow-hidden cursor-pointer')}
+      className={cn(
+        'group border rounded-lg bg-secondary overflow-hidden cursor-pointer',
+        aspect === 'video' ? 'aspect-video' : 'aspect-book'
+      )}
       onClick={() => inputFileRef.current?.click()}
     >
       <input {...inputFileProps} />
