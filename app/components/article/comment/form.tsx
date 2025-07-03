@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { postArticleComment, postArticleCommentReply } from '~/apis/client/articles';
+import { postArticleComment } from '~/apis/client/article';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
 import { Textarea } from '~/components/ui/textarea';
@@ -13,7 +13,7 @@ import { UserInline, UserLink } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { useReply } from '~/hooks/use-reply';
 import { handleMessageError } from '~/lib/error';
-import { articleCommentPostSchema } from '~/schemas/articles';
+import { articleCommentPostSchema } from '~/schemas/article';
 
 interface ArticleCommentFormProps {
   articleId: number;
@@ -29,10 +29,7 @@ export default function ArticleCommentForm({ articleId }: Readonly<ArticleCommen
   const queryClient = useQueryClient();
 
   function onSubmit(values: z.infer<typeof articleCommentPostSchema>) {
-    const req = replyTo
-      ? postArticleCommentReply(articleId, replyTo.id, values)
-      : postArticleComment(articleId, values);
-    req
+    postArticleComment(articleId, values, parentId)
       .then(({ message }) => {
         toast.success(message);
 

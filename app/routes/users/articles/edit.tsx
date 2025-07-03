@@ -3,13 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { getArticle } from '~/apis/server/articles';
+import { getArticle } from '~/apis/server/article';
 import { ArticleEditDialog, ArticleEditForm } from '~/components/article';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
-import { articleEditSchema } from '~/schemas/articles';
-import { compositeKeySchema } from '~/schemas/zod';
+import { articleEditSchema } from '~/schemas/article';
+import { compositeKeySchema } from '~/schemas/common';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

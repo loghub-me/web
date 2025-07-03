@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getSelfProfile } from '~/apis/client/users';
+import { getSelfProfile } from '~/apis/client/user';
 import { UserAvatarUpdateDialog, UserAvatarUpdateForm, UserProfileUpdateForm } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 

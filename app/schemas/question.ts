@@ -1,10 +1,10 @@
-import { pageZod as page, queryZod as query, sortZod as sort } from './zod';
+import { pageZod, queryZod, sortZod } from './zod';
 import { z } from 'zod';
 
-export const questionsSearchSchema = z.object({
-  query,
-  sort,
-  page,
+export const questionSearchSchema = z.object({
+  query: queryZod,
+  sort: sortZod,
+  page: pageZod,
   filter: z.enum(['all', 'open', 'closed', 'solved']).default('all'),
 });
 
@@ -14,9 +14,11 @@ export const questionPostSchema = z.object({
   topicSlugs: z.array(z.string()),
   requestBotAnswer: z.boolean(),
 });
+
 export const questionEditSchema = z.object({
   title: z.string().min(1).max(128),
   content: z.string().min(10).max(2048),
   topicSlugs: z.array(z.string()),
 });
+
 export const answerPostSchema = z.object({ content: z.string().min(10).max(2048) });

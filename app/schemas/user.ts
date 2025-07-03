@@ -1,13 +1,15 @@
 import { z } from 'zod';
-import { nicknameZod as nickname, usernameZod as username } from '~/schemas/zod';
+import { nicknameZod, pageZod, usernameZod } from '~/schemas/zod';
+
+export const userStarPageSchema = z.object({ page: pageZod });
 
 export const usernameUpdateSchema = z.object({
-  oldUsername: username,
-  newUsername: username,
+  oldUsername: usernameZod,
+  newUsername: usernameZod,
 });
 
 export const userProfileUpdateSchema = z.object({
-  nickname,
+  nickname: nicknameZod,
   readme: z.string().max(512),
 });
 

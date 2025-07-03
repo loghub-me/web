@@ -4,7 +4,7 @@ import { getUser } from '~/apis/server/users';
 import { UserDetailAside } from '~/components/user';
 import UserHeader from '~/components/user/header';
 import { parseParams } from '~/lib/parse';
-import { usernameSchema } from '~/schemas/zod';
+import { usernameSchema } from '~/schemas/common';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username } = parseParams(params, usernameSchema);

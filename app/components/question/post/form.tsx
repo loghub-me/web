@@ -4,7 +4,7 @@ import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { postQuestion } from '~/apis/client/questions';
+import { postQuestion } from '~/apis/client/question';
 import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
@@ -13,7 +13,7 @@ import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { Switch } from '~/components/ui/switch';
 import { handleMessageError } from '~/lib/error';
-import { questionPostSchema } from '~/schemas/questions';
+import { questionPostSchema } from '~/schemas/question';
 
 interface QuestionPostFormProps {
   form: UseFormReturn<z.infer<typeof questionPostSchema>>;

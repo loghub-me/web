@@ -1,4 +1,4 @@
-import type { Route } from './+types/article';
+import type { Route } from './+types/articles';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type EasyMDE from 'easymde';
 import { useRef } from 'react';
@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ArticlePostDialog, ArticlePostForm } from '~/components/article';
 import { EasyMDEEditor } from '~/components/common/easymde';
-import { articlePostSchema } from '~/schemas/articles';
+import { articlePostSchema } from '~/schemas/article';
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const autosave = localStorage.getItem('autosave:post-articles');

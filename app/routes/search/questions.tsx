@@ -1,7 +1,7 @@
 import type { Route } from './+types/questions';
 import { Suspense, useRef } from 'react';
 import { Await, Form } from 'react-router';
-import { searchQuestions } from '~/apis/server/questions';
+import { searchQuestions } from '~/apis/server/question';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/question';
@@ -9,11 +9,11 @@ import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { QUESTION_SORT_OPTIONS } from '~/constants/sorts';
 import { parseSearchParams } from '~/lib/parse';
-import { questionsSearchSchema } from '~/schemas/questions';
+import { questionSearchSchema } from '~/schemas/question';
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
-  const searchParams = parseSearchParams(url.searchParams, questionsSearchSchema);
+  const searchParams = parseSearchParams(url.searchParams, questionSearchSchema);
   const questions = searchQuestions(searchParams);
 
   return { questions, url, searchParams };

@@ -9,13 +9,13 @@ import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { ARTICLE_SORT_OPTIONS } from '~/constants/sorts';
 import { parseParams, parseSearchParams } from '~/lib/parse';
-import { articlesSearchSchema } from '~/schemas/articles';
-import { usernameSchema } from '~/schemas/zod';
+import { articleSearchSchema } from '~/schemas/article';
+import { usernameSchema } from '~/schemas/common';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const { username } = parseParams(params, usernameSchema);
-  const searchParams = parseSearchParams(url.searchParams, articlesSearchSchema);
+  const searchParams = parseSearchParams(url.searchParams, articleSearchSchema);
   const articles = searchUserArticles(username, searchParams);
 
   return { articles, url, searchParams };

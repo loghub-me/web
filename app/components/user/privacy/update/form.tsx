@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { updateSelfPrivacy } from '~/apis/client/users';
+import { updateSelfPrivacy } from '~/apis/client/user';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '~/components/ui/form';
 import { Switch, SwitchIcon } from '~/components/ui/switch';

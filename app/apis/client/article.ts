@@ -1,6 +1,6 @@
 import { clientAPI } from './instance';
 import { z } from 'zod';
-import { type articleCommentPostSchema, articleEditSchema, articlePostSchema } from '~/schemas/articles';
+import { type articleCommentPostSchema, articleEditSchema, articlePostSchema } from '~/schemas/article';
 
 export const postArticle = (json: z.infer<typeof articlePostSchema>) =>
   clientAPI.post(`articles`, { json }).json<RedirectResponseBody>();
@@ -17,14 +17,11 @@ export const getArticleComments = (articleId: number, page = 1) =>
 export const getArticleCommentReplies = (articleId: number, commentId: number) =>
   clientAPI.get(`articles/${articleId}/comments/${commentId}/replies`).json<ArticleComment[]>();
 
-export const postArticleComment = (articleId: number, json: z.infer<typeof articleCommentPostSchema>) =>
-  clientAPI.post(`articles/${articleId}/comments`, { json }).json<MethodResponseBody>();
-
-export const postArticleCommentReply = (
+export const postArticleComment = (
   articleId: number,
-  parentId: number,
-  json: z.infer<typeof articleCommentPostSchema>
-) => postArticleComment(articleId, { ...json, parentId });
+  json: z.infer<typeof articleCommentPostSchema>,
+  parentId?: number
+) => clientAPI.post(`articles/${articleId}/comments`, { json: { ...json, parentId } }).json<MethodResponseBody>();
 
 export const removeArticleComment = (articleId: number, commentId: number) =>
   clientAPI.delete(`articles/${articleId}/comments/${commentId}`).json<MethodResponseBody>();

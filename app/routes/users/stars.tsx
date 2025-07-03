@@ -7,23 +7,21 @@ import { PageNavSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
 import { StarList, StarListItem, StarListSkeleton } from '~/components/star';
 import { parseParams, parseSearchParams } from '~/lib/parse';
-import { pageSchema, usernameSchema } from '~/schemas/zod';
+import { usernameSchema } from '~/schemas/common';
+import { userStarPageSchema } from '~/schemas/user';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const { username } = parseParams(params, usernameSchema);
-  const searchParams = parseSearchParams(url.searchParams, pageSchema);
-  const stars = getUserStars(username, searchParams);
+  const { page } = parseSearchParams(url.searchParams, userStarPageSchema);
+  const stars = getUserStars(username, page);
 
-  return { stars, url, searchParams };
+  return { stars, url, page };
 }
 
 export default function UserStarsRoute({ loaderData }: Route.ComponentProps) {
-  const {
-    stars,
-    url: { pathname },
-    searchParams: { page },
-  } = loaderData;
+  const { stars, url, page } = loaderData;
+  const { pathname } = url;
 
   return (
     <main className="space-y-4">

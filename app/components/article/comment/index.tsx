@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getArticleComments } from '~/apis/client/articles';
+import { getArticleComments } from '~/apis/client/article';
 import ArticleCommentForm from '~/components/article/comment/form';
 import ArticleCommentList from '~/components/article/comment/list';
 import ArticleCommentListItem from '~/components/article/comment/list-item';

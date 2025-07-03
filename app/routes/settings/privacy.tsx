@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getSelfPrivacy } from '~/apis/client/users';
+import { getSelfPrivacy } from '~/apis/client/user';
 import { UserPrivacyUpdateForm } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 

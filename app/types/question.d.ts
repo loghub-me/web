@@ -1,4 +1,4 @@
-interface Question {
+interface Question extends Timestamps {
   id: number;
   slug: string;
   title: string;
@@ -6,11 +6,9 @@ interface Question {
   stats: QuestionStats;
   writerUsername: string;
   topics: Topic[];
-  createdAt: string;
-  updatedAt: string;
 }
 
-interface QuestionDetail {
+interface QuestionDetail extends Timestamps {
   id: number;
   slug: string;
   title: string;
@@ -19,9 +17,7 @@ interface QuestionDetail {
   stats: QuestionStats;
   writer: User;
   topics: Topic[];
-  answers: Answer[];
-  createdAt: string;
-  updatedAt: string;
+  answers: QuestionAnswer[];
 }
 
 interface QuestionStats {
@@ -33,11 +29,16 @@ type QuestionStatus = 'OPEN' | 'CLOSED' | 'SOLVED';
 type QuestionSort = 'latest' | 'oldest' | 'relevant' | 'trending';
 type QuestionFilter = 'all' | 'open' | 'closed' | 'solved';
 
-interface Answer {
+interface QuestionAnswer extends Timestamps {
   id: number;
   content: Content;
   accepted: boolean;
   writer: User;
-  createdAt: string;
-  updatedAt: string;
+}
+
+interface AnswerPermission {
+  isWriter: boolean;
+  isAcceptable: boolean;
+  isEditable: boolean;
+  isDeletable: boolean;
 }

@@ -1,5 +1,5 @@
 import type { Route } from './+types/detail';
-import { getQuestion } from '~/apis/server/questions';
+import { getQuestion } from '~/apis/server/question';
 import {
   QuestionDetailContent,
   QuestionDetailFooter,
@@ -10,7 +10,7 @@ import { AnswerList, AnswerListItem, AnswerPost } from '~/components/question/an
 import { Card } from '~/components/ui/card';
 import { useAuth } from '~/hooks/use-auth';
 import { parseParams } from '~/lib/parse';
-import { compositeKeySchema } from '~/schemas/zod';
+import { compositeKeySchema } from '~/schemas/common';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

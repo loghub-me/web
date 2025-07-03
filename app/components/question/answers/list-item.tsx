@@ -2,7 +2,7 @@ import { CheckIcon, EllipsisIcon, PencilIcon, TrashIcon, UserIcon } from 'lucide
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { acceptAnswer, removeAnswer } from '~/apis/client/questions';
+import { acceptAnswer, removeAnswer } from '~/apis/client/question';
 import { AnswerEditForm } from '~/components/question/answers';
 import { Badge } from '~/components/ui/badge';
 import { Button } from '~/components/ui/button';

@@ -2,7 +2,7 @@ import { ImageIcon, UploadIcon, XIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { updateSelfAvatar } from '~/apis/client/users';
+import { updateSelfAvatar } from '~/apis/client/user';
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';

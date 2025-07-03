@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { StarIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import { addQuestionStar, existsQuestionStar, removeQuestionStar } from '~/apis/client/questions';
+import { addQuestionStar, existsQuestionStar, removeQuestionStar } from '~/apis/client/question';
 import { Button } from '~/components/ui/button';
 import { ErrorMessage } from '~/constants/error-messages';
 import { useAuth } from '~/hooks/use-auth';

@@ -3,13 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { getQuestion } from '~/apis/server/questions';
+import { getQuestion } from '~/apis/server/question';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { QuestionEditDialog, QuestionEditForm } from '~/components/question';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
-import { questionEditSchema } from '~/schemas/questions';
-import { compositeKeySchema } from '~/schemas/zod';
+import { compositeKeySchema } from '~/schemas/common';
+import { questionEditSchema } from '~/schemas/question';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

@@ -4,7 +4,7 @@ import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { editArticle } from '~/apis/client/articles';
+import { editArticle } from '~/apis/client/article';
 import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
 import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
@@ -14,7 +14,7 @@ import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
 import { handleMessageError } from '~/lib/error';
-import { articleEditSchema } from '~/schemas/articles';
+import { articleEditSchema } from '~/schemas/article';
 
 interface ArticleEditFormProps {
   form: UseFormReturn<z.infer<typeof articleEditSchema>>;

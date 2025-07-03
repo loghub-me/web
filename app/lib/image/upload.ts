@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { uploadImage } from '~/apis/client/users';
+import { uploadImage } from '~/apis/client/user';
 
 export const defaultInputFileProps: React.InputHTMLAttributes<HTMLInputElement> = {
   type: 'file',

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+export const idZod = z.number().int().positive();
 export const emailZod = z.string().email('올바른 이메일 형식이 아닙니다.').trim();
 export const usernameZod = z
   .string()
@@ -16,18 +17,7 @@ export const otpZod = z.string().trim().min(6, '인증번호는 6자리여야 �
 export const queryZod = z.string().trim().optional().default('');
 export const sortZod = z.enum(['latest', 'oldest', 'relevant', 'trending']).default('latest');
 export const pageZod = z.coerce.number().int().min(1).default(1);
-export const primaryKeySchema = z.object({ id: z.coerce.number().positive() });
-export const usernameSchema = z.object({
-  username: z
-    .string()
-    .trim()
-    .startsWith('@') // startsWith('@')
-    .transform((value) => value.replace('@', '')), // replace('@', '')
-});
-export const compositeKeySchema = usernameSchema.extend({ slug: z.string().trim() });
-export const pageSchema = z.object({ page: pageZod });
 
-export const idZod = z.number().positive();
 export const commentContentZod = z
   .string()
   .trim()

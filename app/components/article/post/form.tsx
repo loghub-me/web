@@ -4,7 +4,7 @@ import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { postArticle } from '~/apis/client/articles';
+import { postArticle } from '~/apis/client/article';
 import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
 import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
@@ -13,7 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '~/component
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { handleMessageError } from '~/lib/error';
-import { articlePostSchema } from '~/schemas/articles';
+import { articlePostSchema } from '~/schemas/article';
 
 interface ArticlePostFormProps {
   form: UseFormReturn<z.infer<typeof articlePostSchema>>;

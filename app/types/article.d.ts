@@ -8,9 +8,15 @@ interface Article extends Timestamps {
   topics: Topic[];
 }
 
-interface ArticleDetail extends Article {
+interface ArticleDetail extends Timestamps {
+  id: number;
+  slug: string;
+  title: string;
   content: Content;
+  thumbnail: string;
+  stats: ArticleStats;
   writer: User;
+  topics: Topic[];
 }
 
 interface ArticleStats {

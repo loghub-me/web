@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { postAnswer } from '~/apis/client/questions';
+import { postAnswer } from '~/apis/client/question';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { Button } from '~/components/ui/button';
 import { Card } from '~/components/ui/card';
@@ -14,7 +14,7 @@ import { Form, FormField, FormMessage } from '~/components/ui/form';
 import { UserInline } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
-import { answerPostSchema } from '~/schemas/questions';
+import { answerPostSchema } from '~/schemas/question';
 
 interface AnswerPostFormProps {
   questionId: number;

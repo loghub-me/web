@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getArticleCommentReplies } from '~/apis/client/articles';
+import { getArticleCommentReplies } from '~/apis/client/article';
 import ArticleCommentList from '~/components/article/comment/list';
 import ArticleCommentListItem from '~/components/article/comment/list-item';
 import { CommentSkeleton } from '~/components/common/skeletons';

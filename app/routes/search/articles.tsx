@@ -1,7 +1,7 @@
 import type { Route } from './+types/articles';
 import { Suspense, useRef } from 'react';
 import { Await, Form } from 'react-router';
-import { searchArticles } from '~/apis/server/articles';
+import { searchArticles } from '~/apis/server/article';
 import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/article';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
@@ -9,11 +9,11 @@ import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { ARTICLE_SORT_OPTIONS } from '~/constants/sorts';
 import { parseSearchParams } from '~/lib/parse';
-import { articlesSearchSchema } from '~/schemas/articles';
+import { articleSearchSchema } from '~/schemas/article';
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
-  const searchParams = parseSearchParams(url.searchParams, articlesSearchSchema);
+  const searchParams = parseSearchParams(url.searchParams, articleSearchSchema);
   const articles = searchArticles(searchParams);
 
   return { articles, url, searchParams };

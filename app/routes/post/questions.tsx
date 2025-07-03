@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { QuestionPostDialog, QuestionPostForm } from '~/components/question';
-import { questionPostSchema } from '~/schemas/questions';
+import { questionPostSchema } from '~/schemas/question';
 
 export default function PostQuestionsRoute() {
   const easyMDERef = useRef<EasyMDE>(null);

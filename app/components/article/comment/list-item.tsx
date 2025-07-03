@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { DotIcon, ReplyIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { removeArticleComment } from '~/apis/client/articles';
+import { removeArticleComment } from '~/apis/client/article';
 import ArticleCommentReplies from '~/components/article/comment/replies';
 import { Button } from '~/components/ui/button';
 import { UserInline, UserMention } from '~/components/user';

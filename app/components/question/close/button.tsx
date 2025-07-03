@@ -1,7 +1,7 @@
 import { XIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { closeQuestion } from '~/apis/client/questions';
+import { closeQuestion } from '~/apis/client/question';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,

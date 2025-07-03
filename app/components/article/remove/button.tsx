@@ -1,7 +1,7 @@
 import { TrashIcon, XIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
-import { removeArticle } from '~/apis/client/articles';
+import { removeArticle } from '~/apis/client/article';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,

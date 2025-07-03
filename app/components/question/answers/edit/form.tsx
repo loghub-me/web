@@ -6,13 +6,13 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { editAnswer } from '~/apis/client/questions';
+import { editAnswer } from '~/apis/client/question';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { Button } from '~/components/ui/button';
 import { Form, FormField, FormMessage } from '~/components/ui/form';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
-import { answerPostSchema } from '~/schemas/questions';
+import { answerPostSchema } from '~/schemas/question';
 
 interface AnswerEditFormProps {
   questionId: number;

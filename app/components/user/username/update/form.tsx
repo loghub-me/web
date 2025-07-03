@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { refreshToken } from '~/apis/client/auth';
-import { updateSelfUsername } from '~/apis/client/users';
+import { updateSelfUsername } from '~/apis/client/user';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';

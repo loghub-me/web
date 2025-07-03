@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { serverAPI } from '~/apis/server/instance';
-import type { articlesSearchSchema } from '~/schemas/articles';
-import type { questionsSearchSchema } from '~/schemas/questions';
+import type { articlesSearchSchema } from '~/schemas/article';
+import type { questionsSearchSchema } from '~/schemas/question';
 import type { pageSchema } from '~/schemas/zod';
 
 export const getUser = (username: string) => serverAPI.get(`users/@${username}`).json<UserDetail>();
