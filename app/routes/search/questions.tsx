@@ -29,7 +29,7 @@ export default function SearchQuestionsRoute({ loaderData }: Route.ComponentProp
 
   return (
     <main className="container mx-auto p-4 pt-20 min-h-screen space-y-4">
-      <Form action={pathname} ref={formRef} className="space-y-2">
+      <Form action={pathname} ref={formRef} className="space-y-4">
         <div className="flex gap-2">
           <SearchSort
             submit={() => formRef.current?.requestSubmit()}

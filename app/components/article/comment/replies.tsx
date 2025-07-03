@@ -10,16 +10,18 @@ interface ArticleCommentRepliesProps {
   articleId: number;
   commentId: number;
   replyCount: number;
+  queryKey: (string | number)[];
 }
 
 export default function ArticleCommentReplies({
   articleId,
   commentId,
   replyCount,
+  queryKey,
 }: Readonly<ArticleCommentRepliesProps>) {
   const [loaded, setLoaded] = useState(false);
   const { data: replies, status } = useQuery({
-    queryKey: ['articles-comment-replies', articleId, commentId],
+    queryKey: ['getArticleCommentReplies', articleId, commentId],
     queryFn: () => getArticleCommentReplies(articleId, commentId),
     enabled: loaded,
   });
@@ -36,7 +38,13 @@ export default function ArticleCommentReplies({
     <ArticleCommentList className="pt-4">
       {status === 'pending' && <CommentSkeleton size={2} />}
       {replies?.map((reply) => (
-        <ArticleCommentListItem key={reply.id} articleId={articleId} parentId={commentId} comment={reply} />
+        <ArticleCommentListItem
+          key={reply.id}
+          articleId={articleId}
+          parentId={commentId}
+          comment={reply}
+          queryKey={queryKey}
+        />
       ))}
     </ArticleCommentList>
   );

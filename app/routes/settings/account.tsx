@@ -1,8 +1,7 @@
 import { MailIcon, UserXIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import UsernameUpdateDialog from '~/components/user/username/update/dialog';
-import UsernameUpdateForm from '~/components/user/username/update/form';
+import { UsernameUpdateDialog, UsernameUpdateForm } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 
 export default function SettingAccountRoute() {
@@ -19,7 +18,7 @@ export default function SettingAccountRoute() {
           <label className="text-sm font-medium">이메일</label>
           <div className="flex gap-2">
             <Input type="text" name="email" value={session.email} disabled />
-            <Button type="button" variant="outline" disabled>
+            <Button type="button" variant="outline" className="w-32" disabled>
               <MailIcon /> 이메일 변경
             </Button>
           </div>

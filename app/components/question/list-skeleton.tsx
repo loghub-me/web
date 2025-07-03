@@ -4,9 +4,10 @@ export default function ArticleListSkeleton({ size = 1 }: Readonly<SkeletonProps
   return Array.from({ length: size }, (_, index) => (
     <div key={index} className="space-y-2">
       <div className="flex flex-wrap items-center gap-1">
-        <Skeleton className="h-7 w-1/3" />
         <Skeleton className="h-6 w-18 rounded-full" />
+        <Skeleton className="h-6 w-10 rounded-full" />
       </div>
+      <Skeleton className="h-7 w-1/3" />
       <div className="flex justify-between gap-2">
         <div className="flex flex-wrap gap-1">
           <Skeleton className="w-12 h-7" />

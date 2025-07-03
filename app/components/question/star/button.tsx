@@ -58,7 +58,7 @@ export default function QuestionStarButton({
       onClick={onButtonClick}
       disabled={existsLoading || isPending}
     >
-      <StarIcon className={cn('text-yellow-500', exists && 'fill-yellow-500')} />
+      <StarIcon className={cn('text-yellow-500', exists && 'fill-current')} />
       <span className="font-mono text-xs">{starCount}</span>
     </Button>
   );

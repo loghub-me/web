@@ -20,7 +20,7 @@ export default function ArticleDetailHeader({
 
   return (
     <div className="sticky top-0 z-40 px-4 w-full h-16 bg-card/70 backdrop-blur flex items-center justify-end gap-2 rounded-t-xl border-b">
-      <UserLink username={username} className={'mr-auto'} />
+      <UserLink username={username} className="mr-auto" />
       {session?.username === username && (
         <div>
           <ArticleEditLink username={username} slug={slug} />

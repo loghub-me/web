@@ -1,8 +1,6 @@
-import { Link } from 'react-router';
 import { QuestionCloseButton, QuestionEditLink, QuestionRemoveButton, QuestionStarButton } from '~/components/question';
-import { Button } from '~/components/ui/button';
 import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
-import { UserInline } from '~/components/user';
+import { UserLink } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 
 interface QuestionDetailHeaderProps {
@@ -25,11 +23,7 @@ export default function QuestionDetailHeader({
 
   return (
     <div className="sticky top-0 z-40 px-4 w-full h-16 bg-card/70 backdrop-blur flex items-center justify-end gap-2 rounded-t-xl border-b">
-      <Button variant={'ghost'} className="mr-auto px-2" asChild>
-        <Link to={`/@${username}`}>
-          <UserInline username={username} />
-        </Link>
-      </Button>
+      <UserLink username={username} className="mr-auto" />
       {session?.username === username && isOpen && (
         <div>
           <QuestionEditLink username={username} slug={slug} />

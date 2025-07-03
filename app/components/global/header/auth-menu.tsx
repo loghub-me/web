@@ -1,7 +1,6 @@
 import { LogInIcon } from 'lucide-react';
-import { Link } from 'react-router';
 import MemberNav from '~/components/global/member-nav';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
 import { Skeleton } from '~/components/ui/skeleton';
 import { useAuth } from '~/hooks/use-auth';
 
@@ -20,10 +19,8 @@ export default function HeaderAuthMenu() {
 
 function GuestNav() {
   return (
-    <Button variant={'default'} className="hidden md:inline-flex lg:inline-flex" asChild>
-      <Link to={'/login'}>
-        <LogInIcon /> 로그인
-      </Link>
-    </Button>
+    <ButtonLink to={'/login'} variant={'default'} className={'hidden md:inline-flex'}>
+      <LogInIcon /> 로그인
+    </ButtonLink>
   );
 }

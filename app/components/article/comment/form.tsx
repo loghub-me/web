@@ -17,9 +17,10 @@ import { articleCommentPostSchema } from '~/schemas/article';
 
 interface ArticleCommentFormProps {
   articleId: number;
+  queryKey: (string | number)[];
 }
 
-export default function ArticleCommentForm({ articleId }: Readonly<ArticleCommentFormProps>) {
+export default function ArticleCommentForm({ articleId, queryKey }: Readonly<ArticleCommentFormProps>) {
   const form = useForm<z.infer<typeof articleCommentPostSchema>>({
     resolver: zodResolver(articleCommentPostSchema),
     defaultValues: { content: '', articleId: articleId },
@@ -36,8 +37,10 @@ export default function ArticleCommentForm({ articleId }: Readonly<ArticleCommen
         form.reset();
         if (replyTo) clear();
 
-        if (parentId) queryClient.invalidateQueries({ queryKey: ['articles-comment-replies', articleId, parentId] });
-        queryClient.invalidateQueries({ queryKey: ['articles-comment', articleId] });
+        if (parentId) {
+          queryClient.invalidateQueries({ queryKey: ['getArticleCommentReplies', articleId, parentId] });
+        }
+        queryClient.invalidateQueries({ queryKey });
       })
       .catch(handleMessageError);
   }

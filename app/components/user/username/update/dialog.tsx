@@ -17,7 +17,7 @@ export default function UsernameUpdateDialog({ children }: Readonly<UsernameUpda
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        <Button variant="outline" className="w-32">
           <UserRoundPenIcon /> 유저네임 변경
         </Button>
       </DialogTrigger>

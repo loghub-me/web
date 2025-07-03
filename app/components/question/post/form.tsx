@@ -1,4 +1,4 @@
-import { BotIcon, CloudUploadIcon, LetterTextIcon, WandSparklesIcon, XIcon } from 'lucide-react';
+import { BotIcon, BotOffIcon, CloudUploadIcon, LetterTextIcon, WandSparklesIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -11,7 +11,7 @@ import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
-import { Switch } from '~/components/ui/switch';
+import { Switch, SwitchIcon } from '~/components/ui/switch';
 import { handleMessageError } from '~/lib/error';
 import { questionPostSchema } from '~/schemas/question';
 
@@ -41,12 +41,13 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>제목</FormLabel>
               <FormControl>
                 <IconInput icon={LetterTextIcon} placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
@@ -66,7 +67,7 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
               </div>
               <FormControl>
                 <Switch checked={field.value} onCheckedChange={field.onChange}>
-                  <BotIcon className="size-4" />
+                  <SwitchIcon enabledIcon={BotIcon} disabledIcon={BotOffIcon} value={field.value} />
                 </Switch>
               </FormControl>
             </FormItem>

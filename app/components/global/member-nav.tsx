@@ -1,9 +1,9 @@
 import { ChevronUpIcon, LogOutIcon, PencilIcon, SettingsIcon, StarIcon, UserIcon } from 'lucide-react';
-import { useState } from 'react';
-import { Link } from 'react-router';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { toast } from 'sonner';
 import { logout } from '~/apis/client/auth';
-import { Button } from '~/components/ui/button';
+import { Button, ButtonLink } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,12 +17,12 @@ import { cn } from '~/lib/utils';
 
 interface MemberNavProps {
   type: 'header' | 'sidebar';
-  closeSheet?: () => void;
 }
 
-export default function MemberNav({ type, closeSheet }: MemberNavProps) {
-  const { session, unregisterSession } = useAuth();
+export default function MemberNav({ type }: MemberNavProps) {
   const [open, setOpen] = useState(false);
+  const { session, unregisterSession } = useAuth();
+  const { pathname } = useLocation();
   const triggerVariant = type === 'header' ? (open ? 'secondary' : 'ghost') : open ? 'outline' : 'outline';
 
   const navLinks = [
@@ -31,13 +31,6 @@ export default function MemberNav({ type, closeSheet }: MemberNavProps) {
     { to: '/post', name: '작성', icon: PencilIcon },
     { to: '/settings', name: '설정', icon: SettingsIcon },
   ];
-
-  function onClickLink() {
-    setOpen(false);
-    if (type === 'sidebar' && closeSheet) {
-      closeSheet();
-    }
-  }
 
   function onClickLogout() {
     logout()
@@ -48,6 +41,10 @@ export default function MemberNav({ type, closeSheet }: MemberNavProps) {
       })
       .catch(handleMessageError);
   }
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     session && (
@@ -60,11 +57,9 @@ export default function MemberNav({ type, closeSheet }: MemberNavProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent className={cn('flex flex-col', type === 'sidebar' && 'w-xs')}>
           {navLinks.map(({ to, name, icon: Icon }) => (
-            <Button key={to} variant="ghost" className="justify-start" asChild>
-              <Link to={to} onClick={onClickLink}>
-                <Icon /> {name}
-              </Link>
-            </Button>
+            <ButtonLink key={to} to={to} className={'justify-start'}>
+              <Icon /> {name}
+            </ButtonLink>
           ))}
           <DropdownMenuSeparator />
           <Button variant="ghost" className="justify-start" onClick={onClickLogout}>

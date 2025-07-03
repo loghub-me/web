@@ -1,5 +1,5 @@
 import { GlobeLockIcon, IdCardIcon, UserRoundPenIcon } from 'lucide-react';
-import SettingHeaderNavLink from '~/components/setting/header/nav-link';
+import { ButtonNavLink } from '~/components/ui/button';
 
 const navLinks = [
   { name: '계정', to: '/settings/account', icon: IdCardIcon },
@@ -15,8 +15,10 @@ export default function SettingHeader() {
         <p className="text-muted-foreground text-sm">계정, 프로필, 개인정보 등 설정을 관리할 수 있습니다.</p>
       </div>
       <nav className="flex items-center gap-2">
-        {navLinks.map((navLink) => (
-          <SettingHeaderNavLink key={navLink.to} {...navLink} />
+        {navLinks.map(({ name, to, icon: Icon }) => (
+          <ButtonNavLink key={to} to={to} end>
+            <Icon /> {name}
+          </ButtonNavLink>
         ))}
       </nav>
     </header>

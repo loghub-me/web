@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
+import { Link, NavLink } from 'react-router';
 import { cn } from '~/lib/utils';
 
 const buttonVariants = cva(
@@ -43,4 +44,45 @@ function Button({
   return <Comp data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
 }
 
-export { Button, buttonVariants };
+function ButtonLink({
+  className,
+  variant = 'ghost',
+  size,
+  to,
+  ...props
+}: React.ComponentProps<'a'> & VariantProps<typeof buttonVariants> & { to: string }) {
+  return (
+    <Link to={to} data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props}>
+      {props.children}
+    </Link>
+  );
+}
+
+function ButtonNavLink({
+  className,
+  variant,
+  size,
+  to,
+  end = false,
+  ...props
+}: React.ComponentProps<'a'> & VariantProps<typeof buttonVariants> & { to: string; end?: boolean }) {
+  return (
+    <NavLink
+      to={to}
+      data-slot="button"
+      className={({ isActive }) =>
+        cn(
+          isActive
+            ? buttonVariants({ variant: 'secondary', size, className })
+            : buttonVariants({ variant: 'ghost', size, className })
+        )
+      }
+      {...props}
+      end={end}
+    >
+      {props.children}
+    </NavLink>
+  );
+}
+
+export { Button, ButtonLink, ButtonNavLink, buttonVariants };

@@ -14,7 +14,9 @@ export default function StarListItem({ star }: Readonly<StarListItemProps>) {
   return (
     <Link to={path} className="flex flex-col gap-2 rounded-lg p-4 border transition-colors hover:bg-accent">
       <div className="flex items-start gap-2">
-        <Badge variant="outline">{targetLabel}</Badge>
+        <Badge variant="outline" className="rounded-sm">
+          {targetLabel}
+        </Badge>
         <h3 className="font-medium line-clamp-2">{title}</h3>
       </div>
       {topics.length > 0 && (

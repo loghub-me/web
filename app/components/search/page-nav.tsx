@@ -1,6 +1,5 @@
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
-import { Link } from 'react-router';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
 
 interface PageNavProps {
   to: string;
@@ -15,27 +14,23 @@ export default function PageNav({ to, currentPage, totalPages }: Readonly<PageNa
   const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
   return (
-    <div className="flex items-center justify-center gap-1 mt-4">
+    <div className="flex items-center justify-center gap-1">
       {currentPage > 1 && (
-        <Button variant="ghost" size="icon" asChild>
-          <Link to={`${to}${currentPage - 1}`}>
-            <ChevronLeftIcon className="h-4 w-4" />
-          </Link>
-        </Button>
+        <ButtonLink to={`${to}${currentPage - 1}`} size={'icon'}>
+          <ChevronLeftIcon className="h-4 w-4" />
+        </ButtonLink>
       )}
 
       {pages.map((page) => (
-        <Button key={page} variant="ghost" asChild className={page === currentPage ? 'bg-accent' : ''}>
-          <Link to={`${to}${page}`}>{page}</Link>
-        </Button>
+        <ButtonLink key={page} to={`${to}${page}`} variant={currentPage === page ? 'secondary' : 'ghost'} size={'icon'}>
+          {page}
+        </ButtonLink>
       ))}
 
       {currentPage < totalPages && (
-        <Button variant="ghost" size="icon" asChild>
-          <Link to={`${to}${currentPage + 1}`}>
-            <ChevronRightIcon className="h-4 w-4" />
-          </Link>
-        </Button>
+        <ButtonLink to={`${to}${currentPage + 1}`} size={'icon'}>
+          <ChevronRightIcon />
+        </ButtonLink>
       )}
     </div>
   );

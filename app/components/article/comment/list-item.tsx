@@ -2,7 +2,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { DotIcon, ReplyIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { removeArticleComment } from '~/apis/client/article';
-import ArticleCommentReplies from '~/components/article/comment/replies';
 import { Button } from '~/components/ui/button';
 import { UserInline, UserMention } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
@@ -12,27 +11,35 @@ import { parseRelativeTime } from '~/lib/parse';
 import { cn } from '~/lib/utils';
 
 interface ArticleCommentListItemProps {
-  parentId?: number;
   articleId: number;
   comment: ArticleComment;
+  queryKey: (string | number)[];
+  parentId?: number;
+  children?: React.ReactNode;
 }
 
 export default function ArticleCommentListItem({
-  parentId,
   articleId,
   comment,
+  queryKey,
+  parentId,
+  children,
 }: Readonly<ArticleCommentListItemProps>) {
-  const { id, writer, createdAt, content, replyCount, mention, deleted } = comment;
+  const { writer, createdAt, content, mention, deleted } = comment;
   const { session } = useAuth();
   const { replyTo, setReplyTo, setParentId, clear } = useReply();
-  const isReplying = replyTo?.id === id;
+  const isReplying = replyTo?.id === comment.id;
   const queryClient = useQueryClient();
 
   function onDeleteButtonClick() {
     removeArticleComment(articleId, comment.id)
       .then(({ message }) => {
         toast.success(message);
-        return queryClient.invalidateQueries({ queryKey: ['articles-comment', articleId] });
+
+        if (parentId) {
+          queryClient.invalidateQueries({ queryKey: ['getArticleCommentReplies', articleId, parentId] });
+        }
+        queryClient.invalidateQueries({ queryKey });
       })
       .catch(handleMessageError);
   }
@@ -41,7 +48,12 @@ export default function ArticleCommentListItem({
     if (isReplying) {
       return clear();
     }
-    setParentId(parentId);
+
+    if (parentId) {
+      setParentId(parentId);
+    } else {
+      setParentId(comment.id);
+    }
     setReplyTo(comment);
   }
 
@@ -78,9 +90,7 @@ export default function ArticleCommentListItem({
           {mention && <UserMention {...mention} />}
           <span className={cn(deleted && 'text-muted-foreground')}>{content}</span>
         </p>
-        {replyCount > 0 && (
-          <ArticleCommentReplies articleId={articleId} commentId={comment.id} replyCount={replyCount} />
-        )}
+        {children}
       </div>
     </div>
   );

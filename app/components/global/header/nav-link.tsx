@@ -18,6 +18,7 @@ export default function HeaderNavLink({ name, to }: Readonly<HeaderNavLinkProps>
           isPending && 'animate-pulse'
         )
       }
+      end
     >
       {({ isActive }) => (
         <>

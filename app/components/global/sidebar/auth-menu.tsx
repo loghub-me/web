@@ -1,15 +1,10 @@
 import { LogInIcon } from 'lucide-react';
-import { Link } from 'react-router';
 import MemberNav from '~/components/global/member-nav';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
 import { Skeleton } from '~/components/ui/skeleton';
 import { useAuth } from '~/hooks/use-auth';
 
-interface SideAuthMenuProps {
-  closeSheet: () => void;
-}
-
-export default function SideAuthMenu({ closeSheet }: Readonly<SideAuthMenuProps>) {
+export default function SideAuthMenu() {
   const { status } = useAuth();
 
   switch (status) {
@@ -18,16 +13,14 @@ export default function SideAuthMenu({ closeSheet }: Readonly<SideAuthMenuProps>
     case 'unauthenticated':
       return <GuestNav />;
     case 'authenticated':
-      return <MemberNav type="sidebar" closeSheet={closeSheet} />;
+      return <MemberNav type="sidebar" />;
   }
 }
 
 function GuestNav() {
   return (
-    <Button variant={'default'} className="" asChild>
-      <Link to={'/login'}>
-        <LogInIcon /> 로그인
-      </Link>
-    </Button>
+    <ButtonLink to={'/login'} variant={'default'} className="w-full">
+      <LogInIcon /> 로그인
+    </ButtonLink>
   );
 }

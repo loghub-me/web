@@ -1,7 +1,28 @@
 import { BookIcon, KeyboardIcon, MessageCircleQuestionIcon, NewspaperIcon } from 'lucide-react';
-import { Link } from 'react-router';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
 import { Card } from '~/components/ui/card';
+import { cn } from '~/lib/utils';
+
+const navLinks = [
+  {
+    to: '/post/articles',
+    label: '아티클 작성하기',
+    description: '아티클을 작성하고, 다른 사람들과 공유해보세요.',
+    icon: NewspaperIcon,
+  },
+  {
+    to: '/post/books',
+    label: '도서 작성하기',
+    description: '도서를 작성하고, 다른 사람들과 공유해보세요.',
+    icon: BookIcon,
+  },
+  {
+    to: '/post/questions',
+    label: '질문 작성하기',
+    description: '질문을 작성하고, 다른 사람들과 공유해보세요.',
+    icon: MessageCircleQuestionIcon,
+  },
+];
 
 export default function PostIndex() {
   return (
@@ -12,43 +33,26 @@ export default function PostIndex() {
           글을 작성하고, 다른 사람들과 공유해보세요. <br />
           글은 Markdown으로 작성할 수 있습니다.
         </p>
-        <Button asChild>
-          <Link to={'/how-to-use/markdown'}>
-            <KeyboardIcon /> 마크다운 사용법
-          </Link>
-        </Button>
+        <ButtonLink to={'/how-to-use/markdown'} variant={'default'}>
+          <KeyboardIcon /> 마크다운 사용법
+        </ButtonLink>
       </div>
-      <div className="overflow-hidden rounded-xl flex">
-        <Card className="w-full rounded-r-none p-6 gap-2">
-          <NewspaperIcon className="mb-2" />
-          <div>
-            <h3 className="font-semibold">아티클 작성하기</h3>
-            <p className="text-muted-foreground">아티클을 작성하고, 다른 사람들과 공유해보세요.</p>
-          </div>
-          <Button variant="outline" className="mt-auto" asChild>
-            <Link to={'/post/articles'}>새 글 작성하기</Link>
-          </Button>
-        </Card>
-        <Card className="w-full rounded-none p-6 gap-2 border-x-0">
-          <BookIcon className="mb-2" />
-          <div>
-            <h3 className="font-semibold">책 작성하기</h3>
-            <p className="text-muted-foreground">책을 작성하고, 다른 사람들과 공유해보세요.</p>
-          </div>
-          <Button variant="outline" className="mt-auto" asChild>
-            <Link to={'/post/books'}>새 책 작성하기</Link>
-          </Button>
-        </Card>
-        <Card className="w-full rounded-l-none p-6 gap-2">
-          <MessageCircleQuestionIcon className="mb-2" />
-          <div>
-            <h3 className="font-semibold">질문 작성하기</h3>
-            <p className="text-muted-foreground">질문을 작성하고, 다른 사람들과 공유해보세요.</p>
-          </div>
-          <Button variant="outline" className="mt-auto" asChild>
-            <Link to={'/post/questions'}>새 질문 작성하기</Link>
-          </Button>
-        </Card>
+      <div className="overflow-hidden rounded-xl border flex">
+        {navLinks.map(({ to, label, description, icon: Icon }) => (
+          <Card
+            key={to}
+            className={cn('p-6 w-full flex flex-col gap-1 border-0 border-r last:border-r-0 rounded-none')}
+          >
+            <Icon className="mb-2" />
+            <div>
+              <h3 className="font-semibold">{label}</h3>
+              <p className="text-muted-foreground">{description}</p>
+            </div>
+            <ButtonLink to={to} className={'mt-auto'} variant={'outline'}>
+              {label}
+            </ButtonLink>
+          </Card>
+        ))}
       </div>
     </main>
   );

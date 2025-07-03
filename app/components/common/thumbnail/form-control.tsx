@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { toast } from 'sonner';
 import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
+import { cn } from '~/lib/utils';
 
 interface ThumbnailFormControlProps {
   value: string;
@@ -21,7 +22,7 @@ export default function ThumbnailFormControl({ value, setValue }: Readonly<Thumb
 
   return (
     <div
-      className="group aspect-video border rounded-lg bg-secondary overflow-hidden cursor-pointer"
+      className={cn('group border aspect-video rounded-lg bg-secondary overflow-hidden cursor-pointer')}
       onClick={() => inputFileRef.current?.click()}
     >
       <input {...inputFileProps} />

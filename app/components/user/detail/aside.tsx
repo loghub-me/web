@@ -13,7 +13,7 @@ export default function UserDetailAside({ username, nickname, readme }: Readonly
       <h3 className="mt-2 text-lg font-medium">@{username}</h3>
       <h4 className="text-muted-foreground">{nickname}</h4>
       <hr className="w-full" />
-      <p className="text-muted-foreground">{readme}</p>
+      {readme && <p className="text-muted-foreground">{readme}</p>}
     </aside>
   );
 }

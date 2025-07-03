@@ -1,8 +1,9 @@
 import { TagIcon } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import { TopicTag } from '~/components/topic';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '~/components/ui/command';
+import { FormLabel } from '~/components/ui/form';
 import { ErrorMessage } from '~/constants/error-messages';
 import { ALL_TOPICS } from '~/constants/topics';
 import { cn } from '~/lib/utils';
@@ -15,7 +16,10 @@ interface TopicSlugsFormControlProps {
 export default function TopicSlugsFormControl({ topics, setTopics }: Readonly<TopicSlugsFormControlProps>) {
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
-  const commandInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setFocused(query.trim().length > 0);
+  }, [query]);
 
   function onSelect(value: string) {
     const [slug, name] = value.split(':');
@@ -33,20 +37,13 @@ export default function TopicSlugsFormControl({ topics, setTopics }: Readonly<To
 
   return (
     <div className="space-y-2">
+      <FormLabel>토픽</FormLabel>
       <Command>
-        <CommandInput
-          ref={commandInputRef}
-          icon={TagIcon}
-          placeholder="토픽을 입력해주세요"
-          value={query}
-          onValueChange={setQuery}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-        />
+        <CommandInput icon={TagIcon} placeholder="토픽을 입력해주세요" value={query} onValueChange={setQuery} />
         <CommandList className={cn(focused ? 'block' : 'hidden')}>
           <CommandEmpty>토픽을 찾을 수 없습니다.</CommandEmpty>
           {ALL_TOPICS.map((topic) => (
-            <CommandItem key={topic.slug} value={`${topic.slug}:${topic.name}`} onSelect={(value) => onSelect(value)}>
+            <CommandItem key={topic.slug} value={`${topic.slug}:${topic.name}`} onSelect={onSelect}>
               <img className="size-4" src={`/icons/${topic.slug}.svg`} alt={topic.name} />
               <span>{topic.name}</span>
             </CommandItem>

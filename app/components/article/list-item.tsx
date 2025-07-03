@@ -20,7 +20,7 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
           alt={title}
         />
       </div>
-      <h3 className="font-medium line-clamp-2">{title}</h3>
+      <h3 className="font-medium line-clamp-2 group-hover:underline">{title}</h3>
       {topics.length > 0 && (
         <div className="flex gap-1 flex-wrap">
           {topics.map((topic) => (
@@ -30,7 +30,7 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
       )}
       <div className="mt-auto flex items-center gap-2 justify-between">
         <UserInline username={writerUsername} />
-        <Timestamp {...article} />
+        <Timestamp {...article} showUpdated={false} />
       </div>
     </Link>
   );

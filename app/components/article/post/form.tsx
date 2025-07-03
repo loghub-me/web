@@ -9,7 +9,7 @@ import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
 import TopicSlugsFormControl from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { handleMessageError } from '~/lib/error';
@@ -41,12 +41,13 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>제목</FormLabel>
               <FormControl>
                 <IconInput icon={LetterTextIcon} placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
@@ -59,6 +60,7 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
           name="thumbnail"
           render={({ field }) => (
             <FormItem>
+              <FormLabel>썸네일</FormLabel>
               <ThumbnailFormControl value={field.value} setValue={(value) => form.setValue('thumbnail', value)} />
               <FormControl>
                 <input type="hidden" placeholder="제목을 입력해주세요" {...field} />

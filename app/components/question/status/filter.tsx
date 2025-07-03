@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
+import { QUESTION_FILTER_OPTIONS } from '~/constants/filters';
 
 interface QuestionStatusFilterProps {
   filter: QuestionFilter;
@@ -11,18 +11,16 @@ export default function QuestionStatusFilter({ filter, query, sort }: Readonly<Q
   return (
     <div className="flex items-center gap-2">
       <input type="hidden" name="filter" value={filter} />
-      <Button className="rounded-full" variant={filter === 'all' ? 'secondary' : 'ghost'} asChild>
-        <Link to={`/search/questions?query=${query}&sort=${sort}&filter=all`}>ALL</Link>
-      </Button>
-      <Button className="rounded-full" variant={filter === 'open' ? 'secondary' : 'ghost'} asChild>
-        <Link to={`/search/questions?query=${query}&sort=${sort}&filter=open`}>OPEN</Link>
-      </Button>
-      <Button className="rounded-full" variant={filter === 'closed' ? 'secondary' : 'ghost'} asChild>
-        <Link to={`/search/questions?query=${query}&sort=${sort}&filter=closed`}>CLOSED</Link>
-      </Button>
-      <Button className="rounded-full" variant={filter === 'solved' ? 'secondary' : 'ghost'} asChild>
-        <Link to={`/search/questions?query=${query}&sort=${sort}&filter=solved`}>SOLVED</Link>
-      </Button>
+      {Object.entries(QUESTION_FILTER_OPTIONS).map(([key, { label }]) => (
+        <ButtonLink
+          key={key}
+          to={`/search/questions?query=${query}&sort=${sort}&filter=${key}`}
+          variant={filter === key ? 'secondary' : 'ghost'}
+          className={'rounded-full'}
+        >
+          {label}
+        </ButtonLink>
+      ))}
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { PencilIcon } from 'lucide-react';
-import { Link } from 'react-router';
-import { Button } from '~/components/ui/button';
+import { ButtonLink } from '~/components/ui/button';
 
 interface QuestionEditLinkProps {
   username: string;
@@ -9,10 +8,8 @@ interface QuestionEditLinkProps {
 
 export default function QuestionEditLink({ username, slug }: Readonly<QuestionEditLinkProps>) {
   return (
-    <Button className="rounded-l-full border-r-0" variant="outline" asChild>
-      <Link to={`/questions/@${username}/${slug}/edit`}>
-        <PencilIcon className="ml-0.5" />
-      </Link>
-    </Button>
+    <ButtonLink to={`/@${username}/questions/${slug}/edit`} variant={'outline'} className="rounded-l-full border-r-0">
+      <PencilIcon className="ml-0.5" />
+    </ButtonLink>
   );
 }

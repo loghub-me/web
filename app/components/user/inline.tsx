@@ -9,7 +9,9 @@ export default function UserInline({ username, nickname }: Readonly<UserInlinePr
   return (
     <div className="flex items-center gap-1.5">
       <UserAvatar username={username} className="mt-0.5" />
-      <span className="text-sm group-hover:text-accent-foreground">{nickname ? `${nickname}` : `@${username}`}</span>
+      <span className="text-sm font-medium group-hover:text-accent-foreground">
+        {nickname ? `${nickname}` : `@${username}`}
+      </span>
     </div>
   );
 }

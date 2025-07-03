@@ -1,12 +1,12 @@
-import { FileQuestionIcon, PaperclipIcon } from 'lucide-react';
 import HeaderAuthMenu from '~/components/global/header/auth-menu';
 import HeaderNavLink from '~/components/global/header/nav-link';
 import Logo from '~/components/global/logo';
 import GlobalSidebar from '~/components/global/sidebar';
 
 export const navLinks = [
-  { name: '아티클', to: '/search/articles', icon: PaperclipIcon },
-  { name: '질문', to: '/search/questions', icon: FileQuestionIcon },
+  { name: '아티클', to: '/search/articles' },
+  { name: '도서', to: '/search/books' },
+  { name: '질문', to: '/search/questions' },
 ];
 
 export default function GlobalHeader() {
