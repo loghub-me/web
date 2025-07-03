@@ -1,6 +1,6 @@
 import { Skeleton } from '~/components/ui/skeleton';
 
-export default function ArticleListSkeleton({ size = 1 }: Readonly<SkeletonProps>) {
+export default function BookListSkeleton({ size = 1 }: Readonly<SkeletonProps>) {
   return Array.from({ length: size }, (_, index) => (
     <div key={index} className="space-y-2">
       <Skeleton className="aspect-book" />
