@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { StarIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { addQuestionStar, existsQuestionStar, removeQuestionStar } from '~/apis/client/question';
+import StarIcon from '~/components/common/icon/star';
 import { Button } from '~/components/ui/button';
 import { ErrorMessage } from '~/constants/error-messages';
 import { useAuth } from '~/hooks/use-auth';
-import { cn } from '~/lib/utils';
 
 interface QuestionStarButtonProps {
   questionId: number;
@@ -58,7 +57,7 @@ export default function QuestionStarButton({
       onClick={onButtonClick}
       disabled={existsLoading || isPending}
     >
-      <StarIcon className={cn('text-yellow-500', exists && 'fill-current')} />
+      <StarIcon fill={exists} />
       <span className="font-mono text-xs">{starCount}</span>
     </Button>
   );

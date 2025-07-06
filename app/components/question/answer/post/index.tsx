@@ -1,12 +1,12 @@
 import { QuestionAnswerPostClosed, QuestionAnswerPostForm, QuestionAnswerPostLink } from '~/components/question';
 import { useAuth } from '~/hooks/use-auth';
 
-interface AnswerPostProps {
+interface QuestionAnswerPostProps {
   questionId: number;
   questionStatus: QuestionStatus;
 }
 
-export default function AnswerPost({ questionId, questionStatus }: Readonly<AnswerPostProps>) {
+export default function QuestionAnswerPost({ questionId, questionStatus }: Readonly<QuestionAnswerPostProps>) {
   const { status } = useAuth();
 
   switch (questionStatus) {

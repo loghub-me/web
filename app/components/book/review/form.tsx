@@ -1,11 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { MessageSquareMoreIcon, StarIcon } from 'lucide-react';
+import { MessageSquareMoreIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { postBookReview } from '~/apis/client/books';
+import StarIcon from '~/components/common/icon/star';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select';
@@ -17,9 +18,10 @@ import { bookReviewPostSchema } from '~/schemas/book';
 
 interface BookReviewFormProps {
   bookId: number;
+  queryKey: (string | number)[];
 }
 
-export default function BookReviewForm({ bookId }: Readonly<BookReviewFormProps>) {
+export default function BookReviewForm({ bookId, queryKey }: Readonly<BookReviewFormProps>) {
   const form = useForm<z.infer<typeof bookReviewPostSchema>>({
     resolver: zodResolver(bookReviewPostSchema),
     defaultValues: { content: '', rating: 5, bookId: bookId },
@@ -34,7 +36,7 @@ export default function BookReviewForm({ bookId }: Readonly<BookReviewFormProps>
 
         form.reset();
 
-        queryClient.invalidateQueries({ queryKey: ['books-review', bookId] });
+        queryClient.invalidateQueries({ queryKey });
       })
       .catch(handleMessageError);
   }
@@ -70,9 +72,7 @@ export default function BookReviewForm({ bookId }: Readonly<BookReviewFormProps>
                     {[5, 4, 3, 2, 1].map((i) => (
                       <SelectItem key={i} value={i.toString()}>
                         <div className="flex gap-0.5">
-                          {Array.from({ length: i }, (_, index) => (
-                            <StarIcon key={index} className={'text-yellow-500 fill-current'} />
-                          ))}
+                          <StarIcon size={i} fill={true} />
                         </div>
                       </SelectItem>
                     ))}

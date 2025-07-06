@@ -1,4 +1,4 @@
-import { DotIcon, MessagesSquareIcon, StarIcon } from 'lucide-react';
+import { DotIcon, MessagesSquareIcon } from 'lucide-react';
 import Timestamp from '~/components/common/timestamp';
 import { QuestionStatusBadge } from '~/components/question';
 import { TopicBadge } from '~/components/topic';
@@ -22,11 +22,6 @@ export default function QuestionListItem({ question }: Readonly<QuestionListItem
     >
       <div className="flex gap-1">
         <QuestionStatusBadge status={status} />
-        {stats.starCount > 0 && (
-          <Badge variant={'outline'} className="border-transparent">
-            <StarIcon className="size-2" /> {stats.starCount}
-          </Badge>
-        )}
         {stats.answerCount > 0 && (
           <Badge variant={'outline'} className="border-transparent">
             <MessagesSquareIcon className="size-2" /> {stats.answerCount}

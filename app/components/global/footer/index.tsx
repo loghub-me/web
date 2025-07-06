@@ -46,10 +46,10 @@ export default function GlobalFooter() {
     !isPostEditPage && (
       <footer className="w-full py-8 space-y-8 border-t bg-card text-card-foreground">
         <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
-          <div className="flex flex-col items-center lg:items-start">
-            <h2 className="h-16 flex items-center">
+          <div className="flex flex-col items-center lg:items-start gap-4">
+            <Link to={'/'}>
               <Logo />
-            </h2>
+            </Link>
             <p className="text-center lg:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -2,7 +2,7 @@ import { MessagesSquareIcon } from 'lucide-react';
 import { ButtonLink } from '~/components/ui/button';
 import { Card } from '~/components/ui/card';
 
-export default function AnswerPostLink() {
+export default function QuestionAnswerPostLink() {
   return (
     <Card className="p-6 flex items-center gap-2 bg-blue-50">
       <ButtonLink to={'/login'} variant={'default'}>

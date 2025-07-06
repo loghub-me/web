@@ -14,19 +14,19 @@ import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
 import { answerPostSchema } from '~/schemas/question';
 
-interface AnswerEditFormProps {
+interface QuestionAnswerEditFormProps {
   questionId: number;
   answerId: number;
   defaultContent: string;
   closeEditForm: () => void;
 }
 
-export default function AnswerEditForm({
+export default function QuestionAnswerEditForm({
   questionId,
   answerId,
   defaultContent,
   closeEditForm,
-}: Readonly<AnswerEditFormProps>) {
+}: Readonly<QuestionAnswerEditFormProps>) {
   const { session } = useAuth();
   const navigate = useNavigate();
   const easyMDERef = useRef<EasyMDE>(null);

@@ -11,13 +11,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '~/compon
 import { UserAvatar, UserLink } from '~/components/user';
 import { handleMessageError } from '~/lib/error';
 
-interface AnswerListItemProps {
+interface QuestionAnswerListItemProps {
   answer: QuestionAnswer;
   questionId: number;
   permission: AnswerPermission;
 }
 
-export default function AnswerListItem({ answer, questionId, permission }: Readonly<AnswerListItemProps>) {
+export default function QuestionAnswerListItem({
+  answer,
+  questionId,
+  permission,
+}: Readonly<QuestionAnswerListItemProps>) {
   const { content, accepted, writer } = answer;
   const [isEditing, setIsEditing] = useState(false);
 

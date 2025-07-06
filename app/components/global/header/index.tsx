@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import HeaderAuthMenu from '~/components/global/header/auth-menu';
 import HeaderNavLink from '~/components/global/header/nav-link';
 import Logo from '~/components/global/logo';
@@ -11,9 +12,11 @@ export const navLinks = [
 
 export default function GlobalHeader() {
   return (
-    <header className="absolute top-0 left-0 z-50 w-full h-16 border-b bg-card">
+    <header className="absolute top-0 left-0 z-50 w-full h-16 border-b bg-background">
       <div className="container mx-auto px-4 h-16 flex items-center gap-8">
-        <Logo />
+        <Link to={'/'}>
+          <Logo />
+        </Link>
         <nav className="md:flex hidden gap-6">
           {navLinks.map((navLink) => (
             <HeaderNavLink key={navLink.to} {...navLink} />

@@ -14,3 +14,6 @@ export { default as BookPostForm } from '~/components/book/post/form';
 export { default as BookEditLink } from '~/components/book/edit/link';
 export { default as BookEditForm } from '~/components/book/edit/form';
 export { default as BookRemoveButton } from '~/components/book/remove/button';
+export { default as BookReviewForm } from '~/components/book/review/form';
+export { default as BookReviewList } from '~/components/book/review/list';
+export { default as BookReviewListItem } from '~/components/book/review/list-item';

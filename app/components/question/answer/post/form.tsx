@@ -16,11 +16,11 @@ import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
 import { answerPostSchema } from '~/schemas/question';
 
-interface AnswerPostFormProps {
+interface QuestionAnswerPostFormProps {
   questionId: number;
 }
 
-export default function AnswerPostForm({ questionId }: Readonly<AnswerPostFormProps>) {
+export default function QuestionAnswerPostForm({ questionId }: Readonly<QuestionAnswerPostFormProps>) {
   const { session } = useAuth();
   const navigate = useNavigate();
   const easyMDERef = useRef<EasyMDE>(null);

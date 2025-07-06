@@ -41,7 +41,7 @@ export default function BookDetailContent({
         )}
         <UserInline username={writer.username} />
       </div>
-      <p className="p-2 border-y text-sm text-muted-foreground">{content}</p>
+      <p className="p-2 border-y text-sm">{content}</p>
       <Timestamp createdAt={createdAt} updatedAt={updatedAt} />
     </div>
   );

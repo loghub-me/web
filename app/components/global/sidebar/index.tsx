@@ -1,6 +1,6 @@
 import { BookIcon, FileQuestionIcon, MenuIcon, PaperclipIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
 import SidebarAuthMenu from '~/components/global/sidebar/auth-menu';
 import { Button, ButtonNavLink } from '~/components/ui/button';
@@ -29,9 +29,11 @@ export default function GlobalSidebar() {
       </SheetTrigger>
       <SheetContent className="gap-0">
         <SheetTitle className="p-6">
-          <Logo />
+          <Link to={'/'}>
+            <Logo />
+          </Link>
         </SheetTitle>
-        <hr className="mx-6 my-2" />
+        <hr className="mx-6" />
         <nav className="px-6 py-4 flex flex-col gap-2">
           {navLinks.map(({ name, to, icon: Icon }) => (
             <ButtonNavLink key={to} to={to} className="justify-start">

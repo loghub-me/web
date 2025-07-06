@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '~/hooks/use-auth';
+import { cn } from '~/lib/utils';
 
 interface GuestGuardProps {
   children: React.ReactNode;
@@ -16,9 +17,5 @@ export default function GuestGuard({ children }: Readonly<GuestGuardProps>) {
     }
   }, [status, navigate]);
 
-  return (
-    <div className="h-screen" style={{ visibility: status === 'unauthenticated' ? 'visible' : 'hidden' }}>
-      {children}
-    </div>
-  );
+  return <div className={cn(status === 'unauthenticated' ? 'visible' : 'invisible')}>{children}</div>;
 }

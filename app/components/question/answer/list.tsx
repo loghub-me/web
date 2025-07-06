@@ -1,8 +1,8 @@
-interface AnswerListProps {
+interface QuestionAnswerListProps {
   children?: React.ReactNode;
 }
 
-export default function AnswerList({ children }: Readonly<AnswerListProps>) {
+export default function QuestionAnswerList({ children }: Readonly<QuestionAnswerListProps>) {
   return (
     <div className="relative space-y-4">
       <hr className="absolute -z-10 top-0 left-8 w-1 h-full bg-border" />

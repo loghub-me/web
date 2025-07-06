@@ -1,4 +1,4 @@
-export const quotes = [
+const quotes = [
   {
     text: '왜 개발자는 항상 커피를 마실까요? 디버그 모드에서 정신이 필요하니까요!',
     by: '코딩 농담 위원회',

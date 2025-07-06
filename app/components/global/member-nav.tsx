@@ -48,7 +48,7 @@ export default function MemberNav({ type }: MemberNavProps) {
 
   return (
     session && (
-      <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
         <DropdownMenuTrigger className={cn(type === 'header' && 'hidden md:flex')} asChild>
           <Button type="button" variant={triggerVariant} className="w-full h-11 justify-between cursor-pointer">
             <UserInline username={session.username} />
