@@ -1,8 +1,7 @@
 import type { Route } from './+types/layout';
 import { Outlet } from 'react-router';
 import { getUser } from '~/apis/server/users';
-import { UserDetailAside } from '~/components/user';
-import UserHeader from '~/components/user/header';
+import { UserDetailAside, UserDetailNav } from '~/components/user';
 import { parseParams } from '~/lib/parse';
 import { usernameSchema } from '~/schemas/common';
 
@@ -19,7 +18,7 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
     <main className="container mx-auto px-4 pt-20 pb-4 min-h-screen space-y-4 flex flex-col md:flex-row gap-8">
       <UserDetailAside {...user} />
       <div className="w-full space-y-4">
-        <UserHeader username={user.username} />
+        <UserDetailNav {...user} />
         <Outlet />
       </div>
     </main>

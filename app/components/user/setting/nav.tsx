@@ -1,13 +1,14 @@
-import { GlobeLockIcon, IdCardIcon, UserRoundPenIcon } from 'lucide-react';
+import { GlobeLockIcon, IdCardIcon, PaintbrushIcon, UserRoundPenIcon } from 'lucide-react';
 import { ButtonNavLink } from '~/components/ui/button';
 
 const navLinks = [
   { name: '계정', to: '/settings/account', icon: IdCardIcon },
   { name: '프로필', to: '/settings/profile', icon: UserRoundPenIcon },
   { name: '개인정보', to: '/settings/privacy', icon: GlobeLockIcon },
+  { name: '테마', to: '/settings/theme', icon: PaintbrushIcon },
 ];
 
-export default function SettingHeader() {
+export default function UserSettingNav() {
   return (
     <header className="pt-8 space-y-4">
       <div className="space-y-2">

@@ -1,11 +1,11 @@
 import { BookIcon, FileQuestionIcon, PaperclipIcon, StarIcon, UserIcon } from 'lucide-react';
 import { ButtonNavLink } from '~/components/ui/button';
 
-interface UserHeaderProps {
+interface UserDetailNavProps {
   username: string;
 }
 
-export default function UserHeader({ username }: Readonly<UserHeaderProps>) {
+export default function UserDetailNav({ username }: Readonly<UserDetailNavProps>) {
   const navLinks = [
     { name: '프로필', to: `/@${username}`, icon: UserIcon },
     { name: '아티클', to: `/@${username}/articles`, icon: PaperclipIcon },

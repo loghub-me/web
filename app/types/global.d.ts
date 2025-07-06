@@ -8,17 +8,17 @@ interface Content {
   markdown: string;
 }
 
+interface Timestamps {
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface Toc {
   level: number;
   title: string;
   slug: string;
 }
 
-interface Timestamps {
-  createdAt: string;
-  updatedAt: string;
-}
+type Sort = ArticleSort | BookSort | QuestionSort;
 
-type Sort = ArticleSort;
-
-type EditorMode = 'edit' | 'preview' | 'preview-edit';
+type Theme = 'light' | 'dark';

@@ -49,6 +49,7 @@ export default [
       route('account', 'routes/settings/account.tsx'),
       route('profile', 'routes/settings/profile.tsx'),
       route('privacy', 'routes/settings/privacy.tsx'),
+      route('theme', 'routes/settings/theme.tsx'),
     ]),
   ]),
 ] satisfies RouteConfig;

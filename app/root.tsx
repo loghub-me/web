@@ -7,6 +7,7 @@ import { Toaster } from '~/components/ui/sonner';
 import { fonts } from '~/constants/fonts';
 import AuthProvider from '~/providers/auth-provider';
 import QueryProvider from '~/providers/query-provider';
+import ThemeProvider from '~/providers/theme-provider';
 import '~/styles/easymde.css';
 import '~/styles/markdown-it.css';
 
@@ -33,10 +34,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <QueryProvider>
           <AuthProvider>
-            <GlobalHeader />
-            {children}
-            <GlobalFooter />
-            <Toaster position={'top-center'} richColors />
+            <ThemeProvider>
+              <GlobalHeader />
+              {children}
+              <GlobalFooter />
+              <Toaster position={'top-center'} richColors />
+            </ThemeProvider>
           </AuthProvider>
         </QueryProvider>
         <ScrollRestoration />
