@@ -1,7 +1,7 @@
 import { index, layout, prefix, route, type RouteConfig } from '@react-router/dev/routes';
 
 export default [
-  index('routes/home.tsx'),
+  index('routes/home/index.tsx'),
   layout('routes/auth/layout.tsx', [
     route('join', 'routes/auth/join/request.tsx'),
     route('join/confirm', 'routes/auth/join/confirm.tsx'),

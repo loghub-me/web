@@ -2,6 +2,8 @@ import { clientAPI } from './instance';
 import { z } from 'zod';
 import { answerPostSchema, questionEditSchema, type questionPostSchema } from '~/schemas/question';
 
+export const getTrendingQuestions = () => clientAPI.get('questions/trending').json<Question[]>();
+
 export const postQuestion = (json: z.infer<typeof questionPostSchema>) =>
   clientAPI.post(`questions`, { json }).json<RedirectResponseBody>();
 

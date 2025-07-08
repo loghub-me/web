@@ -2,6 +2,8 @@ import { clientAPI } from './instance';
 import { z } from 'zod';
 import { bookChapterEditSchema, bookEditSchema, bookPostSchema, type bookReviewPostSchema } from '~/schemas/book';
 
+export const getTrendingBooks = () => clientAPI.get('books/trending').json<Book[]>();
+
 export const postBook = (json: z.infer<typeof bookPostSchema>) =>
   clientAPI.post(`books`, { json }).json<RedirectResponseBody>();
 
