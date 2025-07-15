@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
 import { Separator } from '~/components/ui/separator';
 
-export const navLinks = [
+const navLinks = [
   {
     name: 'About',
     links: [
