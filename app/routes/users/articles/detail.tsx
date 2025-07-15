@@ -41,7 +41,7 @@ export default function ArticleDetailRoute({ loaderData }: Route.ComponentProps)
       <ArticleDetailHero {...article} />
       <div className="flex gap-4">
         <div className="w-full space-y-4">
-          <Card>
+          <Card className="pt-0">
             <ArticleDetailHeader {...article} />
             <ArticleDetailContent {...article} />
           </Card>
@@ -68,7 +68,7 @@ function ArticleDetailComments({ articleId, currentPage }: Readonly<ArticleDetai
   return (
     <ReplyProvider>
       <Card>
-        <CardHeader className="border-b">
+        <CardHeader className="pb-4 border-b">
           <ArticleCommentForm articleId={articleId} queryKey={queryKey} />
         </CardHeader>
         <CardContent className="space-y-2">

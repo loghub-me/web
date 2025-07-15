@@ -33,7 +33,7 @@ export default function PostIndex() {
           글을 작성하고, 다른 사람들과 공유해보세요. <br />
           글은 Markdown으로 작성할 수 있습니다.
         </p>
-        <ButtonLink to={'/how-to-use/markdown'} variant={'default'}>
+        <ButtonLink to={'/manual/markdown'} variant={'default'}>
           <KeyboardIcon /> 마크다운 사용법
         </ButtonLink>
       </div>

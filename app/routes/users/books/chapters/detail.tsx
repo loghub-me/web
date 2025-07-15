@@ -1,5 +1,5 @@
 import { data, useOutletContext } from 'react-router';
-import { BookChapterDetailContent } from '~/components/book';
+import { BookChapterDetailContent, BookChapterDetailFooter } from '~/components/book';
 import { Card } from '~/components/ui/card';
 import { ErrorMessage } from '~/constants/error-messages';
 import type { BookDetailLayoutContextProps } from '~/routes/users/books/layout';
@@ -13,9 +13,9 @@ export default function BookChapterDetailRoute() {
 
   return (
     <main className="p-4 w-full">
-      <Card className="h-fit pt-0">
-        <BookChapterDetailContent
-          {...chapter}
+      <Card className="h-fit">
+        <BookChapterDetailContent {...chapter} />
+        <BookChapterDetailFooter
           bookSlug={book.slug}
           writerUsername={book.writer.username}
           currentSequence={chapter.sequence}

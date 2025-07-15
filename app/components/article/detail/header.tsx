@@ -1,4 +1,5 @@
 import { ArticleEditLink, ArticleRemoveButton, ArticleStarButton } from '~/components/article';
+import { CardHeader } from '~/components/ui/card';
 import ScrollProgressBar from '~/components/ui/scroll-progress-bar';
 import { UserLink } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
@@ -19,8 +20,8 @@ export default function ArticleDetailHeader({
   const { session } = useAuth();
 
   return (
-    <div className="sticky top-0 z-40 px-4 w-full h-16 bg-card/70 backdrop-blur flex items-center justify-end gap-2 rounded-t-xl border-b">
-      <UserLink username={username} className="mr-auto" />
+    <CardHeader className="sticky top-0 z-50 w-full h-16 flex items-center justify-end gap-2 bg-card/70 backdrop-blur rounded-t-xl border-b">
+      <UserLink username={username} className={'mr-auto'} />
       {session?.username === username && (
         <div>
           <ArticleEditLink username={username} slug={slug} />
@@ -29,6 +30,6 @@ export default function ArticleDetailHeader({
       )}
       <ArticleStarButton articleId={id} starCount={starCount} />
       <ScrollProgressBar className={'fixed bottom-0 left-0 w-full'} />
-    </div>
+    </CardHeader>
   );
 }

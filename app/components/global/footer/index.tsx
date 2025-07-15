@@ -14,9 +14,9 @@ export const navLinks = [
   {
     name: 'Services',
     links: [
-      { name: 'Articles', to: '/how-to-use/articles' },
-      { name: 'Snippets', to: '/how-to-use/snippets' },
-      { name: 'Questions', to: '/how-to-use/questions' },
+      { name: 'Articles', to: '/manual/articles' },
+      { name: 'Books', to: '/manual/books' },
+      { name: 'Questions', to: '/manual/questions' },
     ],
   },
   {

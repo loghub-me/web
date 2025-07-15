@@ -1,5 +1,4 @@
 import { BookEditLink, BookRemoveButton, BookStarButton } from '~/components/book';
-import { CardHeader } from '~/components/ui/card';
 import { useAuth } from '~/hooks/use-auth';
 
 interface BookChapterDetailHeaderProps {
@@ -18,7 +17,7 @@ export default function BookChapterDetailHeader({
   const { session } = useAuth();
 
   return (
-    <CardHeader className="sticky top-0 z-40 px-4 w-full h-16 bg-card/70 backdrop-blur flex items-center justify-between gap-2 rounded-t-xl border-b">
+    <div className="px-4 w-full h-16 flex items-center justify-end gap-2 border-b">
       {session?.username === username && (
         <div>
           <BookEditLink username={username} slug={slug} />
@@ -26,6 +25,6 @@ export default function BookChapterDetailHeader({
         </div>
       )}
       <BookStarButton bookId={id} starCount={starCount} />
-    </CardHeader>
+    </div>
   );
 }

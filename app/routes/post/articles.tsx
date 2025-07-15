@@ -13,7 +13,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   return { autosave };
 }
 
-export default function PostArticlesRoute({ loaderData: { autosave } }: Route.ComponentProps) {
+export default function PostArticleRoute({ loaderData: { autosave } }: Route.ComponentProps) {
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof articlePostSchema>>({
     resolver: zodResolver(articlePostSchema),

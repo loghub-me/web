@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArticleTocList, ArticleTocListItem } from '~/components/article';
-import { Card } from '~/components/ui/card';
+import { Card, CardTitle } from '~/components/ui/card';
 
 interface ArticleTocCardProps {
   toc: Toc[];
@@ -32,8 +32,8 @@ export default function ArticleTocCard({ toc }: Readonly<ArticleTocCardProps>) {
   }, [toc]);
 
   return (
-    <Card className="p-2 pb-4">
-      <h2 className="p-4 text-lg font-semibold">목차</h2>
+    <Card className="px-2 py-4">
+      <CardTitle className="px-2">목차</CardTitle>
       <ArticleTocList>
         {toc.map((item) => (
           <ArticleTocListItem key={item.slug} toc={item} isActive={item.slug === activeSlug} />

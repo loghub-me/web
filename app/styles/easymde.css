@@ -3,6 +3,7 @@
 .CodeMirror {
   @apply h-full;
   direction: ltr;
+  background: var(--card) !important;
 }
 .CodeMirror-gutter-filler,
 .CodeMirror-scrollbar-filler {

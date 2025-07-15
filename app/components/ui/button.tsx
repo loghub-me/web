@@ -49,8 +49,17 @@ function ButtonLink({
   variant = 'ghost',
   size,
   to,
+  disabled = false,
   ...props
-}: React.ComponentProps<'a'> & VariantProps<typeof buttonVariants> & { to: string }) {
+}: React.ComponentProps<'a'> & VariantProps<typeof buttonVariants> & { to: string; disabled?: boolean }) {
+  if (disabled) {
+    return (
+      <Button variant={variant} disabled={true}>
+        {props.children}
+      </Button>
+    );
+  }
+
   return (
     <Link to={to} data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props}>
       {props.children}

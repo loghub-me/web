@@ -7,7 +7,7 @@ import { EasyMDEEditor } from '~/components/common/easymde';
 import { QuestionPostDialog, QuestionPostForm } from '~/components/question';
 import { questionPostSchema } from '~/schemas/question';
 
-export default function PostQuestionsRoute() {
+export default function PostQuestionRoute() {
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof questionPostSchema>>({
     resolver: zodResolver(questionPostSchema),

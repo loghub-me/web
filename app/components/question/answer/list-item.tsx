@@ -26,8 +26,8 @@ export default function QuestionAnswerListItem({
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="px-4 py-0 h-16 border-b flex items-center justify-start gap-2">
+    <Card className="overflow-hidden py-0 gap-0">
+      <CardHeader className="py-0 h-16 border-b flex items-center justify-start gap-2">
         <UserLink username={writer.username} />
         {permission.isWriter && (
           <Badge variant="outline" className="rounded-full">

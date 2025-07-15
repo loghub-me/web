@@ -10,7 +10,7 @@ export default function QuestionSummaryCard({ writer, answers }: Readonly<Questi
   const answerWriters = Array.from(new Set(answers.map((answer) => answer.writer.username)));
 
   return (
-    <Card className="p-4 space-y-4">
+    <Card className="p-4 space-y-4 gap-0">
       <div className="flex flex-col gap-1 items-start">
         <h5 className="p-2 text-sm text-muted-foreground font-semibold">질문자</h5>
         <UserLink username={writer.username} />

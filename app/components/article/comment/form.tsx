@@ -2,11 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { ChevronRightIcon, MessageSquareMoreIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { postArticleComment } from '~/apis/client/article';
-import { Button } from '~/components/ui/button';
+import { Button, ButtonLink } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
 import { Textarea } from '~/components/ui/textarea';
 import { UserInline, UserLink } from '~/components/user';
@@ -47,10 +46,10 @@ export default function ArticleCommentForm({ articleId, queryKey }: Readonly<Art
 
   if (!session) {
     return (
-      <p className="text-sm text-center text-muted-foreground">
-        <Link to={'/login'} className="text-primary underline hover:text-primary/80">
+      <p className="py-4 text-sm text-center text-muted-foreground">
+        <ButtonLink to={'/login'} variant={'link'} className="p-0 h-fit">
           로그인
-        </Link>{' '}
+        </ButtonLink>{' '}
         후 댓글을 작성할 수 있습니다.
       </p>
     );

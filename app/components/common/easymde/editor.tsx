@@ -8,6 +8,8 @@ import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
 import { parseMarkdown } from '~/lib/markdown/parse';
 import { cn } from '~/lib/utils';
 
+type EditorMode = 'edit' | 'preview' | 'preview-edit';
+
 interface EasyMDEEditorProps {
   ref: React.RefObject<EasyMDE | null>;
   title: string;

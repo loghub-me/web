@@ -10,7 +10,7 @@ export function loader() {
   return { quote };
 }
 
-export default function AuthRequestLayout({ loaderData }: Route.ComponentProps) {
+export default function AuthLayout({ loaderData }: Route.ComponentProps) {
   const { quote } = loaderData;
 
   return (

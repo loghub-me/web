@@ -10,7 +10,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   return { autosave };
 }
 
-export default function PostArticlesRoute({ loaderData: { autosave } }: Route.ComponentProps) {
+export default function PostBookRoute({ loaderData: { autosave } }: Route.ComponentProps) {
   const form = useForm<z.infer<typeof bookPostSchema>>({
     resolver: zodResolver(bookPostSchema),
     defaultValues: { title: '', content: '', thumbnail: 'default/thumbnail.webp', topicSlugs: [] },

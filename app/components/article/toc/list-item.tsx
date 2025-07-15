@@ -9,7 +9,7 @@ export default function ArticleTocList({ toc, isActive }: Readonly<ArticleTocLis
   const { level, title, slug } = toc;
 
   return (
-    <ButtonLink to={`#${slug}`} className="w-full justify-start">
+    <ButtonLink to={`#${slug}`} className="w-full justify-start px-2.5">
       {title}
     </ButtonLink>
   );

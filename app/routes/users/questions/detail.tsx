@@ -30,7 +30,7 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
       <QuestionDetailHero {...question} />
       <div className="flex gap-4">
         <div className="w-full space-y-4">
-          <Card>
+          <Card className="pt-0">
             <QuestionDetailHeader {...question} />
             <QuestionDetailContent {...question} />
           </Card>
