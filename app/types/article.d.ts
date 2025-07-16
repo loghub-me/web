@@ -4,7 +4,7 @@ interface Article extends Timestamps {
   title: string;
   thumbnail: string;
   stats: ArticleStats;
-  writerUsername: string;
+  writer: UserSimple;
   topics: Topic[];
 }
 

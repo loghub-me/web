@@ -51,7 +51,7 @@ export default function MemberNav({ type }: MemberNavProps) {
       <DropdownMenu open={open} onOpenChange={setOpen} modal={false}>
         <DropdownMenuTrigger className={cn(type === 'header' && 'hidden md:flex')} asChild>
           <Button type="button" variant={triggerVariant} className="w-full h-11 justify-between cursor-pointer">
-            <UserInline username={session.username} />
+            <UserInline id={session.id} username={session.username} />
             {type === 'sidebar' && <ChevronUpIcon className={cn('transition-transform', open && '-rotate-180')} />}
           </Button>
         </DropdownMenuTrigger>

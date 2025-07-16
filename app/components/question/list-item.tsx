@@ -11,8 +11,8 @@ interface QuestionListItemProps {
 }
 
 export default function QuestionListItem({ question }: Readonly<QuestionListItemProps>) {
-  const { status, stats, slug, title, topics, writerUsername } = question;
-  const to = `/@${writerUsername}/questions/${slug}`;
+  const { status, stats, slug, title, topics, writer } = question;
+  const to = `/@${writer.username}/questions/${slug}`;
 
   return (
     <ButtonLink
@@ -36,7 +36,7 @@ export default function QuestionListItem({ question }: Readonly<QuestionListItem
           ))}
         </div>
         <div className="flex items-center gap-1 self-end">
-          <UserInline username={writerUsername} />
+          <UserInline {...writer} />
           <DotIcon className="text-muted-foreground" />
           <Timestamp {...question} showUpdated={false} />
         </div>

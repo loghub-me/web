@@ -4,7 +4,7 @@ interface Series extends Timestamps {
   title: string;
   thumbnail: string;
   stats: SeriesStats;
-  writerUsername: string;
+  writer: UserSimple;
   topics: Topic[];
 }
 

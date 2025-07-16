@@ -12,27 +12,21 @@ interface QuestionDetailHeaderProps {
   status: QuestionStatus;
 }
 
-export default function QuestionDetailHeader({
-  id,
-  slug,
-  writer: { username },
-  stats: { starCount },
-  status,
-}: Readonly<QuestionDetailHeaderProps>) {
+export default function QuestionDetailHeader({ id, slug, writer, stats, status }: Readonly<QuestionDetailHeaderProps>) {
   const { session } = useAuth();
   const isOpen = status === 'OPEN';
 
   return (
     <CardHeader className="sticky top-0 z-50 w-full h-16 flex items-center justify-end gap-2 bg-card/70 backdrop-blur rounded-t-xl border-b">
-      <UserLink username={username} className="mr-auto" />
-      {session?.username === username && isOpen && (
+      <UserLink {...writer} className="mr-auto" />
+      {session?.username === writer.username && isOpen && (
         <div>
-          <QuestionEditLink username={username} slug={slug} />
+          <QuestionEditLink username={writer.username} slug={slug} />
           <QuestionCloseButton id={id} />
         </div>
       )}
-      {session?.username === username && <QuestionRemoveButton id={id} />}
-      <QuestionStarButton questionId={id} starCount={starCount} />
+      {session?.username === writer.username && <QuestionRemoveButton id={id} />}
+      <QuestionStarButton questionId={id} starCount={stats.starCount} />
       <ScrollProgressBar className={'fixed bottom-0 left-0 w-full'} />
     </CardHeader>
   );

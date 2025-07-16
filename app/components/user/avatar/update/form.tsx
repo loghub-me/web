@@ -9,11 +9,12 @@ import { DialogClose } from '~/components/ui/dialog';
 import { handleMessageError } from '~/lib/error';
 
 interface UserAvatarUpdateFormProps {
+  id: number;
   username: string;
 }
 
-export default function UserAvatarUpdateForm({ username }: Readonly<UserAvatarUpdateFormProps>) {
-  const defaultAvatarSrc = `${import.meta.env.VITE_BUCKET_HOST}/${username}/avatar.webp`;
+export default function UserAvatarUpdateForm({ id, username }: Readonly<UserAvatarUpdateFormProps>) {
+  const defaultAvatarSrc = `${import.meta.env.VITE_BUCKET_HOST}/${id}/avatar.webp`;
   const navigate = useNavigate();
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [avatarFile, setAvatarFile] = useState<File>();

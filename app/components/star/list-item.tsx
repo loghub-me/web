@@ -9,7 +9,7 @@ interface StarListItemProps {
 }
 
 export default function StarListItem({ star }: Readonly<StarListItemProps>) {
-  const { path, title, writerUsername, topics, createdAt, targetLabel } = star;
+  const { path, title, writer, topics, createdAt, targetLabel } = star;
 
   return (
     <Link to={path} className="flex flex-col gap-2 rounded-lg p-4 border transition-colors hover:bg-accent">
@@ -27,7 +27,7 @@ export default function StarListItem({ star }: Readonly<StarListItemProps>) {
         </div>
       )}
       <div className="mt-auto flex items-center gap-2 justify-between">
-        <UserInline username={writerUsername} />
+        <UserInline {...writer} />
         <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)} 작성</span>
       </div>
     </Link>

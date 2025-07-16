@@ -4,7 +4,7 @@ interface Question extends Timestamps {
   title: string;
   status: QuestionStatus;
   stats: QuestionStats;
-  writerUsername: string;
+  writer: UserSimple;
   topics: Topic[];
 }
 

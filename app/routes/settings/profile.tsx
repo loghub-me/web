@@ -15,7 +15,7 @@ export default function SettingProfileRoute() {
     <main className="flex gap-8 flex-col items-center md:items-start md:flex-row">
       {session && (
         <UserAvatarUpdateDialog username={session.username}>
-          <UserAvatarUpdateForm username={session.username} />
+          <UserAvatarUpdateForm {...session} />
         </UserAvatarUpdateDialog>
       )}
       <div className="w-full space-y-4">

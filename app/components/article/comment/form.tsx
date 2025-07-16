@@ -59,11 +59,11 @@ export default function ArticleCommentForm({ articleId, queryKey }: Readonly<Art
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex items-center gap-2">
-          <UserLink username={session.username} />
+          <UserLink {...session} />
           {replyTo && (
             <Button type="button" variant="outline" onClick={() => clear()}>
               <ChevronRightIcon className="size-3" />
-              <UserInline username={replyTo.writer.username} />
+              <UserInline {...replyTo.writer} />
             </Button>
           )}
         </div>

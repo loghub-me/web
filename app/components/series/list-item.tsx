@@ -8,8 +8,8 @@ interface SeriesListItemProps {
 }
 
 export default function SeriesListItem({ series }: Readonly<SeriesListItemProps>) {
-  const { slug, title, thumbnail, topics, writerUsername } = series;
-  const to = `/@${writerUsername}/series/${slug}`;
+  const { slug, title, thumbnail, topics, writer } = series;
+  const to = `/@${writer.username}/series/${slug}`;
 
   return (
     <Link to={to} className="h-full group flex flex-col gap-2 rounded-xl">
@@ -29,7 +29,7 @@ export default function SeriesListItem({ series }: Readonly<SeriesListItemProps>
         </div>
       )}
       <div className="mt-auto flex items-center gap-2 justify-between">
-        <UserInline username={writerUsername} />
+        <UserInline {...writer} />
         <Timestamp {...series} showUpdated={false} />
       </div>
     </Link>

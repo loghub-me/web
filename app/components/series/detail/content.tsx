@@ -39,7 +39,7 @@ export default function SeriesDetailContent({
             ))}
           </div>
         )}
-        <UserInline username={writer.username} />
+        <UserInline id={writer.id} username={writer.username} />
       </div>
       <p className="p-2 border-y text-sm">{content}</p>
       <Timestamp createdAt={createdAt} updatedAt={updatedAt} />

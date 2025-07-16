@@ -8,8 +8,8 @@ interface ArticleListItemProps {
 }
 
 export default function ArticleListItem({ article }: Readonly<ArticleListItemProps>) {
-  const { slug, title, thumbnail, topics, writerUsername } = article;
-  const to = `/@${writerUsername}/articles/${slug}`;
+  const { slug, title, thumbnail, topics, writer } = article;
+  const to = `/@${writer.username}/articles/${slug}`;
 
   return (
     <Link to={to} className="h-full group flex flex-col gap-2 rounded-xl">
@@ -29,7 +29,7 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
         </div>
       )}
       <div className="mt-auto flex items-center gap-2 justify-between">
-        <UserInline username={writerUsername} />
+        <UserInline {...writer} />
         <Timestamp {...article} showUpdated={false} />
       </div>
     </Link>

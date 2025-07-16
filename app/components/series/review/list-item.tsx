@@ -33,7 +33,7 @@ export default function SeriesReviewListItem({ seriesId, review, queryKey }: Rea
     <div>
       <div className="flex items-center gap-2">
         <div className="flex items-center">
-          <UserInline username={writer.username} />
+          <UserInline {...writer} />
           <DotIcon className="text-muted-foreground" />
           <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
           <div className="pl-2 flex items-center">

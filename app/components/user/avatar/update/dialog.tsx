@@ -10,11 +10,12 @@ import {
 import { UserAvatar } from '~/components/user';
 
 interface UserAvatarUpdateDialogProps {
+  id: number;
   username: string;
   children: React.ReactNode;
 }
 
-export default function UserAvatarUpdateDialog({ username, children }: Readonly<UserAvatarUpdateDialogProps>) {
+export default function UserAvatarUpdateDialog({ id, username, children }: Readonly<UserAvatarUpdateDialogProps>) {
   return (
     <Dialog>
       <DialogTrigger className="relative">
@@ -23,7 +24,7 @@ export default function UserAvatarUpdateDialog({ username, children }: Readonly<
             <ImageIcon className="size-4" /> 사진 변경
           </p>
         </div>
-        <UserAvatar username={username} size={'xl'} />
+        <UserAvatar id={id} username={username} size={'xl'} />
       </DialogTrigger>
       <DialogContent className="w-fit">
         <DialogHeader>

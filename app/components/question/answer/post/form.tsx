@@ -52,7 +52,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
         <form onSubmit={handleFormSubmit}>
           <Card className="py-0 gap-0 overflow-hidden">
             <div className="sticky top-0 z-40 px-4 w-full h-16 min-h-16 bg-card/70 backdrop-blur flex items-center gap-2 rounded-t-xl border-b">
-              <UserInline username={session.username} />
+              <UserInline id={session.id} username={session.username} />
             </div>
             <EasyMDEEditor title={'답변 작성'} ref={easyMDERef}>
               <Button type="submit" disabled={form.formState.isSubmitting}>

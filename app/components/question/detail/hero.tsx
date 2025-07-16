@@ -25,7 +25,7 @@ export default function QuestionDetailHero({
       </div>
       <h2 className="text-center font-semibold text-2xl">{title}</h2>
       <div className="mt-auto flex items-center justify-center">
-        <UserLink username={writer.username} />
+        <UserLink {...writer} />
         <DotIcon className="text-muted-foreground mr-2" />
         <Timestamp createdAt={createdAt} updatedAt={updatedAt} />
       </div>

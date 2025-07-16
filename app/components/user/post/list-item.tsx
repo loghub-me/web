@@ -12,10 +12,12 @@ export default function UserPostItem({ post }: Readonly<UserPostItemProps>) {
   const { path, title, questionStatus } = post;
 
   return (
-    <ButtonLink to={path} className="px-2 has-[>svg]:px-2 w-full h-fit justify-start">
-      <UserAvatar username={session!!.username} />
-      <span className="truncate">{title}</span>
-      {questionStatus && <QuestionStatusDot status={questionStatus} />}
-    </ButtonLink>
+    session && (
+      <ButtonLink to={path} className="px-2 has-[>svg]:px-2 w-full h-fit justify-start">
+        <UserAvatar {...session} />
+        <span className="truncate">{title}</span>
+        {questionStatus && <QuestionStatusDot status={questionStatus} />}
+      </ButtonLink>
+    )
   );
 }

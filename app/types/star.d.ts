@@ -2,7 +2,7 @@ interface Star {
   id: number;
   path: string;
   title: string;
-  writerUsername: string;
+  writer: UserSimple;
   topics: Topic[];
   createdAt: string;
   target: StarTarget;

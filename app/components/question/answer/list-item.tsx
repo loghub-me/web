@@ -28,7 +28,7 @@ export default function QuestionAnswerListItem({
   return (
     <Card className="overflow-hidden py-0 gap-0">
       <CardHeader className="py-0 h-16 border-b flex items-center justify-start gap-2">
-        <UserLink username={writer.username} />
+        <UserLink {...writer} />
         {permission.isWriter && (
           <Badge variant="outline" className="rounded-full">
             <UserIcon /> 작성자
@@ -106,7 +106,7 @@ function AnswerMenu({ permission, questionId, answerId, answerWriter, setIsEditi
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col">
         <ButtonLink to={`/@${answerWriter.username}`} className="justify-start px-2.5">
-          <UserAvatar username="username" size="sm" /> 프로필
+          <UserAvatar {...answerWriter} size="sm" /> 프로필
         </ButtonLink>
         {isAcceptable && (
           <Button variant="ghost" className="justify-start" onClick={onClickAccept}>

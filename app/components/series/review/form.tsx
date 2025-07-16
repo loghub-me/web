@@ -56,7 +56,7 @@ export default function SeriesReviewForm({ seriesId, queryKey }: Readonly<Series
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="flex items-center justify-between gap-2">
-          <UserLink username={session.username} />
+          <UserLink {...session} />
           <FormField
             control={form.control}
             name="rating"
