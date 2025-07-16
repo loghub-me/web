@@ -6,7 +6,7 @@ import GlobalSidebar from '~/components/global/sidebar';
 
 export const navLinks = [
   { name: '아티클', to: '/search/articles' },
-  { name: '도서', to: '/search/books' },
+  { name: '시리즈', to: '/search/series' },
   { name: '질문', to: '/search/questions' },
 ];
 

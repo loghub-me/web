@@ -1,6 +1,6 @@
 import type { Route } from './+types/layout';
 import { Outlet } from 'react-router';
-import { getUser } from '~/apis/server/users';
+import { getUser } from '~/apis/server/user';
 import { UserDetailAside, UserDetailNav } from '~/components/user';
 import { parseParams } from '~/lib/parse';
 import { usernameSchema } from '~/schemas/common';

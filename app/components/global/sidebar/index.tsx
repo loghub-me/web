@@ -1,4 +1,4 @@
-import { BookIcon, FileQuestionIcon, MenuIcon, PaperclipIcon } from 'lucide-react';
+import { FileQuestionIcon, LayersIcon, MenuIcon, PaperclipIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '~/components/ui/s
 
 export const navLinks = [
   { name: '아티클', to: '/search/articles', icon: PaperclipIcon },
-  { name: '도서', to: '/search/books', icon: BookIcon },
+  { name: '시리즈', to: '/search/series', icon: LayersIcon },
   { name: '질문', to: '/search/questions', icon: FileQuestionIcon },
 ];
 

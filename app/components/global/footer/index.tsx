@@ -15,7 +15,7 @@ const navLinks = [
     name: 'Services',
     links: [
       { name: 'Articles', to: '/manual/articles' },
-      { name: 'Books', to: '/manual/books' },
+      { name: 'Series', to: '/manual/series' },
       { name: 'Questions', to: '/manual/questions' },
     ],
   },

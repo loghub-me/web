@@ -13,7 +13,7 @@ export const ARTICLE_SORT_OPTIONS: Record<ArticleSort, { icon: LucideIcon; label
   trending: { icon: TrendingUpIcon, label: '인기순' },
 };
 
-export const BOOK_SORT_OPTIONS: Record<BookSort, { icon: LucideIcon; label: string }> = {
+export const SERIES_SORT_OPTIONS: Record<SeriesSort, { icon: LucideIcon; label: string }> = {
   latest: { icon: CalendarArrowDownIcon, label: '최신순' },
   oldest: { icon: CalendarArrowUpIcon, label: '오래된순' },
   relevant: { icon: CrosshairIcon, label: '관련순' },

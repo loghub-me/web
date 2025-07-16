@@ -10,9 +10,9 @@ const contentCards = [
     link: '/search/articles',
   },
   {
-    title: '도서',
-    description: '도서는 여러 아티클을 모아 하나의 주제로 구성된 글 모음입니다.',
-    link: '/search/books',
+    title: '시리즈',
+    description: '시리즈는 여러 아티클을 모아 하나의 주제로 구성된 글 모음입니다.',
+    link: '/search/series',
   },
   {
     title: '질문',

@@ -1,4 +1,4 @@
-import { BookIcon, FileQuestionIcon, PaperclipIcon, StarIcon, UserIcon } from 'lucide-react';
+import { FileQuestionIcon, LayersIcon, PaperclipIcon, StarIcon, UserIcon } from 'lucide-react';
 import { ButtonNavLink } from '~/components/ui/button';
 
 interface UserDetailNavProps {
@@ -9,7 +9,7 @@ export default function UserDetailNav({ username }: Readonly<UserDetailNavProps>
   const navLinks = [
     { name: '프로필', to: `/@${username}`, icon: UserIcon },
     { name: '아티클', to: `/@${username}/articles`, icon: PaperclipIcon },
-    { name: '도서', to: `/@${username}/books`, icon: BookIcon },
+    { name: '시리즈', to: `/@${username}/series`, icon: LayersIcon },
     { name: '질문', to: `/@${username}/questions`, icon: FileQuestionIcon },
     { name: '스타', to: `/@${username}/stars`, icon: StarIcon },
   ];

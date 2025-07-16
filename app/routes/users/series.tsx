@@ -1,29 +1,29 @@
-import type { Route } from './+types/articles';
+import type { Route } from './+types/series';
 import { Suspense, useRef } from 'react';
 import { Await, Form } from 'react-router';
-import { searchUserArticles } from '~/apis/server/user';
-import { ArticleList, ArticleListItem, ArticleListSkeleton } from '~/components/article';
+import { searchUserSeries } from '~/apis/server/user';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
-import { ARTICLE_SORT_OPTIONS } from '~/constants/sorts';
+import { SeriesList, SeriesListItem, SeriesListSkeleton } from '~/components/series';
+import { SERIES_SORT_OPTIONS } from '~/constants/sorts';
 import { parseParams, parseSearchParams } from '~/lib/parse';
-import { articleSearchSchema } from '~/schemas/article';
 import { usernameSchema } from '~/schemas/common';
+import { seriesSearchSchema } from '~/schemas/series';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const { username } = parseParams(params, usernameSchema);
-  const searchParams = parseSearchParams(url.searchParams, articleSearchSchema);
-  const articles = searchUserArticles(username, searchParams);
+  const searchParams = parseSearchParams(url.searchParams, seriesSearchSchema);
+  const series = searchUserSeries(username, searchParams);
 
-  return { articles, url, searchParams };
+  return { series, url, searchParams };
 }
 
-export default function UserArticlesRoute({ loaderData }: Route.ComponentProps) {
+export default function UserSeriesRoute({ loaderData }: Route.ComponentProps) {
   const {
-    articles,
+    series,
     url: { pathname },
     searchParams: { query, sort, page },
   } = loaderData;
@@ -35,25 +35,25 @@ export default function UserArticlesRoute({ loaderData }: Route.ComponentProps) 
         <SearchSort
           submit={() => formRef.current?.requestSubmit()}
           currentSort={sort}
-          sortOptions={ARTICLE_SORT_OPTIONS}
+          sortOptions={SERIES_SORT_OPTIONS}
         />
         <SearchQuery />
         <SearchSubmit />
       </Form>
-      <ArticleList>
-        <Suspense fallback={<ArticleListSkeleton size={4} />}>
-          <Await resolve={articles}>
+      <SeriesList>
+        <Suspense fallback={<SeriesListSkeleton size={4} />}>
+          <Await resolve={series}>
             {(resolved) => {
               if (resolved.content.length === 0) {
-                return <ListEmpty className="col-span-4" message="검색된 아티클이 없습니다." />;
+                return <ListEmpty className="col-span-4" message="검색된 시리즈가 없습니다." />;
               }
-              return resolved.content.map((article) => <ArticleListItem key={article.id} article={article} />);
+              return resolved.content.map((series) => <SeriesListItem key={series.id} series={series} />);
             }}
           </Await>
         </Suspense>
-      </ArticleList>
+      </SeriesList>
       <Suspense fallback={<PageNavSkeleton />}>
-        <Await resolve={articles}>
+        <Await resolve={series}>
           {(resolved) => (
             <PageNav
               to={`${pathname}?query=${query}&sort=${sort}&page=`}

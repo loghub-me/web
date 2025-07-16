@@ -1,19 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { getTrendingArticles } from '~/apis/client/article';
-import { getTrendingBooks } from '~/apis/client/books';
 import { getTrendingQuestions } from '~/apis/client/question';
+import { getTrendingSeries } from '~/apis/client/series';
 import { getSelfRecentPosts } from '~/apis/client/user';
 import { ArticleList, ArticleListItem } from '~/components/article';
-import { BookList, BookListItem } from '~/components/book';
 import { QuestionList, QuestionListItem } from '~/components/question';
+import { SeriesList, SeriesListItem } from '~/components/series';
 import { Tabs, TabsContent, TabsDescription, TabsList, TabsTitle, TabsTrigger } from '~/components/ui/tabs';
 import { UserPostList, UserPostListItem, UserPostListSkeleton, UserPostShowMoreButton } from '~/components/user';
 
 export default function MemberHomeRoute() {
   const { data: recentPosts, status } = useQuery({ queryKey: ['getSelfRecentPosts'], queryFn: getSelfRecentPosts });
   const { data: trendingArticles } = useQuery({ queryKey: ['getTrendingPosts'], queryFn: getTrendingArticles });
-  const { data: trendingBooks } = useQuery({ queryKey: ['getTrendingBooks'], queryFn: getTrendingBooks });
+  const { data: trendingSeries } = useQuery({ queryKey: ['getTrendingSeries'], queryFn: getTrendingSeries });
   const { data: trendingQuestions } = useQuery({ queryKey: ['getTrendingQuestions'], queryFn: getTrendingQuestions });
 
   const [showAllPosts, setShowAllPosts] = useState(false);
@@ -38,7 +38,7 @@ export default function MemberHomeRoute() {
       <Tabs defaultValue={'articles'} className="p-4 w-full">
         <TabsList>
           <TabsTrigger value={'articles'}>아티클</TabsTrigger>
-          <TabsTrigger value={'books'}>도서</TabsTrigger>
+          <TabsTrigger value={'series'}>시리즈</TabsTrigger>
           <TabsTrigger value={'questions'}>질문</TabsTrigger>
         </TabsList>
         <TabsContent value={'articles'}>
@@ -54,17 +54,17 @@ export default function MemberHomeRoute() {
             </ArticleList>
           </div>
         </TabsContent>
-        <TabsContent value={'books'}>
+        <TabsContent value={'series'}>
           <div className="space-y-4">
             <div className="space-y-2">
-              <TabsTitle>인기 도서</TabsTitle>
-              <TabsDescription>최근 인기 있는 도서를 확인해보세요!</TabsDescription>
+              <TabsTitle>인기 시리즈</TabsTitle>
+              <TabsDescription>최근 인기 있는 시리즈를 확인해보세요!</TabsDescription>
             </div>
-            <BookList>
-              {trendingBooks?.map((book) => (
-                <BookListItem key={book.id} book={book} />
+            <SeriesList>
+              {trendingSeries?.map((series) => (
+                <SeriesListItem key={series.id} series={series} />
               ))}
-            </BookList>
+            </SeriesList>
           </div>
         </TabsContent>
         <TabsContent value={'questions'}>

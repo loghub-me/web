@@ -1,4 +1,4 @@
-import { BookIcon, KeyboardIcon, MessageCircleQuestionIcon, NewspaperIcon } from 'lucide-react';
+import { KeyboardIcon, LayersIcon, MessageCircleQuestionIcon, NewspaperIcon } from 'lucide-react';
 import { ButtonLink } from '~/components/ui/button';
 import { Card } from '~/components/ui/card';
 import { cn } from '~/lib/utils';
@@ -11,10 +11,10 @@ const navLinks = [
     icon: NewspaperIcon,
   },
   {
-    to: '/post/books',
-    label: '도서 작성하기',
-    description: '도서를 작성하고, 다른 사람들과 공유해보세요.',
-    icon: BookIcon,
+    to: '/post/series',
+    label: '시리즈 작성하기',
+    description: '시리즈를 작성하고, 다른 사람들과 공유해보세요.',
+    icon: LayersIcon,
   },
   {
     to: '/post/questions',

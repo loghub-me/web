@@ -19,6 +19,6 @@ interface Toc {
   slug: string;
 }
 
-type Sort = ArticleSort | BookSort | QuestionSort;
+type Sort = ArticleSort | SeriesSort | QuestionSort;
 
 type Theme = 'light' | 'dark';

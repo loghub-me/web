@@ -1,7 +1,7 @@
 import type { Route } from './+types/questions';
 import { Suspense, useRef } from 'react';
 import { Await, Form } from 'react-router';
-import { searchUserQuestions } from '~/apis/server/users';
+import { searchUserQuestions } from '~/apis/server/user';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/question';

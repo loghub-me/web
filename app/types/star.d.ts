@@ -9,4 +9,4 @@ interface Star {
   targetLabel: string;
 }
 
-type StarTarget = 'ARTICLE' | 'QUESTION';
+type StarTarget = 'ARTICLE' | 'SERIES' | 'QUESTION';

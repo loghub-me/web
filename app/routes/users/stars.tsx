@@ -1,7 +1,7 @@
 import type { Route } from './+types/stars';
 import { Suspense } from 'react';
 import { Await } from 'react-router';
-import { getUserStars } from '~/apis/server/users';
+import { getUserStars } from '~/apis/server/user';
 import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
