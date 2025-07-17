@@ -1,5 +1,5 @@
 import type { Route } from './+types/detail';
-import { getQuestion } from '~/apis/server/question';
+import { getQuestion, getQuestionAnswers } from '~/apis/server/question';
 import {
   QuestionAnswerList,
   QuestionAnswerListItem,
@@ -18,11 +18,12 @@ import { compositeKeySchema } from '~/schemas/common';
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);
   const question = await getQuestion(username, slug);
-  return { question };
+  const answers = await getQuestionAnswers(question.id);
+  return { question, answers };
 }
 
 export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps) {
-  const { question } = loaderData;
+  const { question, answers } = loaderData;
   const { session } = useAuth();
 
   return (
@@ -36,7 +37,7 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
           </Card>
           <QuestionAnswerList>
             <QuestionAnswerPost questionId={question.id} questionStatus={question.status} />
-            {question.answers.map((answer) => {
+            {answers.map((answer) => {
               const permission = {
                 isWriter: question.writer.username === answer.writer.username,
                 isAcceptable:
@@ -60,7 +61,7 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
           </QuestionAnswerList>
         </div>
         <QuestionDetailAside>
-          <QuestionSummaryCard {...question} />
+          <QuestionSummaryCard questionWriter={question.writer} answers={answers} />
         </QuestionDetailAside>
       </div>
     </main>

@@ -7,3 +7,6 @@ export const searchQuestions = (searchParams: z.infer<typeof questionSearchSchem
 
 export const getQuestion = (username: string, slug: string) =>
   serverAPI.get(`questions/@${username}/${slug}`).json<QuestionDetail>();
+
+export const getQuestionAnswers = (questionId: number) =>
+  serverAPI.get(`questions/${questionId}/answers`).json<QuestionAnswer[]>();

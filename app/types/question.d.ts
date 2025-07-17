@@ -17,7 +17,6 @@ interface QuestionDetail extends Timestamps {
   stats: QuestionStats;
   writer: User;
   topics: Topic[];
-  answers: QuestionAnswer[];
 }
 
 interface QuestionStats {
