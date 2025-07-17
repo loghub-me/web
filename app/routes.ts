@@ -52,4 +52,6 @@ export default [
       route('theme', 'routes/settings/theme.tsx'),
     ]),
   ]),
+
+  route('/theme', 'actions/theme/route.ts'),
 ] satisfies RouteConfig;

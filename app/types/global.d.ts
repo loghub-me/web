@@ -21,4 +21,4 @@ interface Toc {
 
 type Sort = ArticleSort | SeriesSort | QuestionSort;
 
-type Theme = 'light' | 'dark';
+type Theme = 'dark' | 'light' | 'system';
