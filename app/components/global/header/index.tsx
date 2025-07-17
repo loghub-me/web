@@ -3,12 +3,7 @@ import HeaderAuthMenu from '~/components/global/header/auth-menu';
 import HeaderNavLink from '~/components/global/header/nav-link';
 import Logo from '~/components/global/logo';
 import GlobalSidebar from '~/components/global/sidebar';
-
-export const navLinks = [
-  { name: '아티클', to: '/search/articles' },
-  { name: '시리즈', to: '/search/series' },
-  { name: '질문', to: '/search/questions' },
-];
+import { SEARCH_LINKS } from '~/constants/nav-links';
 
 export default function GlobalHeader() {
   return (
@@ -18,7 +13,7 @@ export default function GlobalHeader() {
           <Logo />
         </Link>
         <nav className="md:flex hidden gap-6">
-          {navLinks.map((navLink) => (
+          {SEARCH_LINKS.map((navLink) => (
             <HeaderNavLink key={navLink.to} {...navLink} />
           ))}
         </nav>

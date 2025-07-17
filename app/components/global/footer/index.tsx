@@ -1,41 +1,13 @@
 import { Link, useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
 import { Separator } from '~/components/ui/separator';
+import { CONTACT_LINKS, LEGAL_LINKS, MANUAL_LINKS, SEARCH_LINKS } from '~/constants/nav-links';
 
-const navLinks = [
-  {
-    name: 'About',
-    links: [
-      { name: 'About Us', to: '/about' },
-      { name: 'Our Team', to: '/team' },
-      { name: 'Careers', to: '/careers' },
-    ],
-  },
-  {
-    name: 'Services',
-    links: [
-      { name: 'Articles', to: '/manual/articles' },
-      { name: 'Series', to: '/manual/series' },
-      { name: 'Questions', to: '/manual/questions' },
-    ],
-  },
-  {
-    name: 'Legal',
-    links: [
-      { name: 'Privacy Policy', to: '/privacy' },
-      { name: 'Terms of Service', to: '/terms' },
-    ],
-  },
-  {
-    name: 'Contact',
-    links: [
-      // TODO: Implement links
-      { name: 'Contact Us', to: '/contact' },
-      { name: 'Discord', to: 'https://discord.gg' },
-      { name: 'GitHub', to: 'https://github.com' },
-      { name: 'X', to: 'https://x.com' },
-    ],
-  },
+const footerNavSections = [
+  { name: 'Manual', links: MANUAL_LINKS },
+  { name: 'Search', links: SEARCH_LINKS },
+  { name: 'Legal', links: LEGAL_LINKS },
+  { name: 'Contact', links: CONTACT_LINKS },
 ];
 
 export default function GlobalFooter() {
@@ -53,7 +25,7 @@ export default function GlobalFooter() {
             <p className="text-center lg:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {navLinks.map((section) => (
+            {footerNavSections.map((section) => (
               <nav className="space-y-3 text-center lg:text-left" key={section.name} role="navigation">
                 <h4 className="font-semibold text-primary">{section.name}</h4>
                 <ul className="space-y-1">

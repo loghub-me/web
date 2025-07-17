@@ -14,7 +14,7 @@ export default function SettingProfileRoute() {
   return (
     <main className="flex gap-8 flex-col items-center md:items-start md:flex-row">
       {session && (
-        <UserAvatarUpdateDialog username={session.username}>
+        <UserAvatarUpdateDialog {...session}>
           <UserAvatarUpdateForm {...session} />
         </UserAvatarUpdateDialog>
       )}

@@ -1,16 +1,11 @@
-import { FileQuestionIcon, LayersIcon, MenuIcon, PaperclipIcon } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router';
 import Logo from '~/components/global/logo';
 import SidebarAuthMenu from '~/components/global/sidebar/auth-menu';
 import { Button, ButtonNavLink } from '~/components/ui/button';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '~/components/ui/sheet';
-
-export const navLinks = [
-  { name: '아티클', to: '/search/articles', icon: PaperclipIcon },
-  { name: '시리즈', to: '/search/series', icon: LayersIcon },
-  { name: '질문', to: '/search/questions', icon: FileQuestionIcon },
-];
+import { SEARCH_LINKS } from '~/constants/nav-links';
 
 export default function GlobalSidebar() {
   const [open, setOpen] = useState(false);
@@ -35,7 +30,7 @@ export default function GlobalSidebar() {
         </SheetTitle>
         <hr className="mx-6" />
         <nav className="px-6 py-4 flex flex-col gap-2">
-          {navLinks.map(({ name, to, icon: Icon }) => (
+          {SEARCH_LINKS.map(({ name, to, icon: Icon }) => (
             <ButtonNavLink key={to} to={to} className="justify-start">
               <Icon /> {name}
             </ButtonNavLink>

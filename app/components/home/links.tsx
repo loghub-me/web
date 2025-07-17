@@ -14,7 +14,7 @@ export default function HomeLinks() {
       </div>
       <div className="flex justify-center gap-2">
         <ButtonLink to={'https://github.com/loghub-kr/loghub-kr'} target={'_blank'} variant="ghost" size={'icon'}>
-          <img className="size-4" src={'/icons/github.svg'} alt={'GitHub'} />
+          <img className="size-4 dark:invert" src={'/icons/github.svg'} alt={'GitHub'} />
         </ButtonLink>
       </div>
     </div>
