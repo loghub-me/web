@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import ThumbnailImage from '~/components/common/thumbnail/image';
 import Timestamp from '~/components/common/timestamp';
 import { TopicBadge } from '~/components/topic';
 import { UserInline } from '~/components/user';
@@ -13,13 +14,7 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
 
   return (
     <Link to={to} className="h-full group flex flex-col gap-2 rounded-xl">
-      <div className="aspect-video border rounded-lg bg-secondary overflow-hidden">
-        <img
-          className="w-full h-full object-cover transition-transform group-hover:scale-105"
-          src={`${import.meta.env.VITE_BUCKET_HOST}/${thumbnail}`}
-          alt={title}
-        />
-      </div>
+      <ThumbnailImage src={thumbnail} alt={title} type={'article'} grouped={true} />
       <h3 className="font-medium line-clamp-2 group-hover:underline">{title}</h3>
       {topics.length > 0 && (
         <div className="flex gap-1 flex-wrap">

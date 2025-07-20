@@ -7,7 +7,7 @@ import { PageNavSkeleton } from '~/components/common/skeletons';
 import { QuestionList, QuestionListItem, QuestionListSkeleton, QuestionStatusFilter } from '~/components/question';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
-import { QUESTION_SORT_OPTIONS } from '~/constants/sorts';
+import { QUESTION_SORT_OPTIONS } from '~/constants/options';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import { usernameSchema } from '~/schemas/common';
 import { questionSearchSchema } from '~/schemas/question';

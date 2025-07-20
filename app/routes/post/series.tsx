@@ -13,7 +13,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 export default function PostSeriesRoute({ loaderData: { autosave } }: Route.ComponentProps) {
   const form = useForm<z.infer<typeof seriesPostSchema>>({
     resolver: zodResolver(seriesPostSchema),
-    defaultValues: { title: '', content: '', thumbnail: 'default/thumbnail.webp', topicSlugs: [] },
+    defaultValues: { title: '', content: '', thumbnail: 'default/series-thumbnail.webp', topicSlugs: [] },
   });
 
   return (

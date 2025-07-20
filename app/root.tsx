@@ -18,10 +18,9 @@ export const links: Route.LinksFunction = () => [
   { rel: 'preload', href: `${fonts.sans.origin}${fonts.sans.path}`, as: 'style', crossOrigin: 'anonymous' },
   { rel: 'stylesheet', href: `${fonts.sans.origin}${fonts.sans.path}`, crossOrigin: 'anonymous' },
 
-  // TODO: Implement mono font
-  // { rel: 'preconnect', href: fonts.mono.origin, crossOrigin: 'anonymous' },
-  // { rel: 'preload', href: `${fonts.mono.origin}${fonts.mono.path}`, as: 'style', crossOrigin: 'anonymous' },
-  // { rel: 'stylesheet', href: `${fonts.mono.origin}${fonts.mono.path}`, crossOrigin: 'anonymous' },
+  { rel: 'preconnect', href: fonts.mono.origin, crossOrigin: 'anonymous' },
+  { rel: 'preload', href: `${fonts.mono.origin}${fonts.mono.path}`, as: 'style', crossOrigin: 'anonymous' },
+  { rel: 'stylesheet', href: `${fonts.mono.origin}${fonts.mono.path}`, crossOrigin: 'anonymous' },
 ];
 
 export async function loader({ request }: Route.LoaderArgs) {

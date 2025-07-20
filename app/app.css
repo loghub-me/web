@@ -8,9 +8,13 @@
     -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard Variable', Pretendard, Roboto, 'Noto Sans KR',
     'Segoe UI', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 
+  --font-mono:
+    'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Courier New', Courier, monospace;
+
   --aspect-series: 3 / 4;
 
   --animate-swing: swing 0.5s ease-in-out;
+
   @keyframes swing {
     0% {
       transform: rotate(0deg);
@@ -112,9 +116,9 @@
 .dark {
   --background: oklch(0.1185 0.0044 257.43);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.21 0.006 285.885);
+  --card: oklch(0.17 0.006 285.885);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.21 0.006 285.885);
+  --popover: oklch(0.17 0.006 285.885);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.67 0.2 264);
   --primary-foreground: oklch(0.98 0 0);

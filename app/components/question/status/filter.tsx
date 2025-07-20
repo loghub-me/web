@@ -1,5 +1,5 @@
 import { ButtonLink } from '~/components/ui/button';
-import { QUESTION_FILTER_OPTIONS } from '~/constants/filters';
+import { QUESTION_FILTER_OPTIONS } from '~/constants/options';
 
 interface QuestionStatusFilterProps {
   filter: QuestionFilter;

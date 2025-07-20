@@ -7,7 +7,7 @@ import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { SeriesList, SeriesListItem, SeriesListSkeleton } from '~/components/series';
-import { SERIES_SORT_OPTIONS } from '~/constants/sorts';
+import { SERIES_SORT_OPTIONS } from '~/constants/options';
 import { parseSearchParams } from '~/lib/parse';
 import { seriesSearchSchema } from '~/schemas/series';
 

@@ -1,4 +1,4 @@
-import { ChevronDownIcon, type LucideIcon } from 'lucide-react';
+import { ChevronDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Button } from '~/components/ui/button';
 import {
@@ -8,11 +8,12 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
+import type { IconAndLabel } from '~/constants/options';
 
 interface SearchSortProps {
   submit: () => void;
   currentSort: Sort;
-  sortOptions: Record<Sort, { icon: LucideIcon; label: string }>;
+  sortOptions: Record<Sort, IconAndLabel>;
 }
 
 export default function SearchSort({ submit, currentSort, sortOptions }: Readonly<SearchSortProps>) {

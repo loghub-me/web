@@ -17,7 +17,7 @@ export default function PostArticleRoute({ loaderData: { autosave } }: Route.Com
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof articlePostSchema>>({
     resolver: zodResolver(articlePostSchema),
-    defaultValues: { title: '', content: '', thumbnail: 'default/thumbnail.webp', topicSlugs: [] },
+    defaultValues: { title: '', content: '', thumbnail: 'default/article-thumbnail.webp', topicSlugs: [] },
   });
 
   function onDialogOpenChange(open: boolean) {

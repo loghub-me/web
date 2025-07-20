@@ -1,5 +1,7 @@
+import ThumbnailImage from '~/components/common/thumbnail/image';
 import { TopicBadge } from '~/components/topic';
 import { CardContent } from '~/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 
 interface ArticleDetailContentProps {
   topics: Topic[];
@@ -23,7 +25,17 @@ export default function ArticleDetailContent({
           ))}
         </div>
       )}
-      <img src={`${import.meta.env.VITE_BUCKET_HOST}/${thumbnail}`} alt={title} className="w-full border rounded-md" />
+      <Dialog>
+        <DialogTrigger className="group cursor-pointer">
+          <ThumbnailImage src={thumbnail} alt={title} type={'article'} />
+        </DialogTrigger>
+        <DialogContent className="p-0 border-0">
+          <DialogHeader className="hidden">
+            <DialogTitle>썸네일</DialogTitle>
+          </DialogHeader>
+          <ThumbnailImage src={thumbnail} alt={title} type={'article'} className={'aspect-auto border-none'} />
+        </DialogContent>
+      </Dialog>
       <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
     </CardContent>
   );

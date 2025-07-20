@@ -4,7 +4,7 @@ export { default as UserInline } from '~/components/user/inline';
 export { default as UserMention } from '~/components/user/mention';
 export { default as UserDetailNav } from '~/components/user/detail/nav';
 export { default as UserDetailAside } from '~/components/user/detail/aside';
-export { default as UserSettingNav } from '~/components/user/setting/nav';
+export { default as UserSettingHeader } from '~/components/user/setting/nav';
 export { default as UsernameUpdateForm } from '~/components/user/username/update/form';
 export { default as UserAvatarUpdateDialog } from '~/components/user/avatar/update/dialog';
 export { default as UserAvatarUpdateForm } from '~/components/user/avatar/update/form';
