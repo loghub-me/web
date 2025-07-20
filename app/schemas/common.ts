@@ -7,4 +7,5 @@ export const usernameSchema = z.object({
     .startsWith('@') // startsWith('@')
     .transform((value) => value.replace('@', '')), // replace('@', '')
 });
-export const compositeKeySchema = usernameSchema.extend({ slug: z.string().trim() });
+export const slugSchema = z.object({ slug: z.string().trim() });
+export const compositeKeySchema = usernameSchema.merge(slugSchema);

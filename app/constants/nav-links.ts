@@ -5,6 +5,7 @@ import {
   MessageCircleQuestionIcon,
   PaintbrushIcon,
   ScrollIcon,
+  TagIcon,
   UserRoundPenIcon,
 } from 'lucide-react';
 
@@ -12,6 +13,7 @@ export const SEARCH_LINKS = [
   { name: '아티클', to: '/search/articles', icon: ScrollIcon },
   { name: '시리즈', to: '/search/series', icon: LayersIcon },
   { name: '질문', to: '/search/questions', icon: MessageCircleQuestionIcon },
+  { name: '토픽', to: '/topics', icon: TagIcon },
 ];
 
 export const MANUAL_LINKS = [

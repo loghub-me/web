@@ -51,6 +51,7 @@ export default [
     route('questions/:slug', 'routes/users/questions/detail.tsx'),
     route('questions/:slug/edit', 'routes/users/questions/edit.tsx'),
   ]),
+  ...prefix('topics', [index('routes/topics/index.tsx'), route(':slug', 'routes/topics/detail.tsx')]),
   ...prefix('settings', [
     layout('routes/settings/layout.tsx', [
       index('routes/settings/index.tsx'),
