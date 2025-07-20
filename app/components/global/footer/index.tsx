@@ -16,7 +16,7 @@ export default function GlobalFooter() {
 
   return (
     !isPostEditPage && (
-      <footer className="w-full py-8 space-y-8 border-t bg-card text-card-foreground">
+      <footer className="relative z-10 w-full py-8 space-y-8 border-t bg-card text-card-foreground">
         <div className="container mx-auto px-4 flex flex-col lg:flex-row gap-8">
           <div className="flex flex-col items-center lg:items-start gap-4">
             <Link to={'/'}>
@@ -41,7 +41,7 @@ export default function GlobalFooter() {
             ))}
           </div>
         </div>
-        <Separator className="mx-auto max-w-sm" />
+        <Separator className="mx-auto max-w-72" />
         <p className="text-center">&copy; 2025. All rights reserved.</p>
       </footer>
     )

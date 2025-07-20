@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { getSeries, getSeriesChapter } from '~/apis/server/series';
 import { EasyMDEEditor } from '~/components/common/easymde';
-import { SeriesChapterEditDialog, SeriesChapterEditForm } from '~/components/series';
+import { SeriesChapterEditDialog, SeriesChapterEditForm, SeriesChapterRemoveDialog } from '~/components/series';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
@@ -39,6 +39,12 @@ export default function SeriesChapterEditRoute({ loaderData }: Route.ComponentPr
     <AuthGuard>
       <main className="max-h-screen h-screen pt-16">
         <EasyMDEEditor title="챕터 수정" ref={easyMDERef} defaultValue={content.markdown}>
+          <SeriesChapterRemoveDialog
+            seriesId={series.id}
+            seriesSlug={series.slug}
+            writerUsername={series.writer.username}
+            chapterSequence={chapter.sequence}
+          />
           <SeriesChapterEditDialog onOpenChange={onDialogOpenChange}>
             <SeriesChapterEditForm form={form} seriesId={series.id} chapterSequence={sequence} />
           </SeriesChapterEditDialog>

@@ -12,8 +12,8 @@ export default function SeriesChapterDetailContent({
   content,
 }: Readonly<SeriesChapterDetailContentProps>) {
   return (
-    <CardContent className="space-y-4 border-b pb-4">
-      <CardTitle className="text-3xl py-2">
+    <CardContent className="pb-4 space-y-4 border-b">
+      <CardTitle className="text-3xl">
         <span className="text-primary/80">{sequence}.</span> {title}
       </CardTitle>
       <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />

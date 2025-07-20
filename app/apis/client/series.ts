@@ -17,6 +17,9 @@ export const editSeries = (seriesId: number, json: z.infer<typeof seriesEditSche
 
 export const removeSeries = (seriesId: number) => clientAPI.delete(`series/${seriesId}`).json<MessageResponseBody>();
 
+export const addSeriesChapter = (seriesId: number) =>
+  clientAPI.post(`series/${seriesId}/chapters`).json<RedirectResponseBody>();
+
 export const editSeriesChapter = (
   seriesId: number,
   chapterSequence: number,

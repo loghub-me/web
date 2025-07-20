@@ -30,7 +30,6 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps) {
   const { series, chapter } = loaderData;
-  const currentSequence = chapter?.sequence;
 
   return (
     <div className="pt-16 min-h-screen flex flex-col md:flex-row">
@@ -39,12 +38,7 @@ export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps)
         <SeriesDetailContent {...series} />
         <SeriesChapterList>
           {series.chapters.map((chapter) => (
-            <SeriesChapterListItem
-              key={chapter.sequence}
-              {...series}
-              chapter={chapter}
-              currentSequence={currentSequence}
-            />
+            <SeriesChapterListItem key={chapter.sequence} {...series} chapter={chapter} />
           ))}
         </SeriesChapterList>
       </SeriesDetailAside>
