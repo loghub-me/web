@@ -17,7 +17,8 @@ export default function QuestionListItem({ question }: Readonly<QuestionListItem
   return (
     <ButtonLink
       to={to}
-      className={'w-full h-fit p-4 rounded-xl block space-y-2 items-start shadow-none'}
+      size={'custom'}
+      className={'w-full p-4 rounded-xl block space-y-2 items-start shadow-none'}
       variant={'outline'}
     >
       <div className="flex gap-1">

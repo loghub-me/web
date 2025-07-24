@@ -1,129 +1,44 @@
-import { CheckIcon, EllipsisIcon, PencilIcon, TrashIcon, UserIcon } from 'lucide-react';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { toast } from 'sonner';
-import { acceptAnswer, removeAnswer } from '~/apis/client/question';
-import { QuestionAnswerEditForm } from '~/components/question';
+import { CheckIcon, UserRoundPenIcon } from 'lucide-react';
+import { useState } from 'react';
+import { QuestionAnswerEditForm, QuestionAnswerMenu } from '~/components/question';
 import { Badge } from '~/components/ui/badge';
-import { Button, ButtonLink } from '~/components/ui/button';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '~/components/ui/dropdown-menu';
-import { UserAvatar, UserLink } from '~/components/user';
-import { handleMessageError } from '~/lib/error';
+import { UserAvatar } from '~/components/user';
+import { cn } from '~/lib/utils';
 
 interface QuestionAnswerListItemProps {
   answer: QuestionAnswer;
-  questionId: number;
-  permission: AnswerPermission;
+  question: QuestionDetail;
 }
 
-export default function QuestionAnswerListItem({
-  answer,
-  questionId,
-  permission,
-}: Readonly<QuestionAnswerListItemProps>) {
-  const { content, accepted, writer } = answer;
+export default function QuestionAnswerListItem({ answer, question }: Readonly<QuestionAnswerListItemProps>) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Card className="overflow-hidden py-0 gap-0">
-      <CardHeader className="py-0 h-16 border-b flex items-center justify-start gap-2">
-        <UserLink {...writer} />
-        {permission.isWriter && (
-          <Badge variant="outline" className="rounded-full">
-            <UserIcon /> 작성자
-          </Badge>
-        )}
-        {accepted && (
-          <Badge className={'rounded-full bg-green-500 text-white [a&]:hover:bg-green-400'}>
-            <CheckIcon /> 채택 완료
-          </Badge>
-        )}
-        <AnswerMenu
-          permission={permission}
-          questionId={questionId}
-          answerId={answer.id}
-          answerWriter={writer}
-          setIsEditing={setIsEditing}
-        />
-      </CardHeader>
-      <CardContent className="p-0">
-        {isEditing ? (
-          <QuestionAnswerEditForm
-            questionId={questionId}
-            answerId={answer.id}
-            defaultContent={content.markdown}
-            closeEditForm={() => setIsEditing(false)}
-          />
-        ) : (
-          <div className="markdown-it p-4" dangerouslySetInnerHTML={{ __html: content.html }} />
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
-interface AnswerMenuProps {
-  permission: AnswerPermission;
-  questionId: number;
-  answerId: number;
-  answerWriter: User;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function AnswerMenu({ permission, questionId, answerId, answerWriter, setIsEditing }: Readonly<AnswerMenuProps>) {
-  const navigate = useNavigate();
-  const { isWriter, isAcceptable, isEditable, isDeletable } = permission;
-
-  function onClickAccept() {
-    acceptAnswer(questionId, answerId)
-      .then(({ message }) => {
-        toast.success(message);
-        navigate(0);
-      })
-      .catch(handleMessageError);
-  }
-
-  function onClickEdit() {
-    setIsEditing((prev) => !prev);
-  }
-
-  function onClickDelete() {
-    removeAnswer(questionId, answerId)
-      .then(({ message }) => {
-        toast.success(message);
-        navigate(0);
-      })
-      .catch(handleMessageError);
-  }
-
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button type="button" variant="ghost" size="icon" className="ml-auto rounded-full">
-          <EllipsisIcon />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex flex-col">
-        <ButtonLink to={`/@${answerWriter.username}`} className="justify-start px-2.5">
-          <UserAvatar {...answerWriter} size="sm" /> 프로필
-        </ButtonLink>
-        {isAcceptable && (
-          <Button variant="ghost" className="justify-start" onClick={onClickAccept}>
-            <CheckIcon /> 채택하기
-          </Button>
-        )}
-        {isEditable && (
-          <Button variant="ghost" className="justify-start" onClick={onClickEdit}>
-            <PencilIcon /> 편집하기
-          </Button>
-        )}
-        {isDeletable && (
-          <Button variant="ghost" className="justify-start" onClick={onClickDelete}>
-            <TrashIcon /> 삭제하기
-          </Button>
-        )}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <Card className={cn('gap-0 pb-0 overflow-hidden', isEditing && 'hidden')}>
+        <CardHeader className="flex items-center gap-2 pb-4 border-b">
+          <UserAvatar {...answer.writer} />
+          <h3 className="text-sm font-medium truncate">{answer.title}</h3>
+          {answer.accepted && (
+            <Badge variant={'success'}>
+              <CheckIcon /> 채택완료
+            </Badge>
+          )}
+          {question.writer.id === answer.writer.id && (
+            <Badge variant={'secondary'}>
+              <UserRoundPenIcon /> 질문자
+            </Badge>
+          )}
+          <QuestionAnswerMenu question={question} answer={answer} setIsEditing={setIsEditing} />
+        </CardHeader>
+        <CardContent className="py-4">
+          <div className="markdown-it" dangerouslySetInnerHTML={{ __html: answer.content.html }} />
+        </CardContent>
+      </Card>
+      {isEditing && (
+        <QuestionAnswerEditForm question={question} answer={answer} closeEditForm={() => setIsEditing(false)} />
+      )}
+    </>
   );
 }

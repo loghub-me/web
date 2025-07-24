@@ -31,37 +31,19 @@ export default function QuestionDetailRoute({ loaderData }: Route.ComponentProps
       <QuestionDetailHero {...question} />
       <div className="flex gap-4">
         <div className="w-full space-y-4">
-          <Card className="pt-0">
+          <Card id={'question'} className="pt-0">
             <QuestionDetailHeader {...question} />
             <QuestionDetailContent {...question} />
           </Card>
           <QuestionAnswerList>
             <QuestionAnswerPost questionId={question.id} questionStatus={question.status} />
-            {answers.map((answer) => {
-              const permission = {
-                isWriter: question.writer.username === answer.writer.username,
-                isAcceptable:
-                  question.status === 'OPEN' &&
-                  question.writer.username !== answer.writer.username &&
-                  session?.username === question.writer.username,
-                isEditable:
-                  question.status === 'OPEN' && question.writer && session?.username === answer.writer.username,
-                isDeletable:
-                  question.status === 'OPEN' && question.writer && session?.username === answer.writer.username,
-              } satisfies AnswerPermission;
-              return (
-                <QuestionAnswerListItem
-                  key={answer.id}
-                  answer={answer}
-                  questionId={question.id}
-                  permission={permission}
-                />
-              );
-            })}
+            {answers.map((answer) => (
+              <QuestionAnswerListItem key={answer.id} answer={answer} question={question} />
+            ))}
           </QuestionAnswerList>
         </div>
         <QuestionDetailAside>
-          <QuestionSummaryCard questionWriter={question.writer} answers={answers} />
+          <QuestionSummaryCard question={question} answers={answers} />
         </QuestionDetailAside>
       </div>
     </main>

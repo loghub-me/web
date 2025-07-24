@@ -1,7 +1,6 @@
 export { default as QuestionList } from '~/components/question/list';
 export { default as QuestionListItem } from '~/components/question/list-item';
 export { default as QuestionListSkeleton } from '~/components/question/list-skeleton';
-export { default as QuestionStatusDot } from '~/components/question/status/dot';
 export { default as QuestionStatusBadge } from '~/components/question/status/badge';
 export { default as QuestionStatusFilter } from '~/components/question/status/filter';
 export { default as QuestionDetailHero } from '~/components/question/detail/hero';
@@ -19,6 +18,7 @@ export { default as QuestionCloseButton } from '~/components/question/close/butt
 export { default as QuestionStarButton } from '~/components/question/star/button';
 export { default as QuestionAnswerList } from '~/components/question/answer/list';
 export { default as QuestionAnswerListItem } from '~/components/question/answer/list-item';
+export { default as QuestionAnswerMenu } from '~/components/question/answer/menu';
 export { default as QuestionAnswerPost } from '~/components/question/answer/post';
 export { default as QuestionAnswerPostForm } from '~/components/question/answer/post/form';
 export { default as QuestionAnswerPostLink } from '~/components/question/answer/post/link';

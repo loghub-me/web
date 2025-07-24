@@ -5,5 +5,5 @@ interface QuestionListProps {
 }
 
 export default function QuestionList({ children }: Readonly<QuestionListProps>) {
-  return <div className="space-y-4">{children}</div>;
+  return <div className="space-y-2">{children}</div>;
 }

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type EasyMDE from 'easymde';
-import { CloudUploadIcon } from 'lucide-react';
+import { CloudUploadIcon, LetterTextIcon } from 'lucide-react';
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -9,11 +9,13 @@ import { z } from 'zod';
 import { postAnswer } from '~/apis/client/question';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { Button } from '~/components/ui/button';
-import { Card } from '~/components/ui/card';
-import { Form, FormField, FormMessage } from '~/components/ui/form';
-import { UserInline } from '~/components/user';
+import { Card, CardFooter, CardHeader } from '~/components/ui/card';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '~/components/ui/form';
+import { IconInput } from '~/components/ui/icon-input';
+import { UserAvatar } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
+import { cn } from '~/lib/utils';
 import { answerPostSchema } from '~/schemas/question';
 
 interface QuestionAnswerPostFormProps {
@@ -28,6 +30,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
     resolver: zodResolver(answerPostSchema),
     defaultValues: { content: '' },
   });
+  const hasError = form.formState.errors.content || form.formState.errors.title;
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -47,26 +50,34 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
   }
 
   return (
-    session && (
-      <Form {...form}>
-        <form onSubmit={handleFormSubmit}>
-          <Card className="py-0 gap-0 overflow-hidden">
-            <div className="sticky top-0 z-40 px-4 w-full h-16 min-h-16 bg-card/70 backdrop-blur flex items-center gap-2 rounded-t-xl border-b">
-              <UserInline id={session.id} username={session.username} />
-            </div>
-            <EasyMDEEditor title={'답변 작성'} ref={easyMDERef}>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
-                <CloudUploadIcon /> 게시하기
-              </Button>
-            </EasyMDEEditor>
+    <Form {...form}>
+      <form onSubmit={handleFormSubmit}>
+        <Card className="gap-0 pb-0 overflow-hidden">
+          <CardHeader className="flex items-center gap-2 pb-4 border-b">
+            {session && <UserAvatar {...session} />}
             <FormField
               control={form.control}
-              name="content"
-              render={() => <FormMessage className="p-6 pt-0 text-center" />}
+              name="title"
+              render={({ field }) => (
+                <FormItem className="flex-grow">
+                  <FormControl>
+                    <IconInput icon={LetterTextIcon} placeholder="제목을 입력해주세요" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
             />
-          </Card>
-        </form>
-      </Form>
-    )
+          </CardHeader>
+          <EasyMDEEditor title={'답변 작성'} ref={easyMDERef}>
+            <Button type="submit" disabled={form.formState.isSubmitting}>
+              <CloudUploadIcon /> 게시하기
+            </Button>
+          </EasyMDEEditor>
+          <CardFooter className={cn('space-y-2', hasError && 'border-t py-4')}>
+            <FormField control={form.control} name="title" render={() => <FormMessage className="text-center" />} />
+            <FormField control={form.control} name="content" render={() => <FormMessage className="text-center" />} />
+          </CardFooter>
+        </Card>
+      </form>
+    </Form>
   );
 }

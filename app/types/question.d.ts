@@ -30,6 +30,7 @@ type QuestionFilter = 'all' | 'open' | 'closed' | 'solved';
 
 interface QuestionAnswer extends Timestamps {
   id: number;
+  title: string;
   content: Content;
   accepted: boolean;
   writer: User;

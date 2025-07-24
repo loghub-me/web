@@ -114,7 +114,7 @@ export default function EasyMDEEditor({
         <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
         <div className="flex gap-2">
           <input {...inputFileProps} />
-          <Button type="button" variant="outline" size="icon" onClick={() => inputFileRef.current?.click()}>
+          <Button type="button" variant="outline" size={'icon'} onClick={() => inputFileRef.current?.click()}>
             <ImageUpIcon />
           </Button>
           {children}

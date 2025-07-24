@@ -4,7 +4,7 @@ import { Card } from '~/components/ui/card';
 
 export default function QuestionAnswerPostLink() {
   return (
-    <Card className="p-6 flex items-center gap-2 bg-blue-50">
+    <Card className="p-6 flex-row items-center gap-2 bg-blue-50">
       <ButtonLink to={'/login'} variant={'default'}>
         <MessagesSquareIcon /> 답변하기
       </ButtonLink>

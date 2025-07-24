@@ -8,8 +8,7 @@
     -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Pretendard Variable', Pretendard, Roboto, 'Noto Sans KR',
     'Segoe UI', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 
-  --font-mono:
-    'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Courier New', Courier, monospace;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Courier New', Courier, monospace;
 
   --aspect-series: 3 / 4;
 
@@ -27,6 +26,30 @@
     }
     60% {
       transform: rotate(5deg);
+    }
+  }
+
+  --animate-orbit: orbit var(--duration, 10s) linear infinite;
+
+  @keyframes orbit {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg)) translateX(var(--radius)) rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateX(var(--radius))
+        rotate(calc(var(--angle) * -1deg - 360deg));
+    }
+  }
+
+  --animate-orbit-reverse: orbit-reverse var(--duration, 10s) linear infinite;
+
+  @keyframes orbit-reverse {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg)) translateX(var(--radius)) rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg - 360deg)) translateX(var(--radius))
+        rotate(calc(var(--angle) * -1deg + 360deg));
     }
   }
 }
@@ -80,7 +103,7 @@
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.67 0.2 264);
+  --primary: oklch(0.65 0.17 244);
   --primary-foreground: oklch(0.98 0 0);
   /*TODO*/
   /*--primary: oklch(0.21 0.006 285.885);*/
@@ -120,7 +143,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.17 0.006 285.885);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.67 0.2 264);
+  --primary: oklch(0.65 0.17 244);
   --primary-foreground: oklch(0.98 0 0);
   /*TODO*/
   /*--primary: oklch(0.21 0.006 285.885);*/
