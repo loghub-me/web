@@ -7,5 +7,5 @@ interface LogoProps {
 }
 
 export default function Logo({ width = 128, height = 32, className }: Readonly<LogoProps>) {
-  return <img src={'/logo.svg'} alt={'Logo'} className={cn('dark:invert', className)} width={width} height={height} />;
+  return <img src={'/logo.svg'} alt={'Logo'} className={cn(className)} width={width} height={height} />;
 }

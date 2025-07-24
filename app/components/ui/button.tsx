@@ -1,5 +1,6 @@
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { type LucideIcon, MoveUpRightIcon } from 'lucide-react';
 import * as React from 'react';
 import { Link, NavLink } from 'react-router';
 import { cn } from '~/lib/utils';
@@ -68,6 +69,29 @@ function ButtonLink({
   );
 }
 
+function JumboButtonLink({
+  className,
+  variant = 'outline',
+  to,
+  icon: Icon,
+  disabled = false,
+  ...props
+}: React.ComponentProps<'a'> &
+  VariantProps<typeof buttonVariants> & { to: string; icon: LucideIcon; disabled?: boolean }) {
+  return (
+    <ButtonLink
+      to={to}
+      variant={'outline'}
+      size={'custom'}
+      className={cn('group relative flex-1 flex-col items-start p-4 h-auto gap-4 rounded-lg', className)}
+    >
+      <MoveUpRightIcon className="absolute top-4 right-4 group-hover:top-3 group-hover:right-3 transition-all text-muted-foreground" />
+      <Icon className="size-6" />
+      <div className="space-y-1">{props.children}</div>
+    </ButtonLink>
+  );
+}
+
 function ButtonNavLink({
   className,
   variant,
@@ -95,4 +119,4 @@ function ButtonNavLink({
   );
 }
 
-export { Button, ButtonLink, ButtonNavLink, buttonVariants };
+export { Button, ButtonLink, JumboButtonLink, ButtonNavLink, buttonVariants };

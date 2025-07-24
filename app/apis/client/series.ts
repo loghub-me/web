@@ -7,8 +7,6 @@ import {
   type seriesReviewPostSchema,
 } from '~/schemas/series';
 
-export const getTrendingSeries = () => clientAPI.get('series/trending').json<Series[]>();
-
 export const postSeries = (json: z.infer<typeof seriesPostSchema>) =>
   clientAPI.post(`series`, { json }).json<RedirectResponseBody>();
 
