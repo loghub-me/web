@@ -2,6 +2,9 @@ import { z } from 'zod';
 import { nicknameZod, pageZod, usernameZod } from '~/schemas/zod';
 
 export const userStarPageSchema = z.object({ page: pageZod });
+export const userActivitySearchSchema = z.object({
+  date: z.coerce.date().optional(),
+});
 
 export const usernameUpdateSchema = z.object({
   oldUsername: usernameZod,

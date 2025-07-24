@@ -12,7 +12,10 @@ export { default as UserProfileUpdateForm } from '~/components/user/profile/upda
 export { default as UserPrivacyUpdateForm } from '~/components/user/privacy/update/form';
 export { default as UsernameUpdateDialog } from '~/components/user/username/update/dialog';
 export { default as UserThemeUpdateForm } from '~/components/user/theme/update/form';
-export { default as UserPostList } from '~/components/user/post/list';
-export { default as UserPostListItem } from '~/components/user/post/list-item';
-export { default as UserPostListSkeleton } from '~/components/user/post/list-skeleton';
-export { default as UserPostShowMoreButton } from '~/components/user/post/show-more-button';
+export { default as UserStarList } from '~/components/user/star/list';
+export { default as UserStarListItem } from '~/components/user/star/list-item';
+export { default as UserStarListSkeleton } from '~/components/user/star/list-skeleton';
+export { default as UserActivityCalendar } from '~/components/user/activity/calendar';
+export { default as UserActivityList } from '~/components/user/activity/list';
+export { default as UserActivityListItem } from '~/components/user/activity/list-item';
+export { default as UserActivityListSkeleton } from '~/components/user/activity/list-skeleton';
