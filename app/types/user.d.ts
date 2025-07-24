@@ -14,14 +14,6 @@ interface UserDetail extends User {
   readme: string;
 }
 
-interface UserPost {
-  path: string;
-  title: string;
-  type: UserPostType;
-  questionStatus?: QuestionStatus;
-  updatedAt: string;
-}
-
 interface UserProfile {
   nickname: string;
   readme: string;
@@ -32,5 +24,28 @@ interface UserPrivacy {
   starVisible: boolean;
 }
 
+interface UserStar {
+  id: number;
+  slug: string;
+  title: string;
+  writer: UserSimple;
+  topics: Topic[];
+  target: UserStarTarget;
+}
+
+interface UserActivitySummary {
+  createdDate: string;
+  count: number;
+}
+
+interface UserActivity {
+  id: number;
+  slug: string;
+  title: string;
+  action: UserActivityAction;
+}
+
+type UserStarTarget = 'ARTICLE' | 'SERIES' | 'QUESTION';
+type UserActivityAction = 'POST_ARTICLE' | 'POST_SERIES' | 'POST_QUESTION';
+
 type UserRole = 'MEMBER' | 'ADMIN' | 'BOT';
-type UserPostType = 'ARTICLE' | 'QUESTION';

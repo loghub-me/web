@@ -15,7 +15,7 @@ export default function UserDetailNav({ username }: Readonly<UserDetailNavProps>
   ];
 
   return (
-    <nav className="flex items-center gap-2">
+    <nav className="flex items-center gap-2 overflow-x-auto">
       {navLinks.map(({ name, to, icon: Icon }) => (
         <ButtonNavLink key={to} to={to} end>
           <Icon /> {name}

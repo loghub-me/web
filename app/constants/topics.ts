@@ -1,4 +1,4 @@
-export const ALL_TOPICS = [
+export const TOPICS = [
   { slug: 'c', name: 'C' },
   { slug: 'cpp', name: 'C++' },
   { slug: 'csharp', name: 'C#' },
@@ -18,7 +18,7 @@ export const ALL_TOPICS = [
   { slug: 'typescript', name: 'TypeScript' },
 ] as Topic[];
 
-const TOPIC_MAP = ALL_TOPICS.reduce((acc, topic) => acc.set(topic.slug, topic), new Map<string, Topic>());
+const TOPIC_MAP = TOPICS.reduce((acc, topic) => acc.set(topic.slug, topic), new Map<string, Topic>());
 
 export function getTopicBySlugs(slugs: string[]) {
   return slugs.map((slug) => TOPIC_MAP.get(slug)).filter((topic): topic is Topic => !!topic);
@@ -30,5 +30,5 @@ export function searchTopics(query: string) {
   }
 
   const lowerQuery = query.toLowerCase();
-  return ALL_TOPICS.filter((topic) => `${topic.slug} ${topic.name}`.toLowerCase().includes(lowerQuery));
+  return TOPICS.filter((topic) => `${topic.slug} ${topic.name}`.toLowerCase().includes(lowerQuery));
 }

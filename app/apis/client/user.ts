@@ -2,9 +2,14 @@ import { clientAPI } from './instance';
 import { z } from 'zod';
 import { usernameUpdateSchema, type userPrivacyUpdateSchema, type userProfileUpdateSchema } from '~/schemas/user';
 
-export const getSelfRecentPosts = () => clientAPI.get(`users/self/recent/posts`).json<UserPost[]>();
 export const getSelfProfile = () => clientAPI.get(`users/self/profile`).json<UserProfile>();
 export const getSelfPrivacy = () => clientAPI.get(`users/self/privacy`).json<UserPrivacy>();
+export const getUserActivitySummaries = (userId: number) =>
+  clientAPI.get(`users/${userId}/activities`).json<UserActivitySummary[]>();
+export const getUserActivities = (userId: number, date: string) =>
+  clientAPI.get(`users/${userId}/activities/${date}`).json<UserActivity[]>();
+export const getUserStars = (userId: number, page = 1) =>
+  clientAPI.get(`users/${userId}/stars`, { searchParams: { page } }).json<Page<UserStar>>();
 
 export const updateSelfUsername = (json: z.infer<typeof usernameUpdateSchema>) =>
   clientAPI.put(`users/self/username`, { json }).json<MessageResponseBody>();

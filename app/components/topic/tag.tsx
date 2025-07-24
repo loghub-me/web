@@ -13,7 +13,8 @@ export default function TopicTag({ topic: { slug, name }, remove }: Readonly<Top
       className="h-7 rounded-sm p-1 cursor-pointer transition-colors hover:bg-accent"
       onClick={remove}
     >
-      <img className="size-4" src={`/icons/${slug}.svg`} alt={name} />
+      <img src={`/icons/${slug}.svg`} alt={name} className="size-4 dark:hidden" />
+      <img src={`/icons/${slug}-dark.svg`} alt={name} className="size-4 not-dark:hidden" />
       <span>{name}</span>
       <XIcon />
     </Badge>

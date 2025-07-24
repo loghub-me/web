@@ -14,6 +14,3 @@ export const searchUserSeries = (username: string, searchParams: z.infer<typeof 
 
 export const searchUserQuestions = (username: string, searchParams: z.infer<typeof questionSearchSchema>) =>
   serverAPI.get(`users/@${username}/questions`, { searchParams }).json<Page<Question>>();
-
-export const getUserStars = (username: string, page = 1) =>
-  serverAPI.get(`users/@${username}/stars`, { searchParams: { page } }).json<Page<Star>>();

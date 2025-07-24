@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router';
+import { TopicImage } from '~/components/topic';
 import { Badge } from '~/components/ui/badge';
 import { cn } from '~/lib/utils';
 
@@ -17,20 +18,13 @@ export default function TopicBadge({ topic, linkify = false }: Readonly<TopicBad
     >
       {linkify ? (
         <Link to={`/topics/${topic.slug}`}>
-          <Content topic={topic} />
+          <TopicImage topic={topic} /> {topic.name}
         </Link>
       ) : (
-        <Content topic={topic} />
+        <>
+          <TopicImage topic={topic} /> {topic.name}
+        </>
       )}
     </Badge>
-  );
-}
-
-function Content({ topic }: Readonly<TopicBadgeProps>) {
-  return (
-    <>
-      <img className="size-4" src={`/icons/${topic.slug}.svg`} alt={topic.name} />
-      <span>{topic.name}</span>
-    </>
   );
 }

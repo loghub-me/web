@@ -1,3 +1,4 @@
+export { default as TopicImage } from '~/components/topic/image';
 export { default as TopicBadge } from '~/components/topic/badge';
 export { default as TopicTag } from '~/components/topic/tag';
 export { default as TopicList } from '~/components/topic/list';

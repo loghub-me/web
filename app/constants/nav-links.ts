@@ -23,9 +23,24 @@ export const MANUAL_LINKS = [
 ];
 
 export const POST_LINKS = [
-  { name: '아티클 작성하기', description: '아티클을 작성하고, 다른 사람들과 공유해보세요.', to: '/post/articles' },
-  { name: '시리즈 작성하기', description: '시리즈를 작성하고, 다른 사람들과 공유해보세요.', to: '/post/series' },
-  { name: '질문 작성하기', description: '질문을 작성하고, 다른 사람들과 공유해보세요.', to: '/post/questions' },
+  {
+    name: '아티클 작성하기',
+    description: '아티클을 작성하고, 다른 사람들과 공유해보세요.',
+    to: '/post/articles',
+    icon: ScrollIcon,
+  },
+  {
+    name: '시리즈 작성하기',
+    description: '시리즈를 작성하고, 다른 사람들과 공유해보세요.',
+    to: '/post/series',
+    icon: LayersIcon,
+  },
+  {
+    name: '질문 작성하기',
+    description: '질문을 작성하고, 다른 사람들과 공유해보세요.',
+    to: '/post/questions',
+    icon: MessageCircleQuestionIcon,
+  },
 ];
 
 export const SETTING_LINKS = [

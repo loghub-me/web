@@ -1,11 +1,11 @@
 import { TagIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { TopicTag } from '~/components/topic';
+import { TopicImage, TopicTag } from '~/components/topic';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '~/components/ui/command';
 import { FormLabel } from '~/components/ui/form';
 import { ErrorMessage } from '~/constants/error-messages';
-import { ALL_TOPICS } from '~/constants/topics';
+import { TOPICS } from '~/constants/topics';
 import { cn } from '~/lib/utils';
 
 interface TopicSlugsFormControlProps {
@@ -42,9 +42,9 @@ export default function TopicSlugsFormControl({ topics, setTopics }: Readonly<To
         <CommandInput icon={TagIcon} placeholder="토픽을 입력해주세요" value={query} onValueChange={setQuery} />
         <CommandList className={cn(focused ? 'block' : 'hidden')}>
           <CommandEmpty>토픽을 찾을 수 없습니다.</CommandEmpty>
-          {ALL_TOPICS.map((topic) => (
+          {TOPICS.map((topic) => (
             <CommandItem key={topic.slug} value={`${topic.slug}:${topic.name}`} onSelect={onSelect}>
-              <img className="size-4" src={`/icons/${topic.slug}.svg`} alt={topic.name} />
+              <TopicImage topic={topic} />
               <span>{topic.name}</span>
             </CommandItem>
           ))}

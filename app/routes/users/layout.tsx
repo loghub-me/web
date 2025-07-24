@@ -19,7 +19,7 @@ export default function UserLayout({ loaderData }: Route.ComponentProps) {
       <UserDetailAside {...user} />
       <div className="w-full space-y-4">
         <UserDetailNav {...user} />
-        <Outlet />
+        <Outlet key={'layout'} context={{ user }} />
       </div>
     </main>
   );

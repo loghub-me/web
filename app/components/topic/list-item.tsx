@@ -1,3 +1,4 @@
+import { TopicImage } from '~/components/topic';
 import { ButtonLink } from '~/components/ui/button';
 
 interface TopicListProps {
@@ -9,8 +10,8 @@ export default function TopicList({ topic }: Readonly<TopicListProps>) {
 
   return (
     <ButtonLink to={`/topics/${slug}`} variant={'outline'} size={'custom'} className="flex-col p-4">
-      <img src={`/icons/${slug}.svg`} alt={slug} className="size-8" />
-      <span className="text-muted-foreground">{name}</span>
+      <TopicImage topic={topic} size={'lg'} />
+      <span className="text-muted-foreground">{topic.name}</span>
     </ButtonLink>
   );
 }
