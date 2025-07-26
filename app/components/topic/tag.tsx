@@ -1,4 +1,5 @@
 import { XIcon } from 'lucide-react';
+import { TopicImage } from '~/components/topic';
 import { Badge } from '~/components/ui/badge';
 
 interface TopicTagProps {
@@ -6,17 +7,16 @@ interface TopicTagProps {
   remove: () => void;
 }
 
-export default function TopicTag({ topic: { slug, name }, remove }: Readonly<TopicTagProps>) {
+export default function TopicTag({ topic, remove }: Readonly<TopicTagProps>) {
   return (
     <Badge
       variant="outline"
       className="h-7 rounded-sm p-1 cursor-pointer transition-colors hover:bg-accent"
       onClick={remove}
     >
-      <img src={`/icons/${slug}.svg`} alt={name} className="size-4 dark:hidden" />
-      <img src={`/icons/${slug}-dark.svg`} alt={name} className="size-4 not-dark:hidden" />
-      <span>{name}</span>
-      <XIcon />
+      <TopicImage topic={topic} />
+      <span>{topic.name}</span>
+      <XIcon className="text-muted-foreground" />
     </Badge>
   );
 }

@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
+import { useResolvedTheme } from '~/actions/theme/utils';
 
 const imageVariants = cva('', {
   variants: {
@@ -19,19 +20,8 @@ interface TopicImageProps extends VariantProps<typeof imageVariants> {
 
 export default function TopicImage({ topic, size, className }: Readonly<TopicImageProps>) {
   const { slug, name } = topic;
+  const resolvedTheme = useResolvedTheme();
+  const src = `/icons/${slug}${resolvedTheme === 'dark' ? '-dark' : ''}.svg`;
 
-  return (
-    <>
-      <img
-        src={`/icons/${slug}.svg`}
-        alt={name}
-        className={imageVariants({ size, className: `${className} dark:hidden` })}
-      />
-      {/*<img*/}
-      {/*  src={`/icons/${slug}-dark.svg`}*/}
-      {/*  alt={name}*/}
-      {/*  className={imageVariants({ size, className: `${className} not-dark:hidden` })}*/}
-      {/*/>*/}
-    </>
-  );
+  return <img src={src} alt={name} className={imageVariants({ size, className })} />;
 }

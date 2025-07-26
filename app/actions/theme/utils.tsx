@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useNavigation, useRouteLoaderData } from 'react-router';
 import type { loader as rootLoader } from '~/root';
 
@@ -21,6 +21,38 @@ export function useTheme(): Theme {
   const { formData } = useNavigation();
   const optimisticTheme = formData ? getTheme(formData) : null;
   return optimisticTheme || rootLoaderData.theme;
+}
+
+/**
+ * Resolve a Theme value to a concrete "light" or "dark".
+ * If the incoming theme is "system", it reads the current prefers-color-scheme
+ * and subscribes to changes to keep the value in sync.
+ */
+export function useResolvedTheme(): 'light' | 'dark' {
+  const theme = useTheme();
+
+  // Helper to read system preference safely (SSR safe)
+  const getSystem = () =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+  const [resolved, setResolved] = useState<'light' | 'dark'>(() => (theme === 'system' ? getSystem() : theme));
+
+  useEffect(() => {
+    if (theme === 'system') {
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const handler = (e: MediaQueryListEvent) => setResolved(e.matches ? 'dark' : 'light');
+
+      // set initial value
+      setResolved(media.matches ? 'dark' : 'light');
+
+      media.addEventListener('change', handler);
+      return () => media.removeEventListener('change', handler);
+    } else {
+      setResolved(theme);
+    }
+  }, [theme]);
+
+  return resolved;
 }
 
 export function ThemeScript() {
