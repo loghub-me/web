@@ -1,4 +1,4 @@
-import { UserAvatar } from '~/components/user/index';
+import { UserAvatar } from '~/components/user';
 
 interface UserInlineProps {
   id: number;

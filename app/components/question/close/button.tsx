@@ -34,8 +34,8 @@ export default function QuestionCloseButton({ id }: Readonly<QuestionCloseButton
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-r-full" variant="outline">
-          <XIcon className="mr-0.5" />
+        <Button variant={'outline'} size={'multi'}>
+          <XIcon />
         </Button>
       </DialogTrigger>
       <DialogContent>

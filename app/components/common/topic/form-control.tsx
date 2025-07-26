@@ -13,7 +13,7 @@ interface TopicSlugsFormControlProps {
   setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
 }
 
-export default function TopicSlugsFormControl({ topics, setTopics }: Readonly<TopicSlugsFormControlProps>) {
+function TopicSlugsFormControl({ topics, setTopics }: Readonly<TopicSlugsFormControlProps>) {
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
 
@@ -64,3 +64,5 @@ export default function TopicSlugsFormControl({ topics, setTopics }: Readonly<To
     </div>
   );
 }
+
+export { TopicSlugsFormControl };

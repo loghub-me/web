@@ -1,19 +1,23 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import { useRef } from 'react';
 import { toast } from 'sonner';
 import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
-import { cn } from '~/lib/utils';
 
-interface ThumbnailFormControlProps {
-  aspect?: 'video' | 'series';
+const formControlVariants = cva('group border rounded-lg bg-secondary overflow-hidden cursor-pointer', {
+  variants: {
+    type: {
+      article: 'aspect-video',
+      series: 'aspect-series',
+    },
+  },
+});
+
+interface ThumbnailFormControlProps extends VariantProps<typeof formControlVariants> {
   value: string;
   setValue: (value: string) => void;
 }
 
-export default function ThumbnailFormControl({
-  aspect = 'video',
-  value,
-  setValue,
-}: Readonly<ThumbnailFormControlProps>) {
+function ThumbnailFormControl({ type, value, setValue }: Readonly<ThumbnailFormControlProps>) {
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const inputFileProps = {
@@ -26,13 +30,7 @@ export default function ThumbnailFormControl({
   };
 
   return (
-    <div
-      className={cn(
-        'group border rounded-lg bg-secondary overflow-hidden cursor-pointer',
-        aspect === 'video' ? 'aspect-video' : 'aspect-series'
-      )}
-      onClick={() => inputFileRef.current?.click()}
-    >
+    <div className={formControlVariants({ type })} onClick={() => inputFileRef.current?.click()}>
       <input {...inputFileProps} />
       <img
         className="w-full h-full object-cover transition-transform group-hover:scale-105"
@@ -42,3 +40,5 @@ export default function ThumbnailFormControl({
     </div>
   );
 }
+
+export { ThumbnailFormControl };

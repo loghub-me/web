@@ -32,7 +32,7 @@ export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps)
   const { series, chapter } = loaderData;
 
   return (
-    <div className="pt-16 min-h-screen flex flex-col md:flex-row">
+    <main className="pt-16 min-h-screen flex flex-col md:flex-row">
       <SeriesDetailAside>
         <SeriesDetailHeader {...series} />
         <SeriesDetailContent {...series} />
@@ -43,6 +43,6 @@ export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps)
         </SeriesChapterList>
       </SeriesDetailAside>
       <Outlet context={{ series, chapter } satisfies SeriesDetailLayoutContextProps} />
-    </div>
+    </main>
   );
 }

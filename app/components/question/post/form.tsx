@@ -1,17 +1,16 @@
-import { BotIcon, BotOffIcon, CloudUploadIcon, LetterTextIcon, WandSparklesIcon, XIcon } from 'lucide-react';
+import { CloudUploadIcon, LetterTextIcon, WandSparklesIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { postQuestion } from '~/apis/client/question';
-import TopicSlugsFormControl from '~/components/common/topic/form-control';
+import { TopicSlugsFormControl } from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
-import { Switch, SwitchIcon } from '~/components/ui/switch';
 import { handleMessageError } from '~/lib/error';
 import { questionPostSchema } from '~/schemas/question';
 
@@ -56,23 +55,6 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
           )}
         />
         <TopicSlugsFormControl topics={topics} setTopics={setTopics} />
-        <FormField
-          control={form.control}
-          name="requestBotAnswer"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 space-y-0">
-              <div className="space-y-0.5">
-                <FormLabel>AI 답변 요청하기</FormLabel>
-                <FormDescription>봇에게 답변을 요청하면, 질문에 대한 답변을 AI가 생성합니다.</FormDescription>
-              </div>
-              <FormControl>
-                <Switch checked={field.value} onCheckedChange={field.onChange}>
-                  <SwitchIcon enabledIcon={BotIcon} disabledIcon={BotOffIcon} value={field.value} />
-                </Switch>
-              </FormControl>
-            </FormItem>
-          )}
-        />
         <FormField control={form.control} name="content" render={({ field }) => <FormMessage />} />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <DialogClose asChild>

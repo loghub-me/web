@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import ThumbnailImage from '~/components/common/thumbnail/image';
+import { ThumbnailImage } from '~/components/common/thumbnail/image';
 import Timestamp from '~/components/common/timestamp';
 import { TopicBadge } from '~/components/topic';
 import { UserInline } from '~/components/user';

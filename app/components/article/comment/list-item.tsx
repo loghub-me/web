@@ -2,12 +2,12 @@ import { useQueryClient } from '@tanstack/react-query';
 import { DotIcon, ReplyIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { removeArticleComment } from '~/apis/client/article';
+import Timestamp from '~/components/common/timestamp';
 import { Button } from '~/components/ui/button';
 import { UserInline, UserMention } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { useReply } from '~/hooks/use-reply';
 import { handleMessageError } from '~/lib/error';
-import { parseRelativeTime } from '~/lib/parse';
 import { cn } from '~/lib/utils';
 
 interface ArticleCommentListItemProps {
@@ -25,7 +25,7 @@ export default function ArticleCommentListItem({
   parentId,
   children,
 }: Readonly<ArticleCommentListItemProps>) {
-  const { writer, createdAt, content, mention, deleted } = comment;
+  const { writer, content, mention, deleted } = comment;
   const { session } = useAuth();
   const { replyTo, setReplyTo, setParentId, clear } = useReply();
   const isReplying = replyTo?.id === comment.id;
@@ -63,7 +63,7 @@ export default function ArticleCommentListItem({
         <div className="flex items-center">
           <UserInline {...writer} />
           <DotIcon className="text-muted-foreground" />
-          <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
+          <Timestamp {...comment} className="text-xs" />
         </div>
         {session && (
           <div className="flex gap-1">

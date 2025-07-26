@@ -34,7 +34,7 @@ export default function QuestionRemoveButton({ id }: Readonly<QuestionRemoveButt
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-full" variant="outline">
+        <Button variant={'outline'} size={'multi'}>
           <TrashIcon />
         </Button>
       </DialogTrigger>

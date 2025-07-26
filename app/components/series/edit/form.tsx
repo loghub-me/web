@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { editSeries } from '~/apis/client/series';
-import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
-import TopicSlugsFormControl from '~/components/common/topic/form-control';
+import { ThumbnailFormControl } from '~/components/common/thumbnail/form-control';
+import { TopicSlugsFormControl } from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { IconInput } from '~/components/ui/icon-input';
@@ -76,7 +76,7 @@ export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEd
             <FormItem>
               <FormLabel>썸네일</FormLabel>
               <ThumbnailFormControl
-                aspect={'series'}
+                type={'series'}
                 value={field.value}
                 setValue={(value) => form.setValue('thumbnail', value)}
               />

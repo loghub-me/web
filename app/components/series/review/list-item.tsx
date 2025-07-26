@@ -3,11 +3,11 @@ import { DotIcon, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { removeSeriesReview } from '~/apis/client/series';
 import StarIcon from '~/components/common/icon/star';
+import Timestamp from '~/components/common/timestamp';
 import { Button } from '~/components/ui/button';
 import { UserInline } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
-import { parseRelativeTime } from '~/lib/parse';
 
 interface SeriesReviewListItemProps {
   seriesId: number;
@@ -16,7 +16,7 @@ interface SeriesReviewListItemProps {
 }
 
 export default function SeriesReviewListItem({ seriesId, review, queryKey }: Readonly<SeriesReviewListItemProps>) {
-  const { id: reviewId, writer, createdAt, content, rating } = review;
+  const { id: reviewId, writer, content, rating } = review;
   const { session } = useAuth();
   const queryClient = useQueryClient();
 
@@ -35,7 +35,7 @@ export default function SeriesReviewListItem({ seriesId, review, queryKey }: Rea
         <div className="flex items-center">
           <UserInline {...writer} />
           <DotIcon className="text-muted-foreground" />
-          <span className="text-muted-foreground text-xs">{parseRelativeTime(createdAt)}</span>
+          <Timestamp {...review} className="text-xs" />
           <div className="pl-2 flex items-center">
             <StarIcon size={rating} fill={true} className="size-3" />
           </div>

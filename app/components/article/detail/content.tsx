@@ -1,7 +1,6 @@
-import ThumbnailImage from '~/components/common/thumbnail/image';
+import { ThumbnailImageDialog } from '~/components/common/thumbnail/image';
 import { TopicBadge } from '~/components/topic';
 import { CardContent } from '~/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '~/components/ui/dialog';
 
 interface ArticleDetailContentProps {
   topics: Topic[];
@@ -25,17 +24,7 @@ export default function ArticleDetailContent({
           ))}
         </div>
       )}
-      <Dialog>
-        <DialogTrigger className="group cursor-pointer">
-          <ThumbnailImage src={thumbnail} alt={title} type={'article'} />
-        </DialogTrigger>
-        <DialogContent className="p-0 border-0">
-          <DialogHeader className="hidden">
-            <DialogTitle>썸네일</DialogTitle>
-          </DialogHeader>
-          <ThumbnailImage src={thumbnail} alt={title} type={'article'} className={'aspect-auto border-none'} />
-        </DialogContent>
-      </Dialog>
+      <ThumbnailImageDialog src={thumbnail} alt={title} />
       <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
     </CardContent>
   );

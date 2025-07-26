@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { editArticle } from '~/apis/client/article';
-import ThumbnailFormControl from '~/components/common/thumbnail/form-control';
-import TopicSlugsFormControl from '~/components/common/topic/form-control';
+import { ThumbnailFormControl } from '~/components/common/thumbnail/form-control';
+import { TopicSlugsFormControl } from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
@@ -63,7 +63,11 @@ export default function ArticleEditForm({ form, id }: Readonly<ArticleEditFormPr
           render={({ field }) => (
             <FormItem>
               <FormLabel>썸네일</FormLabel>
-              <ThumbnailFormControl value={field.value} setValue={(value) => form.setValue('thumbnail', value)} />
+              <ThumbnailFormControl
+                type={'article'}
+                value={field.value}
+                setValue={(value) => form.setValue('thumbnail', value)}
+              />
               <FormControl>
                 <input type="hidden" placeholder="제목을 입력해주세요" {...field} />
               </FormControl>
