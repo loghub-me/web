@@ -2,6 +2,7 @@ export { default as UserLink } from '~/components/user/link';
 export { default as UserAvatar } from '~/components/user/avatar';
 export { default as UserInline } from '~/components/user/inline';
 export { default as UserMention } from '~/components/user/mention';
+export { default as UserRoleBadge } from '~/components/user/role/badge';
 export { default as UserDetailNav } from '~/components/user/detail/nav';
 export { default as UserDetailAside } from '~/components/user/detail/aside';
 export { default as UserSettingHeader } from '~/components/user/setting/nav';

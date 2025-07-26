@@ -24,3 +24,4 @@ export { default as QuestionAnswerPostForm } from '~/components/question/answer/
 export { default as QuestionAnswerPostLink } from '~/components/question/answer/post/link';
 export { default as QuestionAnswerPostClosed } from '~/components/question/answer/post/closed';
 export { default as QuestionAnswerEditForm } from '~/components/question/answer/edit/form';
+export { default as QuestionAnswerGenerateRequestButton } from '~/components/question/answer/generate/request-button';

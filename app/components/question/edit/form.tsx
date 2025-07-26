@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { editQuestion } from '~/apis/client/question';
-import TopicSlugsFormControl from '~/components/common/topic/form-control';
+import { TopicSlugsFormControl } from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
@@ -13,10 +13,10 @@ import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
 import { handleMessageError } from '~/lib/error';
-import { questionEditSchema } from '~/schemas/question';
+import type { questionPostSchema } from '~/schemas/question';
 
 interface QuestionEditFormProps {
-  form: UseFormReturn<z.infer<typeof questionEditSchema>>;
+  form: UseFormReturn<z.infer<typeof questionPostSchema>>;
   id: number;
 }
 
@@ -24,7 +24,7 @@ export default function QuestionEditForm({ form, id }: Readonly<QuestionEditForm
   const navigate = useNavigate();
   const [topics, setTopics] = useState(getTopicBySlugs(form.getValues('topicSlugs')));
 
-  function onSubmit(values: z.infer<typeof questionEditSchema>) {
+  function onSubmit(values: z.infer<typeof questionPostSchema>) {
     editQuestion(id, values)
       .then(({ pathname, message }) => {
         toast.success(message);

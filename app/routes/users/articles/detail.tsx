@@ -18,7 +18,7 @@ import ListEmpty from '~/components/common/list/empty';
 import { CommentSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
-import { parseToc } from '~/lib/markdown/parse';
+import { parseHTMLToc } from '~/lib/html/toc';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import ReplyProvider from '~/providers/reply-provider';
 import { articleCommentPageSchema } from '~/schemas/article';
@@ -29,12 +29,12 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const { commentPage } = parseSearchParams(url.searchParams, articleCommentPageSchema);
   const { username, slug } = parseParams(params, compositeKeySchema);
   const article = await getArticle(username, slug);
-  return { article, commentPage };
+  const toc = parseHTMLToc(article.content.html);
+  return { article, toc, commentPage };
 }
 
 export default function ArticleDetailRoute({ loaderData }: Route.ComponentProps) {
-  const { article, commentPage } = loaderData;
-  const toc = parseToc(article.content.markdown);
+  const { article, toc, commentPage } = loaderData;
 
   return (
     <main className="container mx-auto px-2 pt-20 pb-4 min-h-screen space-y-4">
