@@ -1,11 +1,11 @@
 import type EasyMDE from 'easymde';
+import { MarkdownRenderer } from 'loghub-markdown-renderer';
 import { Columns2Icon, EyeIcon, ImageUpIcon, PencilIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '~/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '~/components/ui/toggle-group';
 import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
-import { parseMarkdown } from '~/lib/markdown/parse';
 import { cn } from '~/lib/utils';
 
 type EditorMode = 'edit' | 'preview' | 'preview-edit';
@@ -23,6 +23,7 @@ export default function EasyMDEEditor({
   defaultValue = '',
   children,
 }: Readonly<EasyMDEEditorProps>) {
+  const rendererRef = useRef<MarkdownRenderer>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -50,11 +51,18 @@ export default function EasyMDEEditor({
 
   useEffect(() => {
     if (typeof window === 'undefined' || !textareaRef.current) return;
+    if (!rendererRef.current) {
+      rendererRef.current = new MarkdownRenderer({
+        useMarkdownItAnchor: true,
+        useSafeLinkify: true,
+        useSanitize: false,
+      });
+    }
 
     import('easymde').then((EasyMDEModule) => {
       const EasyMDEConstructor = EasyMDEModule.default;
 
-      if (!textareaRef.current) {
+      if (!textareaRef.current || !rendererRef.current || !previewRef.current) {
         return;
       }
 
@@ -66,19 +74,17 @@ export default function EasyMDEEditor({
         initialValue: defaultValue,
         placeholder: '# 나의 글은 최강이다.',
       });
-
       easyMDERef.current = easyMDE;
 
-      if (previewRef && previewRef.current) {
-        easyMDE.codemirror.on('change', () => {
-          const markdown = easyMDE.value();
-          if (previewRef?.current) {
-            previewRef.current.innerHTML = parseMarkdown(markdown);
-          }
-        });
-      }
-      if (previewRef && previewRef.current && defaultValue) {
-        previewRef.current.innerHTML = parseMarkdown(defaultValue);
+      easyMDE.codemirror.on('change', () => {
+        const markdown = easyMDE.value();
+        if (previewRef && previewRef.current && rendererRef.current) {
+          previewRef.current.innerHTML = rendererRef.current.render(markdown);
+        }
+      });
+
+      if (defaultValue) {
+        previewRef.current.innerHTML = rendererRef.current.render(defaultValue);
       }
     });
 
