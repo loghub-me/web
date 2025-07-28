@@ -1,6 +1,6 @@
 import { clientAPI } from './instance';
 import { z } from 'zod';
-import { usernameUpdateSchema, type userPrivacyUpdateSchema, type userProfileUpdateSchema } from '~/schemas/user';
+import type { usernameUpdateSchema, userPrivacyUpdateSchema, userProfileUpdateSchema } from '~/schemas/user';
 
 export const getSelfProfile = () => clientAPI.get(`users/self/profile`).json<UserProfile>();
 export const getSelfPrivacy = () => clientAPI.get(`users/self/privacy`).json<UserPrivacy>();

@@ -1,20 +1,23 @@
-import { pageZod, queryZod, sortZod } from './zod';
 import { z } from 'zod';
+import zodFields from '~/schemas/fields';
 
-export const questionSearchSchema = z.object({
-  query: queryZod,
-  sort: sortZod,
-  page: pageZod,
-  filter: z.enum(['all', 'open', 'closed', 'solved']).default('all'),
-});
+const { content, page, query, sort, title, topicSlugs } = zodFields;
 
-export const questionPostSchema = z.object({
-  title: z.string().min(1).max(128),
-  content: z.string().min(10).max(2048),
-  topicSlugs: z.array(z.string()),
+const questionSearchSchema = z.object({
+  query,
+  sort,
+  page,
+  filter: z.enum(['all', 'open', 'closed', 'solved'], { message: '잘못된 필터입니다.' }).default('all'),
 });
+const questionPostSchema = z.object({ title, content, topicSlugs });
+const questionEditSchema = questionPostSchema;
+const questionAnswerPostSchema = z.object({ title, content });
+const questionAnswerEditSchema = questionAnswerPostSchema;
 
-export const answerPostSchema = z.object({
-  title: z.string().min(1).max(128),
-  content: z.string().min(10).max(2048),
-});
+export {
+  questionSearchSchema,
+  questionPostSchema,
+  questionEditSchema,
+  questionAnswerPostSchema,
+  questionAnswerEditSchema,
+};

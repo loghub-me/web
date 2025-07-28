@@ -1,11 +1,23 @@
 import { z } from 'zod';
 
-export const usernameSchema = z.object({
+const usernameRegex = /^@[a-zA-Z0-9]+$/;
+const usernameSchema = z.object({
   username: z
-    .string()
+    .string({ message: '유저네임은 문자열이어야 합니다.' })
     .trim()
-    .startsWith('@') // startsWith('@')
-    .transform((value) => value.replace('@', '')), // replace('@', '')
+    .regex(usernameRegex, { message: '유저네임은 영문자와 숫자로만 이루어져야 합니다.' })
+    .startsWith('@', { message: '유저네임은 @로 시작해야 합니다.' })
+    .transform((value) => value.replace('@', '')),
 });
-export const slugSchema = z.object({ slug: z.string().trim() });
-export const compositeKeySchema = usernameSchema.merge(slugSchema);
+
+const slugRegex = /^[a-zA-Z0-9-]+$/;
+const slugSchema = z.object({
+  slug: z
+    .string({ message: '슬러그는 문자열이어야 합니다.' })
+    .regex(slugRegex, { message: '슬러그는 영문자, 숫자, 하이픈(-)으로만 이루어져야 합니다.' })
+    .trim(),
+});
+
+const compositeKeySchema = usernameSchema.merge(slugSchema);
+
+export { usernameSchema, slugSchema, compositeKeySchema };

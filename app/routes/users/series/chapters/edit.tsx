@@ -9,8 +9,8 @@ import { SeriesChapterEditDialog, SeriesChapterEditForm, SeriesChapterRemoveDial
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
+import { sequenceZod } from '~/schemas/fields';
 import { seriesChapterEditSchema } from '~/schemas/series';
-import { sequenceZod } from '~/schemas/zod';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug, sequence } = parseParams(params, compositeKeySchema.extend({ sequence: sequenceZod }));

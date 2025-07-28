@@ -1,6 +1,6 @@
 import { clientAPI } from './instance';
 import { z } from 'zod';
-import { type articleCommentPostSchema, articleEditSchema, articlePostSchema } from '~/schemas/article';
+import type { articleCommentPostSchema, articleEditSchema, articlePostSchema } from '~/schemas/article';
 
 export const postArticle = (json: z.infer<typeof articlePostSchema>) =>
   clientAPI.post(`articles`, { json }).json<RedirectResponseBody>();

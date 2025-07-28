@@ -1,3 +1,7 @@
 import { z } from 'zod';
 
-export const topicSearchSchema = z.object({ view: z.enum(['articles', 'series', 'questions']).default('articles') });
+const topicSearchSchema = z.object({
+  view: z.enum(['articles', 'series', 'questions'], { message: '잘못된 view 값입니다.' }).default('articles'),
+});
+
+export { topicSearchSchema };

@@ -13,10 +13,10 @@ import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
 import { handleMessageError } from '~/lib/error';
-import type { questionPostSchema } from '~/schemas/question';
+import type { questionEditSchema } from '~/schemas/question';
 
 interface QuestionEditFormProps {
-  form: UseFormReturn<z.infer<typeof questionPostSchema>>;
+  form: UseFormReturn<z.infer<typeof questionEditSchema>>;
   id: number;
 }
 
@@ -24,7 +24,7 @@ export default function QuestionEditForm({ form, id }: Readonly<QuestionEditForm
   const navigate = useNavigate();
   const [topics, setTopics] = useState(getTopicBySlugs(form.getValues('topicSlugs')));
 
-  function onSubmit(values: z.infer<typeof questionPostSchema>) {
+  function onSubmit(values: z.infer<typeof questionEditSchema>) {
     editQuestion(id, values)
       .then(({ pathname, message }) => {
         toast.success(message);

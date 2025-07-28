@@ -10,7 +10,7 @@ import {
 } from '~/components/series';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
-import { sequenceZod } from '~/schemas/zod';
+import { sequenceZod } from '~/schemas/fields';
 
 export type SeriesDetailLayoutContextProps = { series: SeriesDetail; chapter?: SeriesChapterDetail };
 
@@ -32,7 +32,7 @@ export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps)
   const { series, chapter } = loaderData;
 
   return (
-    <main className="pt-16 min-h-screen flex flex-col md:flex-row">
+    <main className="pt-16 min-h-screen flex flex-col md:flex-row bg-card">
       <SeriesDetailAside>
         <SeriesDetailHeader {...series} />
         <SeriesDetailContent {...series} />

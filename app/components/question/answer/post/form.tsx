@@ -16,7 +16,7 @@ import { UserAvatar } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
 import { cn } from '~/lib/utils';
-import { answerPostSchema } from '~/schemas/question';
+import { questionAnswerPostSchema } from '~/schemas/question';
 
 interface QuestionAnswerPostFormProps {
   questionId: number;
@@ -26,8 +26,8 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
   const { session } = useAuth();
   const navigate = useNavigate();
   const easyMDERef = useRef<EasyMDE>(null);
-  const form = useForm<z.infer<typeof answerPostSchema>>({
-    resolver: zodResolver(answerPostSchema),
+  const form = useForm<z.infer<typeof questionAnswerPostSchema>>({
+    resolver: zodResolver(questionAnswerPostSchema),
     defaultValues: { content: '' },
   });
   const hasError = form.formState.errors.content || form.formState.errors.title;
@@ -38,7 +38,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
     form.handleSubmit(onSubmit)(e);
   }
 
-  function onSubmit(values: z.infer<typeof answerPostSchema>) {
+  function onSubmit(values: z.infer<typeof questionAnswerPostSchema>) {
     postAnswer(questionId, values)
       .then(({ pathname, message }) => {
         toast.success(message);

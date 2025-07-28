@@ -1,11 +1,22 @@
 import { z } from 'zod';
-import { emailZod as email, nicknameZod as nickname, otpZod as otp, usernameZod as username } from '~/schemas/zod';
+import zodFields from '~/schemas/fields';
 
-export const joinRequestSchema = z.object({ email, username, nickname });
-export const loginRequestSchema = z.object({ email });
+const { email, nickname, otp, username } = zodFields;
 
-export const joinConfirmSchema = z.object({ email, otp });
-export const loginConfirmSchema = z.object({ email, otp });
+const joinRequestSchema = z.object({ email, username, nickname });
+const loginRequestSchema = z.object({ email });
 
-export const joinConfirmSearchParamsSchema = z.object({ email });
-export const loginConfirmSearchParamsSchema = z.object({ email });
+const joinConfirmSchema = z.object({ email, otp });
+const loginConfirmSchema = z.object({ email, otp });
+
+const joinConfirmSearchParamsSchema = z.object({ email });
+const loginConfirmSearchParamsSchema = z.object({ email });
+
+export {
+  joinRequestSchema,
+  loginRequestSchema,
+  joinConfirmSchema,
+  loginConfirmSchema,
+  joinConfirmSearchParamsSchema,
+  loginConfirmSearchParamsSchema,
+};

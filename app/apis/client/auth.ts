@@ -2,7 +2,7 @@ import { jwtDecode } from 'jwt-decode';
 import ky, { type KyResponse } from 'ky';
 import { z } from 'zod';
 import { clientAPI, extendClientAPIConfig } from '~/apis/client/instance';
-import { joinConfirmSchema, joinRequestSchema, loginConfirmSchema, loginRequestSchema } from '~/schemas/auth';
+import type { joinConfirmSchema, joinRequestSchema, loginConfirmSchema, loginRequestSchema } from '~/schemas/auth';
 
 export const requestJoin = (json: z.infer<typeof joinRequestSchema>) => clientAPI.post('auth/join/request', { json });
 export const requestLogin = (json: z.infer<typeof loginRequestSchema>) =>
@@ -43,6 +43,7 @@ function extractSession(res: KyResponse): Session {
     email: decodedToken.email,
     username: decodedToken.username,
     nickname: decodedToken.nickname,
+    joinedAt: decodedToken.joinedAt,
     role: decodedToken.role,
   } as Session;
 }

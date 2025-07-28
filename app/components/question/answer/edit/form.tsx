@@ -16,7 +16,7 @@ import { UserAvatar } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { handleMessageError } from '~/lib/error';
 import { cn } from '~/lib/utils';
-import { answerPostSchema } from '~/schemas/question';
+import { questionAnswerEditSchema } from '~/schemas/question';
 
 interface QuestionAnswerEditFormProps {
   question: { id: number };
@@ -36,8 +36,8 @@ export default function QuestionAnswerEditForm({
   const { session } = useAuth();
   const navigate = useNavigate();
   const easyMDERef = useRef<EasyMDE>(null);
-  const form = useForm<z.infer<typeof answerPostSchema>>({
-    resolver: zodResolver(answerPostSchema),
+  const form = useForm<z.infer<typeof questionAnswerEditSchema>>({
+    resolver: zodResolver(questionAnswerEditSchema),
     defaultValues: { title: answer.title, content: answer.content.markdown },
   });
   const hasError = form.formState.errors.content || form.formState.errors.title;
@@ -48,7 +48,7 @@ export default function QuestionAnswerEditForm({
     form.handleSubmit(onSubmit)(e);
   }
 
-  function onSubmit(values: z.infer<typeof answerPostSchema>) {
+  function onSubmit(values: z.infer<typeof questionAnswerEditSchema>) {
     editAnswer(question.id, answer.id, values)
       .then(({ pathname, message }) => {
         toast.success(message);

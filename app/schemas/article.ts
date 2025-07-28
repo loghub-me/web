@@ -1,20 +1,26 @@
-import { commentContentZod, idZod, pageZod, queryZod, sortZod } from './zod';
 import { z } from 'zod';
+import zodFields from '~/schemas/fields';
 
-export const articleSearchSchema = z.object({ query: queryZod, sort: sortZod, page: pageZod });
+const { content, id, page, query, sort, thumbnail, title, topicSlugs } = zodFields;
 
-export const articlePostSchema = z.object({
-  title: z.string().min(1).max(128),
-  content: z.string().min(10).max(2048),
-  thumbnail: z.string(),
-  topicSlugs: z.array(z.string()),
+const articleSearchSchema = z.object({ query, sort, page });
+const articlePostSchema = z.object({ title, content, thumbnail, topicSlugs });
+const articleEditSchema = z.object({ title, content, thumbnail, topicSlugs });
+const articleCommentPageSchema = z.object({ commentPage: page });
+const articleCommentPostSchema = z.object({
+  content: z
+    .string({ message: '댓글 내용은 문자열이어야 합니다.' })
+    .trim()
+    .min(1, { message: '댓글을 입력해주세요.' })
+    .max(255, { message: '댓글은 최대 255자까지 입력할 수 있습니다.' }),
+  articleId: id,
+  parentId: id.optional(),
 });
-export const articleEditSchema = articlePostSchema;
 
-export const articleCommentPageSchema = z.object({ commentPage: pageZod });
-
-export const articleCommentPostSchema = z.object({
-  content: commentContentZod,
-  articleId: idZod,
-  parentId: idZod.optional(),
-});
+export {
+  articleSearchSchema,
+  articlePostSchema,
+  articleEditSchema,
+  articleCommentPageSchema,
+  articleCommentPostSchema,
+};

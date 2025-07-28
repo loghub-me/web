@@ -1,22 +1,32 @@
 import { z } from 'zod';
-import { nicknameZod, pageZod, usernameZod } from '~/schemas/zod';
+import zodFields from '~/schemas/fields';
 
-export const userStarPageSchema = z.object({ page: pageZod });
-export const userActivitySearchSchema = z.object({
-  date: z.coerce.date().optional(),
+const { nickname, page, username } = zodFields;
+
+const userStarPageSchema = z.object({ page });
+const userActivitySearchSchema = z.object({
+  date: z.coerce.date({ message: '올바르지 않은 날짜 형식입니다.' }),
 });
 
-export const usernameUpdateSchema = z.object({
-  oldUsername: usernameZod,
-  newUsername: usernameZod,
+const usernameUpdateSchema = z.object({
+  oldUsername: username,
+  newUsername: username,
 });
 
-export const userProfileUpdateSchema = z.object({
-  nickname: nicknameZod,
-  readme: z.string().max(512),
+const userProfileUpdateSchema = z.object({
+  nickname: nickname,
+  readme: z.string({ message: 'README' }).max(512),
 });
 
-export const userPrivacyUpdateSchema = z.object({
+const userPrivacyUpdateSchema = z.object({
   emailVisible: z.boolean(),
   starVisible: z.boolean(),
 });
+
+export {
+  userStarPageSchema,
+  userActivitySearchSchema,
+  usernameUpdateSchema,
+  userProfileUpdateSchema,
+  userPrivacyUpdateSchema,
+};
