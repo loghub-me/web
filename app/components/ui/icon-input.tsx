@@ -8,8 +8,8 @@ function IconInput(props: React.ComponentProps<'input'> & { icon: LucideIcon }) 
 
   return (
     <div className="relative w-full h-9">
-      <Icon className="absolute top-2.75 left-3.25 size-3.5 text-muted-foreground" />
-      <Input {...props} className={cn('absolute pl-9.5', props.className)} />
+      <Icon className="absolute z-10 top-2.5 left-3 size-4 text-muted-foreground" />
+      <Input {...props} className={cn('absolute pl-9', props.className)} />
     </div>
   );
 }

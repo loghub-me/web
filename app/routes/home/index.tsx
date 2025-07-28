@@ -2,14 +2,17 @@ import Logo from '~/components/global/logo';
 import {
   ContentList,
   ContentListItem,
-  FeatureTabsContent,
+  FeatureBotAnswer,
+  FeatureGrassCalendar,
+  FeatureMarkdownEditor,
   FeatureTabsTrigger,
   HomeAuthLinks,
   HomeDescription,
   HomeManualLink,
   HomeTopicIcons,
 } from '~/components/home';
-import { Tabs, TabsList } from '~/components/ui/tabs';
+import FeatureAutoFill from '~/components/home/feature/auto-fill';
+import { Tabs, TabsContent, TabsList } from '~/components/ui/tabs';
 import { CONTENTS, FEATURES } from '~/constants/home';
 
 export default function HomeIndex() {
@@ -42,15 +45,24 @@ export default function HomeIndex() {
             이 기능들은 사용자 경험을 향상시키고, 더 나은 콘텐츠를 생성하는 데 도움을 줍니다.
           </p>
         </div>
-        <Tabs defaultValue={FEATURES[0].value} className="w-full flex flex-col lg:flex-row gap-4">
+        <Tabs defaultValue={FEATURES[0].value} className="flex flex-col lg:flex-row gap-4">
           <TabsList className="lg:max-w-1/3 flex flex-col gap-1 items-center">
             {FEATURES.map((feature) => (
               <FeatureTabsTrigger key={feature.value} {...feature} />
             ))}
           </TabsList>
-          {FEATURES.map((feature) => (
-            <FeatureTabsContent key={feature.value} {...feature} />
-          ))}
+          <TabsContent value={'markdown-editor'}>
+            <FeatureMarkdownEditor />
+          </TabsContent>
+          <TabsContent value={'bot-answer'}>
+            <FeatureBotAnswer />
+          </TabsContent>
+          <TabsContent value={'auto-fill'}>
+            <FeatureAutoFill />
+          </TabsContent>
+          <TabsContent value={'grass-calendar'}>
+            <FeatureGrassCalendar />
+          </TabsContent>
         </Tabs>
       </section>
     </main>

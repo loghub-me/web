@@ -107,10 +107,10 @@ export default function EasyMDEEditor({
       </div>
       <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">
         <ToggleGroup type={'single'} value={mode} onValueChange={onModeChange}>
-          <ToggleGroupItem value={'update'}>
+          <ToggleGroupItem value={'edit'}>
             <PencilIcon />
           </ToggleGroupItem>
-          <ToggleGroupItem value={'preview-update'}>
+          <ToggleGroupItem value={'preview-edit'}>
             <Columns2Icon />
           </ToggleGroupItem>
           <ToggleGroupItem value={'preview'}>

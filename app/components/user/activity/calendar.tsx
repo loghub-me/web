@@ -58,7 +58,7 @@ export default function UserActivityCalendar({ username, summaries }: Readonly<U
   }, [summaries, username]);
 
   return (
-    <div className="grid grid-flow-col grid-rows-7 auto-cols-max gap-1 p-2 w-full bg-card border rounded-xl overflow-x-auto">
+    <div className="grid grid-flow-col grid-rows-7 gap-1 auto-cols-max p-2 w-full max-w-268 h-38 bg-card border rounded-xl overflow-x-auto">
       {cells}
     </div>
   );

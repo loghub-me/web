@@ -11,7 +11,7 @@ export default function TopicTag({ topic, remove }: Readonly<TopicTagProps>) {
   return (
     <Badge
       variant="outline"
-      className="h-7 rounded-sm p-1 cursor-pointer transition-colors hover:bg-accent"
+      className="h-7 rounded-sm p-1 cursor-pointer transition-colors bg-card hover:bg-accent"
       onClick={remove}
     >
       <TopicImage topic={topic} />

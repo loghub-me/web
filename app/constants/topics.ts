@@ -32,3 +32,8 @@ export function searchTopics(query: string) {
   const lowerQuery = query.toLowerCase();
   return TOPICS.filter((topic) => `${topic.slug} ${topic.name}`.toLowerCase().includes(lowerQuery));
 }
+
+export function getRandomTopics(count = 5) {
+  const shuffled = [...TOPICS].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}

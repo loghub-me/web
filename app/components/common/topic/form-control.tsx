@@ -11,9 +11,10 @@ import { cn } from '~/lib/utils';
 interface TopicSlugsFormControlProps {
   topics: Topic[];
   setTopics: React.Dispatch<React.SetStateAction<Topic[]>>;
+  showLabel?: boolean;
 }
 
-function TopicSlugsFormControl({ topics, setTopics }: Readonly<TopicSlugsFormControlProps>) {
+function TopicSlugsFormControl({ topics, setTopics, showLabel = true }: Readonly<TopicSlugsFormControlProps>) {
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
 
@@ -37,8 +38,8 @@ function TopicSlugsFormControl({ topics, setTopics }: Readonly<TopicSlugsFormCon
 
   return (
     <div className="space-y-2">
-      <FormLabel>토픽</FormLabel>
-      <Command>
+      {showLabel && <FormLabel>토픽</FormLabel>}
+      <Command className="rounded-md">
         <CommandInput icon={TagIcon} placeholder="토픽을 입력해주세요" value={query} onValueChange={setQuery} />
         <CommandList className={cn(focused ? 'block' : 'hidden')}>
           <CommandEmpty>토픽을 찾을 수 없습니다.</CommandEmpty>
