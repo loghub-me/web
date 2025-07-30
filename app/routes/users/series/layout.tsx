@@ -12,8 +12,6 @@ import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
 import zodFields from '~/schemas/fields';
 
-export type SeriesDetailLayoutContextProps = { series: SeriesDetail; chapter?: SeriesChapterDetail };
-
 export async function loader({ params }: Route.LoaderArgs) {
   const { sequence: sequenceZod } = zodFields;
 

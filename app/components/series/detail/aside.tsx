@@ -3,5 +3,9 @@ interface SeriesDetailAsideProps {
 }
 
 export default function SeriesDetailAside({ children }: Readonly<SeriesDetailAsideProps>) {
-  return <aside className="md:max-w-96 md:min-w-96 w-full space-y-4 border-r">{children}</aside>;
+  return (
+    <aside className="pb-4 md:max-w-96 md:min-w-96 w-full space-y-4 border-b md:border-b-0 md:border-r">
+      {children}
+    </aside>
+  );
 }

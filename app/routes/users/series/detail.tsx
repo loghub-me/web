@@ -37,11 +37,11 @@ function SeriesDetailComments({ seriesId, currentPage }: Readonly<SeriesDetailCo
   const { pathname } = useLocation();
 
   return (
-    <div>
-      <div className="p-6 border-b">
+    <div className="space-y-4">
+      <div className="border-b">
         <SeriesReviewForm seriesId={seriesId} queryKey={queryKey} />
       </div>
-      <div className="p-6 space-y-2">
+      <div className="space-y-2">
         <SeriesReviewList>
           {status === 'pending' && <ReviewSkeleton size={2} />}
           {reviews?.page.totalPages === 0 && (

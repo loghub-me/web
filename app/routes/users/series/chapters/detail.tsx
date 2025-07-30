@@ -1,10 +1,9 @@
 import { data, useOutletContext } from 'react-router';
 import { SeriesChapterDetailContent, SeriesChapterDetailFooter } from '~/components/series';
-import { ErrorMessage } from '~/constants/error-messages';
-import type { SeriesDetailLayoutContextProps } from '~/routes/users/series/layout';
+import { ErrorMessage } from '~/constants/messages';
 
 export default function SeriesChapterDetailRoute() {
-  const { series, chapter } = useOutletContext<SeriesDetailLayoutContextProps>();
+  const { series, chapter } = useOutletContext<{ series: SeriesDetail; chapter?: SeriesChapterDetail }>();
 
   if (!chapter) {
     throw data(ErrorMessage.UNKNOWN, { status: 404 });
