@@ -24,10 +24,7 @@ export default function UserPrivacyUpdateForm({ privacy }: Readonly<UserPrivacyU
 
   function onSubmit(values: z.infer<typeof userPrivacyUpdateSchema>) {
     updateSelfPrivacy(values)
-      .then(({ message }) => {
-        toast.success(message);
-        navigate(0);
-      })
+      .then(({ message }) => toast.success(message))
       .catch((err) => handleFormError(err, form.setError));
   }
 

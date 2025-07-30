@@ -5,6 +5,7 @@ const { content, id, page, query, sort, thumbnail, title, topicSlugs } = zodFiel
 
 const seriesSearchSchema = z.object({ query, sort, page });
 const seriesPostSchema = z.object({ title, content, thumbnail, topicSlugs });
+const seriesEditSchema = seriesPostSchema;
 const seriesChapterEditSchema = z.object({ title, content });
 const seriesReviewPageSchema = z.object({ reviewPage: page });
 const seriesReviewPostSchema = z.object({
@@ -24,6 +25,7 @@ const seriesReviewPostSchema = z.object({
 export {
   seriesSearchSchema,
   seriesPostSchema,
+  seriesEditSchema,
   seriesChapterEditSchema,
   seriesReviewPageSchema,
   seriesReviewPostSchema,

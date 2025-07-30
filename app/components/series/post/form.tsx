@@ -11,7 +11,7 @@ import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { IconInput } from '~/components/ui/icon-input';
 import { Textarea } from '~/components/ui/textarea';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { seriesPostSchema } from '~/schemas/series';
 
 interface SeriesPostFormProps {
@@ -28,7 +28,7 @@ export default function SeriesPostForm({ form }: Readonly<SeriesPostFormProps>) 
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   useEffect(() => {

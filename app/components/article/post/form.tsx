@@ -12,7 +12,7 @@ import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { articlePostSchema } from '~/schemas/article';
 
 interface ArticlePostFormProps {
@@ -29,7 +29,7 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   useEffect(() => {

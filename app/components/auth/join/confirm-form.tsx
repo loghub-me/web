@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { confirmJoin } from '~/apis/client/auth';
+import { confirmJoin, extractSessionFromToken } from '~/apis/client/auth';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
@@ -27,6 +27,7 @@ export default function JoinConfirmForm({ email }: Readonly<JoinConfirmFormProps
 
   function onSubmit(values: z.infer<typeof joinConfirmSchema>) {
     confirmJoin(values)
+      .then(extractSessionFromToken)
       .then((session) => {
         registerSession(session);
         toast.success('회원가입이 성공적으로 완료되었습니다!');

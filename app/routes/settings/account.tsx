@@ -1,4 +1,4 @@
-import { MailIcon, UserXIcon } from 'lucide-react';
+import { MailIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { UsernameUpdateDialog, UsernameUpdateForm } from '~/components/user';
@@ -31,11 +31,6 @@ export default function SettingAccountRoute() {
               <UsernameUpdateForm />
             </UsernameUpdateDialog>
           </div>
-        </div>
-        <div className="flex justify-end gap-2">
-          <Button variant={'destructive'}>
-            <UserXIcon /> 탈퇴하기
-          </Button>
         </div>
       </main>
     )

@@ -14,7 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '~/component
 import { IconInput } from '~/components/ui/icon-input';
 import { UserAvatar } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { cn } from '~/lib/utils';
 import { questionAnswerPostSchema } from '~/schemas/question';
 
@@ -46,7 +46,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
         form.reset();
         easyMDERef.current?.value('');
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   return (

@@ -5,7 +5,7 @@ const { nickname, page, username } = zodFields;
 
 const userStarPageSchema = z.object({ page });
 const userActivitySearchSchema = z.object({
-  date: z.coerce.date({ message: '올바르지 않은 날짜 형식입니다.' }),
+  date: z.coerce.date({ message: '올바르지 않은 날짜 형식입니다.' }).optional(),
 });
 
 const usernameUpdateSchema = z.object({
@@ -14,8 +14,8 @@ const usernameUpdateSchema = z.object({
 });
 
 const userProfileUpdateSchema = z.object({
-  nickname: nickname,
-  readme: z.string({ message: 'README' }).max(512),
+  nickname,
+  readme: z.string({ message: '소개는 문자열이어야 합니다.' }).max(512).optional(),
 });
 
 const userPrivacyUpdateSchema = z.object({

@@ -5,16 +5,20 @@ const id = z
   .int({ message: '아이디는 정수여야 합니다.' })
   .positive({ message: '아이디는 양수여야 합니다.' });
 const email = z.string({ message: '이메일은 문자열이어야 합니다.' }).email('올바른 이메일 형식이 아닙니다.').trim();
+const usernameRegex = /^[a-zA-Z0-9]+$/;
 const username = z
   .string({ message: '유저네임은 문자열이어야 합니다.' })
   .trim()
   .min(4, '유저네임은 4글자 이상이어야 합니다.')
-  .max(12, '유저네임은 12글자 이하여야 합니다.');
+  .max(12, '유저네임은 12글자 이하여야 합니다.')
+  .regex(usernameRegex, { message: '유저네임은 영문자와 숫자로만 이루어져야 합니다.' });
+const nicknameRegex = /^[a-zA-Z0-9가-힣_]+$/;
 const nickname = z
   .string({ message: '닉네임은 문자열이어야 합니다.' })
   .trim()
   .min(2, '닉네임은 2글자 이상이어야 합니다.')
-  .max(12, '닉네임은 12글자 이하여야 합니다.');
+  .max(12, '닉네임은 12글자 이하여야 합니다.')
+  .regex(nicknameRegex, { message: '닉네임은 영문자, 숫자, 한글, 밑줄(_)로만 이루어져야 합니다.' });
 
 const otp = z
   .string({ message: '인증번호는 문자열이어야 합니다.' })
@@ -43,8 +47,8 @@ const title = z
 const content = z
   .string({ message: '내용은 문자열이어야 합니다.' })
   .min(10, { message: '내용은 10글자 이상이어야 합니다.' })
-  .max(2048, { message: '내용은 2048글자 이하여야 합니다.' });
-const thumbnailRegex = /^[0-9]+\/[a-zA-Z0-9_-]+\.webp$/;
+  .max(8192, { message: '내용은 8192글자 이하여야 합니다.' });
+const thumbnailRegex = /^(default|[0-9]+)\/[a-zA-Z0-9_-]+\.webp$/;
 const thumbnail = z
   .string({ message: '썸네일의 path는 문자열이어야 합니다.' })
   .regex(thumbnailRegex, { message: '썸네일의 path는 올바른 형식이어야 합니다.' });

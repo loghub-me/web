@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UploadIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { refreshToken } from '~/apis/client/auth';
+import { extractSessionFromToken, refreshToken } from '~/apis/client/auth';
 import { updateSelfProfile } from '~/apis/client/user';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
@@ -20,7 +19,6 @@ interface UserProfileUpdateFormProps {
 
 export default function UserProfileUpdateForm({ profile }: Readonly<UserProfileUpdateFormProps>) {
   const { registerSession, unregisterSession } = useAuth();
-  const navigate = useNavigate();
   const form = useForm<z.infer<typeof userProfileUpdateSchema>>({
     resolver: zodResolver(userProfileUpdateSchema),
     defaultValues: profile,
@@ -30,8 +28,7 @@ export default function UserProfileUpdateForm({ profile }: Readonly<UserProfileU
     updateSelfProfile(values)
       .then(({ message }) => {
         toast.success(message);
-        navigate(0);
-        refreshToken().then(registerSession).catch(unregisterSession);
+        refreshToken().then(extractSessionFromToken).then(registerSession).catch(unregisterSession);
       })
       .catch((err) => handleFormError(err, form.setError));
   }

@@ -8,7 +8,7 @@ import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { IconInput } from '~/components/ui/icon-input';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { seriesChapterEditSchema } from '~/schemas/series';
 
 interface SeriesChapterEditFormProps {
@@ -30,7 +30,7 @@ export default function SeriesChapterEditForm({
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   return (

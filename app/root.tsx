@@ -45,7 +45,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <GlobalHeader />
             {children}
             <GlobalFooter />
-            <Toaster position={'top-center'} richColors />
+            <Toaster position={'top-center'} expand={true} richColors />
           </AuthProvider>
         </QueryProvider>
         <ScrollRestoration />

@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~
 import { Textarea } from '~/components/ui/textarea';
 import { UserLink } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { seriesReviewPostSchema } from '~/schemas/series';
 
 interface SeriesReviewFormProps {
@@ -38,12 +38,12 @@ export default function SeriesReviewForm({ seriesId, queryKey }: Readonly<Series
 
         queryClient.invalidateQueries({ queryKey });
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   if (!session) {
     return (
-      <p className="text-sm text-center text-muted-foreground">
+      <p className="pb-4 text-sm text-center text-muted-foreground">
         <Link to={'/login'} className="text-primary underline hover:text-primary/80">
           로그인
         </Link>{' '}

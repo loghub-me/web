@@ -3,6 +3,7 @@ interface Session {
   email: string;
   username: string;
   nickname: string;
+  joinedAt: string;
   role: UserRole;
 }
 
@@ -14,6 +15,7 @@ interface CustomJwtPayload {
   email: string;
   username: string;
   nickname: string;
+  joinedAt: string;
   role: UserRole;
 }
 

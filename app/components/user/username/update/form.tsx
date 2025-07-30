@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { refreshToken } from '~/apis/client/auth';
+import { extractSessionFromToken, refreshToken } from '~/apis/client/auth';
 import { updateSelfUsername } from '~/apis/client/user';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
@@ -31,8 +31,8 @@ export default function UsernameUpdateForm() {
     updateSelfUsername(values)
       .then(({ message }) => {
         toast.success(message);
-        navigate(0);
-        refreshToken().then(registerSession).catch(unregisterSession);
+        navigate('/settings/account');
+        refreshToken().then(extractSessionFromToken).then(registerSession).catch(unregisterSession);
       })
       .catch((err) => handleFormError(err, form.setError));
   }

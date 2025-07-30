@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { getTopicBySlugs } from '~/constants/topics';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import type { questionEditSchema } from '~/schemas/question';
 
 interface QuestionEditFormProps {
@@ -30,7 +30,7 @@ export default function QuestionEditForm({ form, id }: Readonly<QuestionEditForm
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   useEffect(() => {

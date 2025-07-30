@@ -11,7 +11,7 @@ import { Textarea } from '~/components/ui/textarea';
 import { UserInline, UserLink } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
 import { useReply } from '~/hooks/use-reply';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { articleCommentPostSchema } from '~/schemas/article';
 
 interface ArticleCommentFormProps {
@@ -41,7 +41,7 @@ export default function ArticleCommentForm({ articleId, queryKey }: Readonly<Art
         }
         queryClient.invalidateQueries({ queryKey });
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   if (!session) {

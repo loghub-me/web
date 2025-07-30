@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import { confirmLogin } from '~/apis/client/auth';
+import { confirmLogin, extractSessionFromToken } from '~/apis/client/auth';
 import { Button } from '~/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
@@ -27,6 +27,7 @@ export default function LoginConfirmForm({ email }: Readonly<LoginConfirmFormPro
 
   function onSubmit(values: z.infer<typeof loginConfirmSchema>) {
     confirmLogin(values)
+      .then(extractSessionFromToken)
       .then((session: Session) => {
         registerSession(session);
         toast.success('로그인이 성공적으로 완료되었습니다!');

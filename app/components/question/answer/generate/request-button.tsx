@@ -1,5 +1,5 @@
 import { BotIcon, XIcon } from 'lucide-react';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import { requestGenerateAnswer } from '~/apis/client/question';
 import { Button } from '~/components/ui/button';
@@ -22,19 +22,19 @@ interface QuestionAnswerGenerateRequestButtonProps {
 export default function QuestionAnswerGenerateRequestButton({
   id,
 }: Readonly<QuestionAnswerGenerateRequestButtonProps>) {
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   function onRequestButtonClick() {
     requestGenerateAnswer(id)
       .then(({ message }) => {
         toast.success(message);
-        navigate(0);
+        setOpen(false);
       })
       .catch(handleMessageError);
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={'outline'} size={'multi'}>
           <BotIcon />

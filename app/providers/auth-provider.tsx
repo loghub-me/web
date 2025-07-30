@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { refreshToken } from '~/apis/client/auth';
+import { extractSessionFromToken, refreshToken } from '~/apis/client/auth';
 
 type AuthContextType = Readonly<{
   status: AuthStatus;
@@ -25,7 +25,7 @@ export default function AuthProvider({ children }: Readonly<{ children: React.Re
   }, []);
 
   useEffect(() => {
-    refreshToken().then(registerSession).catch(unregisterSession);
+    refreshToken().then(extractSessionFromToken).then(registerSession).catch(unregisterSession);
   }, [registerSession, unregisterSession]);
 
   return (

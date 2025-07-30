@@ -9,34 +9,48 @@ export const requestLogin = (json: z.infer<typeof loginRequestSchema>) =>
   clientAPI.post('auth/login/request', { json });
 
 export const confirmJoin = (json: z.infer<typeof joinConfirmSchema>) =>
-  clientAPI.post('auth/join/confirm', { json }).then(extractSession);
+  clientAPI
+    .post('auth/join/confirm', { json })
+    .then(extractTokenFromResponse)
+    .then((token) => {
+      setAuthorizationHeader(token);
+      return token;
+    });
 export const confirmLogin = (json: z.infer<typeof loginConfirmSchema>) =>
-  clientAPI.post(`auth/login/confirm`, { json }).then(extractSession);
+  clientAPI
+    .post(`auth/login/confirm`, { json })
+    .then(extractTokenFromResponse)
+    .then((token) => {
+      setAuthorizationHeader(token);
+      return token;
+    });
 
 export const refreshToken = () =>
   ky
     .post(`${import.meta.env.VITE_API_HOST}/auth/refresh`, { credentials: 'include', keepalive: true })
-    .then(extractSession);
-
-export const logout = () =>
-  clientAPI
-    .post('auth/logout')
-    .json<MessageResponseBody>()
-    .then((body) => {
-      extendClientAPIConfig({ headers: {} });
-      return body;
+    .then(extractTokenFromResponse)
+    .then((token) => {
+      setAuthorizationHeader(token);
+      return token;
     });
 
-function extractSession(res: KyResponse): Session {
-  const Authorization = res.headers.get('Authorization');
+export const logout = () => clientAPI.post('auth/logout').json<MessageResponseBody>();
 
-  if (!Authorization || !Authorization.startsWith('Bearer ')) {
-    throw new Error();
+function extractTokenFromResponse(res: KyResponse): string {
+  const authHeader = res.headers.get('Authorization');
+
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    throw new Error('No valid Authorization header found');
   }
 
-  extendClientAPIConfig({ headers: { Authorization } });
+  return authHeader.slice(7);
+}
 
-  const token = Authorization.slice(7);
+function setAuthorizationHeader(token: string) {
+  extendClientAPIConfig({ headers: { Authorization: `Bearer ${token}` } });
+}
+
+export function extractSessionFromToken(token: string) {
   const decodedToken = jwtDecode<CustomJwtPayload>(token);
   return {
     id: decodedToken.sub,

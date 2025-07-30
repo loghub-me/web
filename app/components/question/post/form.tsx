@@ -11,7 +11,7 @@ import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { questionPostSchema } from '~/schemas/question';
 
 interface QuestionPostFormProps {
@@ -28,7 +28,7 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   useEffect(() => {

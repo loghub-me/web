@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { IconInput } from '~/components/ui/icon-input';
 import { Textarea } from '~/components/ui/textarea';
 import { getTopicBySlugs } from '~/constants/topics';
-import { handleMessageError } from '~/lib/error';
+import { handleFormError } from '~/lib/error';
 import { seriesEditSchema } from '~/schemas/series';
 
 interface SeriesEditFormProps {
@@ -30,7 +30,7 @@ export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEd
         toast.success(message);
         navigate(pathname);
       })
-      .catch(handleMessageError);
+      .catch((err) => handleFormError(err, form.setError));
   }
 
   useEffect(() => {
