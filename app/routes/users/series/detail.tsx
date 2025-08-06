@@ -6,7 +6,6 @@ import { CommentSkeleton as ReviewSkeleton } from '~/components/common/skeletons
 import PageNav from '~/components/search/page-nav';
 import { SeriesReviewForm, SeriesReviewList, SeriesReviewListItem } from '~/components/series';
 import { parseSearchParams } from '~/lib/parse';
-import type { SeriesDetailLayoutContextProps } from '~/routes/users/series/layout';
 import { seriesReviewPageSchema } from '~/schemas/series';
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -17,7 +16,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
 export default function SeriesDetailRoute({ loaderData }: Route.ComponentProps) {
   const { reviewPage } = loaderData;
-  const { series } = useOutletContext<SeriesDetailLayoutContextProps>();
+  const { series } = useOutletContext<{ series: SeriesDetail }>();
 
   return (
     <main className="p-4 w-full">
