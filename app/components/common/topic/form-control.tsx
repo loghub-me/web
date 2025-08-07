@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { TopicImage, TopicTag } from '~/components/topic';
 import { Command, CommandEmpty, CommandInput, CommandItem, CommandList } from '~/components/ui/command';
 import { FormLabel } from '~/components/ui/form';
-import { ErrorMessage } from '~/constants/error-messages';
+import { ErrorMessage } from '~/constants/messages';
 import { TOPICS } from '~/constants/topics';
 import { cn } from '~/lib/utils';
 

@@ -2,7 +2,7 @@ import { HTTPError } from 'ky';
 import type { UseFormSetError } from 'react-hook-form';
 import { toast } from 'sonner';
 import { refreshToken } from '~/apis/client/auth';
-import { ErrorMessage } from '~/constants/error-messages';
+import { ErrorMessage } from '~/constants/messages';
 
 export async function handleMessageError(err: Error) {
   if (!(err instanceof HTTPError)) {

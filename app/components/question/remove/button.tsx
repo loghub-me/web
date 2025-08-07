@@ -25,7 +25,7 @@ export default function QuestionRemoveButton({ id }: Readonly<QuestionRemoveButt
   function onRemoveButtonClick() {
     removeQuestion(id)
       .then(({ message }) => {
-        toast.success(message);
+        toast.success(message, { icon: <TrashIcon className="size-4" /> });
         navigate('/search/questions');
       })
       .catch(handleMessageError);

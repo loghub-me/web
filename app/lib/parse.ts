@@ -1,6 +1,6 @@
 import { data } from 'react-router';
 import { z } from 'zod';
-import { ErrorMessage } from '~/constants/error-messages';
+import { ErrorMessage } from '~/constants/messages';
 
 export function parseParams<S extends z.ZodObject<any, any>>(params: object, schema: S): z.infer<S> {
   const parsedParams = schema.safeParse(params);

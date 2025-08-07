@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { addArticleStar, existsArticleStar, removeArticleStar } from '~/apis/client/article';
 import StarIcon from '~/components/common/icon/star';
 import { Button } from '~/components/ui/button';
-import { ErrorMessage } from '~/constants/error-messages';
+import { ErrorMessage } from '~/constants/messages';
 import { useAuth } from '~/hooks/use-auth';
 
 interface ArticleStarButtonProps {

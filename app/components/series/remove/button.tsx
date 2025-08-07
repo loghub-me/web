@@ -25,7 +25,7 @@ export default function SeriesRemoveButton({ id }: Readonly<SeriesRemoveButtonPr
   function onRemoveButtonClick() {
     removeSeries(id)
       .then(({ message }) => {
-        toast.success(message);
+        toast.success(message, { icon: <TrashIcon className="size-4" /> });
         navigate('/search/series');
       })
       .catch(handleMessageError);

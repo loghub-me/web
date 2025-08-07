@@ -33,7 +33,7 @@ export default function SeriesChapterDeleteDialog({
   function onClickDelete() {
     removeSeriesChapter(seriesId, chapterSequence)
       .then(({ message }) => {
-        toast.success(message);
+        toast.success(message, { icon: <TrashIcon className="size-4" /> });
         navigate(`/@${writerUsername}/series/${seriesSlug}/edit`);
       })
       .catch(handleMessageError);
