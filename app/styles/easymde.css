@@ -21,7 +21,7 @@
   color: #999;
 }
 .CodeMirror-cursor {
-  border-left: 1px solid #000;
+  @apply border-l-border border-l-1;
   border-right: none;
   width: 0;
 }

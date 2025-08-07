@@ -87,7 +87,7 @@
 
         .hljs-comment,
         .hljs-quote {
-          color: hsl(var(--code-comment-quote));
+          color: var(--code-comment-quote);
         }
 
         .hljs-keyword,
@@ -95,19 +95,19 @@
         .hljs-section,
         .hljs-selector-tag,
         .hljs-title {
-          color: hsl(var(--code-keyword-name));
+          color: var(--code-keyword-name);
         }
 
         .hljs-template-variable,
         .hljs-variable {
-          color: hsl(var(--code-template-variable));
+          color: var(--code-template-variable);
         }
 
         .hljs-regexp,
         .hljs-selector-attr,
         .hljs-selector-pseudo,
         .hljs-string {
-          color: hsl(var(--code-regexp-string));
+          color: var(--code-regexp-string);
         }
 
         .hljs-bullet,
@@ -116,7 +116,7 @@
         .hljs-meta,
         .hljs-number,
         .hljs-symbol {
-          color: hsl(var(--code-bullet-link));
+          color: var(--code-bullet-link);
         }
 
         .hljs-attr,
@@ -125,12 +125,12 @@
         .hljs-params,
         .hljs-title,
         .hljs-type {
-          color: hsl(var(--code-attr-built-in));
+          color: var(--code-attr-built-in);
         }
 
         .hljs-attribute,
         .hljs-subst {
-          color: hsl(var(--code-attribute-subst));
+          color: var(--code-attribute-subst);
         }
 
         .hljs-formula {
@@ -140,15 +140,15 @@
 
         .hljs-selector-class,
         .hljs-selector-id {
-          color: hsl(var(--code-selector-class-id));
+          color: var(--code-selector-class-id);
         }
 
         .hljs-addition {
-          background-color: hsl(var(--code-addition));
+          background-color: var(--code-addition);
         }
 
         .hljs-deletion {
-          background-color: hsl(var(--code-deletion));
+          background-color: var(--code-deletion);
         }
 
         .hljs-doctag,
