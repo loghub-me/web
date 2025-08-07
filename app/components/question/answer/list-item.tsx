@@ -16,7 +16,7 @@ export default function QuestionAnswerListItem({ answer, question }: Readonly<Qu
 
   return (
     <>
-      <Card className={cn('gap-0 pb-0 overflow-hidden', isEditing && 'hidden')}>
+      <Card id={`answer-${answer.id}`} className={cn('gap-0 pb-0 overflow-hidden', isEditing && 'hidden')}>
         <CardHeader className="flex items-center gap-2 pb-4 border-b">
           <UserAvatar {...answer.writer} />
           <UserRoleBadge {...answer.writer} />

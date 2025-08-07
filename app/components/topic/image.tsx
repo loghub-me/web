@@ -23,5 +23,5 @@ export default function TopicImage({ topic, size, className }: Readonly<TopicIma
   const resolvedTheme = useResolvedTheme();
   const src = `/icons/${slug}${resolvedTheme === 'dark' ? '-dark' : ''}.svg`;
 
-  return <img src={src} alt={name} className={imageVariants({ size, className })} />;
+  return <img src={src} alt={name} className={imageVariants({ size, className })} suppressHydrationWarning />;
 }

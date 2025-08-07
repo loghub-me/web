@@ -22,7 +22,9 @@ export default function GlobalFooter() {
             <Link to={'/'}>
               <Logo />
             </Link>
-            <p className="text-center lg:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p className="text-center text-muted-foreground lg:text-left">
+              LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.
+            </p>
           </div>
           <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4">
             {footerNavSections.map((section) => (

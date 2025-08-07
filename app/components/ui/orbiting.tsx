@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { cn } from '~/lib/utils';
 
 interface OrbitingIconProps {
   radius: number; // 원궤도 반지름(px)
@@ -24,13 +24,13 @@ export function OrbitingIcon({
           '--duration': duration,
         } as React.CSSProperties
       }
-      className={clsx(
+      className={cn(
         'absolute flex items-center justify-center rounded-full',
         'size-[40px] transform-gpu',
         reverse ? 'animate-orbit-reverse' : 'animate-orbit'
       )}
     >
-      <div className="size-12">{children}</div>
+      <div className="size-12 group-hover:animate-swing group-hover:repeat-infinite">{children}</div>
     </div>
   );
 }
@@ -42,7 +42,7 @@ interface OrbitCanvasProps {
 
 export function OrbitCanvas({ radius, children }: Readonly<OrbitCanvasProps>) {
   return (
-    <div className="relative h-[28rem] overflow-hidden">
+    <div className="group relative h-[28rem] overflow-hidden">
       <div className="relative flex h-[1200px] w-full flex-col items-center justify-center overflow-hidden">
         {radius.map((r) => (
           <svg key={r} xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute inset-0 size-full">
