@@ -1,4 +1,4 @@
-import { ChevronUpIcon, LogOutIcon, PencilIcon, SettingsIcon, StarIcon, UserIcon } from 'lucide-react';
+import { ChevronUpIcon, LogOutIcon, NotepadTextIcon, PencilIcon, SettingsIcon, StarIcon, UserIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { toast } from 'sonner';
@@ -28,7 +28,8 @@ export default function MemberNav({ type }: MemberNavProps) {
   const navLinks = [
     { to: `/@${session?.username}`, name: '프로필', icon: UserIcon },
     { to: `/@${session?.username}/stars`, name: '스타', icon: StarIcon },
-    { to: '/post', name: '작성', icon: PencilIcon },
+    { to: '/post', name: '포스트', icon: PencilIcon },
+    { to: '/manual', name: '메뉴얼', icon: NotepadTextIcon },
     { to: '/settings', name: '설정', icon: SettingsIcon },
   ];
 

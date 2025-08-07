@@ -1,5 +1,5 @@
 import type { Route } from './+types/detail';
-import { LayersIcon, MessageCircleQuestionIcon, ScrollIcon } from 'lucide-react';
+import { LayersIcon, MessagesSquareIcon, ScrollIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import { Await } from 'react-router';
 import {
@@ -112,7 +112,7 @@ export default function TopicDetailRoute({ loaderData }: Route.ComponentProps) {
             to={`/topics/${topic.slug}?view=questions`}
             variant={view === 'questions' ? 'secondary' : 'ghost'}
           >
-            <MessageCircleQuestionIcon /> 질문
+            <MessagesSquareIcon /> 질문
           </ButtonLink>
         </div>
         {renderView()}

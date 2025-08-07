@@ -2,7 +2,7 @@ import {
   GlobeLockIcon,
   IdCardIcon,
   LayersIcon,
-  MessageCircleQuestionIcon,
+  MessagesSquareIcon,
   PaintbrushIcon,
   ScrollIcon,
   TagIcon,
@@ -12,7 +12,7 @@ import {
 export const SEARCH_LINKS = [
   { name: '아티클', to: '/search/articles', icon: ScrollIcon },
   { name: '시리즈', to: '/search/series', icon: LayersIcon },
-  { name: '질문', to: '/search/questions', icon: MessageCircleQuestionIcon },
+  { name: '질문', to: '/search/questions', icon: MessagesSquareIcon },
   { name: '토픽', to: '/topics', icon: TagIcon },
 ];
 
@@ -39,7 +39,7 @@ export const POST_LINKS = [
     name: '질문 작성하기',
     description: '질문을 작성하고, 다른 사람들과 공유해보세요.',
     to: '/post/questions',
-    icon: MessageCircleQuestionIcon,
+    icon: MessagesSquareIcon,
   },
 ];
 

@@ -1,4 +1,4 @@
-import { LayersIcon, MessageCircleQuestionIcon, ScrollIcon, StarIcon, UserIcon } from 'lucide-react';
+import { LayersIcon, MessagesSquareIcon, ScrollIcon, StarIcon, UserIcon } from 'lucide-react';
 import { ButtonNavLink } from '~/components/ui/button';
 
 interface UserDetailNavProps {
@@ -10,7 +10,7 @@ export default function UserDetailNav({ username }: Readonly<UserDetailNavProps>
     { name: '프로필', to: `/@${username}`, icon: UserIcon },
     { name: '아티클', to: `/@${username}/articles`, icon: ScrollIcon },
     { name: '시리즈', to: `/@${username}/series`, icon: LayersIcon },
-    { name: '질문', to: `/@${username}/questions`, icon: MessageCircleQuestionIcon },
+    { name: '질문', to: `/@${username}/questions`, icon: MessagesSquareIcon },
     { name: '스타', to: `/@${username}/stars`, icon: StarIcon },
   ];
 

@@ -1,12 +1,4 @@
-import {
-  BotIcon,
-  LayersIcon,
-  MessageCircleQuestionIcon,
-  PencilIcon,
-  ScrollIcon,
-  SproutIcon,
-  WandIcon,
-} from 'lucide-react';
+import { BotIcon, LayersIcon, MessagesSquareIcon, PencilIcon, ScrollIcon, SproutIcon, WandIcon } from 'lucide-react';
 
 export const CONTENTS = [
   {
@@ -22,7 +14,7 @@ export const CONTENTS = [
   {
     title: '질문',
     description: '질문은 사용자 간의 질문과 답변을 공유하는 공간입니다.',
-    icon: MessageCircleQuestionIcon,
+    icon: MessagesSquareIcon,
   },
 ];
 
