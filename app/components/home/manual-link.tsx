@@ -7,7 +7,7 @@ export default function HomeManualLink() {
       <span className={'p-1 text-accent-foreground bg-accent border rounded-full'}>
         <TerminalIcon className="size-3 stroke-2.5" />
       </span>
-      <span>$ man loghub-kr</span>
+      <span>$ man loghub-me</span>
     </ButtonLink>
   );
 }

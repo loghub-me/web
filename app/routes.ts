@@ -21,14 +21,7 @@ export default [
       route('questions', 'routes/post/questions.tsx'),
     ]),
   ]),
-  ...prefix('manual', [
-    layout('routes/manual/layout.tsx', [
-      index('routes/manual/index.tsx'),
-      route('articles', 'routes/manual/articles.tsx'),
-      route('series', 'routes/manual/series.tsx'),
-      route('questions', 'routes/manual/questions.tsx'),
-    ]),
-  ]),
+  ...prefix('manual', [index('routes/manual/index.tsx')]),
   ...prefix(':username', [
     layout('routes/users/layout.tsx', [
       index('routes/users/index.tsx'),
