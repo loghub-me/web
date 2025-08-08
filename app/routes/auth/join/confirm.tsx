@@ -23,7 +23,7 @@ export default function JoinConfirmRoute({ loaderData }: Route.ComponentProps) {
           메일에 포함된 링크를 클릭하여 회원가입을 완료해주세요.
         </p>
       </div>
-      <JoinConfirmForm email={searchParams.email} />
+      <JoinConfirmForm {...searchParams} />
     </main>
   );
 }

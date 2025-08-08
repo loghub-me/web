@@ -9,8 +9,8 @@ const loginRequestSchema = z.object({ email });
 const joinConfirmSchema = z.object({ email, otp });
 const loginConfirmSchema = z.object({ email, otp });
 
-const joinConfirmSearchParamsSchema = z.object({ email });
-const loginConfirmSearchParamsSchema = z.object({ email });
+const joinConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
+const loginConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
 
 export {
   joinRequestSchema,

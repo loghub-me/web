@@ -23,7 +23,7 @@ export default function LoginConfirmRoute({ loaderData }: Route.ComponentProps) 
           메일에 포함된 링크를 클릭하여 로그인을 완료해주세요.
         </p>
       </div>
-      <LoginConfirmForm email={searchParams.email} />
+      <LoginConfirmForm {...searchParams} />
     </main>
   );
 }

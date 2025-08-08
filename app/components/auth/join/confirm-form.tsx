@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MailIcon } from 'lucide-react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { toast } from 'sonner';
@@ -15,12 +16,13 @@ import { joinConfirmSchema } from '~/schemas/auth';
 
 interface JoinConfirmFormProps {
   email: string;
+  otp?: string;
 }
 
-export default function JoinConfirmForm({ email }: Readonly<JoinConfirmFormProps>) {
+export default function JoinConfirmForm({ email, otp }: Readonly<JoinConfirmFormProps>) {
   const form = useForm<z.infer<typeof joinConfirmSchema>>({
     resolver: zodResolver(joinConfirmSchema),
-    defaultValues: { email: email, otp: '' },
+    defaultValues: { email: email, otp: otp || '' },
   });
   const { registerSession } = useAuth();
   const navigate = useNavigate();
@@ -35,6 +37,13 @@ export default function JoinConfirmForm({ email }: Readonly<JoinConfirmFormProps
       })
       .catch((err) => handleFormError(err, form.setError));
   }
+
+  useEffect(() => {
+    if (otp) {
+      form.setValue('otp', otp);
+      form.handleSubmit(onSubmit)();
+    }
+  }, [otp]);
 
   return (
     <Form {...form}>
