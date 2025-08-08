@@ -13,11 +13,11 @@ export default function SocialLoginButtons({ type }: Readonly<SocialLoginButtons
         <hr className="flex-grow" />
       </div>
       <div className="flex flex-col gap-2">
-        <ButtonLink to={`${import.meta.env.VITE_API_HOST}/api/oauth2/authorize/google`} variant={'outline'}>
+        <ButtonLink to={`${import.meta.env.VITE_API_HOST}/oauth2/authorize/google`} variant={'outline'}>
           <img src={'/icons/google.svg'} alt={'Google'} className="size-4" />
           구글 계정으로 {type}
         </ButtonLink>
-        <ButtonLink to={`${import.meta.env.VITE_API_HOST}/api/oauth2/authorize/github`} variant={'outline'}>
+        <ButtonLink to={`${import.meta.env.VITE_API_HOST}/oauth2/authorize/github`} variant={'outline'}>
           <img src={'/icons/github.svg'} alt={'GitHub'} className="size-4 dark:invert" />
           깃허브 계정으로 {type}
         </ButtonLink>
