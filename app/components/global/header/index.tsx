@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import HeaderAuthMenu from '~/components/global/header/auth-menu';
 import HeaderNavLink from '~/components/global/header/nav-link';
+import { HeaderThemeMenu } from '~/components/global/header/theme-menu';
 import Logo from '~/components/global/logo';
 import GlobalSidebar from '~/components/global/sidebar';
 import { SEARCH_LINKS } from '~/constants/nav-links';
@@ -17,8 +18,9 @@ export default function GlobalHeader() {
             <HeaderNavLink key={navLink.to} {...navLink} />
           ))}
         </nav>
-        <nav className="flex gap-4 ml-auto">
+        <nav className="flex items-center gap-2 ml-auto">
           <HeaderAuthMenu />
+          <HeaderThemeMenu />
           <GlobalSidebar />
         </nav>
       </div>

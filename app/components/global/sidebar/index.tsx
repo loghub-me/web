@@ -18,7 +18,7 @@ export default function GlobalSidebar() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant={'ghost'} className="inline-flex md:hidden lg:hidden px-2.5 rounded-full">
+        <Button variant={'ghost'} size={'icon'} className="inline-flex md:hidden">
           <MenuIcon />
         </Button>
       </SheetTrigger>

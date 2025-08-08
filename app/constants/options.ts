@@ -3,6 +3,9 @@ import {
   CalendarArrowUpIcon,
   CrosshairIcon,
   type LucideIcon,
+  MonitorIcon,
+  MoonIcon,
+  SunIcon,
   TrendingUpIcon,
 } from 'lucide-react';
 
@@ -34,4 +37,10 @@ export const QUESTION_FILTER_OPTIONS: Record<QuestionFilter, { label: string }> 
   open: { label: 'OPEN' },
   closed: { label: 'CLOSED' },
   solved: { label: 'SOLVED' },
+};
+
+export const THEME_OPTIONS: Record<Theme, IconAndLabel> = {
+  system: { icon: MonitorIcon, label: '시스템' },
+  light: { icon: SunIcon, label: '라이트' },
+  dark: { icon: MoonIcon, label: '다크' },
 };
