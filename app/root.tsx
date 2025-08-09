@@ -5,9 +5,11 @@ import { ThemeScript, useTheme } from '~/actions/theme/utils';
 import '~/app.css';
 import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
+import NoticeDialog from '~/components/global/notice-dialog';
 import { Toaster } from '~/components/ui/sonner';
 import { fonts } from '~/constants/fonts';
 import { ErrorMessage } from '~/constants/messages';
+import { NOTICES } from '~/constants/notices';
 import { cn } from '~/lib/utils';
 import AuthProvider from '~/providers/auth-provider';
 import QueryProvider from '~/providers/query-provider';
@@ -47,6 +49,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {children}
             <GlobalFooter />
             <Toaster position={'top-center'} expand={true} richColors />
+            {NOTICES.map((notice) => (
+              <NoticeDialog key={notice.id} {...notice} />
+            ))}
           </AuthProvider>
         </QueryProvider>
         <ScrollRestoration />
