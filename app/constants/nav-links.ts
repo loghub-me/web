@@ -17,9 +17,9 @@ export const SEARCH_LINKS = [
 ];
 
 export const MANUAL_LINKS = [
-  { name: '아티클', to: '/manual/articles' },
-  { name: '시리즈', to: '/manual/series' },
-  { name: '질문', to: '/manual/questions' },
+  { name: '아티클', to: '/manual#article' },
+  { name: '시리즈', to: '/manual#series' },
+  { name: '질문', to: '/manual#question' },
 ];
 
 export const POST_LINKS = [
@@ -51,12 +51,8 @@ export const SETTING_LINKS = [
 ];
 
 export const LEGAL_LINKS = [
-  { name: '이용약관', to: '/legal/terms' },
-  { name: '개인정보처리방침', to: '/legal/privacy' },
+  { name: '이용약관', to: '/legal#terms' },
+  { name: '개인정보처리방침', to: '/legal#privacy' },
 ];
 
-export const CONTACT_LINKS = [
-  { name: 'GitHub', to: 'https://github.com' },
-  { name: 'Discord', to: 'https://discord.gg' },
-  { name: 'X', to: 'https://x.com' },
-];
+export const CONTACT_LINKS = [{ name: 'GitHub', to: 'https://github.com/loghub-me' }];

@@ -22,6 +22,7 @@ export default [
     ]),
   ]),
   ...prefix('manual', [index('routes/manual/index.tsx')]),
+  ...prefix('legal', [index('routes/legal/index.tsx')]),
   ...prefix(':username', [
     layout('routes/users/layout.tsx', [
       index('routes/users/index.tsx'),

@@ -22,7 +22,7 @@ export default function GlobalFooter() {
             <Link to={'/'}>
               <Logo />
             </Link>
-            <p className="text-center text-muted-foreground lg:text-left">
+            <p className="text-sm text-center text-muted-foreground lg:text-left">
               LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.
             </p>
           </div>

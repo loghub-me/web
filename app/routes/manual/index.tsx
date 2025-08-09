@@ -11,9 +11,11 @@ export default function ManualIndex() {
       </section>
       <hr />
       {Object.entries(manual).map(([key, value]) => (
-        <section key={key} className="space-y-4">
-          <h2 className="text-2xl font-bold">{value.title}</h2>
-          <p className="text-sm text-muted-foreground">{value.description}</p>
+        <section key={key} id={key} className="space-y-4">
+          <div>
+            <h2 className="text-2xl font-bold">{value.title}</h2>
+            <p className="text-sm text-muted-foreground">{value.description}</p>
+          </div>
           <p className="mt-4">{value.content}</p>
           <div className="flex flex-col lg:flex-row gap-4">
             {value.links.map((link, index) => (
