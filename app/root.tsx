@@ -7,6 +7,7 @@ import GlobalFooter from '~/components/global/footer';
 import GlobalHeader from '~/components/global/header';
 import { Toaster } from '~/components/ui/sonner';
 import { fonts } from '~/constants/fonts';
+import { ErrorMessage } from '~/constants/messages';
 import { cn } from '~/lib/utils';
 import AuthProvider from '~/providers/auth-provider';
 import QueryProvider from '~/providers/query-provider';
@@ -60,22 +61,41 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = 'Oops!';
-  let details = 'An unexpected error occurred.';
+  let message = 'Error';
+  let details = ErrorMessage.UNKNOWN;
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? '404' : 'Error';
-    details = error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
+    switch (error.status) {
+      case 404:
+        message = '404 | Not Found';
+        details = ErrorMessage.NOT_FOUND;
+        break;
+      case 500:
+        message = '500 | Internal Server Error';
+        details = ErrorMessage.INTERNAL_SERVER_ERROR;
+        break;
+      case 501:
+        message = '501 | Not Implemented';
+        details = ErrorMessage.NOT_IMPLEMENTED;
+        break;
+      case 503:
+        message = '503 | Service Unavailable';
+        details = ErrorMessage.SERVICE_UNAVAILABLE;
+        break;
+      default:
+        message = 'Error';
+        details = ErrorMessage.UNKNOWN;
+    }
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
   }
 
   return (
-    <main className="container mx-auto p-4 pt-20 min-h-screen">
-      <h1>{message}</h1>
-      <p>{details}</p>
+    <main className="container flex flex-col items-center justify-center gap-4 mx-auto p-4 min-h-screen">
+      <h2 className="font-semibold text-2xl">{message}</h2>
+      <p className="text-muted-foreground">{details}</p>
       {stack && (
         <pre className="w-full overflow-x-auto p-4">
           <code>{stack}</code>
