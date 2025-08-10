@@ -9,9 +9,16 @@ import {
   SeriesChapterEditListItem,
   SeriesEditForm,
 } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
 import { seriesPostSchema } from '~/schemas/series';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '시리즈 수정';
+  const description = '시리즈를 수정하는 페이지입니다.';
+  return createMetadata(title, description);
+};
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

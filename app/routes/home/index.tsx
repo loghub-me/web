@@ -1,3 +1,4 @@
+import type { Route } from './+types/index';
 import Logo from '~/components/global/logo';
 import {
   ContentList,
@@ -14,6 +15,13 @@ import {
 } from '~/components/home';
 import { Tabs, TabsContent, TabsList } from '~/components/ui/tabs';
 import { CONTENTS, FEATURES } from '~/constants/home';
+import { createMetadata } from '~/constants/meta';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '홈';
+  const description = 'LogHub의 홈 페이지입니다. 다양한 콘텐츠와 기능을 탐색하세요.';
+  return createMetadata(title, description);
+};
 
 export default function HomeIndex() {
   return (

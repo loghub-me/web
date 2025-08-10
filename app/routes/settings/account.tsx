@@ -1,8 +1,16 @@
+import type { Route } from './+types/account';
 import { MailIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
 import { UsernameUpdateDialog, UsernameUpdateForm } from '~/components/user';
+import { createMetadata } from '~/constants/meta';
 import { useAuth } from '~/hooks/use-auth';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '계정 설정';
+  const description = '계정 설정을 통해 사용자 정보를 업데이트할 수 있습니다.';
+  return createMetadata(title, description);
+};
 
 export default function SettingAccountRoute() {
   const { session } = useAuth();

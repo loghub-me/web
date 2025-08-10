@@ -11,9 +11,13 @@ import {
   QuestionSummaryCard,
 } from '~/components/question';
 import { Card } from '~/components/ui/card';
+import { createMetadata } from '~/constants/meta';
 import { useAuth } from '~/hooks/use-auth';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
+
+export const meta: Route.MetaFunction = ({ data }) =>
+  createMetadata(data?.question.title, data?.question.content.markdown.substring(20));
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

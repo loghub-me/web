@@ -4,9 +4,16 @@ import { useState } from 'react';
 import { getTrendingTopics } from '~/apis/server/topic';
 import { TopicList, TopicListItem } from '~/components/topic';
 import { IconInput } from '~/components/ui/icon-input';
+import { createMetadata } from '~/constants/meta';
 import { searchTopics } from '~/constants/topics';
 import { parseSearchParams } from '~/lib/parse';
 import { topicSearchSchema } from '~/schemas/topic';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '토픽 검색';
+  const description = '토픽을 검색하고 확인해보세요.';
+  return createMetadata(title, description);
+};
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const url = new URL(request.url);

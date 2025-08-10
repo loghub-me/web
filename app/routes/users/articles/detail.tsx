@@ -18,11 +18,15 @@ import ListEmpty from '~/components/common/list/empty';
 import { CommentSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
 import { Card, CardContent, CardHeader } from '~/components/ui/card';
+import { createMetadata } from '~/constants/meta';
 import { parseHTMLToc } from '~/lib/html/toc';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import ReplyProvider from '~/providers/reply-provider';
 import { articleCommentPageSchema } from '~/schemas/article';
 import { compositeKeySchema } from '~/schemas/common';
+
+export const meta: Route.MetaFunction = ({ data }) =>
+  createMetadata(data?.article.title, data?.article.content.markdown.substring(20));
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);

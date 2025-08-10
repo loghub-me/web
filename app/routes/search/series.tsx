@@ -7,9 +7,16 @@ import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { SeriesList, SeriesListItem, SeriesListSkeleton } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import { SERIES_SORT_OPTIONS } from '~/constants/options';
 import { parseSearchParams } from '~/lib/parse';
 import { seriesSearchSchema } from '~/schemas/series';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '시리즈 검색';
+  const description = '시리즈 검색 페이지입니다. 다양한 토픽의 시리즈를 검색하고 탐색하세요.';
+  return createMetadata(title, description);
+};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);

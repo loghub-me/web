@@ -10,13 +10,21 @@ import {
   UserActivityListItem,
   UserActivityListSkeleton,
 } from '~/components/user';
+import { createMetadata } from '~/constants/meta';
 import { parseSearchParams } from '~/lib/parse';
 import { userActivitySearchSchema } from '~/schemas/user';
+
+export const meta: Route.MetaFunction = ({ data }) => {
+  const username = data?.url.pathname.substring(2);
+  const title = `${username}님의 활동`;
+  const description = `${username}님의 활동을 확인하세요.`;
+  return createMetadata(title, description);
+};
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const searchParams = parseSearchParams(url.searchParams, userActivitySearchSchema);
-  return { searchParams };
+  return { searchParams, url };
 }
 
 export default function UserDetailRoute({ loaderData }: Route.ComponentProps) {

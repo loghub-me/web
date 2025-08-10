@@ -3,7 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { SeriesPostForm } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import { seriesPostSchema } from '~/schemas/series';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '시리즈 작성';
+  const description = '시리즈 작성 페이지입니다.';
+  return createMetadata(title, description);
+};
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const autosave = localStorage.getItem('autosave:post-series');

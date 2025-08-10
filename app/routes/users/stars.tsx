@@ -6,13 +6,23 @@ import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import PageNav from '~/components/search/page-nav';
 import { UserStarList, UserStarListItem, UserStarListSkeleton } from '~/components/user';
-import { parseSearchParams } from '~/lib/parse';
+import { createMetadata } from '~/constants/meta';
+import { parseParams, parseSearchParams } from '~/lib/parse';
+import { usernameSchema } from '~/schemas/common';
 import { userStarPageSchema } from '~/schemas/user';
 
-export async function loader({ request }: Route.LoaderArgs) {
+export const meta: Route.MetaFunction = ({ data }) => {
+  const username = data?.username;
+  const title = `${username}님의 스타`;
+  const description = `${username}님의 스타를 확인하세요.`;
+  return createMetadata(title, description);
+};
+
+export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
+  const { username } = parseParams(params, usernameSchema);
   const searchParams = parseSearchParams(url.searchParams, userStarPageSchema);
-  return { searchParams };
+  return { username, searchParams };
 }
 
 export default function UserStarsRoute({ loaderData }: Route.ComponentProps) {

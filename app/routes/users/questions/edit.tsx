@@ -6,10 +6,14 @@ import { z } from 'zod';
 import { getQuestion } from '~/apis/server/question';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { QuestionEditDialog, QuestionEditForm } from '~/components/question';
+import { createMetadata } from '~/constants/meta';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
 import { questionPostSchema } from '~/schemas/question';
+
+export const meta: Route.MetaFunction = ({ data }) =>
+  createMetadata(data?.question.title, data?.question.content.markdown.substring(20));
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

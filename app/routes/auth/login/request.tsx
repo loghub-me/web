@@ -1,6 +1,14 @@
+import type { Route } from './+types/request';
 import { UserIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { LoginRequestForm, SocialLoginButtons } from '~/components/auth';
+import { createMetadata } from '~/constants/meta';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '로그인';
+  const description = '로그인 페이지입니다. LogHub에 로그인하여 더 많은 기능을 이용해보세요.';
+  return createMetadata(title, description);
+};
 
 export default function LoginRequestRoute() {
   return (

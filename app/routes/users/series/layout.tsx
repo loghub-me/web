@@ -8,9 +8,13 @@ import {
   SeriesDetailContent,
   SeriesDetailHeader,
 } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
 import zodFields from '~/schemas/fields';
+
+export const meta: Route.MetaFunction = ({ data }) =>
+  createMetadata(data?.series.title, data?.series.content.substring(20));
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { sequence: sequenceZod } = zodFields;
@@ -42,7 +46,7 @@ export default function SeriesDetailLayout({ loaderData }: Route.ComponentProps)
           ))}
         </SeriesChapterList>
       </SeriesDetailAside>
-      <Outlet context={{ series, chapter } satisfies SeriesDetailLayoutContextProps} />
+      <Outlet context={{ series, chapter }} />
     </main>
   );
 }

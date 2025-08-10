@@ -14,9 +14,12 @@ import { QuestionList, QuestionListItem, QuestionListSkeleton } from '~/componen
 import { SeriesList, SeriesListItem, SeriesListSkeleton } from '~/components/series';
 import { TopicDetailAside } from '~/components/topic';
 import { ButtonLink } from '~/components/ui/button';
+import { createMetadata } from '~/constants/meta';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import { slugSchema } from '~/schemas/common';
 import { topicSearchSchema } from '~/schemas/topic';
+
+export const meta: Route.MetaFunction = ({ data }) => createMetadata(data?.topic.name, data?.topic.description);
 
 export const loader = async ({ request, params }: Route.LoaderArgs) => {
   const url = new URL(request.url);

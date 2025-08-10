@@ -1,5 +1,13 @@
+import type { Route } from './+types/index';
 import { JumboButtonLink } from '~/components/ui/button';
+import { createMetadata } from '~/constants/meta';
 import { POST_LINKS } from '~/constants/nav-links';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '포스트';
+  const description = '포스트 작성 페이지입니다. 다른 사람들과 글을 작성하고 공유해보세요.';
+  return createMetadata(title, description);
+};
 
 export default function PostIndex() {
   return (

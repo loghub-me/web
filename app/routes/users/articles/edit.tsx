@@ -6,10 +6,14 @@ import { z } from 'zod';
 import { getArticle } from '~/apis/server/article';
 import { ArticleEditDialog, ArticleEditForm } from '~/components/article';
 import { EasyMDEEditor } from '~/components/common/easymde';
+import { createMetadata } from '~/constants/meta';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
 import { articleEditSchema } from '~/schemas/article';
 import { compositeKeySchema } from '~/schemas/common';
+
+export const meta: Route.MetaFunction = ({ data }) =>
+  createMetadata(data?.article.title, data?.article.content.markdown.substring(20));
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { username, slug } = parseParams(params, compositeKeySchema);

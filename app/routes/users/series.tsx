@@ -7,10 +7,18 @@ import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
 import { SeriesList, SeriesListItem, SeriesListSkeleton } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import { SERIES_SORT_OPTIONS } from '~/constants/options';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import { usernameSchema } from '~/schemas/common';
 import { seriesSearchSchema } from '~/schemas/series';
+
+export const meta: Route.MetaFunction = ({ data }) => {
+  const username = data?.username;
+  const title = `${username}님의 시리즈`;
+  const description = `${username}님의 시리즈을 확인하세요.`;
+  return createMetadata(title, description);
+};
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -18,7 +26,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const searchParams = parseSearchParams(url.searchParams, seriesSearchSchema);
   const series = searchUserSeries(username, searchParams);
 
-  return { series, url, searchParams };
+  return { username, series, url, searchParams };
 }
 
 export default function UserSeriesRoute({ loaderData }: Route.ComponentProps) {

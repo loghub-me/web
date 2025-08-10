@@ -7,10 +7,18 @@ import ListEmpty from '~/components/common/list/empty';
 import { PageNavSkeleton } from '~/components/common/skeletons';
 import { SearchQuery, SearchSort, SearchSubmit } from '~/components/search';
 import PageNav from '~/components/search/page-nav';
+import { createMetadata } from '~/constants/meta';
 import { ARTICLE_SORT_OPTIONS } from '~/constants/options';
 import { parseParams, parseSearchParams } from '~/lib/parse';
 import { articleSearchSchema } from '~/schemas/article';
 import { usernameSchema } from '~/schemas/common';
+
+export const meta: Route.MetaFunction = ({ data }) => {
+  const username = data?.username;
+  const title = `${username}님의 아티클`;
+  const description = `${username}님의 아티클을 확인하세요.`;
+  return createMetadata(title, description);
+};
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -18,7 +26,7 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   const searchParams = parseSearchParams(url.searchParams, articleSearchSchema);
   const articles = searchUserArticles(username, searchParams);
 
-  return { articles, url, searchParams };
+  return { username, articles, url, searchParams };
 }
 
 export default function UserArticlesRoute({ loaderData }: Route.ComponentProps) {

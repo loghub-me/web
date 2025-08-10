@@ -1,7 +1,14 @@
+import type { Route } from './+types/privacy';
 import { useQuery } from '@tanstack/react-query';
 import { getSelfPrivacy } from '~/apis/client/user';
 import { UserPrivacyUpdateForm } from '~/components/user';
 import { useAuth } from '~/hooks/use-auth';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '개인정보 설정';
+  const description = '다른 사용자에게 표시되는 정보를 관리할 수 있습니다.';
+  return createMetadata(title, description);
+};
 
 export default function SettingPrivacyRoute() {
   const { status: authStatus } = useAuth();

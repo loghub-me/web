@@ -1,8 +1,15 @@
 import type { Route } from './+types/confirm';
 import { UserIcon } from 'lucide-react';
 import { JoinConfirmForm } from '~/components/auth';
+import { createMetadata } from '~/constants/meta';
 import { parseSearchParams } from '~/lib/parse';
 import { joinConfirmSearchParamsSchema } from '~/schemas/auth';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '회원가입 확인';
+  const description = '회원가입 확인 페이지입니다. LogHub에 회원가입하여 더 많은 기능을 이용해보세요.';
+  return createMetadata(title, description);
+};
 
 export function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);

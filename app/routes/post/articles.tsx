@@ -6,7 +6,14 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { ArticlePostDialog, ArticlePostForm } from '~/components/article';
 import { EasyMDEEditor } from '~/components/common/easymde';
+import { createMetadata } from '~/constants/meta';
 import { articlePostSchema } from '~/schemas/article';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '아티클 작성';
+  const description = '아티클 작성 페이지입니다.';
+  return createMetadata(title, description);
+};
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const autosave = localStorage.getItem('autosave:post-articles');

@@ -1,6 +1,14 @@
+import type { Route } from './+types/request';
 import { UserIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { JoinRequestForm, SocialLoginButtons } from '~/components/auth';
+import { createMetadata } from '~/constants/meta';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '회원가입';
+  const description = '회원가입 페이지입니다. LogHub에 회원가입하여 더 많은 기능을 이용해보세요.';
+  return createMetadata(title, description);
+};
 
 export default function JoinRequestRoute() {
   return (

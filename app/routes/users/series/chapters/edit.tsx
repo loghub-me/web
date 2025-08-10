@@ -6,11 +6,18 @@ import { z } from 'zod';
 import { getSeries, getSeriesChapter } from '~/apis/server/series';
 import { EasyMDEEditor } from '~/components/common/easymde';
 import { SeriesChapterEditDialog, SeriesChapterEditForm, SeriesChapterRemoveDialog } from '~/components/series';
+import { createMetadata } from '~/constants/meta';
 import AuthGuard from '~/guards/auth-guard';
 import { parseParams } from '~/lib/parse';
 import { compositeKeySchema } from '~/schemas/common';
 import zodFields from '~/schemas/fields';
 import { seriesChapterEditSchema } from '~/schemas/series';
+
+export const meta: Route.MetaFunction = () => {
+  const title = '시리즈 챕터 수정';
+  const description = '시리즈 챕터를 수정하는 페이지입니다.';
+  return createMetadata(title, description);
+};
 
 export async function loader({ params }: Route.LoaderArgs) {
   const { sequence: sequenceZod } = zodFields;
