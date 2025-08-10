@@ -1,4 +1,4 @@
-import { CloudUploadIcon, LetterTextIcon, WandSparklesIcon, XIcon } from 'lucide-react';
+import { CloudUploadIcon, LetterTextIcon, XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { type UseFormReturn } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -9,7 +9,6 @@ import { TopicSlugsFormControl } from '~/components/common/topic/form-control';
 import { Button } from '~/components/ui/button';
 import { DialogClose } from '~/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
-import { GlowButton } from '~/components/ui/glow-button';
 import { IconInput } from '~/components/ui/icon-input';
 import { handleFormError } from '~/lib/error';
 import { questionPostSchema } from '~/schemas/question';
@@ -62,9 +61,6 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
               <XIcon /> 취소하기
             </Button>
           </DialogClose>
-          <GlowButton type="button" variant="outline">
-            <WandSparklesIcon /> 자동완성
-          </GlowButton>
           <Button type="submit" disabled={form.formState.isSubmitting}>
             <CloudUploadIcon /> 게시하기
           </Button>

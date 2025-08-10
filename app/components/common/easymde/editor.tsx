@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '~/components/ui/button';
 import { ToggleGroup, ToggleGroupItem } from '~/components/ui/toggle-group';
+import { ErrorMessage } from '~/constants/messages';
+import { useAuth } from '~/hooks/use-auth';
 import { defaultInputFileProps, uploadImageFile } from '~/lib/image/upload';
 import { cn } from '~/lib/utils';
 
@@ -28,6 +30,7 @@ export default function EasyMDEEditor({
   const previewRef = useRef<HTMLDivElement>(null);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [mode, setMode] = useState<EditorMode>('preview-edit');
+  const { status: authStatus } = useAuth();
 
   const inputFileProps = {
     ...defaultInputFileProps,
@@ -47,6 +50,14 @@ export default function EasyMDEEditor({
       return;
     }
     setMode(value as EditorMode);
+  }
+
+  function onClickImageUpload() {
+    if (authStatus !== 'authenticated') {
+      toast.error(ErrorMessage.LOGIN_REQUIRED);
+      return;
+    }
+    inputFileRef.current?.click();
   }
 
   useEffect(() => {
@@ -120,7 +131,7 @@ export default function EasyMDEEditor({
         <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
         <div className="flex gap-2">
           <input {...inputFileProps} />
-          <Button type="button" variant="outline" size={'icon'} onClick={() => inputFileRef.current?.click()}>
+          <Button type="button" variant="outline" size={'icon'} onClick={onClickImageUpload}>
             <ImageUpIcon />
           </Button>
           {children}

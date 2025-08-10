@@ -1,4 +1,4 @@
-import { BotIcon, LayersIcon, MessagesSquareIcon, PencilIcon, ScrollIcon, SproutIcon, WandIcon } from 'lucide-react';
+import { BotIcon, LayersIcon, MessagesSquareIcon, PencilIcon, ScrollIcon, SproutIcon, TagIcon } from 'lucide-react';
 
 export const CONTENTS = [
   {
@@ -32,10 +32,10 @@ export const FEATURES = [
     icon: BotIcon,
   },
   {
-    value: 'auto-fill',
-    title: '자동 완성',
-    description: '사용자가 입력하는 내용을 기반으로 제목, 태그 등을 자동으로 제안합니다.',
-    icon: WandIcon,
+    value: 'topic',
+    title: '토픽',
+    description: '포스트 작성 시, 관련된 토픽을 선택하여 콘텐츠를 분류할 수 있습니다.',
+    icon: TagIcon,
   },
   {
     value: 'grass-calendar',

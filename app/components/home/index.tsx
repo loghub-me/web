@@ -3,7 +3,7 @@ export { default as HomeManualLink } from '~/components/home/manual-link';
 export { default as HomeDescription } from '~/components/home/description';
 export { default as HomeAuthLinks } from '~/components/home/auth-links';
 export { default as FeatureTabsTrigger } from '~/components/home/feature/tabs-trigger';
-export { default as FeatureAutofill } from '~/components/home/feature/auto-fill';
+export { default as FeatureTopic } from '~/components/home/feature/topic';
 export { default as FeatureBotAnswer } from '~/components/home/feature/bot-answer';
 export { default as FeatureMarkdownEditor } from '~/components/home/feature/markdown-editor';
 export { default as FeatureGrassCalendar } from '~/components/home/feature/grass-calendar';

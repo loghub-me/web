@@ -6,12 +6,12 @@ import {
   FeatureGrassCalendar,
   FeatureMarkdownEditor,
   FeatureTabsTrigger,
+  FeatureTopic,
   HomeAuthLinks,
   HomeDescription,
   HomeManualLink,
   HomeTopicIcons,
 } from '~/components/home';
-import FeatureAutoFill from '~/components/home/feature/auto-fill';
 import { Tabs, TabsContent, TabsList } from '~/components/ui/tabs';
 import { CONTENTS, FEATURES } from '~/constants/home';
 
@@ -57,8 +57,8 @@ export default function HomeIndex() {
           <TabsContent value={'bot-answer'}>
             <FeatureBotAnswer />
           </TabsContent>
-          <TabsContent value={'auto-fill'}>
-            <FeatureAutoFill />
+          <TabsContent value={'topic'}>
+            <FeatureTopic />
           </TabsContent>
           <TabsContent value={'grass-calendar'}>
             <FeatureGrassCalendar />
