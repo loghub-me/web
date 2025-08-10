@@ -45,10 +45,12 @@ export async function handleFormError(err: Error, setError: UseFormSetError<any>
   handleUnauthorizedError(err);
 }
 
-function handleUnauthorizedError(err: Error) {
-  toast.promise(() => refreshToken(), {
-    loading: '재인증 중...',
-    success: '재인증에 성공했습니다.',
-    error: '재인증에 실패했습니다. 다시 로그인해주세요.',
-  });
+function handleUnauthorizedError(err: HTTPError) {
+  if (err.response.status === 401) {
+    toast.promise(() => refreshToken(), {
+      loading: '재인증 중...',
+      success: '재인증에 성공했습니다.',
+      error: '재인증에 실패했습니다. 다시 로그인해주세요.',
+    });
+  }
 }
