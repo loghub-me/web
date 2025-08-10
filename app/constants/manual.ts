@@ -8,13 +8,13 @@ export const manual = {
     links: [
       {
         icon: SearchIcon,
-        to: '/search/article',
+        to: '/search/articles',
         label: '아티클 검색',
         description: '키워드로 검색하거나 카테고리별로 필터링할 수 있습니다.',
       },
       {
         icon: PencilIcon,
-        to: '/post/article',
+        to: '/post/articles',
         label: '아티클 작성',
         description: '새로운 아티클을 작성할 수 있습니다.',
       },
@@ -47,13 +47,13 @@ export const manual = {
     links: [
       {
         icon: SearchIcon,
-        to: '/search/question',
+        to: '/search/questions',
         label: '질문 검색',
         description: '키워드로 검색하거나 카테고리별로 필터링할 수 있습니다.',
       },
       {
         icon: PencilIcon,
-        to: '/post/question',
+        to: '/post/questions',
         label: '질문 작성',
         description: '새로운 질문을 작성할 수 있습니다.',
       },
