@@ -1,14 +1,14 @@
-# LogHub - web-next
+# LogHub - web
 
 ![node](https://img.shields.io/badge/node-20+-green?style=plastic)
 ![pnpm](https://img.shields.io/badge/pnpm-10+-orange?style=plastic)
-![GitHub License](https://img.shields.io/github/license/loghub-me/web-next?style=plastic&logo=github&color=lightgray)
-![GitHub Tag](https://img.shields.io/github/tag/loghub-me/web-next?style=plastic&logo=github&color=lightgray)
-[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/loghub-me/web-next/ci.yml?style=plastic&logo=github&label=CI)](https://github.com/loghub-me/web-next/actions)
+![GitHub License](https://img.shields.io/github/license/loghub-me/web?style=plastic&logo=github&color=lightgray)
+![GitHub Tag](https://img.shields.io/github/tag/loghub-me/web?style=plastic&logo=github&color=lightgray)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/loghub-me/web/ci.yml?style=plastic&logo=github&label=CI)](https://github.com/loghub-me/web/actions)
 
 #### Repositories
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Web-f94949?style=plastic&logo=github)](https://github.com/loghub-me/web-next)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Web-f94949?style=plastic&logo=github)](https://github.com/loghub-me/web)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-API-6db240?style=plastic&logo=github)](https://github.com/loghub-me/api)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Task_API-aab2ff?style=plastic&logo=github)](https://github.com/loghub-me/task-api)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Markdown_Renderer-2d79c7?style=plastic&logo=github)](https://github.com/loghub-me/markdown-renderer)

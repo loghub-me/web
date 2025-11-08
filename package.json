@@ -1,6 +1,6 @@
 {
-  "name": "loghub-web-next",
-  "version": "0.2.5",
+  "name": "loghub-web",
+  "version": "0.2.6",
   "private": true,
   "scripts": {
     "dev": "next dev",
