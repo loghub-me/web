@@ -14,7 +14,6 @@ export async function uploadImageFile(event: React.ChangeEvent<HTMLInputElement>
   const result = toast.promise(() => uploadImage(file), {
     loading: '이미지를 업로드 중입니다.',
     success: '이미지가 업로드되었습니다.',
-    error: '이미지 업로드에 실패했습니다.',
   });
 
   return result.unwrap().then(({ data }) => ({
@@ -30,7 +29,6 @@ export async function uploadAvatarFile(event: React.ChangeEvent<HTMLInputElement
   const result = toast.promise(() => updateSelfAvatar(file), {
     loading: '아바타를 업로드 중입니다.',
     success: '아바타가 업로드되었습니다. 완료까지 다소 시간이 걸릴 수 있습니다.',
-    error: '아바타 업로드에 실패했습니다.',
   });
 
   return result.unwrap();
