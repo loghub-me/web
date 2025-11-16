@@ -5,7 +5,6 @@ import { defaultInputFileProps, uploadAvatarFile } from '@/lib/image/upload';
 import { buildAssetsUrl } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/avatar';
 import { Button } from '@ui/button';
-import { randomUUID } from 'crypto';
 import { ImageUpIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
 
@@ -31,7 +30,7 @@ export default function SettingAvatarForm({ session }: Readonly<SettingAvatarFor
       <Avatar className="border size-48 group cursor-pointer" onClick={() => inputFileRef.current?.click()}>
         <AvatarImage
           key={version}
-          src={buildAssetsUrl(`${session.id}/avatar.webp?${randomUUID()}`)}
+          src={buildAssetsUrl(`${session.id}/avatar.webp?${new Date()}`)}
           className="transition-[scale] group-hover:scale-110"
         />
         <AvatarFallback>{session.username[0]}</AvatarFallback>
