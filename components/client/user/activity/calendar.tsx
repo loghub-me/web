@@ -13,6 +13,8 @@ interface UserActivityCalendarProps {
 }
 
 export default function UserActivityCalendar({ username, summaries }: Readonly<UserActivityCalendarProps>) {
+  const currentDate = new Date().toISOString().slice(0, 10); // "YYYY-MM-DD"
+
   const cells = useMemo<ReactNode | null>(() => {
     if (!summaries?.length) return null;
 
@@ -36,7 +38,10 @@ export default function UserActivityCalendar({ username, summaries }: Readonly<U
 
     const sorted = [...summaries].sort((a, b) => a.date.localeCompare(b.date));
     const firstTs = parseYMDToUTC(sorted[0].date);
-    const lastTs = parseYMDToUTC(sorted[sorted.length - 1].date);
+    const lastSummaryTs = parseYMDToUTC(sorted[sorted.length - 1].date);
+    const currentTs = parseYMDToUTC(currentDate);
+    const lastTs = Math.max(lastSummaryTs, currentTs);
+
     const daysCount = Math.round((lastTs - firstTs) / MS_PER_DAY) + 1;
 
     const countsMap = new Map<string, number>(summaries.map((s) => [s.date, s.count]));
@@ -92,7 +97,7 @@ export default function UserActivityCalendar({ username, summaries }: Readonly<U
         />
       );
     });
-  }, [summaries, username]);
+  }, [summaries, username, currentDate]);
 
   return (
     <Card className="gap-0 pb-0">

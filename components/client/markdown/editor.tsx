@@ -118,7 +118,10 @@ export default function MarkdownEditor({
         <div className={cn('h-full max-h-full overflow-hidden', mode === 'preview' && 'hidden')}>
           <textarea className="w-full h-full resize-none border-r" ref={textareaRef} />
         </div>
-        <div ref={previewRef} className={cn('markdown-it p-6 bg-card/80 overflow-auto', mode === 'edit' && 'hidden')} />
+        <div
+          ref={previewRef}
+          className={cn('markdown-it p-6 pb-92 bg-card/80 overflow-auto', mode === 'edit' && 'hidden')}
+        />
       </div>
       <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">
         <ToggleGroup type={'single'} value={mode} onValueChange={onModeChange}>
