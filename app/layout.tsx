@@ -2,6 +2,7 @@ import '@/app/globals.css';
 import GlobalFooter from '@/components/global/footer';
 import GlobalHeader from '@/components/global/header';
 import AuthProvider from '@/providers/auth';
+import NotificationProvider from '@/providers/notification';
 import ReactQueryProvider from '@/providers/react-query';
 import { ThemeProvider } from '@/providers/theme';
 import '@/styles/markdown-it.css';
@@ -36,10 +37,12 @@ export default function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ReactQueryProvider>
             <AuthProvider>
-              <GlobalHeader />
-              {children}
-              <GlobalFooter />
-              <Toaster position={'top-center'} expand={true} richColors={true} />
+              <NotificationProvider>
+                <GlobalHeader />
+                {children}
+                <GlobalFooter />
+                <Toaster position={'top-center'} expand={true} richColors={true} />
+              </NotificationProvider>
             </AuthProvider>
           </ReactQueryProvider>
         </ThemeProvider>

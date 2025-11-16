@@ -1,10 +1,12 @@
 import AuthMenu from '@/components/global/auth-menu';
 import GlobalCommandMenu from '@/components/global/command-menu';
 import HeaderNavLink from '@/components/global/header/nav-link';
+import GlobalNotificationIndicator from '@/components/global/notification/indicator';
 import GlobalSheet from '@/components/global/sheet';
 import Symbol from '@/components/global/symbol';
 import ThemeSwitch from '@/components/global/theme-switch';
 import { HEADER_LINKS } from '@/constants/links';
+import { ButtonGroup } from '@ui/button-group';
 import Link from 'next/link';
 
 export default function GlobalHeader() {
@@ -22,8 +24,11 @@ export default function GlobalHeader() {
           ))}
         </nav>
         <div className="hidden md:flex items-center gap-2 ml-0 h-full">
-          <ThemeSwitch />
           <GlobalCommandMenu />
+          <ButtonGroup>
+            <ThemeSwitch />
+            <GlobalNotificationIndicator />
+          </ButtonGroup>
           <AuthMenu type={'header'} />
         </div>
         <div className="flex md:hidden items-center gap-1 ml-0 h-full">

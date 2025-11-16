@@ -5,6 +5,7 @@ import {
   CircleCheckIcon,
   CircleDotIcon,
   CircleXIcon,
+  InfoIcon,
   LayersIcon,
   LucideIcon,
   MessagesSquareIcon,
@@ -13,6 +14,7 @@ import {
   NotepadTextIcon,
   SunIcon,
   TrendingUpIcon,
+  TriangleAlertIcon,
 } from 'lucide-react';
 
 const ARTICLE_SORT_OPTIONS: Record<ArticleSort, { label: string; icon: LucideIcon }> = {
@@ -73,6 +75,13 @@ const CHAT_MODEL_OPTIONS: Record<ChatModel, { label: string; icon: string }> = {
   O3: { label: 'O3', icon: 'openai' },
 };
 
+const NOTIFICATION_TYPE_OPTIONS: Record<NotiifcationType, { icon: LucideIcon; color: string }> = {
+  INFO: { icon: InfoIcon, color: 'text-blue-500' },
+  SUCCESS: { icon: CircleCheckIcon, color: 'text-green-500' },
+  WARNING: { icon: TriangleAlertIcon, color: 'text-yellow-500' },
+  ERROR: { icon: CircleXIcon, color: 'text-red-500' },
+};
+
 export {
   ARTICLE_SORT_OPTIONS,
   SERIES_SORT_OPTIONS,
@@ -83,4 +92,5 @@ export {
   USER_ACTIVITY_ACTION_OPTIONS,
   THEME_OPTIONS,
   CHAT_MODEL_OPTIONS,
+  NOTIFICATION_TYPE_OPTIONS,
 };
