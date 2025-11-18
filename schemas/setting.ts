@@ -9,7 +9,7 @@ const settingUsernameUpdateSchema = z.object({
 });
 const settingProfileUpdateSchema = z.object({
   nickname,
-  readme: z.string().max(512, 'README는 512자 이하여야 합니다.').optional(),
+  readme: z.string().max(1024, 'README는 1024자 이하여야 합니다.').optional(),
 });
 const settingPrivacyUpdateSchema = z.object({ emailPublic: z.boolean() });
 

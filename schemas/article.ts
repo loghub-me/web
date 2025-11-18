@@ -24,7 +24,7 @@ const articleCommentPostSchema = z.object({
     .string({ message: '댓글 내용은 문자열이어야 합니다.' })
     .trim()
     .min(1, { message: '댓글을 입력해주세요.' })
-    .max(255, { message: '댓글은 최대 255자까지 입력할 수 있습니다.' }),
+    .max(1024, { message: '댓글은 최대 1024자까지 입력할 수 있습니다.' }),
   parentId: id.optional(),
 });
 const articleCommentEditSchema = articleCommentPostSchema;
