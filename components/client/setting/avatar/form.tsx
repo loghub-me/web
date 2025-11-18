@@ -30,7 +30,7 @@ export default function SettingAvatarForm({ session }: Readonly<SettingAvatarFor
       <Avatar className="border size-48 group cursor-pointer" onClick={() => inputFileRef.current?.click()}>
         <AvatarImage
           key={version}
-          src={buildAssetsUrl(`${session.id}/avatar.webp?${new Date()}`)}
+          src={buildAssetsUrl(`${session.id}/avatar.webp?${new Date().getTime()}`)}
           className="transition-[scale] group-hover:scale-110"
         />
         <AvatarFallback>{session.username[0]}</AvatarFallback>
