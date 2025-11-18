@@ -88,8 +88,8 @@ importers:
         specifier: ^1.10.0
         version: 1.10.0
       loghub-me-markdown-renderer:
-        specifier: 0.1.1
-        version: 0.1.1(@types/markdown-it@14.1.2)
+        specifier: 0.1.2
+        version: 0.1.2(@types/markdown-it@14.1.2)
       lucide-react:
         specifier: ^0.544.0
         version: 0.544.0(react@19.2.0)
@@ -2204,8 +2204,8 @@ packages:
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
-  loghub-me-markdown-renderer@0.1.1:
-    resolution: {integrity: sha512-0nmIOnuJfkGMdW/YrCh5ZjBdph6CpKZy9oCzoiF3jk1v9TJuJ4RxDsmX5cI3wNE4qyzAHT/W9nqh9pB+jPVlPA==}
+  loghub-me-markdown-renderer@0.1.2:
+    resolution: {integrity: sha512-HwHfGSZde94mxsBT4R9qV+Xdhinf+s62ulS5XLkcG+b/FfZTxtidaQfzU79Vlv1A/8fWxd9aaU6n/HFI65426A==}
 
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
@@ -5038,7 +5038,7 @@ snapshots:
 
   lodash@4.17.21: {}
 
-  loghub-me-markdown-renderer@0.1.1(@types/markdown-it@14.1.2):
+  loghub-me-markdown-renderer@0.1.2(@types/markdown-it@14.1.2):
     dependencies:
       highlight.js: 11.11.1
       markdown-it: 14.1.0
