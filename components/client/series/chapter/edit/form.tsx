@@ -22,13 +22,17 @@ interface SeriesChapterEditFormProps {
 
 export default function SeriesChapterEditForm({ seriesId, sequence, form }: Readonly<SeriesChapterEditFormProps>) {
   const router = useRouter();
+  const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, sequence] as const];
   const queryClient = useQueryClient();
 
   function onSubmit(values: z.infer<typeof seriesChapterEditSchema>) {
     editSeriesChapter(seriesId, sequence, values)
       .then(({ pathname, message }) => {
         toast.success(message);
-        queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] }).then(() => router.push(pathname));
+
+        Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key }))).then(() =>
+          router.push(pathname)
+        );
       })
       .catch((err) => handleFormError(err, form.setError));
   }
