@@ -61,8 +61,8 @@ export default function GlobalFooter() {
       </div>
       <Separator />
       <div className="py-4 bg-card">
-        <div className="flex container mx-auto px-4">
-          <p className="flex-1">&copy; {new Date().getFullYear()} LogHub.</p>
+        <div className="flex items-center container mx-auto px-4">
+          <p className="flex-1 text-sm">&copy; {new Date().getFullYear()} LogHub.</p>
           {LEGAL_LINKS.map(({ label, href }) => (
             <ButtonLink key={href} href={href} size={'sm'} prefetch={false}>
               {label}
