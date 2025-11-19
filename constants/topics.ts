@@ -93,6 +93,7 @@ const TOPICS = [
   { slug: 'terraform', name: 'Terraform' },
   { slug: 'ansible', name: 'Ansible' },
   { slug: 'jenkins', name: 'Jenkins' },
+  { slug: 'git', name: 'Git' },
   { slug: 'github-actions', name: 'GitHub Actions' },
   { slug: 'gitlab-ci', name: 'GitLab CI/CD' },
   { slug: 'circle-ci', name: 'CircleCI' },
