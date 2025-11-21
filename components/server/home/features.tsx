@@ -5,7 +5,7 @@ import {
   HomeFeatureActivityCalendar,
   HomeFeatureTopic,
 } from '@/components/client/home';
-import { Tabs, TabsList, TabsContent } from '@radix-ui/react-tabs';
+import { Tabs, TabsList, TabsContent } from '@ui/tabs';
 import { PencilIcon, BotIcon, SproutIcon, TagIcon } from 'lucide-react';
 
 export default function HomeFeatures() {
