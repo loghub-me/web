@@ -1,6 +1,6 @@
 {
   "name": "loghub-web",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -35,7 +35,7 @@
     "input-otp": "^1.4.2",
     "jwt-decode": "^4.0.0",
     "ky": "^1.10.0",
-    "loghub-me-markdown-renderer": "0.2.0",
+    "loghub-me-markdown-renderer": "0.2.1",
     "lucide-react": "^0.544.0",
     "next": "16.0.0",
     "next-sitemap": "^4.2.3",
