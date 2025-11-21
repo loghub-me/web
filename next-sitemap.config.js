@@ -5,7 +5,7 @@ module.exports = {
   changefreq: 'daily',
   generateRobotsTxt: true,
   robotsTxtOptions: {
-    policies: [{ userAgent: '*', allow: '/', disallow: '/topics' }],
+    policies: [{ userAgent: '*', allow: '/', disallow: ['/edit/', '/settings/', '/notifications/', '/safe-link/'] }],
   },
   transform: async (config, url) => {
     const highPriorityUrls = ['/'];
