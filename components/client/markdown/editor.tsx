@@ -66,11 +66,7 @@ export default function MarkdownEditor({
   useEffect(() => {
     if (typeof window === 'undefined' || !textareaRef.current) return;
     if (!rendererRef.current) {
-      rendererRef.current = new MarkdownRenderer({
-        useMarkdownItAnchor: true,
-        useSafeLinkify: true,
-        useSanitize: false,
-      });
+      rendererRef.current = new MarkdownRenderer({ enabledPlugins: ['anchor', 'safeLink', 'captionedImage'] });
     }
 
     import('easymde').then((EasyMDEModule) => {
