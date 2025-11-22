@@ -22,13 +22,13 @@
 
 ### 환경 변수
 
-|               변수명               | 설명                                | 예시                           |
-| :--------------------------------: | ----------------------------------- | ------------------------------ |
-|             `SITE_URL`             | LogHub 웹 서버 주소(sitemap 생성용) | `https://loghub.me`            |
-| `API_HOST`, `NEXT_PUBLIC_API_HOST` | LogHub API 서버 주소                | `http://localhost:8080`        |
-|     `NEXT_PUBLIC_ASSETS_HOST`      | LogHub 에셋 서버 주소               | `http://localhost:4000`        |
-|      `NEXT_PUBLIC_GITHUB_URL`      | GitHub 리포지토리                   | `https://github.com/loghub-me` |
-|     `NEXT_PUBLIC_DISCORD_URL`      | Discord 초대 링크                   | `https://discord.gg/xxxxxx`    |
+|               변수명               | 설명                  | 예시                           |
+| :--------------------------------: | --------------------- | ------------------------------ |
+|             `WEB_URL`              | LogHub 웹 서버 주소   | `https://loghub.me`            |
+| `API_HOST`, `NEXT_PUBLIC_API_HOST` | LogHub API 서버 주소  | `http://localhost:8080`        |
+|     `NEXT_PUBLIC_ASSETS_HOST`      | LogHub 에셋 서버 주소 | `http://localhost:4000`        |
+|      `NEXT_PUBLIC_GITHUB_URL`      | GitHub 리포지토리     | `https://github.com/loghub-me` |
+|     `NEXT_PUBLIC_DISCORD_URL`      | Discord 초대 링크     | `https://discord.gg/xxxxxx`    |
 
 > `.env` 파일을 생성하여 위 환경 변수를 설정해주세요.
 
