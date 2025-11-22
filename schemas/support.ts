@@ -9,4 +9,15 @@ const inquirySchema = z.object({
   content,
 });
 
-export { inquirySchema };
+const topicRequestSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: '토픽 이름을 입력해주세요.' })
+    .max(56, { message: '토픽 이름은 최대 56자까지 이하이어야 합니다.' }),
+  description: z
+    .string()
+    .min(1, { message: '토픽 설명은 10자 이상이어야 합니다.' })
+    .max(8192, { message: '토픽 설명은 8192자 이하이어야 합니다.' }),
+});
+
+export { inquirySchema, topicRequestSchema };

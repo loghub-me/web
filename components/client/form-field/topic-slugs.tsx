@@ -1,8 +1,10 @@
 'use client';
 
+import { TopicRequestDialog } from '@/components/client/support';
 import { TopicBadge, TopicIcon } from '@/components/client/topic';
 import { ErrorMessage } from '@/constants/messages';
 import { getTopicSetBySlugs, searchTopics } from '@/constants/topics';
+import { useAuth } from '@/hooks/use-auth';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { cn } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
@@ -31,6 +33,7 @@ export default function TopicSlugsFormField<T extends FieldValues>({
     queryFn: () => searchTopics(debouncedQuery),
     enabled: debouncedQuery.trim().length > 0,
   });
+  const { status: authStatus } = useAuth();
 
   const showList = useMemo(() => query.trim().length > 0, [query]);
 
@@ -104,6 +107,7 @@ export default function TopicSlugsFormField<T extends FieldValues>({
             </div>
           )}
           <FormMessage />
+          {authStatus === 'authenticated' && <TopicRequestDialog />}
         </FormItem>
       )}
     />
