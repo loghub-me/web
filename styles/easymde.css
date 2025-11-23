@@ -1,73 +1,45 @@
 @reference "../app/globals.css";
 
+.EasyMDEContainer {
+  @apply h-full max-h-full overflow-auto;
+}
+.CodeMirror-rtl pre {
+  direction: rtl;
+}
+.EasyMDEContainer .CodeMirror {
+  @apply h-full p-6;
+
+  box-sizing: border-box;
+  font: inherit;
+  z-index: 0;
+  word-wrap: break-word;
+}
+.EasyMDEContainer .CodeMirror-scroll {
+  cursor: text;
+}
+.EasyMDEContainer .CodeMirror-placeholder {
+  opacity: 0.5;
+}
+
 .CodeMirror {
-  @apply h-full;
+  position: relative;
+  overflow: hidden;
   direction: ltr;
-  background: var(--card) !important;
+  color: var(--color-foreground);
+  background: var(--color-editor);
 }
-.CodeMirror-gutter-filler,
-.CodeMirror-scrollbar-filler {
-  background-color: #fff;
-}
-.CodeMirror-gutters {
-  border-right: 1px solid #ddd;
-  background-color: #f7f7f7;
-  white-space: nowrap;
-}
-.CodeMirror-guttermarker {
-  color: #000;
-}
-.CodeMirror-guttermarker-subtle {
-  color: #999;
-}
+
 .CodeMirror-cursor {
-  @apply border-l-foreground/80 border-l-1;
+  border-left: 1px solid var(--color-foreground);
   border-right: none;
   width: 0;
 }
-.CodeMirror div.CodeMirror-secondarycursor {
-  border-left: 1px solid silver;
-}
-.cm-fat-cursor .CodeMirror-cursor {
-  width: auto;
-  border: 0 !important;
-  background: #7e7;
-}
-.cm-fat-cursor div.CodeMirror-cursors {
-  z-index: 1;
-}
-.cm-fat-cursor .CodeMirror-line::selection,
-.cm-fat-cursor .CodeMirror-line > span::selection,
-.cm-fat-cursor .CodeMirror-line > span > span::selection {
-  background: 0 0;
-}
-.cm-fat-cursor .CodeMirror-line::-moz-selection,
-.cm-fat-cursor .CodeMirror-line > span::-moz-selection,
-.cm-fat-cursor .CodeMirror-line > span > span::-moz-selection {
-  background: 0 0;
-}
-.cm-fat-cursor {
-  caret-color: transparent;
-}
-@-moz-keyframes blink {
-  50% {
-    background-color: transparent;
-  }
-}
-@-webkit-keyframes blink {
-  50% {
-    background-color: transparent;
-  }
-}
-@keyframes blink {
-  50% {
-    background-color: transparent;
-  }
-}
+
 .cm-tab {
   display: inline-block;
   text-decoration: inherit;
 }
+
 .CodeMirror-rulers {
   position: absolute;
   left: 0;
@@ -76,115 +48,71 @@
   bottom: 0;
   overflow: hidden;
 }
+
 .CodeMirror-ruler {
   border-left: 1px solid #ccc;
   top: 0;
   bottom: 0;
   position: absolute;
 }
-.cm-s-default .cm-header {
-  color: #00f;
+
+.cm-header-1 {
+  @apply text-2xl;
 }
-.cm-s-default .cm-quote {
-  color: #090;
+.cm-header-2 {
+  @apply text-xl;
 }
-.cm-negative {
-  color: #d44;
+.cm-header-3 {
+  @apply text-lg;
 }
-.cm-positive {
-  color: #292;
+.cm-header-4 {
+  @apply text-base;
+}
+.cm-header-5 {
+  @apply text-sm;
+}
+.cm-header-6 {
+  @apply text-xs;
 }
 .cm-header,
 .cm-strong {
-  font-weight: 700;
+  @apply font-semibold;
 }
 .cm-em {
   font-style: italic;
 }
-.cm-link {
-  text-decoration: underline;
-}
 .cm-strikethrough {
   text-decoration: line-through;
 }
-.cm-s-default .cm-keyword {
-  color: #708;
+.cm-image-marker {
+  color: var(--color-secondary-foreground);
 }
-.cm-s-default .cm-atom {
-  color: #219;
+.cm-comment {
+  background: var(--color-muted);
+  border-radius: 2px;
 }
-.cm-s-default .cm-number {
-  color: #164;
+.cm-link {
+  color: var(--color-secondary-foreground);
+  text-decoration: none;
 }
-.cm-s-default .cm-def {
-  color: #00f;
+
+.cm-url {
+  color: var(--color-muted-foreground);
+  text-decoration: underline;
 }
-.cm-s-default .cm-variable-2 {
-  color: #05a;
+.cm-quote {
+  color: var(--color-muted-foreground);
+  background: var(--color-muted);
+  font-style: italic;
 }
-.cm-s-default .cm-type,
-.cm-s-default .cm-variable-3 {
-  color: #085;
+.cm-hr {
+  color: var(--color-muted-foreground);
 }
-.cm-s-default .cm-comment {
-  color: #a50;
-}
-.cm-s-default .cm-string {
-  color: #a11;
-}
-.cm-s-default .cm-string-2 {
-  color: #f50;
-}
-.cm-s-default .cm-meta {
-  color: #555;
-}
-.cm-s-default .cm-qualifier {
-  color: #555;
-}
-.cm-s-default .cm-builtin {
-  color: #30a;
-}
-.cm-s-default .cm-bracket {
-  color: #997;
-}
-.cm-s-default .cm-tag {
-  color: #170;
-}
-.cm-s-default .cm-attribute {
-  color: #00c;
-}
-.cm-s-default .cm-hr {
-  color: #999;
-}
-.cm-s-default .cm-link {
-  color: #00c;
-}
-.cm-s-default .cm-error {
-  color: red;
-}
-.cm-invalidchar {
-  color: red;
-}
+
 .CodeMirror-composing {
   border-bottom: 2px solid;
 }
-div.CodeMirror span.CodeMirror-matchingbracket {
-  color: #0b0;
-}
-div.CodeMirror span.CodeMirror-nonmatchingbracket {
-  color: #a22;
-}
-.CodeMirror-matchingtag {
-  background: rgba(255, 150, 0, 0.3);
-}
-.CodeMirror-activeline-background {
-  background: #e8f2ff;
-}
-.CodeMirror {
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-}
+
 .CodeMirror-scroll {
   overflow: scroll !important;
   min-height: auto !important;
@@ -259,12 +187,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   position: absolute;
   cursor: default;
   z-index: 4;
-}
-.CodeMirror-gutter-wrapper ::selection {
-  background-color: transparent;
-}
-.CodeMirror-gutter-wrapper ::-moz-selection {
-  background-color: transparent;
 }
 .CodeMirror-lines {
   cursor: text;
@@ -349,24 +271,22 @@ div.CodeMirror-dragcursors {
   visibility: visible;
 }
 .CodeMirror-selected {
-  background: #d9d9d9;
+  @apply bg-primary/30;
 }
+span.CodeMirror-selectedtext {
+  background: 0 0;
+}
+
 .CodeMirror-focused .CodeMirror-selected {
-  background: #d7d4f0;
+  @apply bg-primary/30;
 }
-.CodeMirror-crosshair {
-  cursor: crosshair;
-}
+
 .CodeMirror-line::selection,
 .CodeMirror-line > span::selection,
 .CodeMirror-line > span > span::selection {
-  background: #d7d4f0;
+  @apply bg-primary/30;
 }
-.CodeMirror-line::-moz-selection,
-.CodeMirror-line > span::-moz-selection,
-.CodeMirror-line > span > span::-moz-selection {
-  background: #d7d4f0;
-}
+
 .cm-searching {
   background-color: #ffa;
   background-color: rgba(255, 255, 0, 0.4);
@@ -381,91 +301,4 @@ div.CodeMirror-dragcursors {
 }
 .cm-tab-wrap-hack:after {
   content: '';
-}
-span.CodeMirror-selectedtext {
-  background: 0 0;
-}
-.EasyMDEContainer {
-  @apply h-full max-h-full overflow-auto border-r;
-}
-.CodeMirror-rtl pre {
-  direction: rtl;
-}
-.EasyMDEContainer .CodeMirror {
-  @apply h-full p-6;
-
-  box-sizing: border-box;
-  font: inherit;
-  z-index: 0;
-  word-wrap: break-word;
-}
-.EasyMDEContainer .CodeMirror-scroll {
-  cursor: text;
-}
-.EasyMDEContainer .CodeMirror-placeholder {
-  opacity: 0.5;
-}
-.EasyMDEContainer .CodeMirror-focused .CodeMirror-selected {
-  background: #d9d9d9;
-}
-.editor-statusbar {
-  @apply text-secondary-foreground hidden space-x-2 border-t p-2 text-right text-xs;
-}
-.editor-statusbar .lines:before {
-  content: 'lines: ';
-}
-.editor-statusbar .words:before {
-  content: 'words: ';
-}
-.editor-statusbar .characters:before {
-  content: 'characters: ';
-}
-.cm-s-easymde .cm-tag {
-  color: #63a35c;
-}
-.cm-s-easymde .cm-attribute {
-  color: #795da3;
-}
-.cm-s-easymde .cm-string {
-  color: #183691;
-}
-.cm-s-easymde .cm-header-1 {
-  @apply text-2xl;
-}
-.cm-s-easymde .cm-header-2 {
-  @apply text-xl;
-}
-.cm-s-easymde .cm-header-3 {
-  @apply text-lg;
-}
-.cm-s-easymde .cm-header-4 {
-  @apply text-base;
-}
-.cm-s-easymde .cm-header-5 {
-  @apply text-sm;
-}
-.cm-s-easymde .cm-header-6 {
-  @apply text-xs;
-}
-.cm-s-easymde .cm-header-1,
-.cm-s-easymde .cm-header-2,
-.cm-s-easymde .cm-header-3,
-.cm-s-easymde .cm-header-4,
-.cm-s-easymde .cm-header-5,
-.cm-s-easymde .cm-header-6 {
-  @apply font-semibold;
-}
-.cm-s-easymde .cm-comment {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 2px;
-}
-.cm-s-easymde .cm-link {
-  color: #7f8c8d;
-}
-.cm-s-easymde .cm-url {
-  color: #aab2b3;
-}
-.cm-s-easymde .cm-quote {
-  color: #7f8c8d;
-  font-style: italic;
 }

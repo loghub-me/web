@@ -95,6 +95,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
+  --color-editor: var(--editor);
   --color-code: var(--code);
   --color-code-comment-quote: var(--code-comment-quote);
   --color-code-keyword-name: var(--code-keyword-name);
@@ -147,6 +148,7 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
 
+  --editor: oklch(0.99 0 0);
   --code: oklch(0.967 0.001 286.375);
   --code-comment-quote: #7a7a7a;
   --code-keyword-name: #0077cc;
@@ -193,6 +195,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.552 0.016 285.938);
 
+  --editor: oklch(0.21 0.008 274.5332);
   --code: oklch(0.324 0.006 286.033);
   --code-comment-quote: #8e99a7;
   --code-keyword-name: #82aaff;

@@ -140,7 +140,7 @@ export default function MarkdownEditor({
         </div>
         <div
           ref={previewRef}
-          className={cn('markdown-it p-6 pb-92 bg-card/80 overflow-auto', mode === 'edit' && 'hidden')}
+          className={cn('markdown-it p-6 pb-92 bg-card overflow-auto border-l', mode === 'edit' && 'hidden')}
         />
       </div>
       <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">

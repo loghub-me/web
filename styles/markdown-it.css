@@ -55,7 +55,7 @@
     }
 
     img {
-      @apply rounded-md border;
+      @apply rounded-md border xl:max-w-3xl;
     }
 
     table {
