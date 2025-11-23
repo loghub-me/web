@@ -11,10 +11,13 @@ import { ToggleGroup, ToggleGroupItem } from '@ui/toggle-group';
 import type EasyMDE from 'easymde';
 import { MarkdownRenderer } from 'loghub-me-markdown-renderer';
 import { Columns2Icon, EyeIcon, ImageUpIcon, PencilIcon } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
+import z from 'zod';
 
 type EditorMode = 'edit' | 'preview' | 'preview-edit';
+const editorModeValue = z.enum(['edit', 'preview', 'preview-edit']);
+const placeholder = '# 나의 글은 최강이다.';
 
 interface MarkdownEditorProps {
   ref: React.RefObject<EasyMDE | null>;
@@ -39,29 +42,50 @@ export default function MarkdownEditor({
   const inputFileProps = {
     ...defaultInputFileProps,
     ref: inputFileRef,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (authStatus !== 'authenticated') {
+        toast.error(ErrorMessage.LOGIN_REQUIRED);
+        return;
+      }
+      if (!easyMDERef.current) {
+        toast.error(ErrorMessage.UNKNOWN);
+        return;
+      }
+      const { codemirror } = easyMDERef.current;
+      const [doc, cursor] = [codemirror.getDoc(), codemirror.getCursor()];
+
       uploadImageFile(e)
         .then(({ filename, path }) => {
-          const newLine = `\n![${filename}](${buildAssetsUrl(path)})\n`;
-          easyMDERef.current?.value(easyMDERef.current?.value() + newLine);
+          const newLine = `![${filename}](${buildAssetsUrl(path)})`;
+          doc.replaceRange(newLine, cursor);
         })
-        .catch(handleError),
+        .catch(handleError);
+    },
   };
 
-  function onModeChange(value: string) {
-    if (!value) {
-      return;
-    }
-    setMode(value as EditorMode);
-  }
+  const onModeChange = useCallback(
+    (value: string) => {
+      const { success, data } = editorModeValue.safeParse(value);
+      if (!success) {
+        toast.error(ErrorMessage.PARSE_ERROR);
+        return;
+      }
+      setMode(data);
+    },
+    [setMode]
+  );
 
-  function onClickImageUpload() {
+  const onClickImageUpload = useCallback(() => {
     if (authStatus !== 'authenticated') {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
     }
-    inputFileRef.current?.click();
-  }
+    if (!inputFileRef.current) {
+      toast.error(ErrorMessage.UNKNOWN);
+      return;
+    }
+    inputFileRef.current.click();
+  }, [authStatus]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !textareaRef.current) return;
@@ -82,7 +106,7 @@ export default function MarkdownEditor({
         status: false,
         spellChecker: false,
         initialValue: defaultValue,
-        placeholder: '# 나의 글은 최강이다.',
+        placeholder: placeholder,
         inputStyle: 'textarea',
       });
       easyMDERef.current = easyMDE;
@@ -106,7 +130,7 @@ export default function MarkdownEditor({
         easyMDERef.current = null;
       }
     };
-  }, [easyMDERef, textareaRef, previewRef, defaultValue]);
+  }, [easyMDERef, defaultValue]);
 
   return (
     <div className="w-full h-full max-w-full max-h-full">
