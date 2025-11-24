@@ -2,6 +2,7 @@
 
 import { ArticlePostDialog, ArticlePostForm } from '@/components/client/article';
 import { MarkdownEditor } from '@/components/client/markdown';
+import { syncEditorWithForm } from '@/lib/form';
 import { articlePostSchema } from '@/schemas/article';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type EasyMDE from 'easymde';
@@ -18,13 +19,10 @@ export default function ArticlePostPage() {
 
   function onDialogOpenChange(open: boolean) {
     if (open) {
-      const title = form.getValues('title');
-      const content = easyMDERef.current?.value() || '';
-      if (!title) {
-        const firstLine = content.split('\n')[0] || '';
-        form.setValue('title', firstLine.replace(/^#+\s*/, '').trim());
-      }
-      form.setValue('content', content);
+      syncEditorWithForm(easyMDERef, form.getValues('title'), form.setValue, {
+        titleField: 'title',
+        contentField: 'content',
+      });
     }
   }
 

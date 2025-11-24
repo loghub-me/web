@@ -13,7 +13,7 @@ export default async function SafeLinkPage({ searchParams }: PageProps<'/safe-li
         <CardHeader className="space-y-1.5 pb-4 border-b">
           <CardTitle>안전하게 링크로 이동</CardTitle>
           <CardDescription>
-            정말로 <span className="font-mono text-primary underline">{url}</span> 로 이동하시겠습니까?
+            <span className="text-primary underline">{url}</span>로 이동하시겠습니까?
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">

@@ -5,6 +5,7 @@ import { MarkdownEditor } from '@/components/client/markdown';
 import { QuestionAnswerEditDialog, QuestionAnswerEditForm } from '@/components/client/question';
 import { useAuth } from '@/hooks/use-auth';
 import { useQueryErrorHandle } from '@/hooks/use-query-error-handle';
+import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
 import { questionAnswerEditPageSchema, questionAnswerEditSchema } from '@/schemas/question';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -49,13 +50,10 @@ function QuestionAnswerEditor({ questionId, defaultValues }: Readonly<QuestionAn
 
   function onDialogOpenChange(open: boolean) {
     if (open) {
-      const title = form.getValues('title');
-      const content = easyMDERef.current?.value() || '';
-      if (!title) {
-        const firstLine = content.split('\n')[0] || '';
-        form.setValue('title', firstLine.replace(/^#+\s*/, '').trim());
-      }
-      form.setValue('content', content);
+      syncEditorWithForm(easyMDERef, form.getValues('title'), form.setValue, {
+        titleField: 'title',
+        contentField: 'content',
+      });
     }
   }
 

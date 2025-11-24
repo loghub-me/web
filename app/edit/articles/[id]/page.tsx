@@ -5,6 +5,7 @@ import { ArticleEditDialog, ArticleEditForm } from '@/components/client/article'
 import { MarkdownEditor } from '@/components/client/markdown';
 import { useAuth } from '@/hooks/use-auth';
 import { useQueryErrorHandle } from '@/hooks/use-query-error-handle';
+import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
 import { articleEditSchema } from '@/schemas/article';
 import { idSchema } from '@/schemas/common';
@@ -42,13 +43,10 @@ function ArticleEditor({ defaultValues }: Readonly<ArticleEditorProps>) {
 
   function onDialogOpenChange(open: boolean) {
     if (open) {
-      const title = form.getValues('title');
-      const content = easyMDERef.current?.value() || '';
-      if (!title) {
-        const firstLine = content.split('\n')[0] || '';
-        form.setValue('title', firstLine.replace(/^#+\s*/, '').trim());
-      }
-      form.setValue('content', content);
+      syncEditorWithForm(easyMDERef, form.getValues('title'), form.setValue, {
+        titleField: 'title',
+        contentField: 'content',
+      });
     }
   }
 
