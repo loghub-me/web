@@ -38,7 +38,7 @@ const content = z
   .string({ message: '내용은 문자열이어야 합니다.' })
   .min(10, { message: '내용은 10글자 이상이어야 합니다.' })
   .max(8192, { message: '내용은 8192글자 이하여야 합니다.' });
-const thumbnailRegex = /^(default|[0-9]+)\/[a-zA-Z0-9_-]+\.webp$/;
+const thumbnailRegex = /^[0-9]+\/[a-zA-Z0-9_-]+\.webp$/;
 const thumbnail = z
   .string({ message: '썸네일의 path는 문자열이어야 합니다.' })
   .regex(thumbnailRegex, { message: '썸네일의 path는 올바른 형식이어야 합니다.' });
