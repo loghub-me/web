@@ -31,7 +31,6 @@ export default function SeriesChapterTOCMenu({ anchors }: Readonly<SeriesChapter
               className="px-2 py-1.5 min-h-9 w-full h-auto justify-start whitespace-normal"
             >
               {text}
-              {text}
             </ButtonLink>
           </DropdownMenuItem>
         ))}
