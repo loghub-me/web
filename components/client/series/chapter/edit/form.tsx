@@ -16,23 +16,21 @@ import { z } from 'zod';
 
 interface SeriesChapterEditFormProps {
   seriesId: number;
-  sequence: number;
+  chapterId: number;
   form: UseFormReturn<z.infer<typeof seriesChapterEditSchema>>;
 }
 
-export default function SeriesChapterEditForm({ seriesId, sequence, form }: Readonly<SeriesChapterEditFormProps>) {
+export default function SeriesChapterEditForm({ seriesId, chapterId, form }: Readonly<SeriesChapterEditFormProps>) {
   const router = useRouter();
-  const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, sequence] as const];
+  const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, chapterId] as const];
   const queryClient = useQueryClient();
 
   function onSubmit(values: z.infer<typeof seriesChapterEditSchema>) {
-    editSeriesChapter(seriesId, sequence, values)
-      .then(({ pathname, message }) => {
+    editSeriesChapter(seriesId, chapterId, values)
+      .then(async ({ pathname, message }) => {
         toast.success(message);
-
-        Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key }))).then(() =>
-          router.push(pathname)
-        );
+        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+        router.push(pathname);
       })
       .catch((err) => handleFormError(err, form.setError));
   }

@@ -31,7 +31,7 @@ export default function SeriesEditPage() {
     status === 'authenticated' && (
       <main className="container mx-auto px-4 py-20 min-h-screen space-y-4">
         {series && <SeriesEditor key={series.id} defaultValues={series} />}
-        {series && <SeriesChapterManager series={series} prefixPath={`/edit/series/${series.id}`} />}
+        {series && <SeriesChapterManager series={series} />}
       </main>
     )
   );

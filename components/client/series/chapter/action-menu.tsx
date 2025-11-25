@@ -20,10 +20,8 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesChapterActionMenuProps {
-  prefixPath: string;
   seriesId: number;
-  id: number;
-  sequence: number;
+  chapterId: number;
 }
 
 export default function SeriesChapterActionMenu(props: Readonly<SeriesChapterActionMenuProps>) {
@@ -42,29 +40,25 @@ export default function SeriesChapterActionMenu(props: Readonly<SeriesChapterAct
   );
 }
 
-function SeriesChapterEditLink({
-  prefixPath,
-  sequence,
-}: Readonly<Pick<SeriesChapterActionMenuProps, 'prefixPath' | 'sequence'>>) {
+function SeriesChapterEditLink({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   return (
-    <ButtonLink href={`${prefixPath}/${sequence}`} variant={'ghost'} size={'sm'}>
+    <ButtonLink href={`/edit/series/${seriesId}/chapters/${chapterId}`} variant={'ghost'} size={'sm'}>
       <PencilIcon /> 수정하기
     </ButtonLink>
   );
 }
 
-function SeriesChapterDeleteButton({
-  seriesId,
-  sequence,
-}: Readonly<Pick<SeriesChapterActionMenuProps, 'seriesId' | 'sequence'>>) {
+function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
+  const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, chapterId] as const];
 
   function onDeleteButtonClick() {
-    deleteSeriesChapter(seriesId, sequence)
-      .then(({ message }) => {
+    deleteSeriesChapter(seriesId, chapterId)
+      .then(async ({ message }) => {
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
-        queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] }).then(() => setOpen(false));
+        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+        setOpen(false);
       })
       .catch(handleError);
   }

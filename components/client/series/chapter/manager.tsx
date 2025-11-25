@@ -34,10 +34,9 @@ import { toast } from 'sonner';
 
 interface SeriesChapterManagerProps {
   series: SeriesForEdit;
-  prefixPath: string;
 }
 
-export default function SeriesChapterManager({ series, prefixPath }: Readonly<SeriesChapterManagerProps>) {
+export default function SeriesChapterManager({ series }: Readonly<SeriesChapterManagerProps>) {
   const [chapters, setChapters] = useState(series.chapters);
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -89,12 +88,7 @@ export default function SeriesChapterManager({ series, prefixPath }: Readonly<Se
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={chapters} strategy={verticalListSortingStrategy}>
             {chapters.map((chapter) => (
-              <SeriesChapterManagerItem
-                key={chapter.id}
-                chapter={chapter}
-                seriesId={series.id}
-                prefixPath={prefixPath}
-              />
+              <SeriesChapterManagerItem key={chapter.id} chapter={chapter} seriesId={series.id} />
             ))}
           </SortableContext>
         </DndContext>
@@ -111,10 +105,9 @@ export default function SeriesChapterManager({ series, prefixPath }: Readonly<Se
 interface SeriesChapterManagerItemProps {
   chapter: SeriesChapter;
   seriesId: number;
-  prefixPath: string;
 }
 
-function SeriesChapterManagerItem({ chapter, seriesId, prefixPath }: Readonly<SeriesChapterManagerItemProps>) {
+function SeriesChapterManagerItem({ chapter, seriesId }: Readonly<SeriesChapterManagerItemProps>) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: chapter.id });
 
   const style = {
@@ -129,7 +122,7 @@ function SeriesChapterManagerItem({ chapter, seriesId, prefixPath }: Readonly<Se
       </Button>
       <span className="font-bold text-primary">{chapter.sequence}.</span>
       <span className="flex-1 whitespace-normal">{chapter.title}</span>
-      <SeriesChapterActionMenu seriesId={seriesId} prefixPath={prefixPath} {...chapter} />
+      <SeriesChapterActionMenu seriesId={seriesId} chapterId={chapter.id} />
     </Card>
   );
 }

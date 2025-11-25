@@ -20,20 +20,20 @@ const editSeries = (seriesId: number, json: z.infer<typeof seriesEditSchema>) =>
 
 const deleteSeries = (seriesId: number) => clientAPI.delete(`series/${seriesId}`).json<MessageResponseBody>();
 
-const getSeriesChapterForEdit = async (seriesId: number, sequence: number) =>
-  clientAPI.get(`series/${seriesId}/chapters/${sequence}/for-edit`).json<SeriesChapterForEdit>();
+const getSeriesChapterForEdit = async (seriesId: number, chapterId: number) =>
+  clientAPI.get(`series/${seriesId}/chapters/${chapterId}/for-edit`).json<SeriesChapterForEdit>();
 
 const createSeriesChapter = (seriesId: number) =>
   clientAPI.post(`series/${seriesId}/chapters`).json<MessageResponseBody>();
 
+const editSeriesChapter = (seriesId: number, chapterId: number, json: z.infer<typeof seriesChapterEditSchema>) =>
+  clientAPI.put(`series/${seriesId}/chapters/${chapterId}`, { json }).json<RedirectResponseBody>();
+
+const deleteSeriesChapter = (seriesId: number, chapterId: number) =>
+  clientAPI.delete(`series/${seriesId}/chapters/${chapterId}`).json<MessageResponseBody>();
+
 const importSeriesChapter = (seriesId: number, articleId: number) =>
   clientAPI.post(`series/${seriesId}/chapters/import/${articleId}`).json<MessageResponseBody>();
-
-const editSeriesChapter = (seriesId: number, sequence: number, json: z.infer<typeof seriesChapterEditSchema>) =>
-  clientAPI.put(`series/${seriesId}/chapters/${sequence}`, { json }).json<RedirectResponseBody>();
-
-const deleteSeriesChapter = (seriesId: number, sequence: number) =>
-  clientAPI.delete(`series/${seriesId}/chapters/${sequence}`).json<MessageResponseBody>();
 
 const changeChapterSequence = (seriesId: number, sequences: number[]) =>
   clientAPI.patch(`series/${seriesId}/chapters/sequence`, { json: { sequences } }).json<MessageResponseBody>();
@@ -58,13 +58,7 @@ const addSeriesStar = (seriesId: number) => clientAPI.post(`series/star/${series
 const removeSeriesStar = (seriesId: number) => clientAPI.delete(`series/star/${seriesId}`).json<MessageResponseBody>();
 
 export { getSeriesForEdit, postSeries, editSeries, deleteSeries };
-export {
-  getSeriesChapterForEdit,
-  createSeriesChapter,
-  importSeriesChapter,
-  editSeriesChapter,
-  deleteSeriesChapter,
-  changeChapterSequence,
-};
+export { getSeriesChapterForEdit, createSeriesChapter, editSeriesChapter, deleteSeriesChapter };
+export { importSeriesChapter, changeChapterSequence };
 export { getSeriesReviews, postSeriesReview, editSeriesReview, deleteSeriesReview };
 export { existsSeriesStar, addSeriesStar, removeSeriesStar };

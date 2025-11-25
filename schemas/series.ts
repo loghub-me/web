@@ -25,7 +25,7 @@ const seriesPostSchema = z.object({
 const seriesEditSchema = seriesPostSchema;
 
 const seriesChapterEditSchema = z.object({ title, content });
-const seriesChapterEditPageSchema = z.object({ id: coercedId, sequence: coercedSequence });
+const seriesChapterEditPageSchema = z.object({ id: coercedId, chapterId: coercedId });
 
 const seriesReviewPostSchema = z.object({
   content: z

@@ -17,7 +17,7 @@ export default async function SeriesDetailLayout({ params, children }: LayoutPro
             <SeriesDetailHeader {...series} />
             <SeriesDetailContent {...series} />
           </Card>
-          <SeriesChapterCard chapters={series.chapters} prefixPath={`/series/${username}/${slug}`} />
+          <SeriesChapterCard writerUsername={username} slug={slug} chapters={series.chapters} />
         </SeriesDetailAside>
         <div className="w-full min-w-0 space-y-4">{children}</div>
       </div>

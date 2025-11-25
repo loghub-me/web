@@ -25,29 +25,21 @@ export default async function SeriesChapterDetailPage({ params }: PageProps<'/se
   const { username, slug, sequence } = parseObject(await params, seriesChapterDetailSchema);
   const series = await getSeriesDetail(username, slug);
   const chapter = getSeriesChapterDetail(series.id, sequence);
-  const prefixPath = `/series/${username}/${slug}`;
 
-  return (
-    <SeriesChapterDetail
-      chapter={chapter}
-      series={series}
-      prefixPath={prefixPath}
-      totalChapters={series.chapters.length}
-    />
-  );
+  return <SeriesChapterDetail chapter={chapter} series={series} totalChapters={series.chapters.length} />;
 }
 
 interface SeriesChapterDetailProps {
   chapter: Promise<SeriesChapterDetail>;
   series: {
     id: number;
+    slug: string;
     writer: UserDetail;
   };
-  prefixPath: string;
   totalChapters: number;
 }
 
-async function SeriesChapterDetail({ chapter, series, prefixPath, totalChapters }: Readonly<SeriesChapterDetailProps>) {
+async function SeriesChapterDetail({ chapter, series, totalChapters }: Readonly<SeriesChapterDetailProps>) {
   const resolvedChapter = await chapter;
   const { sequence } = resolvedChapter;
 
@@ -56,7 +48,7 @@ async function SeriesChapterDetail({ chapter, series, prefixPath, totalChapters 
       <SeriesChapterDetailHeader series={series} {...resolvedChapter} />
       <SeriesChapterDetailContent {...resolvedChapter} />
       <SeriesChapterDetailFooter
-        prefixPath={prefixPath}
+        series={series}
         sequence={sequence}
         hasPrev={sequence > 1}
         hasNext={sequence < totalChapters}
