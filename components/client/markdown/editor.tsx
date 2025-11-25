@@ -139,7 +139,7 @@ export default function MarkdownEditor({
         easyMDERef.current = null;
       }
     };
-  }, [easyMDERef, defaultValue, onClickImageUpload, onDraftSave]);
+  }, [easyMDERef]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="w-full h-full max-w-full max-h-full">

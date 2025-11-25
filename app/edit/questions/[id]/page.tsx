@@ -77,7 +77,7 @@ function QuestionEditor({ question, queryKey }: Readonly<QuestionEditorProps>) {
     updateQuestionDraft(question.id, easyMDERef.current.value())
       .then(({ message }) => {
         toast.success(message, { icon: <SaveIcon className="size-4" /> });
-        queryClient.setQueryData(queryKey, { ...question, draft });
+        queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft } : old));
         setHasDraft(true);
       })
       .catch(handleError);
