@@ -1,7 +1,6 @@
 'use client';
 
 import { COMMAND_LINKS } from '@/constants/links';
-import { useIsMac } from '@/hooks/use-is-mac';
 import { Button } from '@ui/button';
 import {
   CommandDialog,
@@ -12,14 +11,13 @@ import {
   CommandList,
   CommandSeparator,
 } from '@ui/command';
-import { Kbd } from '@ui/kbd';
+import { Kbd, KbdModifier } from '@ui/kbd';
 import { SearchIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 export default function GlobalCommandMenu() {
   const router = useRouter();
-  const isMac = useIsMac();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -48,7 +46,9 @@ export default function GlobalCommandMenu() {
       <Button type={'button'} variant={'outline'} className="hidden md:flex" onClick={() => setOpen(true)}>
         <SearchIcon className="text-muted-foreground" />
         <span className="mr-4 text-muted-foreground">기능을 검색해주세요...</span>
-        <Kbd>{isMac ? '⌘' : 'Ctrl'} K</Kbd>
+        <Kbd>
+          <KbdModifier /> K
+        </Kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen} showCloseButton={false}>
         <CommandInput icon={SearchIcon} placeholder="기능을 검색해주세요..." />
