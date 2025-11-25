@@ -52,6 +52,7 @@ interface SeriesChapterForEdit {
   id: number;
   title: string;
   content: string;
+  draft?: string;
   sequence: number;
 }
 

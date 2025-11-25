@@ -20,6 +20,12 @@ const editArticle = (articleId: number, json: z.infer<typeof articleEditSchema>)
 
 const deleteArticle = (articleId: number) => clientAPI.delete(`articles/${articleId}`).json<MessageResponseBody>();
 
+const updateArticleDraft = (articleId: number, content: string) =>
+  clientAPI.patch(`articles/${articleId}/draft`, { json: { content } }).json<MessageResponseBody>();
+
+const deleteArticleDraft = (articleId: number) =>
+  clientAPI.delete(`articles/${articleId}/draft`).json<MessageResponseBody>();
+
 const getArticleComments = (articleId: number, page = 1) =>
   clientAPI.get(`articles/${articleId}/comments`, { searchParams: { page } }).json<Page<ArticleComment>>();
 
@@ -44,5 +50,6 @@ const removeArticleStar = (articleId: number) =>
   clientAPI.delete(`articles/star/${articleId}`).json<MessageResponseBody>();
 
 export { getArticleForEdit, postArticle, editArticle, deleteArticle };
+export { updateArticleDraft, deleteArticleDraft };
 export { getArticleComments, getArticleCommentReplies, postArticleComment, editArticleComment, deleteArticleComment };
 export { existsArticleStar, addArticleStar, removeArticleStar };

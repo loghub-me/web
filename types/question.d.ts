@@ -24,6 +24,7 @@ interface QuestionForEdit {
   id: number;
   title: string;
   content: string;
+  draft?: string;
   topicSlugs: string[];
 }
 
@@ -44,6 +45,7 @@ interface QuestionAnswerForEdit {
   id: number;
   title: string;
   content: string;
+  draft?: string;
 }
 
 type QuestionStatus = 'OPEN' | 'CLOSED' | 'SOLVED';

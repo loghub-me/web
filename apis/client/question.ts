@@ -23,6 +23,12 @@ const deleteQuestion = (questionId: number) => clientAPI.delete(`questions/${que
 const closeQuestion = (questionId: number) =>
   clientAPI.post(`questions/${questionId}/close`).json<RedirectResponseBody>();
 
+const updateQuestionDraft = (questionId: number, content: string) =>
+  clientAPI.patch(`questions/${questionId}/draft`, { json: { content } }).json<MessageResponseBody>();
+
+const deleteQuestionDraft = (questionId: number) =>
+  clientAPI.delete(`questions/${questionId}/draft`).json<MessageResponseBody>();
+
 const getQuestionAnswerForEdit = async (questionId: number, answerId: number) =>
   clientAPI.get(`questions/${questionId}/answers/${answerId}/for-edit`).json<QuestionAnswerForEdit>();
 
@@ -37,6 +43,14 @@ const deleteQuestionAnswer = (questionId: number, answerId: number) =>
 
 const acceptQuestionAnswer = (questionId: number, answerId: number) =>
   clientAPI.post(`questions/${questionId}/answers/${answerId}/accept`).json<MethodResponseBody>();
+
+const updateQuestionAnswerDraft = (questionId: number, answerId: number, content: string) =>
+  clientAPI
+    .patch(`questions/${questionId}/answers/${answerId}/draft`, { json: { content } })
+    .json<MessageResponseBody>();
+
+const deleteQuestionAnswerDraft = (questionId: number, answerId: number) =>
+  clientAPI.delete(`questions/${questionId}/answers/${answerId}/draft`).json<MessageResponseBody>();
 
 const checkGeneratingQuestionAnswer = (questionId: number) =>
   clientAPI.get(`questions/${questionId}/answers/generating`).json<DataResponseBody<boolean>>();
@@ -54,6 +68,8 @@ const removeQuestionStar = (questionId: number) =>
   clientAPI.delete(`questions/star/${questionId}`).json<MessageResponseBody>();
 
 export { getQuestionForEdit, postQuestion, editQuestion, deleteQuestion, closeQuestion };
+export { updateQuestionDraft, deleteQuestionDraft };
 export { getQuestionAnswerForEdit, postQuestionAnswer, editQuestionAnswer, deleteQuestionAnswer, acceptQuestionAnswer };
+export { updateQuestionAnswerDraft, deleteQuestionAnswerDraft };
 export { checkGeneratingQuestionAnswer, requestGenerateQuestionAnswer };
 export { existsQuestionStar, addQuestionStar, removeQuestionStar };

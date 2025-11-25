@@ -10,14 +10,14 @@ import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
 import { seriesChapterEditPageSchema, seriesChapterEditSchema } from '@/schemas/series';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { ButtonGroup } from '@ui/button-group';
 import { Kbd, KbdModifier } from '@ui/kbd';
 import type EasyMDE from 'easymde';
 import { DeleteIcon, SaveIcon } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -26,38 +26,41 @@ export default function SeriesChapterEditPage() {
   const params = useParams<{ id: string; chapterId: string }>();
   const { id: seriesId, chapterId } = parseObject(params, seriesChapterEditPageSchema);
   const { status } = useAuth();
-  const { data: series, error } = useQuery({
-    queryKey: ['getSeriesChapterForEdit', seriesId, chapterId],
+
+  const queryKey = ['getSeriesChapterForEdit', seriesId, chapterId] as const;
+  const { data: chapter, error } = useQuery({
+    queryKey,
     queryFn: () => getSeriesChapterForEdit(seriesId, chapterId),
     enabled: status === 'authenticated',
     retry: false,
-    refetchOnMount: false,
   });
 
   useQueryErrorHandle(error, '/search/series');
 
   return (
     <main className="max-h-screen h-screen pt-16">
-      {series && <SeriesChapterEditor seriesId={seriesId} defaultValues={series} />}
+      {chapter && <SeriesChapterEditor seriesId={seriesId} chapter={chapter} queryKey={queryKey} />}
     </main>
   );
 }
 
 interface SeriesChapterEditorProps {
   seriesId: number;
-  defaultValues: SeriesChapterForEdit;
+  chapter: SeriesChapterForEdit;
+  queryKey: readonly [string, number, number];
 }
 
-function SeriesChapterEditor({ seriesId, defaultValues }: Readonly<SeriesChapterEditorProps>) {
+function SeriesChapterEditor({ seriesId, chapter, queryKey }: Readonly<SeriesChapterEditorProps>) {
   const easyMDERef = useRef<EasyMDE>(null);
-  const [hasDraft, setHasDraft] = useState(Boolean(defaultValues.draft));
+  const queryClient = useQueryClient();
+  const [hasDraft, setHasDraft] = useState(Boolean(chapter.draft));
 
-  const chapterId = defaultValues.id;
-  const resolvedContent = defaultValues.draft || defaultValues.content;
+  const chapterId = chapter.id;
+  const resolvedContent = chapter.draft || chapter.content;
 
   const form = useForm<z.infer<typeof seriesChapterEditSchema>>({
     resolver: zodResolver(seriesChapterEditSchema),
-    defaultValues: { ...defaultValues, content: resolvedContent },
+    defaultValues: { ...chapter, content: resolvedContent },
   });
 
   function onDialogOpenChange(open: boolean) {
@@ -69,25 +72,28 @@ function SeriesChapterEditor({ seriesId, defaultValues }: Readonly<SeriesChapter
     }
   }
 
-  const onDraftSave = useCallback(() => {
+  const onDraftSave = () => {
     if (!easyMDERef.current) return;
+    const draft = easyMDERef.current.value();
 
     updateSeriesChapterDraft(seriesId, chapterId, easyMDERef.current.value())
       .then(({ message }) => {
-        toast.success(message);
+        toast.success(message, { icon: <SaveIcon className="size-4" /> });
+        queryClient.setQueryData(queryKey, { ...chapter, draft });
         setHasDraft(true);
       })
       .catch(handleError);
-  }, [seriesId, chapterId, easyMDERef]);
+  };
 
   const onDraftDelete = () => {
     if (!easyMDERef.current) return;
 
     deleteSeriesChapterDraft(seriesId, chapterId)
       .then(({ message }) => {
-        toast.success(message);
-        easyMDERef.current?.value(defaultValues.content);
-        form.setValue('content', defaultValues.content);
+        toast.success(message, { icon: <DeleteIcon className="size-4" /> });
+        queryClient.setQueryData(queryKey, { ...chapter, draft: null });
+        easyMDERef.current?.value(chapter.content);
+        form.setValue('content', chapter.content);
         setHasDraft(false);
       })
       .catch(handleError);
@@ -95,7 +101,7 @@ function SeriesChapterEditor({ seriesId, defaultValues }: Readonly<SeriesChapter
 
   return (
     <MarkdownEditor
-      title={`[수정] ${defaultValues.title}`}
+      title={`[수정] ${chapter.title}`}
       ref={easyMDERef}
       defaultValue={resolvedContent}
       onDraftSave={onDraftSave}
@@ -114,7 +120,7 @@ function SeriesChapterEditor({ seriesId, defaultValues }: Readonly<SeriesChapter
         )}
       </ButtonGroup>
       <SeriesChapterEditDialog onOpenChange={onDialogOpenChange}>
-        <SeriesChapterEditForm seriesId={seriesId} chapterId={defaultValues.id} form={form} />
+        <SeriesChapterEditForm seriesId={seriesId} chapterId={chapter.id} form={form} />
       </SeriesChapterEditDialog>
     </MarkdownEditor>
   );

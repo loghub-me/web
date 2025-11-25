@@ -31,6 +31,7 @@ interface ArticleForEdit {
   id: number;
   title: string;
   content: string;
+  draft?: string;
   thumbnail: string;
   topicSlugs: string[];
 }

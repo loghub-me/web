@@ -38,6 +38,12 @@ const importSeriesChapter = (seriesId: number, articleId: number) =>
 const changeChapterSequence = (seriesId: number, sequences: number[]) =>
   clientAPI.patch(`series/${seriesId}/chapters/sequence`, { json: { sequences } }).json<MessageResponseBody>();
 
+const updateSeriesChapterDraft = (seriesId: number, chapterId: number, content: string) =>
+  clientAPI.patch(`series/${seriesId}/chapters/${chapterId}/draft`, { json: { content } }).json<MessageResponseBody>();
+
+const deleteSeriesChapterDraft = (seriesId: number, chapterId: number) =>
+  clientAPI.delete(`series/${seriesId}/chapters/${chapterId}/draft`).json<MessageResponseBody>();
+
 const getSeriesReviews = (seriesId: number, page = 1) =>
   clientAPI.get(`series/${seriesId}/reviews`, { searchParams: { page } }).json<Page<SeriesReview>>();
 
@@ -60,5 +66,6 @@ const removeSeriesStar = (seriesId: number) => clientAPI.delete(`series/star/${s
 export { getSeriesForEdit, postSeries, editSeries, deleteSeries };
 export { getSeriesChapterForEdit, createSeriesChapter, editSeriesChapter, deleteSeriesChapter };
 export { importSeriesChapter, changeChapterSequence };
+export { updateSeriesChapterDraft, deleteSeriesChapterDraft };
 export { getSeriesReviews, postSeriesReview, editSeriesReview, deleteSeriesReview };
 export { existsSeriesStar, addSeriesStar, removeSeriesStar };

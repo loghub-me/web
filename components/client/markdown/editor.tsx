@@ -7,6 +7,7 @@ import { defaultInputFileProps, uploadImageFile } from '@/lib/image/upload';
 import { buildAssetsUrl, cn } from '@/lib/utils';
 import '@/styles/easymde.css';
 import { Button } from '@ui/button';
+import { Kbd, KbdModifier } from '@ui/kbd';
 import { ToggleGroup, ToggleGroupItem } from '@ui/toggle-group';
 import type EasyMDE from 'easymde';
 import { MarkdownRenderer } from 'loghub-me-markdown-renderer';
@@ -23,6 +24,7 @@ interface MarkdownEditorProps {
   ref: React.RefObject<EasyMDE | null>;
   title: string;
   defaultValue?: string;
+  onDraftSave?: () => void;
   children?: React.ReactNode;
 }
 
@@ -30,6 +32,7 @@ export default function MarkdownEditor({
   ref: easyMDERef,
   title,
   defaultValue = '',
+  onDraftSave,
   children,
 }: Readonly<MarkdownEditorProps>) {
   const rendererRef = useRef<MarkdownRenderer>(null);
@@ -117,6 +120,12 @@ export default function MarkdownEditor({
           previewRef.current.innerHTML = rendererRef.current.render(markdown);
         }
       });
+      easyMDE.codemirror.addKeyMap({
+        'Ctrl-I': onClickImageUpload,
+        'Cmd-I': onClickImageUpload,
+        'Ctrl-S': onDraftSave || (() => toast.info('게시 후 임시저장이 가능합니다.')),
+        'Cmd-S': onDraftSave || (() => toast.info('게시 후 임시저장이 가능합니다.')),
+      });
 
       if (defaultValue) {
         previewRef.current.innerHTML = rendererRef.current.render(defaultValue);
@@ -130,7 +139,7 @@ export default function MarkdownEditor({
         easyMDERef.current = null;
       }
     };
-  }, [easyMDERef, defaultValue]);
+  }, [easyMDERef, defaultValue, onClickImageUpload, onDraftSave]);
 
   return (
     <div className="w-full h-full max-w-full max-h-full">
@@ -158,8 +167,11 @@ export default function MarkdownEditor({
         <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
         <div className="flex gap-2">
           <input {...inputFileProps} />
-          <Button type="button" variant="outline" size={'icon'} onClick={onClickImageUpload}>
+          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onClickImageUpload}>
             <ImageUpIcon />
+            <Kbd>
+              <KbdModifier /> I
+            </Kbd>
           </Button>
           {children}
         </div>
