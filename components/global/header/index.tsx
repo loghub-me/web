@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 export default function GlobalHeader() {
   return (
-    <header className="absolute top-0 left-0 w-full h-16 bg-background border-b">
+    <header className="absolute z-10 top-0 left-0 w-full h-16 bg-background/40 backdrop-blur-sm border-b">
       <div className="container mx-auto flex items-center gap-4 h-full px-4">
         <Link href={'/'} className="transition-opacity hover:opacity-70">
           <Symbol size={36} />

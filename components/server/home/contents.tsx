@@ -1,8 +1,7 @@
 import { ButtonLink } from '@ui/button';
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@ui/card';
 import { NotepadTextIcon, LayersIcon, MessagesSquareIcon, TagIcon, ChevronRightIcon } from 'lucide-react';
 
-export default function HomeContents() {
+export default function HomeContentsSection() {
   const CONTENTS = [
     {
       link: '/search/articles',
@@ -31,27 +30,27 @@ export default function HomeContents() {
   ];
 
   return (
-    <section className="container mt-[460px] mx-auto px-16 space-y-8">
-      <div className="space-y-2 text-center">
-        <h3 className="text-xl font-semibold">주요 컨텐츠를 탐색하세요</h3>
-        <p className="text-muted-foreground">
+    <section className="mx-auto max-w-6xl px-16 space-y-8">
+      <div className="space-y-2 md:text-center">
+        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/50 to-primary">
+          주요 컨텐츠를 탐색하세요
+        </h3>
+        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 dark:from-gray-400 to-foreground">
           다양한 주제의 아티클, 시리즈, 질문을 통해 지식을 확장하고 커뮤니티와 소통하세요.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         {CONTENTS.map(({ link, title, description, icon: Icon }) => (
-          <Card key={link} className="flex-1">
-            <CardHeader className="flex flex-row items-center gap-2.5">
-              <Icon className="size-5" />
-              <CardTitle>{title}</CardTitle>
+          <div key={link} className="flex-1 space-y-1">
+            <div className="flex flex-row items-center gap-2.5">
+              <Icon className="size-6" />
+              <h5 className="text-lg font-semibold">{title}</h5>
               <ButtonLink href={link} variant={'ghost'} size={'icon'} className="ml-auto">
                 <ChevronRightIcon />
               </ButtonLink>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>{description}</CardDescription>
-            </CardContent>
-          </Card>
+            </div>
+            <p className="text-medium text-muted-foreground">{description}</p>
+          </div>
         ))}
       </div>
     </section>

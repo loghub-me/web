@@ -8,7 +8,7 @@ import {
 import { Tabs, TabsList, TabsContent } from '@ui/tabs';
 import { PencilIcon, BotIcon, SproutIcon, TagIcon } from 'lucide-react';
 
-export default function HomeFeatures() {
+export default function HomeFeaturesSection() {
   const FEATURES = [
     {
       value: 'markdown-editor',
@@ -37,10 +37,12 @@ export default function HomeFeatures() {
   ];
 
   return (
-    <section className="container mt-16 mx-auto px-4 space-y-8">
-      <div className="px-12 space-y-2 text-center">
-        <h3 className="text-xl font-semibold">다양한 기능을 사용해보세요.</h3>
-        <p className="text-muted-foreground">
+    <section className="mt-16 mx-auto px-8 max-w-6xl space-y-8">
+      <div className="px-8 space-y-2 md:text-center">
+        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/50 to-primary">
+          다양한 기능을 사용해보세요.
+        </h3>
+        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 dark:from-gray-400 to-foreground">
           LogHub는 사용자들이 더 나은 경험을 할 수 있도록 다양한 기능을 제공합니다.
         </p>
       </div>
