@@ -1,13 +1,13 @@
 import { CardContent } from '@ui/card';
 
 interface SeriesChapterDetailContentProps {
-  content: { html: string };
+  chapter: Pick<SeriesChapterDetail, 'content'>;
 }
 
-export default function SeriesChapterDetailContent({ content }: Readonly<SeriesChapterDetailContentProps>) {
+export default function SeriesChapterDetailContent({ chapter }: Readonly<SeriesChapterDetailContentProps>) {
   return (
     <CardContent className="space-y-4">
-      <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
+      <div className="markdown-it" dangerouslySetInnerHTML={{ __html: chapter.content.html }} />
     </CardContent>
   );
 }

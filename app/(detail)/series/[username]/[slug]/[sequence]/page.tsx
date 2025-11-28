@@ -45,8 +45,8 @@ async function SeriesChapterDetail({ chapter, series, totalChapters }: Readonly<
 
   return (
     <Card className="pt-0">
-      <SeriesChapterDetailHeader series={series} {...resolvedChapter} />
-      <SeriesChapterDetailContent {...resolvedChapter} />
+      <SeriesChapterDetailHeader series={series} chapter={resolvedChapter} />
+      <SeriesChapterDetailContent chapter={resolvedChapter} />
       <SeriesChapterDetailFooter
         series={series}
         sequence={sequence}
