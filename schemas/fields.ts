@@ -21,7 +21,7 @@ const coercedDate = z.coerce
   .transform((date) => date.toISOString().slice(0, 10));
 const query = z.string({ message: '검색어는 문자열이어야 합니다.' }).trim().default('');
 const sort = z
-  .enum(['latest', 'oldest', 'trending', 'relevant'], { message: '잘못된 정렬 기준입니다.' })
+  .literal(['latest', 'oldest', 'trending', 'relevant'], { message: '잘못된 정렬 기준입니다.' })
   .default('latest');
 const page = z.coerce
   .number({ message: '페이지 번호는 숫자여야 합니다.' })
