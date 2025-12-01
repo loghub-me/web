@@ -39,7 +39,8 @@ export async function StarListItems({ stars }: Readonly<StarListItemsProps>) {
   return resolvedStars.content.map((star) => <StarListItem key={star.id} star={star} />);
 }
 
-interface StarPageNavProps extends StarListItemsProps {
+interface StarPageNavProps {
+  stars: Promise<Page<UserStar>>;
   currentPage: number;
 }
 
