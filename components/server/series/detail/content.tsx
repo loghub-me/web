@@ -4,22 +4,12 @@ import { Thumbnail } from '@ui/thumbnail';
 import Timestamp from '@ui/timestamp';
 
 interface SeriesDetailContentProps {
-  title: string;
-  description: string;
-  thumbnail: string;
-  topics: Topic[];
-  createdAt: string;
-  updatedAt: string;
+  series: Pick<SeriesDetail, 'title' | 'description' | 'thumbnail' | 'topics' | 'createdAt' | 'updatedAt'>;
 }
 
-export default function SeriesDetailContent({
-  title,
-  description,
-  thumbnail,
-  topics,
-  createdAt,
-  updatedAt,
-}: Readonly<SeriesDetailContentProps>) {
+export default function SeriesDetailContent({ series }: Readonly<SeriesDetailContentProps>) {
+  const { title, description, thumbnail, topics, createdAt, updatedAt } = series;
+
   return (
     <CardContent className="flex flex-row md:flex-col gap-4">
       <Thumbnail

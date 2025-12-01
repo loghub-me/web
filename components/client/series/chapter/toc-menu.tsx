@@ -7,10 +7,11 @@ import ListEmpty from '@ui/list-empty';
 import { ListOrderedIcon } from 'lucide-react';
 
 interface SeriesChapterTOCMenuProps {
-  anchors: Anchor[];
+  chapter: Pick<SeriesChapterDetail, 'anchors'>;
 }
 
-export default function SeriesChapterTOCMenu({ anchors }: Readonly<SeriesChapterTOCMenuProps>) {
+export default function SeriesChapterTOCMenu({ chapter }: Readonly<SeriesChapterTOCMenuProps>) {
+  const { anchors } = chapter;
   const activeSlug = useTOC(anchors);
 
   return (

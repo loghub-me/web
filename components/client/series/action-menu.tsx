@@ -20,11 +20,11 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 interface SeriesActionMenuProps {
-  id: number;
-  writer: UserDetail;
+  series: Pick<SeriesDetail, 'id' | 'writer'>;
 }
 
-export default function SeriesActionMenu({ id, writer }: Readonly<SeriesActionMenuProps>) {
+export default function SeriesActionMenu({ series }: Readonly<SeriesActionMenuProps>) {
+  const { writer } = series;
   const { session } = useAuth();
 
   return (
@@ -36,27 +36,27 @@ export default function SeriesActionMenu({ id, writer }: Readonly<SeriesActionMe
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex flex-col gap-1">
-          <SeriesEditLink id={id} />
-          <SeriesDeleteButton id={id} />
+          <SeriesEditLink seriesId={series.id} />
+          <SeriesDeleteButton seriesId={series.id} />
         </DropdownMenuContent>
       </DropdownMenu>
     )
   );
 }
 
-function SeriesEditLink({ id }: Readonly<Pick<SeriesActionMenuProps, 'id'>>) {
+function SeriesEditLink({ seriesId }: Readonly<{ seriesId: number }>) {
   return (
-    <ButtonLink href={`/edit/series/${id}`} variant={'ghost'} size={'sm'}>
+    <ButtonLink href={`/edit/series/${seriesId}`} variant={'ghost'} size={'sm'}>
       <PencilIcon /> 수정하기
     </ButtonLink>
   );
 }
 
-function SeriesDeleteButton({ id }: Readonly<Pick<SeriesActionMenuProps, 'id'>>) {
+function SeriesDeleteButton({ seriesId }: Readonly<{ seriesId: number }>) {
   const router = useRouter();
 
   function onDeleteButtonClick() {
-    deleteSeries(id)
+    deleteSeries(seriesId)
       .then(({ message }) => {
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.replace('/search/series');

@@ -14,8 +14,8 @@ export default async function SeriesDetailLayout({ params, children }: LayoutPro
       <div className="flex flex-col md:flex-row gap-4">
         <SeriesDetailAside>
           <Card className="pt-0">
-            <SeriesDetailHeader {...series} />
-            <SeriesDetailContent {...series} />
+            <SeriesDetailHeader series={series} />
+            <SeriesDetailContent series={series} />
           </Card>
           <SeriesChapterCard writerUsername={username} slug={slug} chapters={series.chapters} />
         </SeriesDetailAside>

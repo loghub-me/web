@@ -24,7 +24,7 @@ interface SeriesChapterActionMenuProps {
   chapterId: number;
 }
 
-export default function SeriesChapterActionMenu(props: Readonly<SeriesChapterActionMenuProps>) {
+export default function SeriesChapterActionMenu({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
@@ -33,8 +33,8 @@ export default function SeriesChapterActionMenu(props: Readonly<SeriesChapterAct
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-1">
-        <SeriesChapterEditLink {...props} />
-        <SeriesChapterDeleteButton {...props} />
+        <SeriesChapterEditLink seriesId={seriesId} chapterId={chapterId} />
+        <SeriesChapterDeleteButton seriesId={seriesId} chapterId={chapterId} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -51,7 +51,10 @@ function SeriesChapterEditLink({ seriesId, chapterId }: Readonly<SeriesChapterAc
 function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-  const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, chapterId] as const];
+  const queryKeys = [
+    ['getSeriesForEdit', seriesId],
+    ['getSeriesChapterForEdit', seriesId, chapterId],
+  ] as const;
 
   function onDeleteButtonClick() {
     deleteSeriesChapter(seriesId, chapterId)

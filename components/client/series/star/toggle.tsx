@@ -10,14 +10,11 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesStarToggleProps {
-  id: number;
+  seriesId: number;
   starCount: number;
 }
 
-export default function SeriesStarToggle({
-  id: seriesId,
-  starCount: defaultStarCount,
-}: Readonly<SeriesStarToggleProps>) {
+export default function SeriesStarToggle({ seriesId, starCount: defaultStarCount }: Readonly<SeriesStarToggleProps>) {
   const queryClient = useQueryClient();
   const { status } = useAuth();
 

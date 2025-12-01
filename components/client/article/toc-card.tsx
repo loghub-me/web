@@ -6,10 +6,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 
 interface ArticleTOCCardProps {
-  anchors: Anchor[];
+  article: Pick<ArticleDetail, 'anchors'>;
 }
 
-export default function ArticleTOCCard({ anchors }: Readonly<ArticleTOCCardProps>) {
+export default function ArticleTOCCard({ article }: Readonly<ArticleTOCCardProps>) {
+  const { anchors } = article;
   const activeSlug = useTOC(anchors);
 
   return (

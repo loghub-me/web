@@ -20,11 +20,11 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 interface ArticleActionMenuProps {
-  id: number;
-  writer: UserDetail;
+  article: Pick<ArticleDetail, 'id' | 'writer'>;
 }
 
-export default function ArticleActionMenu({ id, writer }: Readonly<ArticleActionMenuProps>) {
+export default function ArticleActionMenu({ article }: Readonly<ArticleActionMenuProps>) {
+  const { writer } = article;
   const { session } = useAuth();
 
   return (
@@ -36,27 +36,27 @@ export default function ArticleActionMenu({ id, writer }: Readonly<ArticleAction
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex flex-col gap-1">
-          <ArticleEditLink id={id} />
-          <ArticleDeleteButton id={id} />
+          <ArticleEditLink articleId={article.id} />
+          <ArticleDeleteButton articleId={article.id} />
         </DropdownMenuContent>
       </DropdownMenu>
     )
   );
 }
 
-function ArticleEditLink({ id }: Readonly<Pick<ArticleActionMenuProps, 'id'>>) {
+function ArticleEditLink({ articleId }: Readonly<{ articleId: number }>) {
   return (
-    <ButtonLink href={`/edit/articles/${id}`} variant={'ghost'} size={'sm'}>
+    <ButtonLink href={`/edit/articles/${articleId}`} variant={'ghost'} size={'sm'}>
       <PencilIcon /> 수정하기
     </ButtonLink>
   );
 }
 
-function ArticleDeleteButton({ id }: Readonly<Pick<ArticleActionMenuProps, 'id'>>) {
+function ArticleDeleteButton({ articleId }: Readonly<{ articleId: number }>) {
   const router = useRouter();
 
   function onDeleteButtonClick() {
-    deleteArticle(id)
+    deleteArticle(articleId)
       .then(({ message }) => {
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.replace('/search/articles');

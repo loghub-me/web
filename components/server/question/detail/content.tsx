@@ -2,11 +2,12 @@ import { TopicLink } from '@/components/client/topic';
 import { CardContent } from '@ui/card';
 
 interface QuestionDetailContentProps {
-  topics: Topic[];
-  content: { html: string };
+  question: Pick<QuestionDetail, 'content' | 'topics'>;
 }
 
-export default function QuestionDetailContent({ topics, content }: Readonly<QuestionDetailContentProps>) {
+export default function QuestionDetailContent({ question }: Readonly<QuestionDetailContentProps>) {
+  const { content, topics } = question;
+
   return (
     <CardContent className="space-y-4">
       {topics.length > 0 && (

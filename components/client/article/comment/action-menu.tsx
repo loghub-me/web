@@ -10,11 +10,7 @@ import { toast } from 'sonner';
 
 interface ArticleCommentActionMenuProps {
   articleId: number;
-  comment: {
-    id: number;
-    writer: { id: number };
-    deleted: boolean;
-  };
+  comment: Pick<ArticleComment, 'id' | 'writer' | 'deleted'>;
   queryKeys: (string | number)[][];
   actionStatus: ArticleCommentActionStatus | null;
   setActionStatus: React.Dispatch<React.SetStateAction<ArticleCommentActionStatus | null>>;

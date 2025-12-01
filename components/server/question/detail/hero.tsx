@@ -5,22 +5,11 @@ import Timestamp from '@ui/timestamp';
 import { DotIcon, MessagesSquareIcon, StarIcon } from 'lucide-react';
 
 interface QuestionDetailHeroProps {
-  status: QuestionStatus;
-  stats: QuestionStats;
-  title: string;
-  writer: UserDetail;
-  createdAt: string;
-  updatedAt: string;
+  question: Pick<QuestionDetail, 'title' | 'status' | 'stats' | 'createdAt' | 'updatedAt' | 'writer'>;
 }
 
-export default function QuestionDetailHero({
-  status,
-  stats,
-  title,
-  writer,
-  createdAt,
-  updatedAt,
-}: Readonly<QuestionDetailHeroProps>) {
+export default function QuestionDetailHero({ question }: Readonly<QuestionDetailHeroProps>) {
+  const { title, status, stats, createdAt, updatedAt, writer } = question;
   const { label: statusLabel, icon: StatusIcon, color: statusColor } = QUESTION_STATUS_OPTIONS[status];
 
   return (

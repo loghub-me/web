@@ -10,10 +10,7 @@ import { toast } from 'sonner';
 
 interface SeriesReviewActionMenuProps {
   seriesId: number;
-  review: {
-    id: number;
-    writer: { id: number };
-  };
+  review: Pick<SeriesReview, 'id' | 'writer'>;
   queryKeys: (string | number)[][];
   editing: boolean;
   setEditing: React.Dispatch<React.SetStateAction<boolean>>;

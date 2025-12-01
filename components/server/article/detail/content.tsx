@@ -3,18 +3,12 @@ import { CardContent } from '@ui/card';
 import { Thumbnail } from '@ui/thumbnail';
 
 interface ArticleDetailContentProps {
-  topics: Topic[];
-  title: string;
-  content: { html: string };
-  thumbnail: string;
+  article: Pick<ArticleDetail, 'title' | 'content' | 'thumbnail' | 'topics'>;
 }
 
-export default function ArticleDetailContent({
-  topics,
-  title,
-  thumbnail,
-  content,
-}: Readonly<ArticleDetailContentProps>) {
+export default function ArticleDetailContent({ article }: Readonly<ArticleDetailContentProps>) {
+  const { title, content, thumbnail, topics } = article;
+
   return (
     <CardContent className="space-y-4">
       {topics.length > 0 && (

@@ -10,12 +10,12 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 interface ArticleStarToggleProps {
-  id: number;
+  articleId: number;
   starCount: number;
 }
 
 export default function ArticleStarToggle({
-  id: articleId,
+  articleId,
   starCount: defaultStarCount,
 }: Readonly<ArticleStarToggleProps>) {
   const queryClient = useQueryClient();

@@ -3,13 +3,12 @@ import Timestamp from '@ui/timestamp';
 import { DotIcon } from 'lucide-react';
 
 interface ArticleDetailHeroProps {
-  title: string;
-  writer: UserDetail;
-  createdAt: string;
-  updatedAt: string;
+  article: Pick<ArticleDetail, 'title' | 'writer' | 'createdAt' | 'updatedAt'>;
 }
 
-export default function ArticleDetailHero({ title, writer, createdAt, updatedAt }: Readonly<ArticleDetailHeroProps>) {
+export default function ArticleDetailHero({ article }: Readonly<ArticleDetailHeroProps>) {
+  const { title, writer, createdAt, updatedAt } = article;
+
   return (
     <div className="px-4 py-16 space-y-4">
       <h2 className="text-center font-semibold text-2xl">{title}</h2>

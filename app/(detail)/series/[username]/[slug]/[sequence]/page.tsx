@@ -26,16 +26,12 @@ export default async function SeriesChapterDetailPage({ params }: PageProps<'/se
   const series = await getSeriesDetail(username, slug);
   const chapter = getSeriesChapterDetail(series.id, sequence);
 
-  return <SeriesChapterDetail chapter={chapter} series={series} totalChapters={series.chapters.length} />;
+  return <SeriesChapterDetail series={series} chapter={chapter} totalChapters={series.chapters.length} />;
 }
 
 interface SeriesChapterDetailProps {
+  series: Pick<SeriesDetail, 'id' | 'slug' | 'writer'>;
   chapter: Promise<SeriesChapterDetail>;
-  series: {
-    id: number;
-    slug: string;
-    writer: UserDetail;
-  };
   totalChapters: number;
 }
 
@@ -49,7 +45,7 @@ async function SeriesChapterDetail({ chapter, series, totalChapters }: Readonly<
       <SeriesChapterDetailContent chapter={resolvedChapter} />
       <SeriesChapterDetailFooter
         series={series}
-        sequence={sequence}
+        chapterSequence={sequence}
         hasPrev={sequence > 1}
         hasNext={sequence < totalChapters}
       />

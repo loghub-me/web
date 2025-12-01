@@ -21,10 +21,7 @@ import { toast } from 'sonner';
 
 interface QuestionAnswerActionMenuProps {
   questionId: number;
-  answer: {
-    id: number;
-    writer: UserDetail;
-  };
+  answer: Pick<QuestionAnswer, 'id' | 'writer'>;
 }
 
 export default function QuestionAnswerActionMenu({ questionId, answer }: Readonly<QuestionAnswerActionMenuProps>) {
@@ -39,33 +36,27 @@ export default function QuestionAnswerActionMenu({ questionId, answer }: Readonl
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex flex-col gap-1">
-          <QuestionEditLink questionId={questionId} answer={answer} />
-          <QuestionDeleteButton questionId={questionId} answer={answer} />
+          <QuestionEditLink questionId={questionId} answerId={answer.id} />
+          <QuestionDeleteButton questionId={questionId} answerId={answer.id} />
         </DropdownMenuContent>
       </DropdownMenu>
     )
   );
 }
 
-function QuestionEditLink({
-  questionId,
-  answer,
-}: Readonly<Pick<QuestionAnswerActionMenuProps, 'questionId' | 'answer'>>) {
+function QuestionEditLink({ questionId, answerId }: Readonly<{ questionId: number; answerId: number }>) {
   return (
-    <ButtonLink href={`/edit/questions/${questionId}/answers/${answer.id}`} variant={'ghost'} size={'sm'}>
+    <ButtonLink href={`/edit/questions/${questionId}/answers/${answerId}`} variant={'ghost'} size={'sm'}>
       <PencilIcon /> 수정하기
     </ButtonLink>
   );
 }
 
-function QuestionDeleteButton({
-  questionId,
-  answer,
-}: Readonly<Pick<QuestionAnswerActionMenuProps, 'questionId' | 'answer'>>) {
+function QuestionDeleteButton({ questionId, answerId }: Readonly<{ questionId: number; answerId: number }>) {
   const router = useRouter();
 
   function onDeleteButtonClick() {
-    deleteQuestionAnswer(questionId, answer.id)
+    deleteQuestionAnswer(questionId, answerId)
       .then(({ message }) => {
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.refresh();

@@ -22,12 +22,11 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 interface QuestionActionMenuProps {
-  id: number;
-  status: QuestionStatus;
-  writer: UserDetail;
+  question: Pick<QuestionDetail, 'id' | 'status' | 'writer'>;
 }
 
-export default function QuestionActionMenu({ id, status, writer }: Readonly<QuestionActionMenuProps>) {
+export default function QuestionActionMenu({ question }: Readonly<QuestionActionMenuProps>) {
+  const { status, writer } = question;
   const { session } = useAuth();
 
   return (
@@ -39,28 +38,28 @@ export default function QuestionActionMenu({ id, status, writer }: Readonly<Ques
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="flex flex-col gap-1">
-          <QuestionEditLink id={id} />
-          <QuestionDeleteButton id={id} />
-          {status === 'OPEN' && <QuestionCloseButton id={id} />}
+          <QuestionEditLink questionId={question.id} />
+          <QuestionDeleteButton questionId={question.id} />
+          {status === 'OPEN' && <QuestionCloseButton questionId={question.id} />}
         </DropdownMenuContent>
       </DropdownMenu>
     )
   );
 }
 
-function QuestionEditLink({ id }: Readonly<Pick<QuestionActionMenuProps, 'id'>>) {
+function QuestionEditLink({ questionId }: Readonly<{ questionId: number }>) {
   return (
-    <ButtonLink href={`/edit/questions/${id}`} variant={'ghost'} size={'sm'}>
+    <ButtonLink href={`/edit/questions/${questionId}`} variant={'ghost'} size={'sm'}>
       <PencilIcon /> 수정하기
     </ButtonLink>
   );
 }
 
-function QuestionDeleteButton({ id }: Readonly<Pick<QuestionActionMenuProps, 'id'>>) {
+function QuestionDeleteButton({ questionId }: Readonly<{ questionId: number }>) {
   const router = useRouter();
 
   function onDeleteButtonClick() {
-    deleteQuestion(id)
+    deleteQuestion(questionId)
       .then(({ message }) => {
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.replace('/search/questions');
@@ -91,11 +90,11 @@ function QuestionDeleteButton({ id }: Readonly<Pick<QuestionActionMenuProps, 'id
   );
 }
 
-function QuestionCloseButton({ id }: Readonly<Pick<QuestionActionMenuProps, 'id'>>) {
+function QuestionCloseButton({ questionId }: Readonly<{ questionId: number }>) {
   const router = useRouter();
 
   function onCloseButtonClick() {
-    closeQuestion(id)
+    closeQuestion(questionId)
       .then(({ message }) => {
         toast.success(message, { icon: <CircleXIcon className="size-4" /> });
         router.refresh();

@@ -7,10 +7,7 @@ import { Card } from '@ui/card';
 import { LogInIcon } from 'lucide-react';
 
 interface QuestionAnswerPostCardProps {
-  question: {
-    id: number;
-    writer: UserDetail;
-  };
+  question: Pick<Question, 'id' | 'writer'>;
 }
 
 export default function QuestionAnswerPostCard({ question }: Readonly<QuestionAnswerPostCardProps>) {

@@ -18,10 +18,7 @@ import { z } from 'zod';
 
 interface ArticleCommentFormProps {
   articleId: number;
-  parent?: {
-    id: number;
-    writer: User;
-  };
+  parent?: Pick<ArticleComment, 'id' | 'writer'>;
   queryKeys: (string | number)[][];
   closeForm?: () => void;
 }

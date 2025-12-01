@@ -15,10 +15,10 @@ import ListEmpty from '@ui/list-empty';
 import { useState } from 'react';
 
 interface ArticleCommentsProps {
-  id: number;
+  articleId: number;
 }
 
-export default function ArticleComments({ id: articleId }: Readonly<ArticleCommentsProps>) {
+export default function ArticleComments({ articleId }: Readonly<ArticleCommentsProps>) {
   const [currentPage, setCurrentPage] = useState(1);
   const commentsQueryKey = ['getArticleComments', articleId, currentPage];
   const { data: comments, status } = useQuery({

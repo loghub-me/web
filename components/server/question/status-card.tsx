@@ -4,11 +4,11 @@ import { ButtonLink } from '@ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 
 interface QuestionStatusCardProps {
-  title: string;
-  status: QuestionStatus;
+  question: Pick<QuestionDetail, 'title' | 'status'>;
 }
 
-export default function QuestionStatusCard({ title, status }: Readonly<QuestionStatusCardProps>) {
+export default function QuestionStatusCard({ question }: Readonly<QuestionStatusCardProps>) {
+  const { title, status } = question;
   const { label: statusLabel, icon: StatusIcon, color: statusColor } = QUESTION_STATUS_OPTIONS[status];
 
   return (

@@ -27,17 +27,17 @@ export default async function ArticleDetailPage({ params }: PageProps<'/articles
 
   return (
     <main className="container mx-auto py-20 min-h-screen space-y-4">
-      <ArticleDetailHero {...article} />
+      <ArticleDetailHero article={article} />
       <div className="flex gap-4">
         <div className="w-full min-w-0 space-y-4">
           <Card className="pt-0">
-            <ArticleDetailHeader {...article} />
-            <ArticleDetailContent {...article} />
+            <ArticleDetailHeader article={article} />
+            <ArticleDetailContent article={article} />
           </Card>
-          <ArticleComments id={article.id} />
+          <ArticleComments articleId={article.id} />
         </div>
         <ArticleDetailAside>
-          <ArticleTOCCard {...article} />
+          <ArticleTOCCard article={article} />
         </ArticleDetailAside>
       </div>
     </main>

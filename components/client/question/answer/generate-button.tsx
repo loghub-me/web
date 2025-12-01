@@ -22,10 +22,7 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 interface QuestionAnswerGenerateButtonProps {
-  question: {
-    id: number;
-    writer: UserDetail;
-  };
+  question: Pick<QuestionDetail, 'id' | 'writer'>;
   align: 'start' | 'end';
 }
 

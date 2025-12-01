@@ -8,18 +8,14 @@ import { CircleCheckIcon } from 'lucide-react';
 
 interface QuestionAnswerListItemProps {
   answer: QuestionAnswer;
-  question: {
-    id: number;
-    status: QuestionStatus;
-    writer: UserDetail;
-  };
+  question: Pick<Question, 'id' | 'status' | 'writer'>;
 }
 
 export default function QuestionAnswerListItem({ answer, question }: Readonly<QuestionAnswerListItemProps>) {
-  const { id, title, content, accepted, writer } = answer;
+  const { title, content, accepted, writer } = answer;
 
   return (
-    <Card id={`answer-${id}`} className="pt-0">
+    <Card id={`answer-${answer.id}`} className="pt-0">
       <CardHeader className="sticky top-0 z-10 w-full h-16 flex items-center justify-end gap-2 bg-card/70 backdrop-blur rounded-t-xl border-b">
         <h4 className="flex-1 text-lg font-semibold line-clamp-2">{title}</h4>
         {accepted && (
@@ -27,7 +23,7 @@ export default function QuestionAnswerListItem({ answer, question }: Readonly<Qu
             <CircleCheckIcon className={QUESTION_STATUS_OPTIONS['SOLVED'].color} /> 채택
           </Badge>
         )}
-        {question.status === 'OPEN' && <QuestionAnswerAcceptButton question={question} {...answer} />}
+        {question.status === 'OPEN' && <QuestionAnswerAcceptButton question={question} answerId={answer.id} />}
         <QuestionAnswerActionMenu questionId={question.id} answer={answer} />
       </CardHeader>
       <CardContent className="pb-4 border-b">

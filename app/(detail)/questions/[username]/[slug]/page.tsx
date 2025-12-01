@@ -32,12 +32,12 @@ export default async function QuestionDetailPage({ params }: PageProps<'/questio
 
   return (
     <main className="container mx-auto py-20 min-h-screen space-y-4">
-      <QuestionDetailHero {...question} />
+      <QuestionDetailHero question={question} />
       <div className="flex gap-4">
         <div className="w-full min-w-0 space-y-4">
           <Card id="question" className="pt-0">
-            <QuestionDetailHeader {...question} />
-            <QuestionDetailContent {...question} />
+            <QuestionDetailHeader question={question} />
+            <QuestionDetailContent question={question} />
           </Card>
           {question.status === 'OPEN' && <QuestionAnswerPostCard question={question} />}
           <QuestionAnswerList>
@@ -47,7 +47,7 @@ export default async function QuestionDetailPage({ params }: PageProps<'/questio
           </QuestionAnswerList>
         </div>
         <QuestionDetailAside>
-          <QuestionStatusCard {...question} />
+          <QuestionStatusCard question={question} />
           <Suspense fallback={<QuestionAnswerTOCSkeleton />}>
             <QuestionAnswerTOCContent answers={answers} />
           </Suspense>
@@ -59,11 +59,7 @@ export default async function QuestionDetailPage({ params }: PageProps<'/questio
 
 interface QuestionAnswerListContentProps {
   answers: Promise<QuestionAnswer[]>;
-  question: {
-    id: number;
-    status: QuestionStatus;
-    writer: UserDetail;
-  };
+  question: Pick<QuestionDetail, 'id' | 'status' | 'writer'>;
 }
 
 async function QuestionAnswerListContent({ answers, question }: Readonly<QuestionAnswerListContentProps>) {

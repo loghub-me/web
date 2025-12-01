@@ -6,16 +6,16 @@ import { PencilIcon } from 'lucide-react';
 
 interface SeriesChapterEditLinkProps {
   series: Pick<Series, 'id' | 'writer'>;
-  chapter: Pick<SeriesChapterDetail, 'id'>;
+  chapterId: number;
 }
 
-export default function SeriesChapterEditLink({ series, chapter }: Readonly<SeriesChapterEditLinkProps>) {
+export default function SeriesChapterEditLink({ series, chapterId }: Readonly<SeriesChapterEditLinkProps>) {
   const { session } = useAuth();
   const { writer } = series;
 
   return (
     session?.id === writer.id && (
-      <ButtonLink href={`/edit/series/${series.id}/chapters/${chapter.id}`} size={'icon'}>
+      <ButtonLink href={`/edit/series/${series.id}/chapters/${chapterId}`} size={'icon'}>
         <PencilIcon />
       </ButtonLink>
     )
