@@ -1,6 +1,7 @@
 'use client';
 
 import { COMMAND_LINKS } from '@/constants/links';
+import { stripJamoFromString } from '@/lib/hangul';
 import { Button } from '@ui/button';
 import {
   CommandDialog,
@@ -22,7 +23,7 @@ export default function GlobalCommandMenu() {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         if (
           (e.target instanceof HTMLElement && e.target.isContentEditable) ||
           e.target instanceof HTMLInputElement ||
@@ -50,7 +51,14 @@ export default function GlobalCommandMenu() {
           <KbdModifier /> K
         </Kbd>
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen} showCloseButton={false}>
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        showCloseButton={false}
+        filter={(value, search) =>
+          value.toLowerCase().includes(stripJamoFromString(search).toLowerCase().trim()) ? 1 : 0
+        }
+      >
         <CommandInput icon={SearchIcon} placeholder="기능을 검색해주세요..." />
         <CommandList className="border-t h-92 max-h-92">
           <CommandEmpty>결과를 찾을 수 없습니다.</CommandEmpty>
