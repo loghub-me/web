@@ -14,6 +14,7 @@ jobs:
       - name: Create .env
         run: |
           echo "WEB_URL=${{ secrets.WEB_URL }}" >> .env
+          echo "API_HOST=${{ secrets.API_HOST }}" >> .env
           echo "NEXT_PUBLIC_API_HOST=${{ secrets.NEXT_PUBLIC_API_HOST }}" >> .env
           echo "NEXT_PUBLIC_ASSETS_HOST=${{ secrets.NEXT_PUBLIC_ASSETS_HOST }}" >> .env
           echo "NEXT_PUBLIC_GITHUB_URL=${{ secrets.NEXT_PUBLIC_GITHUB_URL }}" >> .env

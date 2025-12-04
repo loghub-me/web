@@ -12,6 +12,7 @@ jobs:
 
     env:
       WEB_URL: ${{ secrets.WEB_URL }}
+      API_HOST: ${{ secrets.API_HOST }}
       NEXT_PUBLIC_API_HOST: ${{ secrets.NEXT_PUBLIC_API_HOST }}
       NEXT_PUBLIC_ASSETS_HOST: ${{ secrets.NEXT_PUBLIC_ASSETS_HOST }}
       NEXT_PUBLIC_GITHUB_URL: ${{ secrets.NEXT_PUBLIC_GITHUB_URL }}
