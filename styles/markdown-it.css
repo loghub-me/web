@@ -76,7 +76,7 @@
     }
 
     :not(pre) > code {
-      @apply bg-code rounded px-1 font-mono;
+      @apply bg-code rounded px-1 font-mono break-all;
     }
 
     p > code,
