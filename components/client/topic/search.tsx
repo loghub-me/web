@@ -1,23 +1,24 @@
 'use client';
 
-import { TopicRequestDialog } from '@/components/client/support';
 import { TopicListItem } from '@/components/client/topic/index';
 import TopicList from '@/components/client/topic/list';
-import { searchTopics } from '@/constants/topics';
-import { useAuth } from '@/hooks/use-auth';
+import { useDebouncedValue } from '@/hooks/use-debounced-value';
+import { useTopic } from '@/hooks/use-topic';
+import { useQuery } from '@tanstack/react-query';
 import { InputWithIcon } from '@ui/input';
 import ListEmpty from '@ui/list-empty';
 import { SearchIcon } from 'lucide-react';
 import { useState } from 'react';
 
-interface TrendingTopicsProps {
-  trendingTopics: Topic[];
-}
-
-export default function TopicSearch({ trendingTopics }: Readonly<TrendingTopicsProps>) {
+export default function TopicSearch() {
+  const { searchTopics } = useTopic();
   const [query, setQuery] = useState('');
-  const topics = query.trim().length === 0 ? trendingTopics : searchTopics(query);
-  const { status: authStatus } = useAuth();
+  const debouncedQuery = useDebouncedValue(query, 200);
+
+  const { data: searchedTopics, isPending } = useQuery({
+    queryKey: ['searchTopics', debouncedQuery],
+    queryFn: () => searchTopics(debouncedQuery),
+  });
 
   return (
     <>
@@ -29,12 +30,11 @@ export default function TopicSearch({ trendingTopics }: Readonly<TrendingTopicsP
         value={query}
         onChange={(e) => setQuery(e.currentTarget.value)}
       />
-      {authStatus === 'authenticated' && <TopicRequestDialog className="text-center" />}
       <TopicList>
-        {topics.length === 0 && (
+        {!isPending && searchedTopics?.length === 0 && (
           <ListEmpty message={query ? '검색된 토픽이 없습니다.' : '토픽이 없습니다.'} className="py-4" />
         )}
-        {topics.map((topic) => (
+        {searchedTopics?.map((topic) => (
           <TopicListItem key={topic.slug} topic={topic} />
         ))}
       </TopicList>

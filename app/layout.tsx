@@ -1,3 +1,4 @@
+import { getTrendingTopics } from '@/apis/server/topic';
 import '@/app/globals.css';
 import GlobalFooter from '@/components/global/footer';
 import GlobalHeader from '@/components/global/header';
@@ -5,6 +6,7 @@ import AuthProvider from '@/providers/auth';
 import NotificationProvider from '@/providers/notification';
 import ReactQueryProvider from '@/providers/react-query';
 import { ThemeProvider } from '@/providers/theme';
+import TopicProvider from '@/providers/topic';
 import '@/styles/markdown-it.css';
 import { Toaster } from '@ui/sonner';
 import type { Metadata } from 'next';
@@ -30,7 +32,9 @@ export const metadata: Metadata = {
   description: 'LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.',
 };
 
-export default function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
+export default async function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
+  const trendingTopics = await getTrendingTopics();
+
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${pretendard.className} ${ibmPlexMono.variable} antialiased flex flex-col min-h-screen`}>
@@ -38,10 +42,12 @@ export default function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
           <ReactQueryProvider>
             <AuthProvider>
               <NotificationProvider>
-                <GlobalHeader />
-                {children}
-                <GlobalFooter />
-                <Toaster position={'top-center'} expand={true} richColors={true} />
+                <TopicProvider trendingTopics={trendingTopics}>
+                  <GlobalHeader />
+                  {children}
+                  <GlobalFooter />
+                  <Toaster position={'top-center'} expand={true} richColors={true} />
+                </TopicProvider>
               </NotificationProvider>
             </AuthProvider>
           </ReactQueryProvider>
