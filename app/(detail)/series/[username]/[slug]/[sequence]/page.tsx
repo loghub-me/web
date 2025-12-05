@@ -41,7 +41,7 @@ export default async function SeriesChapterDetailPage({ params }: PageProps<'/se
           />
         </Card>
       </div>
-      <aside className="sticky top-4 hidden lg:block max-w-xs w-full h-fit space-y-3">
+      <aside className="sticky top-4 hidden xl:block max-w-xs w-full h-fit space-y-3">
         <SeriesChapterTOCCard chapter={chapter} />
       </aside>
     </>

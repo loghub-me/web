@@ -3,7 +3,7 @@
 import { ButtonLink } from '@ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 interface SeriesChapterCardProps {
   series: Pick<SeriesDetail, 'slug' | 'writer' | 'chapters'>;
@@ -11,7 +11,7 @@ interface SeriesChapterCardProps {
 
 export default function SeriesChapterCard({ series }: Readonly<SeriesChapterCardProps>) {
   const { slug, writer, chapters } = series;
-  const pathname = usePathname();
+  const { sequence: currentSequence } = useParams<{ sequence: string }>();
 
   return (
     <Card className="gap-3">
@@ -22,7 +22,7 @@ export default function SeriesChapterCard({ series }: Readonly<SeriesChapterCard
         {chapters.length === 0 && <ListEmpty message={'아직 작성된 챕터가 없습니다.'} />}
         {chapters.map(({ id, title, sequence }) => {
           const href = `/series/${writer.username}/${slug}/${sequence}`;
-          const isActive = pathname === href;
+          const isActive = currentSequence === sequence.toString();
 
           return (
             <ButtonLink

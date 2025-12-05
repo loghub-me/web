@@ -11,7 +11,7 @@ export default async function SeriesDetailLayout({ params, children }: LayoutPro
 
   return (
     <main className="container mx-auto py-20 min-h-screen space-y-4">
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <aside className="md:max-w-xs w-full space-y-4">
           <Card className="pt-0">
             <SeriesDetailHeader series={series} />

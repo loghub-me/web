@@ -4,7 +4,7 @@ export default function SeriesDetailLoading() {
   return (
     <main className="container mx-auto py-20 min-h-screen space-y-4">
       <div className="flex flex-col md:flex-row gap-4">
-        <aside className="sticky top-4 hidden lg:block h-fit space-y-3">
+        <aside className="md:max-w-xs w-full space-y-4">
           <div className="p-4 space-y-8">
             <div className="flex gap-2">
               <Skeleton className="w-24 h-9" />
