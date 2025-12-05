@@ -18,7 +18,7 @@ const seriesPostSchema = z.object({
   description: z
     .string({ message: '설명은 문자열이어야 합니다.' })
     .min(10, { message: '설명은 10글자 이상이어야 합니다.' })
-    .max(8192, { message: '설명은 8192글자 이하여야 합니다.' }),
+    .max(2048, { message: '설명은 2048글자 이하여야 합니다.' }),
   thumbnail,
   topicSlugs,
 });

@@ -33,11 +33,11 @@ const slug = z.string({ message: '슬러그는 문자열이어야 합니다.' })
 const title = z
   .string({ message: '제목은 문자열이어야 합니다.' })
   .min(2, { message: '제목은 2글자 이상이어야 합니다.' })
-  .max(56, { message: '제목은 56글자 이하여야 합니다.' });
+  .max(64, { message: '제목은 64글자 이하여야 합니다.' });
 const content = z
   .string({ message: '내용은 문자열이어야 합니다.' })
   .min(10, { message: '내용은 10글자 이상이어야 합니다.' })
-  .max(8192, { message: '내용은 8192글자 이하여야 합니다.' });
+  .max(16384, { message: '내용은 16384글자 이하여야 합니다.' });
 const thumbnailRegex = /^[0-9]+\/[a-zA-Z0-9_-]+\.webp$/;
 const thumbnail = z
   .string({ message: '썸네일의 path는 문자열이어야 합니다.' })
@@ -82,3 +82,4 @@ const zodFields = {
 };
 
 export default zodFields;
+export { content as contentField };

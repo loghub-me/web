@@ -9,6 +9,7 @@ import { handleError } from '@/lib/error';
 import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
 import { idSchema } from '@/schemas/common';
+import { contentField } from '@/schemas/fields';
 import { questionEditSchema } from '@/schemas/question';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -73,8 +74,13 @@ function QuestionEditor({ question, queryKey }: Readonly<QuestionEditorProps>) {
   const onDraftSave = () => {
     if (!easyMDERef.current) return;
     const draft = easyMDERef.current.value();
+    const { success, error } = contentField.safeParse(draft);
+    if (!success) {
+      toast.error(error.flatten().formErrors.join(', '));
+      return;
+    }
 
-    updateQuestionDraft(question.id, easyMDERef.current.value())
+    updateQuestionDraft(question.id, draft)
       .then(({ message }) => {
         toast.success(message, { icon: <SaveIcon className="size-4" /> });
         queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft } : old));

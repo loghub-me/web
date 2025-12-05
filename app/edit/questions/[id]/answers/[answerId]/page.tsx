@@ -8,6 +8,7 @@ import { useQueryErrorHandle } from '@/hooks/use-query-error-handle';
 import { handleError } from '@/lib/error';
 import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
+import { contentField } from '@/schemas/fields';
 import { questionAnswerEditPageSchema, questionAnswerEditSchema } from '@/schemas/question';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -75,8 +76,13 @@ function QuestionAnswerEditor({ questionId, answer, queryKey }: Readonly<Questio
   const onDraftSave = () => {
     if (!easyMDERef.current) return;
     const draft = easyMDERef.current.value();
+    const { success, error } = contentField.safeParse(draft);
+    if (!success) {
+      toast.error(error.message);
+      return;
+    }
 
-    updateQuestionAnswerDraft(questionId, answerId, easyMDERef.current.value())
+    updateQuestionAnswerDraft(questionId, answerId, draft)
       .then(({ message }) => {
         toast.success(message, { icon: <SaveIcon className="size-4" /> });
         queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft } : old));

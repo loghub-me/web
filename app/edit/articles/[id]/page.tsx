@@ -10,6 +10,7 @@ import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
 import { articleEditSchema } from '@/schemas/article';
 import { idSchema } from '@/schemas/common';
+import { contentField } from '@/schemas/fields';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
@@ -73,8 +74,13 @@ function ArticleEditor({ article, queryKey }: Readonly<ArticleEditorProps>) {
   const onDraftSave = () => {
     if (!easyMDERef.current) return;
     const draft = easyMDERef.current.value();
+    const { success, error } = contentField.safeParse(draft);
+    if (!success) {
+      toast.error(error.flatten().formErrors.join(', '));
+      return;
+    }
 
-    updateArticleDraft(article.id, easyMDERef.current.value())
+    updateArticleDraft(article.id, draft)
       .then(({ message }) => {
         toast.success(message, { icon: <SaveIcon className="size-4" /> });
         queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft } : old));
