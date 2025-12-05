@@ -12,7 +12,7 @@ export { default as SeriesPostForm } from '@/components/client/series/post/form'
 export { default as SeriesEditForm } from '@/components/client/series/edit/form';
 
 export { default as SeriesChapterCard } from '@/components/client/series/chapter/card';
-export { default as SeriesChapterTOCMenu } from '@/components/client/series/chapter/toc-menu';
+export { default as SeriesChapterTOCCard } from '@/components/client/series/chapter/toc-card';
 export { default as SeriesChapterActionMenu } from '@/components/client/series/chapter/action-menu';
 export { default as SeriesChapterImportButton } from '@/components/client/series/chapter/import/button';
 export { default as SeriesChapterCreateButton } from '@/components/client/series/chapter/create/button';

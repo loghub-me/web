@@ -6,12 +6,11 @@ import ListEmpty from '@ui/list-empty';
 import { usePathname } from 'next/navigation';
 
 interface SeriesChapterCardProps {
-  writerUsername: string;
-  slug: string;
-  chapters: SeriesChapter[];
+  series: Pick<SeriesDetail, 'slug' | 'writer' | 'chapters'>;
 }
 
-export default function SeriesChapterCard({ writerUsername, slug, chapters }: Readonly<SeriesChapterCardProps>) {
+export default function SeriesChapterCard({ series }: Readonly<SeriesChapterCardProps>) {
+  const { slug, writer, chapters } = series;
   const pathname = usePathname();
 
   return (
@@ -22,7 +21,7 @@ export default function SeriesChapterCard({ writerUsername, slug, chapters }: Re
       <CardContent className="px-4 flex flex-col gap-0.5">
         {chapters.length === 0 && <ListEmpty message={'아직 작성된 챕터가 없습니다.'} />}
         {chapters.map(({ id, title, sequence }) => {
-          const href = `/series/${writerUsername}/${slug}/${sequence}`;
+          const href = `/series/${writer.username}/${slug}/${sequence}`;
           const isActive = pathname === href;
 
           return (

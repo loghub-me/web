@@ -17,5 +17,9 @@ export default async function SeriesDetailPage({ params }: PageProps<'/series/[u
   const { username, slug } = parseObject(await params, compositeKeySchema);
   const series = await getSeriesDetail(username, slug);
 
-  return <SeriesReviews id={series.id} />;
+  return (
+    <div className="w-full min-w-0 space-y-4">
+      <SeriesReviews id={series.id} />
+    </div>
+  );
 }
