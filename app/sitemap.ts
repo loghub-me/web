@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-const webURL = new URL(process.env.WEB_URL!);
+const webURL = new URL(process.env.WEB_HOST!);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = ['', '/legal', '/support'];

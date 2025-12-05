@@ -24,7 +24,7 @@
 
 |               변수명               | 설명                  | 예시                           |
 | :--------------------------------: | --------------------- | ------------------------------ |
-|             `WEB_URL`              | LogHub 웹 서버 주소   | `https://loghub.me`            |
+| `WEB_HOST`, `NEXT_PUBLIC_WEB_HOST` | LogHub 웹 서버 주소   | `https://loghub.me`            |
 | `API_HOST`, `NEXT_PUBLIC_API_HOST` | LogHub API 서버 주소  | `http://localhost:8080`        |
 |     `NEXT_PUBLIC_ASSETS_HOST`      | LogHub 에셋 서버 주소 | `http://localhost:4000`        |
 |      `NEXT_PUBLIC_GITHUB_URL`      | GitHub 리포지토리     | `https://github.com/loghub-me` |

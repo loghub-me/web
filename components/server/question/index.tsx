@@ -9,6 +9,7 @@ export { default as QuestionDetailHeader } from '@/components/server/question/de
 export { default as QuestionDetailContent } from '@/components/server/question/detail/content';
 export { default as QuestionDetailAside } from '@/components/server/question/detail/aside';
 
+export { default as QuestionShareMenu } from '@/components/server/question/share-menu';
 export { default as QuestionStatusCard } from '@/components/server/question/status-card';
 
 export { default as QuestionAnswerList } from '@/components/server/question/answer/list';
