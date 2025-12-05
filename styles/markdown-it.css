@@ -55,7 +55,7 @@
     }
 
     img {
-      @apply rounded-md border xl:max-w-4xl;
+      @apply rounded-md border;
     }
 
     table {
@@ -80,7 +80,8 @@
     }
 
     p > code,
-    li > code {
+    li > code,
+    table code {
       @apply text-[0.8em];
     }
 
