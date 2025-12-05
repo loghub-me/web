@@ -2,6 +2,7 @@
 
 import { editSeries } from '@/apis/client/series';
 import { ThumbnailFormField, TitleFormField, TopicSlugsFormField } from '@/components/client/form-field';
+import { DEFAULT_SERIES_THUMBNAIL } from '@/constants/default-values';
 import { handleFormError } from '@/lib/error';
 import { seriesEditSchema } from '@/schemas/series';
 import { useQueryClient } from '@tanstack/react-query';
@@ -66,6 +67,7 @@ export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEd
             aspect={'3:4'}
             width={320}
             height={426}
+            defaultValue={DEFAULT_SERIES_THUMBNAIL}
           />
         </div>
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">

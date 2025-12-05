@@ -19,13 +19,7 @@ export default function ArticleDetailContent({ article }: Readonly<ArticleDetail
         </div>
       )}
       <figure>
-        <Thumbnail
-          aspect={'16:9'}
-          src={thumbnail}
-          alt={`${title}-thumbnail`}
-          fill={true}
-          className="mx-auto max-w-2xl"
-        />
+        <Thumbnail aspect={'16:9'} src={thumbnail} alt={`${title}-thumbnail`} fill className="mx-auto max-w-2xl" />
         <figcaption className="mt-2 text-sm text-center text-muted-foreground">{title}</figcaption>
       </figure>
       <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />

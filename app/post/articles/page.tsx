@@ -2,6 +2,7 @@
 
 import { ArticlePostDialog, ArticlePostForm } from '@/components/client/article';
 import { MarkdownEditor } from '@/components/client/markdown';
+import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
 import { syncEditorWithForm } from '@/lib/form';
 import { articlePostSchema } from '@/schemas/article';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,7 +15,7 @@ export default function ArticlePostPage() {
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof articlePostSchema>>({
     resolver: zodResolver(articlePostSchema),
-    defaultValues: { title: '', content: '', thumbnail: '0/default-article-thumbnail.webp', topicSlugs: [] },
+    defaultValues: { title: '', content: '', thumbnail: DEFAULT_ARTICLE_THUMBNAIL, topicSlugs: [] },
   });
 
   function onDialogOpenChange(open: boolean) {

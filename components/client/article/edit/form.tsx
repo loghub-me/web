@@ -2,6 +2,7 @@
 
 import { editArticle } from '@/apis/client/article';
 import { ThumbnailFormField, TitleFormField, TopicSlugsFormField } from '@/components/client/form-field';
+import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
 import { handleFormError } from '@/lib/error';
 import { articleEditSchema } from '@/schemas/article';
 import { useQueryClient } from '@tanstack/react-query';
@@ -49,6 +50,7 @@ export default function ArticleEditForm({ id: articleId, form }: Readonly<Articl
           aspect={'16:9'}
           width={640}
           height={360}
+          defaultValue={DEFAULT_ARTICLE_THUMBNAIL}
         />
         <TopicSlugsFormField control={form.control} topicSlugs={topicSlugs} setTopicSlugs={setTopicSlugs} />
         <FormField control={form.control} name="content" render={() => <FormMessage />} />

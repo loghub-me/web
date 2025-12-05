@@ -1,6 +1,7 @@
 'use client';
 
 import { SeriesPostForm } from '@/components/client/series';
+import { DEFAULT_SERIES_THUMBNAIL } from '@/constants/default-values';
 import { seriesPostSchema } from '@/schemas/series';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
@@ -10,7 +11,7 @@ import { z } from 'zod';
 export default function SeriesPostPage() {
   const form = useForm<z.infer<typeof seriesPostSchema>>({
     resolver: zodResolver(seriesPostSchema),
-    defaultValues: { title: '', description: '', thumbnail: '0/default-series-thumbnail.webp', topicSlugs: [] },
+    defaultValues: { title: '', description: '', thumbnail: DEFAULT_SERIES_THUMBNAIL, topicSlugs: [] },
   });
 
   return (

@@ -17,7 +17,7 @@ export default function ArticleListItem({ article }: Readonly<ArticleListItemPro
   return (
     <div className="p-1 h-full flex flex-col gap-1.5">
       <Link href={href} prefetch={false} className="group space-y-1.5">
-        <InteractiveThumbnail aspect={'16:9'} src={thumbnail} alt={title} width={640} height={360} />
+        <InteractiveThumbnail aspect={'16:9'} src={thumbnail} alt={`${title}-thumbnail`} width={640} height={360} />
         <h3 className="flex flex-wrap items-center">
           <span className="line-clamp-2 font-medium transition-colors group-hover:text-accent-foreground/50">
             {title}

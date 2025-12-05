@@ -2,6 +2,7 @@
 
 import { postArticle } from '@/apis/client/article';
 import { ThumbnailFormField, TitleFormField, TopicSlugsFormField } from '@/components/client/form-field';
+import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
 import { handleFormError } from '@/lib/error';
 import { articlePostSchema } from '@/schemas/article';
 import { Button } from '@ui/button';
@@ -45,6 +46,7 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
           aspect={'16:9'}
           width={640}
           height={360}
+          defaultValue={DEFAULT_ARTICLE_THUMBNAIL}
         />
         <TopicSlugsFormField control={form.control} topicSlugs={topicSlugs} setTopicSlugs={setTopicSlugs} />
         <FormField control={form.control} name="content" render={() => <FormMessage />} />

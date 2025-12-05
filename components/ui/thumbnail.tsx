@@ -37,7 +37,7 @@ function Thumbnail({ className, ...props }: ThumbnailProps) {
         className
       )}
     >
-      <Image {...props} alt={props.alt} />
+      <Image {...props} alt={props.alt} className="object-contain" />
     </div>
   );
 }
@@ -56,8 +56,8 @@ function InteractiveThumbnail(props: ThumbnailProps) {
         ASPECT_OPTIONS[props.aspect]
       )}
     >
-      <div className="absolute inset-0 transition-colors group-hover:bg-black/10" />
-      <Image {...props} className="transition-[scale] group-hover:scale-105" alt={props.alt} />
+      <div className="absolute z-1 inset-0 transition-colors group-hover:bg-black/10" />
+      <Image {...props} className="object-contain transition-[scale] group-hover:scale-105" alt={props.alt} />
     </div>
   );
 }
