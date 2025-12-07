@@ -4,29 +4,28 @@ import { updateSelfUsername } from '@/apis/client/user';
 import { ErrorMessage } from '@/constants/messages';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
-import { settingUsernameUpdateSchema } from '@/schemas/setting';
+import { usernameUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
 import { Input } from '@ui/input';
-import { UserPenIcon } from 'lucide-react';
+import { IdCardIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-interface SettingUsernameFormProps {
+interface UsernameFormProps {
   username: string;
-  closeDialog: () => void;
 }
 
-export default function SettingUsernameForm({ username, closeDialog }: Readonly<SettingUsernameFormProps>) {
+export default function UsernameForm({ username }: Readonly<UsernameFormProps>) {
   const { session, registerSession } = useAuth();
-  const form = useForm<z.infer<typeof settingUsernameUpdateSchema>>({
-    resolver: zodResolver(settingUsernameUpdateSchema),
+  const form = useForm<z.infer<typeof usernameUpdateSchema>>({
+    resolver: zodResolver(usernameUpdateSchema),
     defaultValues: { oldUsername: '', newUsername: '' },
   });
 
-  function onSubmit(values: z.infer<typeof settingUsernameUpdateSchema>) {
+  function onSubmit(values: z.infer<typeof usernameUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
@@ -42,22 +41,21 @@ export default function SettingUsernameForm({ username, closeDialog }: Readonly<
         toast.success(message);
         form.reset();
         registerSession({ ...session, username: values.newUsername });
-        closeDialog();
       })
       .catch((err) => handleFormError(err, form.setError));
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name={'oldUsername'}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>이전 닉네임</FormLabel>
+              <FormLabel>이전 유저네임</FormLabel>
               <FormControl>
-                <Input type={'text'} placeholder="이전 닉네임을 입력해주세요" {...field} />
+                <Input type={'text'} placeholder={`이전 유저네임을 입력해주세요: ${username}`} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -68,17 +66,17 @@ export default function SettingUsernameForm({ username, closeDialog }: Readonly<
           name={'newUsername'}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>새 닉네임</FormLabel>
+              <FormLabel>새 유저네임</FormLabel>
               <FormControl>
-                <Input type={'text'} placeholder="새로 사용하실 닉네임을 입력해주세요" {...field} />
+                <Input type={'text'} placeholder="새로 사용하실 유저네임을 입력해주세요" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            <UserPenIcon /> 닉네임 업데이트
+          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
+            <IdCardIcon /> 유저네임 업데이트
           </Button>
         </div>
       </form>

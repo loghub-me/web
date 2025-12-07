@@ -7,8 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const searchPaths = ['/search/articles', '/search/series', '/search/questions'];
   const postPaths = ['/post', '/post/articles', '/post/series', '/post/questions'];
   const authPaths = ['/join', '/login'];
-  const notificatioPaths = ['/notifications', '/notifications/settings'];
-  const settingsPaths = ['/settings', '/settings/account', '/settings/profile', '/settings/privacy', '/settings/theme'];
+  const notificatioPaths = ['/notifications'];
+  const settingsPaths = ['/settings'];
 
   function buildPaths(paths: string[], priority: number): MetadataRoute.Sitemap {
     return paths.map((path) => ({

@@ -1,9 +1,12 @@
 'use client';
 
 import { updateSelfPrivacy } from '@/apis/client/user';
+import { ErrorMessage } from '@/constants/messages';
+import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
-import { settingPrivacyUpdateSchema } from '@/schemas/setting';
+import { userPrivacyUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@ui/form';
 import { Switch, SwitchIcon } from '@ui/switch';
@@ -12,19 +15,29 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-interface SettingPrivacyFormProps {
+interface UserPrivacyFormProps {
   privacy: UserPrivacy;
 }
 
-export default function SettingPrivacyForm({ privacy }: Readonly<SettingPrivacyFormProps>) {
-  const form = useForm<z.infer<typeof settingPrivacyUpdateSchema>>({
-    resolver: zodResolver(settingPrivacyUpdateSchema),
+export default function UserPrivacyForm({ privacy }: Readonly<UserPrivacyFormProps>) {
+  const { session } = useAuth();
+  const queryClient = useQueryClient();
+  const form = useForm<z.infer<typeof userPrivacyUpdateSchema>>({
+    resolver: zodResolver(userPrivacyUpdateSchema),
     defaultValues: privacy,
   });
 
-  function onSubmit(values: z.infer<typeof settingPrivacyUpdateSchema>) {
+  function onSubmit(values: z.infer<typeof userPrivacyUpdateSchema>) {
+    if (!session) {
+      toast.error(ErrorMessage.LOGIN_REQUIRED);
+      return;
+    }
+
     updateSelfPrivacy(values)
-      .then(({ message }) => toast.success(message))
+      .then(({ message }) => {
+        toast.success(message);
+        queryClient.invalidateQueries({ queryKey: ['getSelfPrivacy'] });
+      })
       .catch((err) => handleFormError(err, form.setError));
   }
 
@@ -49,7 +62,7 @@ export default function SettingPrivacyForm({ privacy }: Readonly<SettingPrivacyF
           )}
         />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type="submit" disabled={form.formState.isSubmitting}>
+          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
             <CheckIcon /> 변경사항 저장
           </Button>
         </div>

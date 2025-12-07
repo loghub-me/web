@@ -8,11 +8,11 @@ import { Button } from '@ui/button';
 import { ImageUpIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
 
-interface SettingAvatarFormProps {
+interface UserAvatarFormProps {
   session: Session;
 }
 
-export default function SettingAvatarForm({ session }: Readonly<SettingAvatarFormProps>) {
+export default function UserAvatarForm({ session }: Readonly<UserAvatarFormProps>) {
   const [version, setVersion] = useState(0);
   const inputFileRef = useRef<HTMLInputElement>(null);
 

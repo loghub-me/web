@@ -1,16 +1,12 @@
 import {
-  GlobeIcon,
   GlobeLockIcon,
-  IdCardIcon,
   InfoIcon,
   LayersIcon,
   MessageCircleQuestionIcon,
   MessageSquareIcon,
   MessagesSquareIcon,
-  MonitorIcon,
   NotepadTextIcon,
   SettingsIcon,
-  SquareUserIcon,
   TagIcon,
 } from 'lucide-react';
 
@@ -81,12 +77,6 @@ const POST_LINKS = [
     },
   },
 ];
-const SETTING_LINKS = [
-  { label: '계정', href: '/settings/account', icon: IdCardIcon },
-  { label: '프로필', href: '/settings/profile', icon: SquareUserIcon },
-  { label: '개인정보', href: '/settings/privacy', icon: GlobeIcon },
-  { label: '테마', href: '/settings/theme', icon: MonitorIcon },
-];
 const LEGAL_LINKS = [
   { label: '이용약관', href: '/legal#terms' },
   { label: '개인정보처리', href: '/legal#privacy' },
@@ -141,4 +131,4 @@ const COMMAND_LINKS = [
   },
 ];
 
-export { HEADER_LINKS, FOOTER_LINKS, LEGAL_LINKS, TOPIC_DETAIL_LINKS, SETTING_LINKS, POST_LINKS, COMMAND_LINKS };
+export { HEADER_LINKS, FOOTER_LINKS, LEGAL_LINKS, TOPIC_DETAIL_LINKS, POST_LINKS, COMMAND_LINKS };

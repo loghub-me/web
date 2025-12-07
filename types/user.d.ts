@@ -11,6 +11,11 @@ interface UserDetail {
   role: UserRole;
 }
 
+interface UserGitHub {
+  username: string;
+  verified: boolean;
+}
+
 interface UserProfile {
   id: number;
   nickname: string;

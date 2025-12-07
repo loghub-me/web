@@ -11,13 +11,13 @@ import {
 } from '@ui/dialog';
 import { UserXIcon } from 'lucide-react';
 
-export default function SettingWithdrawDialog() {
+export default function UserWithdrawButton() {
   // TODO
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'destructive'}>
+        <Button type={'button'} variant={'destructive'} size={'sm'}>
           <UserXIcon /> 탈퇴하기
         </Button>
       </DialogTrigger>

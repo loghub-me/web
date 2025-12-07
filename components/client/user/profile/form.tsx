@@ -4,8 +4,9 @@ import { updateSelfProfile } from '@/apis/client/user';
 import { ErrorMessage } from '@/constants/messages';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
-import { settingProfileUpdateSchema } from '@/schemas/setting';
+import { userProfileUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
 import { Input } from '@ui/input';
@@ -15,18 +16,19 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-interface SettingProfileFormProps {
+interface UserProfileFormProps {
   profile: UserProfile;
 }
 
-export default function SettingProfileForm({ profile }: Readonly<SettingProfileFormProps>) {
+export default function UserProfileForm({ profile }: Readonly<UserProfileFormProps>) {
   const { session, registerSession } = useAuth();
-  const form = useForm<z.infer<typeof settingProfileUpdateSchema>>({
-    resolver: zodResolver(settingProfileUpdateSchema),
+  const queryClient = useQueryClient();
+  const form = useForm<z.infer<typeof userProfileUpdateSchema>>({
+    resolver: zodResolver(userProfileUpdateSchema),
     defaultValues: profile,
   });
 
-  function onSubmit(values: z.infer<typeof settingProfileUpdateSchema>) {
+  function onSubmit(values: z.infer<typeof userProfileUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
@@ -36,13 +38,14 @@ export default function SettingProfileForm({ profile }: Readonly<SettingProfileF
       .then(({ message }) => {
         toast.success(message);
         registerSession({ ...session, nickname: values.nickname });
+        queryClient.invalidateQueries({ queryKey: ['getSelfProfile'] });
       })
       .catch((err) => handleFormError(err, form.setError));
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name={'nickname'}
@@ -70,7 +73,7 @@ export default function SettingProfileForm({ profile }: Readonly<SettingProfileF
           )}
         />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type="submit" disabled={form.formState.isSubmitting}>
+          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
             <UserPenIcon /> 프로필 업데이트
           </Button>
         </div>
