@@ -15,7 +15,7 @@ interface SeriesDetail extends Timestamps {
   description: string;
   thumbnail: string;
   stats: SeriesStats;
-  writer: UserDetail;
+  writer: User;
   topics: Topic[];
   chapters: SeriesChapter[];
 }

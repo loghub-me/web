@@ -67,7 +67,7 @@ export default function HomeFeatureAnswerGenerate() {
                   <SelectContent>
                     {Object.entries(CHAT_MODEL_OPTIONS).map(([value, { label, icon }]) => (
                       <SelectItem key={value} value={value}>
-                        <div className={'flex items-center gap-2'}>
+                        <div className="flex items-center gap-2.5 font-mono">
                           <TopicIcon slug={icon} name={icon} /> {label}
                         </div>
                       </SelectItem>

@@ -1,9 +1,11 @@
 import { getUserDetail } from '@/apis/server/user';
+import { TopicIcon } from '@/components/client/topic';
 import { UserAvatar, UserDetailNav } from '@/components/client/user';
 import { UserDetailAside, UserDetailAsideSkeleton } from '@/components/server/user';
 import { parseObject } from '@/lib/parse';
 import { userDetailSchema } from '@/schemas/user';
-import { MailIcon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/tooltip';
+import { BadgeCheckIcon, BadgeXIcon, MailIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -43,18 +45,18 @@ interface UserDetailAsideContentProps {
 
 async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentProps>) {
   const resolvedUser = await user;
-  const { username, nickname, email } = resolvedUser;
+  const { email, username, profile, github } = resolvedUser;
 
   return (
     <>
       <UserAvatar size={'xl'} {...resolvedUser} className="shadow-xs" />
       <div className="w-full space-y-1.5">
         <h3 className="text-lg font-semibold">@{username}</h3>
-        <p className="text-sm text-muted-foreground">{nickname}</p>
+        <p className="text-muted-foreground">{profile.nickname}</p>
       </div>
       <div className="space-y-1.5 w-full">
-        <p className="flex items-center gap-2 text-sm text-muted-foreground">
-          <MailIcon className="size-4" />{' '}
+        <div className="flex items-center gap-2 text-muted-foreground">
+          <MailIcon className="size-4 text-foreground" />{' '}
           {email ? (
             <Link href={`mailto:${email}`} className="hover:underline">
               {email}
@@ -62,7 +64,27 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
           ) : (
             '비공개'
           )}
-        </p>
+        </div>
+        {github.username && (
+          <div className="flex items-center gap-2  text-muted-foreground">
+            <TopicIcon slug={'github'} name={'GitHub'} />{' '}
+            <Link href={`https://github.com/${github.username}`} className="hover:underline">
+              {github.username}
+            </Link>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                {github.verified ? (
+                  <BadgeCheckIcon className="text-green-500 size-4" />
+                ) : (
+                  <BadgeXIcon className="text-muted-foreground size-4" />
+                )}
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{github.verified ? '인증완료' : '미인증'}</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        )}
       </div>
     </>
   );

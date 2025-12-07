@@ -16,7 +16,7 @@ interface ArticleDetail extends Timestamps {
   anchors: Anchor[];
   thumbnail: string;
   stats: ArticleStats;
-  writer: UserDetail;
+  writer: User;
   topics: Topic[];
 }
 

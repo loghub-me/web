@@ -7,17 +7,17 @@ interface UserDetail {
   id: number;
   email?: string;
   username: string;
-  nickname: string;
+  profile: UserProfile;
+  github: UserGitHub;
   role: UserRole;
 }
 
 interface UserGitHub {
-  username: string;
+  username?: string;
   verified: boolean;
 }
 
 interface UserProfile {
-  id: number;
   nickname: string;
   readme: UserRole;
 }

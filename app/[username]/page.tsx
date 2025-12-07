@@ -1,4 +1,4 @@
-import { getUserProfile } from '@/apis/server/user';
+import { getUserDetail } from '@/apis/server/user';
 import UserActivities from '@/components/client/user/activity';
 import { parseObject } from '@/lib/parse';
 import { cn } from '@/lib/utils';
@@ -8,8 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/c
 export default async function UserProfilePage({ params, searchParams }: PageProps<'/[username]'>) {
   const parsedParam = parseObject(await params, userDetailSchema);
   const parsedSearchParam = parseObject(await searchParams, userActivitySearchSchema);
-  const profile = await getUserProfile(parsedParam.username);
-  const hasREADME = profile.readme.length > 0;
+  const user = await getUserDetail(parsedParam.username);
+  const hasREADME = user.profile.readme.trim().length > 0;
 
   return (
     <div className="space-y-4">
@@ -18,9 +18,9 @@ export default async function UserProfilePage({ params, searchParams }: PageProp
           <CardTitle>README</CardTitle>
           {!hasREADME && <CardDescription>아직 README가 작성되지 않았습니다.</CardDescription>}
         </CardHeader>
-        {hasREADME && <CardContent>{profile.readme}</CardContent>}
+        {hasREADME && <CardContent>{user.profile.readme}</CardContent>}
       </Card>
-      <UserActivities userId={profile.id} {...parsedParam} {...parsedSearchParam} />
+      <UserActivities userId={user.id} {...parsedParam} {...parsedSearchParam} />
     </div>
   );
 }
