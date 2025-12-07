@@ -68,7 +68,7 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
         {github.username && (
           <div className="flex items-center gap-2  text-muted-foreground">
             <TopicIcon slug={'github'} name={'GitHub'} />{' '}
-            <Link href={`https://github.com/${github.username}`} className="hover:underline">
+            <Link href={`https://github.com/${github.username}`} target={'_blank'} className="hover:underline">
               {github.username}
             </Link>
             <Tooltip>

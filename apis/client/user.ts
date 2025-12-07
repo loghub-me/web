@@ -26,6 +26,7 @@ const updateSelfAvatar = (file: File) => {
 const getSelfGitHub = async () => clientAPI.get('users/github').json<UserGitHub>();
 const updateSelfGitHub = async (json: z.infer<typeof userGitHubUpdateSchema>) =>
   clientAPI.put('users/github', { json }).json<MessageResponseBody>();
+const deleteSelfGitHub = async () => clientAPI.delete('users/github').json<MessageResponseBody>();
 const verifySelfGitHub = async () => clientAPI.post('users/github/verify').json<MessageResponseBody>();
 
 const getSelfProfile = async () => clientAPI.get('users/profile').json<UserProfile>();
@@ -45,7 +46,7 @@ const uploadImage = (file: File) => {
 export { searchArticlesForImport };
 export { getActivitySummaries, getActivities };
 export { updateSelfUsername, updateSelfAvatar };
-export { getSelfGitHub, updateSelfGitHub, verifySelfGitHub };
+export { getSelfGitHub, updateSelfGitHub, deleteSelfGitHub, verifySelfGitHub };
 export { getSelfProfile, updateSelfProfile };
 export { getSelfPrivacy, updateSelfPrivacy };
 export { uploadImage };

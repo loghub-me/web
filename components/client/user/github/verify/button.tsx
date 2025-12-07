@@ -12,14 +12,10 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 interface UserGitHubVerifyButtonProps {
-  verified: boolean;
-  isSubmitting: boolean;
+  github: Pick<UserGitHub, 'verified'>;
 }
 
-export default function UserGitHubVerifyButton({
-  verified,
-  isSubmitting: isUpdateSubmitting,
-}: Readonly<UserGitHubVerifyButtonProps>) {
+export default function UserGitHubVerifyButton({ github: { verified } }: Readonly<UserGitHubVerifyButtonProps>) {
   const { session } = useAuth();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
@@ -46,7 +42,7 @@ export default function UserGitHubVerifyButton({
     session && (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button type={'button'} size={'sm'} variant={'outline'} disabled={verified || isUpdateSubmitting}>
+          <Button type={'button'} size={'sm'} variant={'outline'}>
             <BadgeCheckIcon /> {verified ? '인증 완료' : 'GitHub 인증하기'}
           </Button>
         </DialogTrigger>
@@ -55,7 +51,7 @@ export default function UserGitHubVerifyButton({
             <DialogTitle>GitHub 계정 인증하기</DialogTitle>
             <DialogDescription>안내에 따라 GitHub 계정 설정을 완료한 후 인증을 시도해주세요.</DialogDescription>
           </DialogHeader>
-          <div className="text-sm">
+          <div className="text-sm space-y-4">
             <ol className="pl-4 list-decimal marker:text-primary">
               <li>
                 GitHub에 로그인한 후,
@@ -91,6 +87,9 @@ export default function UserGitHubVerifyButton({
                 설정이 완료되었으면, 하단의 <strong>인증하기</strong> 버튼을 눌러 인증을 완료해주세요.
               </li>
             </ol>
+            <blockquote className="border-l-primary bg-accent border-l-4 p-2 pl-4">
+              <p>인증 완료 후, GitHub Public Profile 설정에서 추가한 링크를 제거해도 인증 상태는 유지됩니다.</p>
+            </blockquote>
           </div>
           <DialogFooter>
             <DialogCloseButton>취소하기</DialogCloseButton>

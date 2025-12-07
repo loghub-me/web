@@ -17,5 +17,6 @@ export { default as UserProfileForm } from '@/components/client/user/profile/for
 export { default as UserPrivacyForm } from '@/components/client/user/privacy/form';
 export { default as UserGitHubForm } from '@/components/client/user/github/form';
 export { default as UserGitHubVerifyButton } from '@/components/client/user/github/verify/button';
+export { default as UserGitHubDeleteButton } from '@/components/client/user/github/delete/button';
 export { default as UserThemeForm } from '@/components/client/user/theme/form';
 export { default as UserWithdrawButton } from '@/components/client/user/withdraw/button';

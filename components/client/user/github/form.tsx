@@ -1,7 +1,8 @@
 'use client';
 
 import { updateSelfGitHub } from '@/apis/client/user';
-import { UserGitHubVerifyButton } from '@/components/client/user';
+import { TopicIcon } from '@/components/client/topic';
+import { UserGitHubDeleteButton, UserGitHubVerifyButton } from '@/components/client/user';
 import { ErrorMessage } from '@/constants/messages';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
@@ -11,7 +12,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
 import { InputWithIcon } from '@ui/input';
-import { AtSignIcon, UserPenIcon } from 'lucide-react';
+import { AtSignIcon } from 'lucide-react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -42,6 +44,10 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
       .catch((err) => handleFormError(err, form.setError));
   }
 
+  useEffect(() => {
+    form.reset({ username: github?.username || '' });
+  }, [form, github]);
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -59,9 +65,14 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
           )}
         />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <UserGitHubVerifyButton isSubmitting={form.formState.isSubmitting} verified={github.verified} />
+          {github.username && (
+            <>
+              <UserGitHubDeleteButton />
+              <UserGitHubVerifyButton github={github} />
+            </>
+          )}
           <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <UserPenIcon /> GitHub 업데이트
+            <TopicIcon slug={'github'} name={'GitHub'} /> GitHub 업데이트
           </Button>
         </div>
       </form>
