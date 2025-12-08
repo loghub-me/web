@@ -14,7 +14,7 @@ export function parseObject<S extends z.ZodTypeAny>(obj: unknown, schema: S): z.
   return result.data;
 }
 
-export function parseRelativeTime(timestamp: string): string {
+export function parseRelativeTime(timestamp: string | number): string {
   const date = new Date(timestamp);
   const now = new Date();
 

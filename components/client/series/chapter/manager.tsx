@@ -6,6 +6,7 @@ import {
   SeriesChapterCreateButton,
   SeriesChapterImportButton,
 } from '@/components/client/series';
+import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
 import {
   closestCenter,
@@ -29,6 +30,7 @@ import { Button } from '@ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 import { ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -44,6 +46,7 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
   );
   const queryKey = ['getSeriesForEdit', series.id] as const;
   const queryClient = useQueryClient();
+  const { session } = useAuth();
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -87,9 +90,15 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
         {chapters.length === 0 && <ListEmpty message={'아직 작성된 챕터가 없습니다.'} />}
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={chapters} strategy={verticalListSortingStrategy}>
-            {chapters.map((chapter) => (
-              <SeriesChapterManagerItem key={chapter.id} chapter={chapter} seriesId={series.id} />
-            ))}
+            {session &&
+              chapters.map((chapter) => (
+                <SeriesChapterManagerItem
+                  key={chapter.id}
+                  chapter={chapter}
+                  series={series}
+                  writerUsername={session.username}
+                />
+              ))}
           </SortableContext>
         </DndContext>
       </CardContent>
@@ -104,10 +113,11 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
 
 interface SeriesChapterManagerItemProps {
   chapter: SeriesChapter;
-  seriesId: number;
+  series: Pick<SeriesForEdit, 'id' | 'slug'>;
+  writerUsername: string;
 }
 
-function SeriesChapterManagerItem({ chapter, seriesId }: Readonly<SeriesChapterManagerItemProps>) {
+function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<SeriesChapterManagerItemProps>) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: chapter.id });
 
   const style = {
@@ -121,8 +131,13 @@ function SeriesChapterManagerItem({ chapter, seriesId }: Readonly<SeriesChapterM
         <ListChevronsUpDownIcon />
       </Button>
       <span className="font-bold text-primary">{chapter.sequence}.</span>
-      <span className="flex-1 whitespace-normal">{chapter.title}</span>
-      <SeriesChapterActionMenu seriesId={seriesId} chapterId={chapter.id} />
+      <Link
+        href={`/series/${writerUsername}/${series.slug}/${chapter.sequence}`}
+        className="flex-1 whitespace-normal transition-colors hover:text-accent-foreground/50"
+      >
+        {chapter.title}
+      </Link>
+      <SeriesChapterActionMenu seriesId={series.id} chapterId={chapter.id} />
     </Card>
   );
 }
