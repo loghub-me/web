@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
-import { PencilIcon, XIcon } from 'lucide-react';
+import { DeleteIcon, PencilIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface SeriesReviewActionMenuProps {
@@ -45,6 +45,7 @@ export default function SeriesReviewActionMenu({
         {session?.id === review.writer.id && (
           <>
             <Button
+              type={'button'}
               variant={editing ? 'secondary' : 'ghost'}
               size={'icon'}
               className="size-6 rounded-full"
@@ -52,9 +53,17 @@ export default function SeriesReviewActionMenu({
             >
               <PencilIcon className="size-3 text-muted-foreground" />
             </Button>
-            <Button variant={'ghost'} size={'icon'} className="size-6 rounded-full" onClick={onClickDelete}>
-              <XIcon className="size-3 text-muted-foreground" />
-            </Button>
+            {!editing && (
+              <Button
+                type={'button'}
+                variant={'ghost'}
+                size={'icon'}
+                className="size-6 rounded-full"
+                onClick={onClickDelete}
+              >
+                <DeleteIcon className="size-3 text-muted-foreground" />
+              </Button>
+            )}
           </>
         )}
       </div>

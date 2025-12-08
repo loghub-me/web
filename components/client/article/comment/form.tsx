@@ -74,7 +74,7 @@ export default function ArticleCommentForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} />
+                <Textarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} autoHeight={true} />
               </FormControl>
               <FormMessage />
             </FormItem>

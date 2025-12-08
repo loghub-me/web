@@ -65,7 +65,7 @@ export default function SeriesReviewForm({ seriesId, queryKey }: Readonly<Series
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="리뷰를 작성해주세요!" className="h-24" {...field} />
+                <Textarea placeholder="리뷰를 작성해주세요!" {...field} autoHeight={true} />
               </FormControl>
               <FormMessage />
             </FormItem>

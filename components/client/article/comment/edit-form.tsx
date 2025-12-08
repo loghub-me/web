@@ -8,7 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
 import { Textarea } from '@ui/textarea';
-import { MessageSquareIcon } from 'lucide-react';
+import { PencilIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -54,7 +54,7 @@ export default function ArticleCommentEditForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} />
+                  <Textarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} autoHeight={true} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -62,7 +62,7 @@ export default function ArticleCommentEditForm({
           />
           <div className="flex items-center justify-end gap-2">
             <Button type="submit" size={'sm'} disabled={form.formState.isSubmitting}>
-              <MessageSquareIcon /> 댓글 수정
+              <PencilIcon /> 수정 완료
             </Button>
           </div>
         </form>

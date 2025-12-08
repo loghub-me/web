@@ -42,7 +42,7 @@ export default function UserGitHubVerifyButton({ github: { verified } }: Readonl
     session && (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button type={'button'} size={'sm'} variant={'outline'}>
+          <Button type={'button'} size={'sm'} variant={'outline'} disabled={verified}>
             <BadgeCheckIcon /> {verified ? '인증 완료' : 'GitHub 인증하기'}
           </Button>
         </DialogTrigger>

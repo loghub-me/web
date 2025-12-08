@@ -5,7 +5,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
-import { PencilIcon, ReplyIcon, XIcon } from 'lucide-react';
+import { DeleteIcon, PencilIcon, ReplyIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface ArticleCommentActionMenuProps {
@@ -49,6 +49,7 @@ export default function ArticleCommentActionMenu({
       <div className="ml-2 flex gap-1">
         {!comment.deleted && (
           <Button
+            type={'button'}
             variant={actionStatus === 'replying' ? 'secondary' : 'ghost'}
             size={'icon'}
             className="size-6 rounded-full"
@@ -60,6 +61,7 @@ export default function ArticleCommentActionMenu({
         {!comment.deleted && session?.id === comment.writer.id && (
           <>
             <Button
+              type={'button'}
               variant={actionStatus === 'editing' ? 'secondary' : 'ghost'}
               size={'icon'}
               className="size-6 rounded-full"
@@ -67,9 +69,17 @@ export default function ArticleCommentActionMenu({
             >
               <PencilIcon className="size-3 text-muted-foreground" />
             </Button>
-            <Button variant={'ghost'} size={'icon'} className="size-6 rounded-full" onClick={onClickDelete}>
-              <XIcon className="size-3 text-muted-foreground" />
-            </Button>
+            {actionStatus === null && (
+              <Button
+                type={'button'}
+                className="size-6 rounded-full"
+                variant={'ghost'}
+                size={'icon'}
+                onClick={onClickDelete}
+              >
+                <DeleteIcon className="size-3 text-muted-foreground" />
+              </Button>
+            )}
           </>
         )}
       </div>

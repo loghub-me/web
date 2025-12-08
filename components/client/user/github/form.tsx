@@ -1,7 +1,6 @@
 'use client';
 
 import { updateSelfGitHub } from '@/apis/client/user';
-import { TopicIcon } from '@/components/client/topic';
 import { UserGitHubDeleteButton, UserGitHubVerifyButton } from '@/components/client/user';
 import { ErrorMessage } from '@/constants/messages';
 import { useAuth } from '@/hooks/use-auth';
@@ -13,6 +12,7 @@ import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
 import { InputWithIcon } from '@ui/input';
 import { AtSignIcon } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -72,7 +72,7 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
             </>
           )}
           <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <TopicIcon slug={'github'} name={'GitHub'} /> GitHub 업데이트
+            <Image src={'/icons/github-dark.svg'} alt={'GitHub'} width={16} height={16} /> GitHub 업데이트
           </Button>
         </div>
       </form>

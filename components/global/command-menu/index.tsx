@@ -44,7 +44,7 @@ export default function GlobalCommandMenu() {
 
   return (
     <>
-      <Button type={'button'} variant={'outline'} className="hidden md:flex" onClick={() => setOpen(true)}>
+      <Button type={'button'} variant={'outline'} className="hidden lg:flex" onClick={() => setOpen(true)}>
         <SearchIcon className="text-muted-foreground" />
         <span className="mr-4 text-muted-foreground">기능을 검색해주세요...</span>
         <Kbd>
