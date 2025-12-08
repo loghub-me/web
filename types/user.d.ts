@@ -44,12 +44,16 @@ interface UserActivitySummary {
 
 interface UserActivity {
   id: number;
-  slug: string;
+  href: string;
   title: string;
   action: UserActivityAction;
-  createdAt: string;
 }
 
 type UserRole = 'MEMBER' | 'ADMIN' | 'BOT';
 type UserStarTarget = 'ARTICLE' | 'SERIES' | 'QUESTION';
-type UserActivityAction = 'POST_ARTICLE' | 'POST_SERIES' | 'POST_QUESTION';
+type UserActivityAction =
+  | 'POST_ARTICLE'
+  | 'POST_SERIES'
+  | 'POST_SERIES_CHAPTER'
+  | 'POST_QUESTION'
+  | 'POST_QUESTION_ANSWER';

@@ -40,7 +40,7 @@ export default function UserActivities({ userId, username, date }: Readonly<User
             {isLoading && <UserActivityListSkeleton size={4} />}
             {activities?.length === 0 && <ListEmpty message="활동이 없습니다" className="py-4" />}
             {activities?.map((activity) => (
-              <UserActivityListItem key={activity.id} activity={activity} username={username} />
+              <UserActivityListItem key={activity.id} activity={activity} />
             ))}
           </UserActivityList>
         </Card>

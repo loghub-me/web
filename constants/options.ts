@@ -6,8 +6,10 @@ import {
   CircleDotIcon,
   CircleXIcon,
   InfoIcon,
+  Layers2Icon,
   LayersIcon,
   LucideIcon,
+  MessageSquareReplyIcon,
   MessagesSquareIcon,
   MonitorIcon,
   MoonIcon,
@@ -57,10 +59,12 @@ const USER_STAR_TARGET_OPTIONS: Record<UserStarTarget, { label: string; path: st
   QUESTION: { label: '질문', path: '/questions', icon: MessagesSquareIcon },
 };
 
-const USER_ACTIVITY_ACTION_OPTIONS: Record<UserActivityAction, { path: string; label: string }> = {
-  POST_ARTICLE: { path: '/articles/{username}/{slug}', label: '아티클 작성' },
-  POST_SERIES: { path: '/series/{username}/{slug}', label: '시리즈 작성' },
-  POST_QUESTION: { path: '/questions/{username}/{slug}', label: '질문 작성' },
+const USER_ACTIVITY_ACTION_OPTIONS: Record<UserActivityAction, { label: string; icon: LucideIcon }> = {
+  POST_ARTICLE: { label: '아티클 작성', icon: NotepadTextIcon },
+  POST_SERIES: { label: '시리즈 작성', icon: LayersIcon },
+  POST_SERIES_CHAPTER: { label: '시리즈 챕터 작성', icon: Layers2Icon },
+  POST_QUESTION: { label: '질문 작성', icon: MessagesSquareIcon },
+  POST_QUESTION_ANSWER: { label: '질문 답변 작성', icon: MessageSquareReplyIcon },
 };
 
 const THEME_OPTIONS: Record<string, { label: string; icon: LucideIcon }> = {
