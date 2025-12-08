@@ -5,7 +5,8 @@ import { NOTIFICATION_TYPE_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { ButtonLink } from '@ui/button';
-import { CheckIcon } from 'lucide-react';
+import { DropdownMenuItem } from '@ui/dropdown-menu';
+import Timestamp from '@ui/timestamp';
 
 interface NotificationListItemProps {
   notification: Notification;
@@ -16,37 +17,28 @@ export default function NotificationListItem({ notification }: Readonly<Notifica
   const queryClient = useQueryClient();
   const { icon: TypeIcon, color: typeColor } = NOTIFICATION_TYPE_OPTIONS[type];
   function onNavigate() {
-    queryClient.invalidateQueries({ queryKey: ['getNotifications'] });
-    queryClient.invalidateQueries({ queryKey: ['countNotifications'] });
+    deleteNotification(timestamp).then(() => {
+      queryClient.invalidateQueries({ queryKey: ['getNotifications'] });
+      queryClient.invalidateQueries({ queryKey: ['countNotifications'] });
+    });
   }
 
   return (
-    <div className={cn('flex gap-3.5 p-2 pl-4 pr-3 border-b last:border-b-0 items-center')}>
-      <TypeIcon className={cn('size-5', typeColor)} />
-      <div className="flex-1">
+    <div className={cn('flex flex-col p-3 border-b last:border-b-0')}>
+      <DropdownMenuItem asChild>
         <ButtonLink
           href={href}
           prefetch={false}
           onNavigate={onNavigate}
           variant={'link'}
           size={'sm'}
-          className="p-0 w-fit h-auto"
+          className="has-[>svg]:p-0 w-fit h-auto"
         >
-          {title}
+          <TypeIcon className={cn(typeColor)} /> {title}
         </ButtonLink>
-        <h5 className="text-sm">{message}</h5>
-      </div>
-      <ButtonLink
-        href={href}
-        prefetch={false}
-        onNavigate={() => deleteNotification(timestamp).then(() => onNavigate())}
-        type={'button'}
-        variant={'secondary'}
-        className="border"
-        size={'icon'}
-      >
-        <CheckIcon />
-      </ButtonLink>
+      </DropdownMenuItem>
+      <p className="pl-5 text-sm">{message}</p>
+      <Timestamp createdAt={timestamp} className="ml-auto" />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import AuthMenu from '@/components/global/auth-menu';
 import GlobalCommandMenu from '@/components/global/command-menu';
 import HeaderNavLink from '@/components/global/header/nav-link';
-import GlobalNotificationIndicator from '@/components/global/notification/indicator';
+import GlobalNotification from '@/components/global/notification';
 import GlobalSheet from '@/components/global/sheet';
 import Symbol from '@/components/global/symbol';
 import ThemeSwitch from '@/components/global/theme-switch';
@@ -27,7 +27,7 @@ export default function GlobalHeader() {
           <GlobalCommandMenu />
           <ButtonGroup>
             <ThemeSwitch />
-            <GlobalNotificationIndicator />
+            <GlobalNotification />
           </ButtonGroup>
           <AuthMenu type={'header'} />
         </div>

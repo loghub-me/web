@@ -1,11 +1,13 @@
 'use client';
 
 import AuthMenu from '@/components/global/auth-menu';
+import GlobalNotification from '@/components/global/notification';
 import SheetNavLink from '@/components/global/sheet/nav-link';
 import Symbol from '@/components/global/symbol';
 import ThemeSwitch from '@/components/global/theme-switch';
 import { HEADER_LINKS } from '@/constants/links';
 import { Button } from '@ui/button';
+import { ButtonGroup } from '@ui/button-group';
 import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@ui/sheet';
 import { MenuIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -38,7 +40,10 @@ export default function GlobalSheet() {
           ))}
         </nav>
         <SheetFooter className="flex-row">
-          <ThemeSwitch />
+          <ButtonGroup>
+            <ThemeSwitch />
+            <GlobalNotification />
+          </ButtonGroup>
           <AuthMenu type={'sheet'} closeSheet={closeSheet} />
         </SheetFooter>
       </SheetContent>
