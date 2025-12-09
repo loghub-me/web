@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
+import { SimpleTooltip } from '@ui/tooltip';
 import Link from 'next/link';
 import { CSSProperties, type ReactNode, useMemo } from 'react';
 
@@ -86,15 +87,14 @@ export default function UserActivityCalendar({ username, summaries }: Readonly<U
       const style = idx === 0 ? ({ gridRowStart: firstDayIndex + 1 } as CSSProperties) : undefined;
 
       return (
-        <Link
-          key={dateString}
-          href={{ pathname: `/${username}`, query: { date: dateString } }}
-          prefetch={false}
-          className={cn('size-4 rounded-[4px] transition-colors', colorClass)}
-          title={`${dateString} — 활동 ${activityCount}`}
-          aria-label={`${dateString} 활동 ${activityCount}`}
-          style={style}
-        />
+        <SimpleTooltip key={dateString} content={`${dateString} ${activityCount}개의 활동`}>
+          <Link
+            href={{ pathname: `/${username}`, query: { date: dateString } }}
+            prefetch={false}
+            className={cn('size-4 rounded-[4px] transition-colors', colorClass)}
+            style={style}
+          />
+        </SimpleTooltip>
       );
     });
   }, [summaries, username, currentDate]);

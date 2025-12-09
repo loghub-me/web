@@ -29,7 +29,7 @@ export default function ArticlePostPage() {
 
   return (
     <main className="max-h-screen h-screen pt-16">
-      <MarkdownEditor title="아티클 작성" ref={easyMDERef}>
+      <MarkdownEditor editor={{ ref: easyMDERef, title: '아티클 작성' }}>
         <ArticlePostDialog onOpenChange={onDialogOpenChange}>
           <ArticlePostForm form={form} />
         </ArticlePostDialog>

@@ -1,17 +1,14 @@
 'use client';
 
+import { MarkdownImageUploadButton, MarkdownDraftSaveButton } from '@/components/client/markdown';
 import { ErrorMessage } from '@/constants/messages';
-import { useAuth } from '@/hooks/use-auth';
-import { handleError } from '@/lib/error';
-import { defaultInputFileProps, uploadImageFile } from '@/lib/image/upload';
-import { buildAssetsUrl, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import '@/styles/easymde.css';
-import { Button } from '@ui/button';
-import { Kbd, KbdModifier } from '@ui/kbd';
 import { ToggleGroup, ToggleGroupItem } from '@ui/toggle-group';
 import type EasyMDE from 'easymde';
+import { Options as EasyMDEOptions } from 'easymde';
 import { MarkdownRenderer } from 'loghub-me-markdown-renderer';
-import { Columns2Icon, EyeIcon, ImageUpIcon, PencilIcon } from 'lucide-react';
+import { Columns2Icon, EyeIcon, PencilIcon } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -21,50 +18,27 @@ const editorModeValue = z.enum(['edit', 'preview', 'preview-edit']);
 const placeholder = '# 나의 글은 최강이다.';
 
 interface MarkdownEditorProps {
-  ref: React.RefObject<EasyMDE | null>;
-  title: string;
-  defaultValue?: string;
-  onDraftSave?: () => void;
+  editor: {
+    ref: React.RefObject<EasyMDE | null>;
+    title: string;
+    defaultValue?: string;
+  };
+  draft?: {
+    queryKey: readonly (string | number)[];
+    exists: boolean;
+    saveDraft: (draft: string) => Promise<MessageResponseBody>;
+    deleteDraft: () => Promise<MessageResponseBody>;
+  };
   children?: React.ReactNode;
 }
 
-export default function MarkdownEditor({
-  ref: easyMDERef,
-  title,
-  defaultValue = '',
-  onDraftSave,
-  children,
-}: Readonly<MarkdownEditorProps>) {
+export default function MarkdownEditor({ editor, draft, children }: Readonly<MarkdownEditorProps>) {
+  const { ref: easyMDERef, title, defaultValue } = editor;
   const rendererRef = useRef<MarkdownRenderer>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
-  const inputFileRef = useRef<HTMLInputElement>(null);
   const [mode, setMode] = useState<EditorMode>('preview-edit');
-  const { status: authStatus } = useAuth();
-
-  const inputFileProps = {
-    ...defaultInputFileProps,
-    ref: inputFileRef,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (authStatus !== 'authenticated') {
-        toast.error(ErrorMessage.LOGIN_REQUIRED);
-        return;
-      }
-      if (!easyMDERef.current) {
-        toast.error(ErrorMessage.UNKNOWN);
-        return;
-      }
-      const { codemirror } = easyMDERef.current;
-      const [doc, cursor] = [codemirror.getDoc(), codemirror.getCursor()];
-
-      uploadImageFile(e)
-        .then(({ filename, path }) => {
-          const newLine = `![${filename}](${buildAssetsUrl(path)})`;
-          doc.replaceRange(newLine, cursor);
-        })
-        .catch(handleError);
-    },
-  };
+  const [ready, setReady] = useState(false);
 
   const onModeChange = useCallback(
     (value: string) => {
@@ -78,18 +52,6 @@ export default function MarkdownEditor({
     [setMode]
   );
 
-  const onClickImageUpload = useCallback(() => {
-    if (authStatus !== 'authenticated') {
-      toast.error(ErrorMessage.LOGIN_REQUIRED);
-      return;
-    }
-    if (!inputFileRef.current) {
-      toast.error(ErrorMessage.UNKNOWN);
-      return;
-    }
-    inputFileRef.current.click();
-  }, [authStatus]);
-
   useEffect(() => {
     if (typeof window === 'undefined' || !textareaRef.current) return;
     if (!rendererRef.current) {
@@ -97,12 +59,11 @@ export default function MarkdownEditor({
     }
 
     import('easymde').then((EasyMDEModule) => {
-      const EasyMDEConstructor = EasyMDEModule.default;
-
       if (!textareaRef.current || !rendererRef.current || !previewRef.current) {
         return;
       }
 
+      const EasyMDEConstructor = EasyMDEModule.default;
       const easyMDE = new EasyMDEConstructor({
         element: textareaRef.current,
         toolbar: false,
@@ -111,7 +72,7 @@ export default function MarkdownEditor({
         initialValue: defaultValue,
         placeholder: placeholder,
         inputStyle: 'textarea',
-      });
+      } satisfies EasyMDEOptions);
       easyMDERef.current = easyMDE;
 
       easyMDE.codemirror.on('change', () => {
@@ -120,16 +81,11 @@ export default function MarkdownEditor({
           previewRef.current.innerHTML = rendererRef.current.render(markdown);
         }
       });
-      easyMDE.codemirror.addKeyMap({
-        'Ctrl-I': onClickImageUpload,
-        'Cmd-I': onClickImageUpload,
-        'Ctrl-S': onDraftSave || (() => toast.info('게시 후 임시저장이 가능합니다.')),
-        'Cmd-S': onDraftSave || (() => toast.info('게시 후 임시저장이 가능합니다.')),
-      });
 
       if (defaultValue) {
         previewRef.current.innerHTML = rendererRef.current.render(defaultValue);
       }
+      setReady(true);
     });
 
     return () => {
@@ -166,13 +122,8 @@ export default function MarkdownEditor({
         </ToggleGroup>
         <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
         <div className="flex gap-2">
-          <input {...inputFileProps} />
-          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onClickImageUpload}>
-            <ImageUpIcon />
-            <Kbd>
-              <KbdModifier /> I
-            </Kbd>
-          </Button>
+          {ready && <MarkdownImageUploadButton easyMDERef={easyMDERef} />}
+          {ready && draft && <MarkdownDraftSaveButton easyMDERef={easyMDERef} {...draft} />}
           {children}
         </div>
       </div>

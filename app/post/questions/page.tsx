@@ -28,7 +28,7 @@ export default function QuestionPostPage() {
 
   return (
     <main className="max-h-screen h-screen pt-16">
-      <MarkdownEditor title="질문 작성" ref={easyMDERef}>
+      <MarkdownEditor editor={{ ref: easyMDERef, title: '질문 작성' }}>
         <QuestionPostDialog onOpenChange={onDialogOpenChange}>
           <QuestionPostForm form={form} />
         </QuestionPostDialog>

@@ -9,7 +9,7 @@ export default function HomeFeatureMarkdownEditor() {
 
   return (
     <div className="w-full h-full border rounded-xl overflow-hidden">
-      <MarkdownEditor ref={easyMDERef} title={'마크다운 에디터'} />
+      <MarkdownEditor editor={{ ref: easyMDERef, title: '마크다운 에디터' }} />
     </div>
   );
 }

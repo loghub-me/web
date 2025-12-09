@@ -58,7 +58,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
             )}
           />
         </div>
-        <MarkdownEditor title="답변 작성" ref={easyMDERef}>
+        <MarkdownEditor editor={{ ref: easyMDERef, title: '답변 작성' }}>
           <Button
             type={'button'}
             onClick={() => {

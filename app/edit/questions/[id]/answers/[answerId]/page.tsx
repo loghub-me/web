@@ -5,22 +5,15 @@ import { MarkdownEditor } from '@/components/client/markdown';
 import { QuestionAnswerEditDialog, QuestionAnswerEditForm } from '@/components/client/question';
 import { useAuth } from '@/hooks/use-auth';
 import { useQueryErrorHandle } from '@/hooks/use-query-error-handle';
-import { handleError } from '@/lib/error';
 import { syncEditorWithForm } from '@/lib/form';
 import { parseObject } from '@/lib/parse';
-import { contentField } from '@/schemas/fields';
 import { questionAnswerEditPageSchema, questionAnswerEditSchema } from '@/schemas/question';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { Button } from '@ui/button';
-import { ButtonGroup } from '@ui/button-group';
-import { Kbd, KbdModifier } from '@ui/kbd';
+import { useQuery } from '@tanstack/react-query';
 import type EasyMDE from 'easymde';
-import { DeleteIcon, SaveIcon } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import { z } from 'zod';
 
 export default function QuestionAnswerEditPage() {
@@ -53,9 +46,6 @@ interface QuestionAnswerEditorProps {
 
 function QuestionAnswerEditor({ questionId, answer, queryKey }: Readonly<QuestionAnswerEditorProps>) {
   const easyMDERef = useRef<EasyMDE>(null);
-  const queryClient = useQueryClient();
-  const [hasDraft, setHasDraft] = useState(Boolean(answer.draft));
-
   const answerId = answer.id;
   const resolvedContent = answer.draft || answer.content;
 
@@ -73,58 +63,25 @@ function QuestionAnswerEditor({ questionId, answer, queryKey }: Readonly<Questio
     }
   }
 
-  const onDraftSave = () => {
-    if (!easyMDERef.current) return;
-    const draft = easyMDERef.current.value();
-    const { success, error } = contentField.safeParse(draft);
-    if (!success) {
-      toast.error(error.message);
-      return;
-    }
-
-    updateQuestionAnswerDraft(questionId, answerId, draft)
-      .then(({ message }) => {
-        toast.success(message, { icon: <SaveIcon className="size-4" /> });
-        queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft } : old));
-        setHasDraft(true);
-      })
-      .catch(handleError);
-  };
-
-  const onDraftDelete = () => {
-    if (!easyMDERef.current) return;
-
-    deleteQuestionAnswerDraft(questionId, answerId)
-      .then(({ message }) => {
-        toast.success(message, { icon: <DeleteIcon className="size-4" /> });
-        queryClient.setQueryData(queryKey, { ...answer, draft: null });
-        easyMDERef.current?.value(answer.content);
-        form.setValue('content', answer.content);
-        setHasDraft(false);
-      })
-      .catch(handleError);
-  };
-
   return (
     <MarkdownEditor
-      title={`[수정] ${answer.title}`}
-      ref={easyMDERef}
-      defaultValue={resolvedContent}
-      onDraftSave={onDraftSave}
+      editor={{
+        ref: easyMDERef,
+        title: `[수정] ${answer.title}`,
+        defaultValue: resolvedContent,
+      }}
+      draft={{
+        exists: Boolean(answer.draft),
+        queryKey,
+        saveDraft: async (draft: string) => updateQuestionAnswerDraft(questionId, answerId, draft),
+        deleteDraft: async () =>
+          deleteQuestionAnswerDraft(questionId, answerId).then((res) => {
+            easyMDERef.current?.value(answer.content);
+            form.setValue('content', answer.content);
+            return res;
+          }),
+      }}
     >
-      <ButtonGroup>
-        <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDraftSave}>
-          <SaveIcon />
-          <Kbd>
-            <KbdModifier /> S
-          </Kbd>
-        </Button>
-        {hasDraft && (
-          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDraftDelete}>
-            <DeleteIcon />
-          </Button>
-        )}
-      </ButtonGroup>
       <QuestionAnswerEditDialog onOpenChange={onDialogOpenChange}>
         <QuestionAnswerEditForm questionId={questionId} answerId={answer.id} form={form} />
       </QuestionAnswerEditDialog>
