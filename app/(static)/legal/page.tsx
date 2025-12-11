@@ -1,9 +1,9 @@
-import { PRIVACY_POLICIES, TERMS } from '@/constants/legals';
+import { TERMS, PRIVACY_POLICIES } from '@/constants/legals';
 import { Separator } from '@ui/separator';
 
 export default function LegalPage() {
   return (
-    <main className="container mx-auto px-4 py-20 min-h-screen">
+    <main className="container mx-auto px-4 py-20 h-screen">
       <section className="py-4">
         <h2 className="text-3xl font-semibold">서비스 이용약관 및 개인정보 처리방침</h2>
       </section>

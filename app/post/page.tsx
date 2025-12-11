@@ -1,9 +1,11 @@
+import { TopicIcon } from '@/components/client/topic';
 import ThemedImage from '@/components/global/themed-image';
 import { POST_LINKS } from '@/constants/links';
 import { cn } from '@/lib/utils';
 import { ButtonLink } from '@ui/button';
+import { ButtonGroup } from '@ui/button-group';
 import { LightRays } from '@ui/light-rays';
-import { HelpCircleIcon, LucideIcon } from 'lucide-react';
+import { LucideIcon, PencilIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -17,28 +19,29 @@ export default function PostPortalPage() {
     <main className="mx-auto p-4 pt-20 max-w-3xl w-full min-h-screen space-y-4">
       <div className="py-12 space-y-4 text-center">
         <h2 className="text-center font-semibold text-2xl">무엇을 작성하시겠어요?</h2>
-        <p className="text-sm text-muted-foreground">
-          아티클, 시리즈, 질문, 답변 등 다양한 글을 작성하고 공유해보세요.
-        </p>
+        <p className="text-muted-foreground">아티클, 시리즈, 질문, 답변 등 다양한 글을 작성하고 공유해보세요.</p>
       </div>
       <PostBentoGrid>
         {POST_LINKS.map((card) => (
           <PostBentoGridItem key={card.href} {...card} />
         ))}
       </PostBentoGrid>
-      <div className="py-8 space-y-2 text-center">
-        <p className="text-sm text-muted-foreground">마크다운이 처음이신가요?</p>
-        <ButtonLink
-          href={'https://www.markdownguide.org/basic-syntax/'}
-          target={'_blank'}
-          variant={'outline'}
-          className="pl-1.5 pr-2.5 rounded-full"
-        >
-          <span className={'p-1 text-accent-foreground bg-accent border rounded-full'}>
-            <HelpCircleIcon className="size-3 stroke-2.5" />
-          </span>
-          마크다운 가이드 보기
-        </ButtonLink>
+      <div className="py-8 space-y-3 text-center">
+        <p className="text-sm text-muted-foreground">포스트 작성에 도움이 필요하신가요? 가이드를 확인해보세요.</p>
+        <ButtonGroup className="mx-auto">
+          <ButtonLink href={'/manual#post'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5 rounded-full">
+            <span className={'p-1.5 text-accent-foreground bg-accent border rounded-full'}>
+              <PencilIcon className="size-3.5 stroke-2.5" />
+            </span>
+            포스트 가이드 보기
+          </ButtonLink>
+          <ButtonLink href={'/manual#markdown'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5 rounded-full">
+            <span className={'p-1.5 text-accent-foreground bg-accent border rounded-full'}>
+              <TopicIcon slug={'markdown'} name={'Markdown'} size={14} />
+            </span>
+            마크다운 가이드 보기
+          </ButtonLink>
+        </ButtonGroup>
       </div>
     </main>
   );
