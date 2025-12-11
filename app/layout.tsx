@@ -2,6 +2,7 @@ import { getTrendingTopics } from '@/apis/server/topic';
 import '@/app/globals.css';
 import GlobalFooter from '@/components/global/footer';
 import GlobalHeader from '@/components/global/header';
+import ScrollManager from '@/components/global/scroll-manager';
 import AuthProvider from '@/providers/auth';
 import NotificationProvider from '@/providers/notification';
 import ReactQueryProvider from '@/providers/react-query';
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: Readonly<LayoutProps<'/'>
                   <GlobalHeader />
                   {children}
                   <GlobalFooter />
+                  <ScrollManager />
                   <Toaster position={'top-center'} expand={true} richColors={true} />
                 </TopicProvider>
               </NotificationProvider>
