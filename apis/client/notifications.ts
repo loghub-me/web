@@ -1,3 +1,5 @@
+'use client';
+
 import { clientAPI } from './instance';
 
 const getNotifications = async () => clientAPI.get('notifications').json<Notification[]>();

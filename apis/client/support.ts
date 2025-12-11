@@ -1,3 +1,5 @@
+'use client';
+
 import { clientAPI } from '@/apis/client/instance';
 import { inquirySchema, topicRequestSchema } from '@/schemas/support';
 import { z } from 'zod';

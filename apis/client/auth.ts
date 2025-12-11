@@ -1,3 +1,5 @@
+'use client';
+
 import { clientAPI, extendClientAPIConfig } from '@/apis/client/instance';
 import { buildAPIUrl } from '@/lib/utils';
 import {

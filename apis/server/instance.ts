@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import 'server-only';
 
 function afterResponseHook(
-  req: KyRequest,
-  opts: NormalizedOptions,
+  _req: KyRequest,
+  _opts: NormalizedOptions,
   res: KyResponse
 ): Response | void | Promise<Response | void> {
   if (res.status === 404) {

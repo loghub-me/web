@@ -11,7 +11,8 @@ export async function handleFormError<TFieldValues extends FieldValues>(
   setError: UseFormSetError<TFieldValues>
 ) {
   if (!(error instanceof HTTPError)) {
-    toast.error(ErrorMessage.UNKNOWN);
+    const errorMessage = error instanceof Error ? error.message : ErrorMessage.UNKNOWN;
+    toast.error(errorMessage);
     return;
   }
 
