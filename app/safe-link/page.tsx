@@ -3,6 +3,12 @@ import { safeLinkSchema } from '@/schemas/safe-link';
 import { ButtonLink } from '@ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import { ChevronRightIcon, HomeIcon } from 'lucide-react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '안전하게 링크 이동',
+  description: '안전하게 외부 링크로 이동할 수 있도록 도와줍니다.',
+};
 
 export default async function SafeLinkPage({ searchParams }: PageProps<'/safe-link'>) {
   const { url } = parseObject(await searchParams, safeLinkSchema);

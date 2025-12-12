@@ -6,9 +6,18 @@ import { QuestionList, QuestionListSkeleton } from '@/components/server/question
 import { parseObject } from '@/lib/parse';
 import { questionSearchSchema } from '@/schemas/question';
 import { userDetailSchema } from '@/schemas/user';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-export default async function UserQuestionSearchPage({ params, searchParams }: PageProps<'/search/questions'>) {
+export async function generateMetadata({ params }: PageProps<'/[username]/questions'>): Promise<Metadata> {
+  const parsedParam = parseObject(await params, userDetailSchema);
+  return {
+    title: `@${parsedParam.username} - 질문`,
+    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+  };
+}
+
+export default async function UserQuestionSearchPage({ params, searchParams }: PageProps<'/[username]/questions'>) {
   const parsedParam = parseObject(await params, userDetailSchema);
   const parsedSearchParams = parseObject(await searchParams, questionSearchSchema);
   const questions = getUserQuestions(parsedParam.username, parsedSearchParams);

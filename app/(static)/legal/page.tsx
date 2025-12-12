@@ -1,9 +1,15 @@
 import { TERMS, PRIVACY_POLICIES } from '@/constants/legals';
 import { Separator } from '@ui/separator';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '정보',
+  description: '서비스 이용약관 및 개인정보 처리방침',
+};
 
 export default function LegalPage() {
   return (
-    <main className="container mx-auto px-4 py-20 h-screen">
+    <main className="container mx-auto px-4 py-20 min-h-screen">
       <section className="py-4">
         <h2 className="text-3xl font-semibold">서비스 이용약관 및 개인정보 처리방침</h2>
       </section>

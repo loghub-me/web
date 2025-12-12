@@ -6,9 +6,18 @@ import { SeriesList, SeriesListSkeleton } from '@/components/server/series';
 import { parseObject } from '@/lib/parse';
 import { seriesSearchSchema } from '@/schemas/series';
 import { userDetailSchema } from '@/schemas/user';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-export default async function UserSeriesSearchPage({ params, searchParams }: PageProps<'/search/series'>) {
+export async function generateMetadata({ params }: PageProps<'/[username]/series'>): Promise<Metadata> {
+  const parsedParam = parseObject(await params, userDetailSchema);
+  return {
+    title: `@${parsedParam.username} - 시리즈`,
+    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+  };
+}
+
+export default async function UserSeriesSearchPage({ params, searchParams }: PageProps<'/[username]/series'>) {
   const parsedParam = parseObject(await params, userDetailSchema);
   const parsedSearchParams = parseObject(await searchParams, seriesSearchSchema);
   const series = getUserSeries(parsedParam.username, parsedSearchParams);

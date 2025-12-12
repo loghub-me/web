@@ -4,7 +4,16 @@ import { StarList, StarListItem, StarListSkeleton } from '@/components/server/st
 import { parseObject } from '@/lib/parse';
 import { userDetailSchema, userStarSearchSchema } from '@/schemas/user';
 import ListEmpty from '@ui/list-empty';
+import { Metadata } from 'next';
 import { Suspense } from 'react';
+
+export async function generateMetadata({ params }: PageProps<'/[username]/series'>): Promise<Metadata> {
+  const parsedParam = parseObject(await params, userDetailSchema);
+  return {
+    title: `@${parsedParam.username} - 스타`,
+    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+  };
+}
 
 export default async function UserStarSearchPage({ params, searchParams }: PageProps<'/[username]/stars'>) {
   const parsedParam = parseObject(await params, userDetailSchema);
