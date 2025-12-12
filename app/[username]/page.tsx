@@ -4,6 +4,15 @@ import { parseObject } from '@/lib/parse';
 import { cn } from '@/lib/utils';
 import { userActivitySearchSchema, userDetailSchema } from '@/schemas/user';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: LayoutProps<'/[username]'>): Promise<Metadata> {
+  const parsedParam = parseObject(await params, userDetailSchema);
+  return {
+    title: `@${parsedParam.username}`,
+    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+  };
+}
 
 export default async function UserProfilePage({ params, searchParams }: PageProps<'/[username]'>) {
   const parsedParam = parseObject(await params, userDetailSchema);

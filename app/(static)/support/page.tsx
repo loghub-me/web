@@ -2,6 +2,12 @@ import { InquiryForm } from '@/components/client/support';
 import { TopicIcon } from '@/components/client/topic';
 import { ButtonLink } from '@ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '문의하기',
+  description: '서비스 관련 문의를 위한 페이지입니다.',
+};
 
 export default function SupportPage() {
   return (

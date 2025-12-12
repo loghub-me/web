@@ -20,7 +20,7 @@ export default function MarkdownManual() {
     <section id="markdown" className="space-y-4">
       <div className="space-y-1.5">
         <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/70 to-primary">
-          마크다운 작성 메뉴얼
+          마크다운 작성 매뉴얼
         </h2>
         <p className="text-secondary-foreground mt-2">
           LogHub에서는 마크다운(Markdown) 형식을 사용하여 포스트를 작성할 수 있습니다.

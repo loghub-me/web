@@ -6,17 +6,8 @@ import { parseObject } from '@/lib/parse';
 import { userDetailSchema } from '@/schemas/user';
 import { SimpleTooltip } from '@ui/tooltip';
 import { BadgeCheckIcon, BadgeXIcon, MailIcon } from 'lucide-react';
-import { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
-
-export async function generateMetadata({ params }: LayoutProps<'/[username]'>): Promise<Metadata> {
-  const parsedParam = parseObject(await params, userDetailSchema);
-  return {
-    title: `@${parsedParam.username}`,
-    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
-  };
-}
 
 export default async function UserDetailLayout({ params, children }: LayoutProps<'/[username]'>) {
   const parsedParam = parseObject(await params, userDetailSchema);
