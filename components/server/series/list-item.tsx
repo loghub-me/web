@@ -39,7 +39,7 @@ export default function SeriesListItem({ series }: Readonly<SeriesListItemProps>
       )}
       <div className="mt-auto flex items-center justify-between gap-2">
         <UserLink {...writer} className="-ml-1.5" />
-        <Timestamp createdAt={series.createdAt} />
+        <Timestamp {...series} />
       </div>
     </div>
   );

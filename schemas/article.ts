@@ -2,7 +2,7 @@ import zodFields from '@/schemas/fields';
 import { z } from 'zod';
 
 const { page, query, sort } = zodFields;
-const { title, content, thumbnail, topicSlugs } = zodFields;
+const { title, content, thumbnail, topicSlugs, published } = zodFields;
 const { id } = zodFields;
 
 const articleSearchSchema = z.object({
@@ -16,6 +16,7 @@ const articlePostSchema = z.object({
   content,
   thumbnail,
   topicSlugs,
+  published,
 });
 const articleEditSchema = articlePostSchema;
 

@@ -45,6 +45,7 @@ const thumbnail = z
 const topicSlugs = z
   .array(z.string({ message: '토픽은 문자열이어야 합니다.' }))
   .max(10, { message: '토픽은 최대 10개까지 선택할 수 있습니다.' });
+const published = z.boolean({ message: '공개 여부는 불리언 값이어야 합니다.' });
 
 const email = z.email('올바른 이메일 형식이 아닙니다.').trim();
 const usernameRegex = /^[a-zA-Z0-9]+$/;
@@ -76,6 +77,7 @@ const zodFields = {
   content,
   thumbnail,
   topicSlugs,
+  published,
   email,
   username,
   nickname,

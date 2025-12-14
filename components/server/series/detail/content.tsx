@@ -8,7 +8,7 @@ interface SeriesDetailContentProps {
 }
 
 export default function SeriesDetailContent({ series }: Readonly<SeriesDetailContentProps>) {
-  const { title, description, thumbnail, topics, createdAt, updatedAt } = series;
+  const { title, description, thumbnail, topics } = series;
 
   return (
     <CardContent className="flex flex-row md:flex-col gap-4">
@@ -31,7 +31,7 @@ export default function SeriesDetailContent({ series }: Readonly<SeriesDetailCon
           </div>
         )}
         <p className="text-right">
-          <Timestamp createdAt={createdAt} updatedAt={updatedAt} />
+          <Timestamp {...series} />
         </p>
       </div>
     </CardContent>

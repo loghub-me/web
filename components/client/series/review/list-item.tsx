@@ -24,7 +24,7 @@ export default function SeriesReviewListItem({
       <div className="flex items-center">
         <UserLink {...writer} />
         <DotIcon className="text-muted-foreground -ml-1" />
-        <Timestamp createdAt={review.createdAt} />
+        <Timestamp {...review} />
         <div className="pl-2.5 flex items-center gap-0.5">
           <StarIcon size={rating} fill={true} className="size-3" />
         </div>

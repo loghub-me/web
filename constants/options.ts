@@ -60,9 +60,9 @@ const USER_STAR_TARGET_OPTIONS: Record<UserStarTarget, { label: string; path: st
 };
 
 const USER_ACTIVITY_ACTION_OPTIONS: Record<UserActivityAction, { label: string; icon: LucideIcon }> = {
-  POST_ARTICLE: { label: '아티클 작성', icon: NotepadTextIcon },
+  PUBLISH_ARTICLE: { label: '아티클 공개', icon: NotepadTextIcon },
   POST_SERIES: { label: '시리즈 작성', icon: LayersIcon },
-  POST_SERIES_CHAPTER: { label: '시리즈 챕터 작성', icon: Layers2Icon },
+  PUBLISH_SERIES_CHAPTER: { label: '시리즈 챕터 공개', icon: Layers2Icon },
   POST_QUESTION: { label: '질문 작성', icon: MessagesSquareIcon },
   POST_QUESTION_ANSWER: { label: '질문 답변 작성', icon: MessageSquareReplyIcon },
 };

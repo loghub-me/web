@@ -53,8 +53,6 @@ export default function MarkdownDraftSaveButton({
       .then(({ message }) => {
         toast.success(message, { icon: <DeleteIcon className="size-4" /> });
         queryClient.setQueryData(queryKey, (old) => (old ? { ...old, draft: undefined } : old));
-        // easyMDERef.current?.value(article.content);
-        // form.setValue('content', article.content);
         setDraftExists(false);
       })
       .catch(handleError);

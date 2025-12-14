@@ -1,4 +1,4 @@
-interface Question extends Timestamps {
+interface Question {
   id: number;
   slug: string;
   title: string;
@@ -6,9 +6,11 @@ interface Question extends Timestamps {
   stats: QuestionStats;
   writer: User;
   topics: Topic[];
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface QuestionDetail extends Timestamps {
+interface QuestionDetail {
   id: number;
   slug: string;
   title: string;
@@ -18,6 +20,8 @@ interface QuestionDetail extends Timestamps {
   stats: QuestionStats;
   writer: User;
   topics: Topic[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface QuestionForEdit {
@@ -33,12 +37,14 @@ interface QuestionStats {
   answerCount: number;
 }
 
-interface QuestionAnswer extends Timestamps {
+interface QuestionAnswer {
   id: number;
   title: string;
   content: Content;
   accepted: boolean;
   writer: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface QuestionAnswerForEdit {

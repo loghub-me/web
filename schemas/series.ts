@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 const { page, query, sort } = zodFields;
 const { coercedId, coercedSequence } = zodFields;
-const { title, content, thumbnail, topicSlugs } = zodFields;
+const { title, content, thumbnail, topicSlugs, published } = zodFields;
 
 const seriesSearchSchema = z.object({
   query,
@@ -24,7 +24,7 @@ const seriesPostSchema = z.object({
 });
 const seriesEditSchema = seriesPostSchema;
 
-const seriesChapterEditSchema = z.object({ title, content });
+const seriesChapterEditSchema = z.object({ title, content, published });
 const seriesChapterEditPageSchema = z.object({ id: coercedId, chapterId: coercedId });
 
 const seriesReviewPostSchema = z.object({

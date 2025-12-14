@@ -1,7 +1,12 @@
 'use client';
 
 import { editArticle } from '@/apis/client/article';
-import { ThumbnailFormField, TitleFormField, TopicSlugsFormField } from '@/components/client/form-field';
+import {
+  PublishedFormField,
+  ThumbnailFormField,
+  TitleFormField,
+  TopicSlugsFormField,
+} from '@/components/client/form-field';
 import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
 import { handleFormError } from '@/lib/error';
 import { articleEditSchema } from '@/schemas/article';
@@ -53,6 +58,7 @@ export default function ArticleEditForm({ id: articleId, form }: Readonly<Articl
           defaultValue={DEFAULT_ARTICLE_THUMBNAIL}
         />
         <TopicSlugsFormField control={form.control} topicSlugs={topicSlugs} setTopicSlugs={setTopicSlugs} />
+        <PublishedFormField control={form.control} />
         <FormField control={form.control} name="content" render={() => <FormMessage />} />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <DialogCloseButton>취소하기</DialogCloseButton>

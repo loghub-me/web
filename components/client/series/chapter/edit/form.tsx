@@ -1,7 +1,7 @@
 'use client';
 
 import { editSeriesChapter } from '@/apis/client/series';
-import { TitleFormField } from '@/components/client/form-field';
+import { PublishedFormField, TitleFormField } from '@/components/client/form-field';
 import { handleFormError } from '@/lib/error';
 import { seriesChapterEditSchema } from '@/schemas/series';
 import { useQueryClient } from '@tanstack/react-query';
@@ -39,6 +39,7 @@ export default function SeriesChapterEditForm({ seriesId, chapterId, form }: Rea
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <TitleFormField control={form.control} />
+        <PublishedFormField control={form.control} />
         <FormField control={form.control} name="content" render={() => <FormMessage />} />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <DialogCloseButton>취소하기</DialogCloseButton>

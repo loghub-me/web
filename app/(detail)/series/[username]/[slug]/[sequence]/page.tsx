@@ -35,7 +35,7 @@ export default async function SeriesChapterDetailPage({ params }: PageProps<'/se
           <SeriesChapterDetailContent chapter={chapter} />
           <SeriesChapterDetailFooter
             series={series}
-            chapterSequence={sequence}
+            chapter={chapter}
             hasPrev={sequence > 1}
             hasNext={sequence < series.chapters.length}
           />

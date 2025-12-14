@@ -1,4 +1,4 @@
-interface Series extends Timestamps {
+interface Series {
   id: number;
   slug: string;
   title: string;
@@ -6,9 +6,11 @@ interface Series extends Timestamps {
   stats: SeriesStats;
   writer: User;
   topics: Topic[];
+  createdAt: string;
+  updatedAt: string;
 }
 
-interface SeriesDetail extends Timestamps {
+interface SeriesDetail {
   id: number;
   slug: string;
   title: string;
@@ -18,6 +20,8 @@ interface SeriesDetail extends Timestamps {
   writer: User;
   topics: Topic[];
   chapters: SeriesChapter[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface SeriesForEdit {
@@ -28,6 +32,7 @@ interface SeriesForEdit {
   thumbnail: string;
   topicSlugs: string[];
   chapters: SeriesChapter[];
+  published: boolean;
 }
 
 interface SeriesStats {
@@ -35,18 +40,21 @@ interface SeriesStats {
   reviewCount: number;
 }
 
-interface SeriesChapter extends Timestamps {
+interface SeriesChapter {
   id: number;
   title: string;
   sequence: number;
+  published: boolean;
 }
 
-interface SeriesChapterDetail extends Timestamps {
+interface SeriesChapterDetail {
   id: number;
   title: string;
   content: Content;
   anchors: Anchor[];
   sequence: number;
+  publishedAt: string;
+  updatedAt: string;
 }
 
 interface SeriesChapterForEdit {
@@ -57,11 +65,13 @@ interface SeriesChapterForEdit {
   sequence: number;
 }
 
-interface SeriesReview extends Timestamps {
+interface SeriesReview {
   id: number;
   content: string;
   rating: number;
   writer: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 type SeriesSort = 'latest' | 'oldest' | 'relevant' | 'trending';

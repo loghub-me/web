@@ -1,4 +1,4 @@
-interface Article extends Timestamps {
+interface Article {
   id: number;
   slug: string;
   title: string;
@@ -6,9 +6,10 @@ interface Article extends Timestamps {
   stats: ArticleStats;
   writer: User;
   topics: Topic[];
+  publishedAt: string;
 }
 
-interface ArticleDetail extends Timestamps {
+interface ArticleDetail {
   id: number;
   slug: string;
   title: string;
@@ -18,6 +19,15 @@ interface ArticleDetail extends Timestamps {
   stats: ArticleStats;
   writer: User;
   topics: Topic[];
+  publishedAt: string;
+  updatedAt: string;
+}
+
+interface ArticleUnpublished {
+  id: number;
+  title: string;
+  topics: Topic[];
+  createdAt: string;
 }
 
 interface ArticleForImport {
@@ -34,6 +44,7 @@ interface ArticleForEdit {
   draft?: string;
   thumbnail: string;
   topicSlugs: string[];
+  published: boolean;
 }
 
 interface ArticleStats {
@@ -41,13 +52,15 @@ interface ArticleStats {
   commentCount: number;
 }
 
-interface ArticleComment extends Timestamps {
+interface ArticleComment {
   id: number;
   content: string;
   deleted: boolean;
   replyCount: number;
   mention: User | null;
   writer: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 type ArticleSort = 'latest' | 'oldest' | 'relevant' | 'trending';

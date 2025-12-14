@@ -29,7 +29,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
-import { ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
+import { SimpleTooltip } from '@ui/tooltip';
+import { GlobeLockIcon, ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -113,7 +114,7 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
 
 interface SeriesChapterManagerItemProps {
   chapter: SeriesChapter;
-  series: Pick<SeriesForEdit, 'id' | 'slug'>;
+  series: Pick<SeriesForEdit, 'id' | 'slug' | 'published'>;
   writerUsername: string;
 }
 
@@ -137,6 +138,11 @@ function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<
       >
         {chapter.title}
       </Link>
+      {!chapter.published && (
+        <SimpleTooltip content="비공개 챕터입니다.">
+          <GlobeLockIcon className="size-4 text-muted-foreground" />
+        </SimpleTooltip>
+      )}
       <SeriesChapterActionMenu seriesId={series.id} chapterId={chapter.id} />
     </Card>
   );

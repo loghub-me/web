@@ -9,7 +9,7 @@ interface QuestionDetailHeroProps {
 }
 
 export default function QuestionDetailHero({ question }: Readonly<QuestionDetailHeroProps>) {
-  const { title, status, stats, createdAt, updatedAt, writer } = question;
+  const { title, status, stats, writer } = question;
   const { label: statusLabel, icon: StatusIcon, color: statusColor } = QUESTION_STATUS_OPTIONS[status];
 
   return (
@@ -29,7 +29,7 @@ export default function QuestionDetailHero({ question }: Readonly<QuestionDetail
       <div className="mt-auto flex items-center justify-center">
         <UserLink {...writer} />
         <DotIcon className="text-muted-foreground mr-1" />
-        <Timestamp createdAt={createdAt} updatedAt={updatedAt} className="text-sm" />
+        <Timestamp {...question} className="text-sm" />
       </div>
     </div>
   );

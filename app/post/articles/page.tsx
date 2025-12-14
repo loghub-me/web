@@ -15,7 +15,7 @@ export default function ArticlePostPage() {
   const easyMDERef = useRef<EasyMDE>(null);
   const form = useForm<z.infer<typeof articlePostSchema>>({
     resolver: zodResolver(articlePostSchema),
-    defaultValues: { title: '', content: '', thumbnail: DEFAULT_ARTICLE_THUMBNAIL, topicSlugs: [] },
+    defaultValues: { title: '', content: '', thumbnail: DEFAULT_ARTICLE_THUMBNAIL, topicSlugs: [], published: false },
   });
 
   function onDialogOpenChange(open: boolean) {
