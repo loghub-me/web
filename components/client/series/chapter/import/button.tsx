@@ -2,7 +2,7 @@
 
 import { importSeriesChapter } from '@/apis/client/series';
 import { searchArticlesForImport } from '@/apis/client/user';
-import { TopicLink } from '@/components/client/topic';
+import { ArticleForImportList, ArticleForImportListItem } from '@/components/client/article';
 import { useAuth } from '@/hooks/use-auth';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { handleError } from '@/lib/error';
@@ -11,9 +11,8 @@ import { Button } from '@ui/button';
 import { InputWithIcon } from '@ui/input';
 import ListEmpty from '@ui/list-empty';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@ui/sheet';
-import { CopyIcon, FolderInputIcon, PlusIcon, SearchIcon } from 'lucide-react';
-import Link from 'next/link';
-import { useState } from 'react';
+import { FolderInputIcon, PlusIcon, SearchIcon } from 'lucide-react';
+import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesChapterImportButtonProps {
@@ -33,14 +32,17 @@ export default function SeriesChapterImportButton({ seriesId }: Readonly<SeriesC
     enabled: status === 'authenticated',
   });
 
-  function onImportButtonClick(articleId: number) {
-    importSeriesChapter(seriesId, articleId)
-      .then(({ message }) => {
-        toast.success(message, { icon: <PlusIcon className="size-4" /> });
-        queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] });
-      })
-      .catch(handleError);
-  }
+  const onImportButtonClick = useCallback(
+    (articleId: number) => {
+      importSeriesChapter(seriesId, articleId)
+        .then(({ message }) => {
+          toast.success(message, { icon: <PlusIcon className="size-4" /> });
+          queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] });
+        })
+        .catch(handleError);
+    },
+    [seriesId, queryClient]
+  );
 
   return (
     session && (
@@ -64,37 +66,22 @@ export default function SeriesChapterImportButton({ seriesId }: Readonly<SeriesC
               value={query}
               onChange={(e) => setQuery(e.currentTarget.value)}
             />
-            <div className="border rounded-xl shadow-xs max-h-128 overflow-y-auto">
-              {isPending && <ListEmpty message="검색 중..." />}
-              {!isPending && articles && articles.length === 0 && <ListEmpty message="검색된 아티클이 없습니다." />}
+            <ArticleForImportList>
+              {isPending && <ListEmpty message="검색 중..." className="my-4" />}
+              {!isPending && articles && articles.length === 0 && (
+                <ListEmpty message="검색된 아티클이 없습니다." className="my-4" />
+              )}
               {!isPending &&
                 articles &&
-                articles.map(({ id, slug, title, topics }) => (
-                  <div key={id} className="flex items-center gap-2 p-4 border-b last:border-b-0">
-                    <div className="flex-1 space-y-1.5">
-                      <h3 className="flex flex-wrap items-center">
-                        <Link
-                          href={`/articles/${session.username}/${slug}`}
-                          prefetch={false}
-                          className="line-clamp-2 font-medium transition-colors hover:text-accent-foreground/50"
-                        >
-                          {title}
-                        </Link>
-                      </h3>
-                      {topics.length > 0 && (
-                        <div className="mt-0.5 flex flex-wrap gap-1">
-                          {topics.map((topic) => (
-                            <TopicLink key={topic.slug} topic={topic} />
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <Button type={'button'} variant={'outline'} size={'icon'} onClick={() => onImportButtonClick(id)}>
-                      <CopyIcon />
-                    </Button>
-                  </div>
+                articles.map((article) => (
+                  <ArticleForImportListItem
+                    key={article.id}
+                    article={article}
+                    writerUsername={session.username}
+                    onImportButtonClick={onImportButtonClick}
+                  />
                 ))}
-            </div>
+            </ArticleForImportList>
           </div>
         </SheetContent>
       </Sheet>
