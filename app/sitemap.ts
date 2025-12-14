@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = ['', 'legal', 'manual', 'support'];
   const searchPaths = ['search/articles', 'search/series', 'search/questions'];
   const postPaths = ['post', 'post/articles', 'post/series', 'post/questions'];
+  const unpublishedPaths = ['unpublished/articles'];
   const authPaths = ['join', 'login'];
   const settingsPaths = ['settings'];
 
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...buildPaths(staticPaths, 1),
     ...buildPaths(searchPaths, 1),
     ...buildPaths(postPaths, 0.7),
+    ...buildPaths(unpublishedPaths, 0.4),
     ...buildPaths(authPaths, 0.7),
     ...buildPaths(settingsPaths, 0.5),
   ];

@@ -10,11 +10,25 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPortal,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@ui/dropdown-menu';
 import { Skeleton } from '@ui/skeleton';
-import { ChevronUpIcon, LogInIcon, LogOutIcon, PencilIcon, SettingsIcon, StarIcon, UserCircleIcon } from 'lucide-react';
+import {
+  ChevronUpIcon,
+  GlobeLockIcon,
+  LogInIcon,
+  LogOutIcon,
+  NotepadTextIcon,
+  PencilIcon,
+  SettingsIcon,
+  StarIcon,
+  UserCircleIcon,
+} from 'lucide-react';
 import { Fragment, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -56,7 +70,12 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
   const navLinks = [
     [{ href: `/${session?.username}`, label: '프로필', icon: UserCircleIcon }],
     [
-      { href: '/post', label: '포스트', icon: PencilIcon },
+      { href: `/post`, label: '포스트', icon: PencilIcon },
+      {
+        label: '비공개',
+        icon: GlobeLockIcon,
+        sub: [{ href: '/unpublished/articles', label: '비공개 아티클', icon: NotepadTextIcon }],
+      },
       { href: `/${session?.username}/stars`, label: '스타', icon: StarIcon },
       { href: '/settings', label: '설정', icon: SettingsIcon },
     ],
@@ -88,13 +107,37 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
       <DropdownMenuContent className={cn('flex flex-col gap-1', type === 'sheet' && 'w-52')}>
         {navLinks.map((group, index) => (
           <Fragment key={index}>
-            {group.map(({ href, label, icon: Icon }) => (
-              <DropdownMenuItem key={href} asChild>
-                <ButtonLink href={href} className="justify-start" size={'sm'} onNavigate={closeSheet}>
-                  <Icon /> {label}
-                </ButtonLink>
-              </DropdownMenuItem>
-            ))}
+            {group.map(({ href, sub, label, icon: Icon }) => {
+              if (href) {
+                return (
+                  <DropdownMenuItem key={label} asChild>
+                    <ButtonLink href={href} size={'sm'} className="justify-start" onNavigate={closeSheet}>
+                      <Icon /> {label}
+                    </ButtonLink>
+                  </DropdownMenuItem>
+                );
+              }
+              if (sub) {
+                return (
+                  <DropdownMenuSub key={label}>
+                    <DropdownMenuSubTrigger>
+                      <Icon className="size-4" /> {label}
+                    </DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="flex flex-col">
+                        {sub.map(({ href: subHref, label: subLabel, icon: SubIcon }) => (
+                          <DropdownMenuItem key={subLabel} asChild>
+                            <ButtonLink href={subHref} size={'sm'} className="justify-start" onNavigate={closeSheet}>
+                              <SubIcon className="size-4" /> {subLabel}
+                            </ButtonLink>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                );
+              }
+            })}
             <DropdownMenuSeparator />
           </Fragment>
         ))}

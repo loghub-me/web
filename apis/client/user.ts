@@ -9,6 +9,8 @@ import {
 } from '@/schemas/user';
 import z from 'zod';
 
+const searchUnpublishedArticles = async (query: string) =>
+  clientAPI.get(`users/articles/unpublished`, { searchParams: { query } }).json<ArticleUnpublished[]>();
 const searchArticlesForImport = async (query: string) =>
   clientAPI.get(`users/articles/for-import`, { searchParams: { query } }).json<ArticleForImport[]>();
 
@@ -45,7 +47,7 @@ const uploadImage = (file: File) => {
   return clientAPI.post('users/image/upload', { body: formData }).json<DataResponseBody<string>>();
 };
 
-export { searchArticlesForImport };
+export { searchUnpublishedArticles, searchArticlesForImport };
 export { getActivitySummaries, getActivities };
 export { updateSelfUsername, updateSelfAvatar };
 export { getSelfGitHub, updateSelfGitHub, deleteSelfGitHub, verifySelfGitHub };
