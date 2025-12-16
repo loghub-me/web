@@ -9,13 +9,13 @@ import { handleError } from '@/lib/error';
 import { cn } from '@/lib/utils';
 import { questionAnswerGenerateRequestSchema } from '@/schemas/question';
 import { useQuery } from '@tanstack/react-query';
+import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
 import { ButtonGroup } from '@ui/button-group';
 import { CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { GlowEffect } from '@ui/glow-effect';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ui/select';
-import { Textarea } from '@ui/textarea';
 import { BotIcon, ChevronDownIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -78,10 +78,10 @@ export default function QuestionAnswerGenerateButton({ question, align }: Readon
 
   return (
     isWriter && (
-      <ButtonGroup className="relative overflow-hidden  border-blue-400/40 dark:border-blue-400/40">
+      <ButtonGroup className="border-blue-400/40 dark:border-blue-400/40">
         <Button
           variant={'outline'}
-          className="has-[>svg]:pr-2.5"
+          className="relative overflow-hidden"
           onClick={onRequestButtonClick}
           disabled={answerGenerating}
         >
@@ -119,7 +119,7 @@ export default function QuestionAnswerGenerateButton({ question, align }: Readon
                   ))}
                 </SelectContent>
               </Select>
-              <Textarea
+              <AutoHeightTextarea
                 name="instruction"
                 value={instruction}
                 onChange={(e) => setInstruction(e.target.value)}

@@ -1,6 +1,7 @@
 import { TopicLink } from '@/components/client/topic';
 import { parseRelativeTime } from '@/lib/parse';
 import { ButtonLink } from '@ui/button-link';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { ChevronRightIcon, GlobeLockIcon, PencilIcon } from 'lucide-react';
 
 interface ArticleUnpublishedListItemProps {
@@ -14,8 +15,10 @@ export default function ArticleUnpublishedListItem({ article }: Readonly<Article
     <div className="flex gap-2 p-4 border-b last:border-b-0">
       <div className="flex-1 space-y-1.5">
         <div className="flex gap-2">
-          <h3 className="flex flex-wrap items-center">
-            <GlobeLockIcon className="mr-1 size-3.5 text-muted-foreground" />
+          <h3 className="flex flex-wrap items-center gap-2">
+            <SimpleTooltip content="비공개 아티클입니다.">
+              <GlobeLockIcon className="size-4 text-muted-foreground" />
+            </SimpleTooltip>
             <span className="line-clamp-2 font-medium">{title}</span>
           </h3>
           <ButtonLink

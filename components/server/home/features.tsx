@@ -46,8 +46,8 @@ export default function HomeFeaturesSection() {
           LogHub는 사용자들이 더 나은 경험을 할 수 있도록 다양한 기능을 제공합니다.
         </p>
       </div>
-      <Tabs defaultValue={FEATURES[0].value} className="flex flex-col lg:flex-row gap-4">
-        <TabsList className="lg:max-w-1/3 flex flex-col gap-1 items-center">
+      <Tabs defaultValue={FEATURES[0].value} className="h-96">
+        <TabsList className="lg:max-w-1/3 w-full flex flex-col gap-1 items-center">
           {FEATURES.map((feature) => (
             <HomeFeatureTabTrigger key={feature.value} {...feature} />
           ))}

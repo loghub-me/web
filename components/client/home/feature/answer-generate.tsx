@@ -3,13 +3,13 @@
 import { TopicIcon } from '../../topic';
 import { CHAT_MODEL_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
+import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
 import { ButtonGroup } from '@ui/button-group';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { GlowEffect } from '@ui/glow-effect';
 import { Popover, PopoverTrigger, PopoverContent } from '@ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ui/select';
-import { Textarea } from '@ui/textarea';
 import { BotIcon, ChevronDownIcon } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -30,10 +30,10 @@ export default function HomeFeatureAnswerGenerate() {
     <div className="p-4 flex items-center justify-center w-full h-full border rounded-xl overflow-hidden">
       <Card className="flex-col md:flex-row items-center gap-4 p-4 rounded-xl">
         <h3 className="flex-1 font-medium">AI가 당신의 질문에 답변을 생성해 드립니다!</h3>
-        <ButtonGroup className="relative overflow-hidden rounded-full border-blue-400/40 dark:border-blue-400/40">
+        <ButtonGroup className="border-blue-400/40 dark:border-blue-400/40">
           <Button
             variant={'outline'}
-            className="rounded-full"
+            className="relative overflow-hidden"
             onClick={onRequestButtonClick}
             disabled={answerGenerating}
           >
@@ -42,15 +42,12 @@ export default function HomeFeatureAnswerGenerate() {
             {answerGenerating && '중...'}
           </Button>
           <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant={'outline'}
-                size="icon"
-                className="w-auto pl-2 pr-2.5 rounded-full"
-                disabled={answerGenerating}
-              >
-                <ChevronDownIcon />
-              </Button>
+            <PopoverTrigger
+              render={
+                <Button variant={'outline'} size="icon" className="w-auto pl-2 pr-2.5" disabled={answerGenerating} />
+              }
+            >
+              <ChevronDownIcon />
             </PopoverTrigger>
             <PopoverContent align="end" className="px-0 py-4 flex flex-col gap-2">
               <CardHeader className="space-y-1.5">
@@ -74,7 +71,10 @@ export default function HomeFeatureAnswerGenerate() {
                     ))}
                   </SelectContent>
                 </Select>
-                <Textarea name="instruction" placeholder={'추가 요청사항을 입력해보세요.\n(예: 답변 스타일)'} />
+                <AutoHeightTextarea
+                  name="instruction"
+                  placeholder={'추가 요청사항을 입력해보세요.\n(예: 답변 스타일)'}
+                />
               </CardContent>
             </PopoverContent>
           </Popover>

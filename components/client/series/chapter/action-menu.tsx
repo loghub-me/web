@@ -67,10 +67,8 @@ function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapt
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant={'ghost'} size={'sm'}>
-          <TrashIcon className="mr-0.5" /> 삭제하기
-        </Button>
+      <DialogTrigger render={<Button variant={'ghost'} size={'sm'} />}>
+        <TrashIcon className="mr-0.5" /> 삭제하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

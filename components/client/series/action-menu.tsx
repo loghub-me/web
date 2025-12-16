@@ -65,10 +65,8 @@ function SeriesDeleteButton({ seriesId }: Readonly<{ seriesId: number }>) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={'ghost'} size={'sm'}>
-          <TrashIcon className="mr-0.5" /> 삭제하기
-        </Button>
+      <DialogTrigger render={<Button variant={'ghost'} size={'sm'} />}>
+        <TrashIcon className="mr-0.5" /> 삭제하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

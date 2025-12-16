@@ -19,17 +19,15 @@ export default function GlobalSheet() {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant={'ghost'} size={'icon'}>
-          <MenuIcon />
-        </Button>
+      <SheetTrigger render={<Button variant={'ghost'} size={'icon'} />}>
+        <MenuIcon />
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="bg-background/80 backdrop-blur">
         <SheetHeader className="h-16 border-b">
-          <SheetTitle asChild>
-            <Link href={'/'} className="transition-opacity hover:opacity-70" onNavigate={closeSheet}>
-              <Symbol size={36} />
-            </Link>
+          <SheetTitle
+            render={<Link href={'/'} className="transition-opacity hover:opacity-70" onNavigate={closeSheet} />}
+          >
+            <Symbol size={36} />
           </SheetTitle>
         </SheetHeader>
         <nav className="px-4 flex flex-col gap-1">

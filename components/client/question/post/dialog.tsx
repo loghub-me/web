@@ -10,10 +10,8 @@ interface QuestionPostDialogProps {
 export default function QuestionPostDialog({ onOpenChange, children }: Readonly<QuestionPostDialogProps>) {
   return (
     <Dialog onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant={'default'}>
-          <UploadIcon /> 게시하기
-        </Button>
+      <DialogTrigger render={<Button variant={'default'} />}>
+        <UploadIcon /> 게시하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

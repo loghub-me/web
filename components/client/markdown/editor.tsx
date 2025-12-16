@@ -41,8 +41,9 @@ export default function MarkdownEditor({ editor, draft, children }: Readonly<Mar
   const [ready, setReady] = useState(false);
 
   const onModeChange = useCallback(
-    (value: string) => {
-      const { success, data } = editorModeValue.safeParse(value);
+    (value: string[]) => {
+      if (value.length === 0) return;
+      const { success, data } = editorModeValue.safeParse(value[0]);
       if (!success) {
         toast.error(ErrorMessage.PARSE_ERROR);
         return;
@@ -109,7 +110,7 @@ export default function MarkdownEditor({ editor, draft, children }: Readonly<Mar
         />
       </div>
       <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">
-        <ToggleGroup type={'single'} value={mode} onValueChange={onModeChange}>
+        <ToggleGroup value={[mode]} onValueChange={onModeChange} spacing={0.5}>
           <ToggleGroupItem value={'edit'} className="size-9">
             <PencilIcon />
           </ToggleGroupItem>

@@ -47,10 +47,8 @@ export default function SeriesChapterImportButton({ seriesId }: Readonly<SeriesC
   return (
     session && (
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button variant={'secondary'} size={'sm'} className="border-border">
-            <FolderInputIcon /> 아티클 불러오기
-          </Button>
+        <SheetTrigger render={<Button variant={'secondary'} size={'sm'} className="border-border" />}>
+          <FolderInputIcon /> 아티클 불러오기
         </SheetTrigger>
         <SheetContent>
           <SheetHeader className="border-b">

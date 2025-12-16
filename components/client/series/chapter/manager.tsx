@@ -140,10 +140,9 @@ function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<
         {chapter.title}
       </ButtonLink>
       {!chapter.published && (
-        <SimpleTooltip
-          content="비공개 챕터입니다."
-          render={() => <GlobeLockIcon className="size-4 text-muted-foreground" />}
-        />
+        <SimpleTooltip content="비공개 챕터입니다.">
+          <GlobeLockIcon className="size-4 text-muted-foreground" />
+        </SimpleTooltip>
       )}
       <SeriesChapterActionMenu seriesId={series.id} chapterId={chapter.id} />
     </Card>

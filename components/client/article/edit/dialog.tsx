@@ -10,10 +10,8 @@ interface ArticleEditDialogProps {
 export default function ArticleEditDialog({ onOpenChange, children }: Readonly<ArticleEditDialogProps>) {
   return (
     <Dialog onOpenChange={onOpenChange}>
-      <DialogTrigger asChild>
-        <Button variant={'default'}>
-          <PencilIcon /> 수정하기
-        </Button>
+      <DialogTrigger render={<Button variant={'default'} />}>
+        <PencilIcon /> 수정하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

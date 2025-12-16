@@ -68,10 +68,8 @@ function QuestionDeleteButton({ questionId }: Readonly<{ questionId: number }>) 
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={'ghost'} size={'sm'}>
-          <TrashIcon className="mr-0.5" /> 삭제하기
-        </Button>
+      <DialogTrigger render={<Button variant={'ghost'} size={'sm'} />}>
+        <TrashIcon className="mr-0.5" /> 삭제하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -103,10 +101,8 @@ function QuestionCloseButton({ questionId }: Readonly<{ questionId: number }>) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button variant={'ghost'} size={'sm'} className="justify-start">
-          <CircleXIcon className="mr-0.5" /> 닫기
-        </Button>
+      <DialogTrigger render={<Button variant={'ghost'} size={'sm'} className="justify-start" />}>
+        <CircleXIcon className="mr-0.5" /> 닫기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

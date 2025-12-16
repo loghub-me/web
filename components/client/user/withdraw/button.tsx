@@ -16,10 +16,8 @@ export default function UserWithdrawButton() {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button type={'button'} variant={'destructive'} size={'sm'}>
-          <UserXIcon /> 탈퇴하기
-        </Button>
+      <DialogTrigger render={<Button type={'button'} variant={'destructive'} size={'sm'} />}>
+        <UserXIcon /> 탈퇴하기
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

@@ -43,10 +43,8 @@ function TopicRequestDialog({ open, setOpen, children }: TopicRequestDialogProps
     <p className={'text-sm text-muted-foreground'}>
       <span>찾으시는 토픽이 없으신가요?</span>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant={'link'} size={'sm'} className="ml-1.5 p-0 h-auto">
-            토픽 요청하기
-          </Button>
+        <DialogTrigger render={<Button variant={'link'} size={'sm'} className="ml-1.5 p-0 h-auto" />}>
+          토픽 요청하기
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
