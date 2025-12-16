@@ -1,7 +1,7 @@
 import { USER_ACTIVITY_ACTION_OPTIONS } from '@/constants/options';
 import { Badge } from '@ui/badge';
 import { ButtonLink } from '@ui/button-link';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 
 interface UserActivityListItemProps {
   activity: UserActivity;

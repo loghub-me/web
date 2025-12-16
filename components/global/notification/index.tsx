@@ -21,10 +21,8 @@ export default function GlobalNotification() {
     case 'authenticated':
       return (
         <DropdownMenu onOpenChange={(value) => value && refetchNotifications()}>
-          <DropdownMenuTrigger asChild>
-            <Button type={'button'} variant={'outline'} size={'icon'}>
-              {notificationCount > 0 ? <BellDotIcon className="text-yellow-600" /> : <BellIcon />}
-            </Button>
+          <DropdownMenuTrigger render={<Button type={'button'} variant={'outline'} size={'icon'} />}>
+            {notificationCount > 0 ? <BellDotIcon className="text-yellow-600" /> : <BellIcon />}
           </DropdownMenuTrigger>
           <DropdownMenuContent className="p-0 max-w-xs w-full max-h-96 overflow-auto">
             {notifications.length === 0 && <ListEmpty message={'알림이 없습니다'} className="p-4" />}

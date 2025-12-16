@@ -30,6 +30,7 @@ import {
   StarIcon,
   UserCircleIcon,
 } from 'lucide-react';
+import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -91,19 +92,21 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
 
   return (
     <DropdownMenu modal={false} open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant={open ? 'secondary' : 'outline'}
-          className={cn('has-[>svg]:px-1.5 border', type === 'sheet' && 'flex-1')}
-        >
-          <UserAvatar {...session} /> {session.username}
-          <ChevronUpIcon
-            className={cn(
-              'ml-auto transition-transform',
-              type === 'header' ? open && '-rotate-180' : !open && 'rotate-180'
-            )}
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant={open ? 'secondary' : 'outline'}
+            className={cn('has-[>svg]:px-1.5 border', type === 'sheet' && 'flex-1')}
           />
-        </Button>
+        }
+      >
+        <UserAvatar {...session} /> {session.username}
+        <ChevronUpIcon
+          className={cn(
+            'ml-auto transition-transform',
+            type === 'header' ? open && '-rotate-180' : !open && 'rotate-180'
+          )}
+        />
       </DropdownMenuTrigger>
       <DropdownMenuContent className={cn('flex flex-col gap-1', type === 'sheet' && 'w-52')}>
         {navLinks.map((group, index) => (
@@ -111,10 +114,11 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
             {group.map(({ href, sub, label, icon: Icon }) => {
               if (href) {
                 return (
-                  <DropdownMenuItem key={label} asChild>
-                    <ButtonLink href={href} size={'sm'} className="justify-start" onNavigate={closeSheet}>
-                      <Icon /> {label}
-                    </ButtonLink>
+                  <DropdownMenuItem
+                    key={label}
+                    render={<Link href={href} prefetch={false} onNavigate={closeSheet} className="justify-start" />}
+                  >
+                    <Icon /> {label}
                   </DropdownMenuItem>
                 );
               }
@@ -127,10 +131,13 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent className="flex flex-col">
                         {sub.map(({ href: subHref, label: subLabel, icon: SubIcon }) => (
-                          <DropdownMenuItem key={subLabel} asChild>
-                            <ButtonLink href={subHref} size={'sm'} className="justify-start" onNavigate={closeSheet}>
-                              <SubIcon className="size-4" /> {subLabel}
-                            </ButtonLink>
+                          <DropdownMenuItem
+                            key={subLabel}
+                            render={
+                              <Link href={subHref} prefetch={false} onNavigate={closeSheet} className="justify-start" />
+                            }
+                          >
+                            <SubIcon className="size-4" /> {subLabel}
                           </DropdownMenuItem>
                         ))}
                       </DropdownMenuSubContent>
@@ -142,10 +149,8 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
             <DropdownMenuSeparator />
           </Fragment>
         ))}
-        <DropdownMenuItem asChild>
-          <Button variant={'ghost'} className="justify-start" size={'sm'} onClick={onClickLogout}>
-            <LogOutIcon /> 로그아웃
-          </Button>
+        <DropdownMenuItem className="justify-start" onClick={onClickLogout}>
+          <LogOutIcon /> 로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

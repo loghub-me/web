@@ -30,7 +30,7 @@ import { Button } from '@ui/button';
 import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { GlobeLockIcon, ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -140,9 +140,10 @@ function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<
         {chapter.title}
       </ButtonLink>
       {!chapter.published && (
-        <SimpleTooltip content="비공개 챕터입니다.">
-          <GlobeLockIcon className="size-4 text-muted-foreground" />
-        </SimpleTooltip>
+        <SimpleTooltip
+          content="비공개 챕터입니다."
+          render={() => <GlobeLockIcon className="size-4 text-muted-foreground" />}
+        />
       )}
       <SeriesChapterActionMenu seriesId={series.id} chapterId={chapter.id} />
     </Card>

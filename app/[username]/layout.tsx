@@ -4,7 +4,7 @@ import { UserAvatar, UserDetailNav } from '@/components/client/user';
 import { UserDetailAside, UserDetailAsideSkeleton } from '@/components/server/user';
 import { parseObject } from '@/lib/parse';
 import { userDetailSchema } from '@/schemas/user';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { BadgeCheckIcon, BadgeXIcon, MailIcon } from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -62,13 +62,16 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
             <Link href={`https://github.com/${github.username}`} target={'_blank'} className="hover:underline">
               {github.username}
             </Link>
-            <SimpleTooltip content={github.verified ? '인증완료' : '미인증'}>
-              {github.verified ? (
-                <BadgeCheckIcon className="text-green-500 size-4" />
-              ) : (
-                <BadgeXIcon className="text-muted-foreground size-4" />
-              )}
-            </SimpleTooltip>
+            <SimpleTooltip
+              content={github.verified ? '인증완료' : '미인증'}
+              render={() =>
+                github.verified ? (
+                  <BadgeCheckIcon className="text-green-500 size-4" />
+                ) : (
+                  <BadgeXIcon className="text-muted-foreground size-4" />
+                )
+              }
+            ></SimpleTooltip>
           </div>
         )}
       </div>

@@ -5,7 +5,7 @@ import { defaultInputFileProps, uploadImageFile } from '@/lib/image/upload';
 import { buildAssetsUrl } from '@/lib/utils';
 import { Button } from '@ui/button';
 import { Kbd, KbdModifier } from '@ui/kbd';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import type EasyMDE from 'easymde';
 import { ImageUpIcon } from 'lucide-react';
 import { useCallback, useEffect, useRef } from 'react';
@@ -75,13 +75,14 @@ export default function MarkdownImageUploadButton({ easyMDERef }: Readonly<Markd
   return (
     <>
       <input {...inputFileProps} />
-      <SimpleTooltip content="이미지 업로드">
-        <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onClickImageUpload}>
-          <ImageUpIcon />
-          <Kbd>
-            <KbdModifier /> I
-          </Kbd>
-        </Button>
+      <SimpleTooltip
+        content="이미지 업로드"
+        render={<Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onClickImageUpload} />}
+      >
+        <ImageUpIcon />
+        <Kbd>
+          <KbdModifier /> I
+        </Kbd>
       </SimpleTooltip>
     </>
   );

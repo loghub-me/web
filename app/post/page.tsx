@@ -2,8 +2,8 @@ import { TopicIcon } from '@/components/client/topic';
 import ThemedImage from '@/components/global/themed-image';
 import { POST_LINKS } from '@/constants/links';
 import { cn } from '@/lib/utils';
-import { ButtonLink } from '@ui/button-link';
 import { ButtonGroup } from '@ui/button-group';
+import { ButtonLink } from '@ui/button-link';
 import { LightRays } from '@ui/light-rays';
 import { LucideIcon, PencilIcon } from 'lucide-react';
 import { Metadata } from 'next';
@@ -29,14 +29,14 @@ export default function PostPortalPage() {
       <div className="py-8 space-y-3 text-center">
         <p className="text-sm text-muted-foreground">포스트 작성에 도움이 필요하신가요? 가이드를 확인해보세요.</p>
         <ButtonGroup className="mx-auto">
-          <ButtonLink href={'/manual#post'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5 rounded-full">
-            <span className={'p-1.5 text-accent-foreground bg-accent border rounded-full'}>
+          <ButtonLink href={'/manual#post'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5">
+            <span className="p-1.5 text-accent-foreground bg-accent border rounded-sm">
               <PencilIcon className="size-3.5 stroke-2.5" />
             </span>
             포스트 가이드 보기
           </ButtonLink>
-          <ButtonLink href={'/manual#markdown'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5 rounded-full">
-            <span className={'p-1.5 text-accent-foreground bg-accent border rounded-full'}>
+          <ButtonLink href={'/manual#markdown'} variant={'outline'} size={'lg'} className="pl-1.5 pr-2.5">
+            <span className="p-1.5 text-accent-foreground bg-accent border rounded-sm">
               <TopicIcon slug={'markdown'} name={'Markdown'} size={14} />
             </span>
             마크다운 가이드 보기

@@ -78,10 +78,10 @@ export default function QuestionAnswerGenerateButton({ question, align }: Readon
 
   return (
     isWriter && (
-      <ButtonGroup className="relative overflow-hidden rounded-full border-blue-400/40 dark:border-blue-400/40">
+      <ButtonGroup className="relative overflow-hidden  border-blue-400/40 dark:border-blue-400/40">
         <Button
           variant={'outline'}
-          className="has-[>svg]:pr-2.5 rounded-full"
+          className="has-[>svg]:pr-2.5"
           onClick={onRequestButtonClick}
           disabled={answerGenerating}
         >
@@ -90,10 +90,12 @@ export default function QuestionAnswerGenerateButton({ question, align }: Readon
           <span className="hidden md:inline-block">답변 생성{answerGenerating && '중...'}</span>
         </Button>
         <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button variant={'outline'} className="has-[>svg]:pl-2.5 rounded-full" disabled={answerGenerating}>
-              <ChevronDownIcon />
-            </Button>
+          <PopoverTrigger
+            render={
+              <Button variant={'outline'} className="has-[>svg]:pl-2.5 rounded-full" disabled={answerGenerating} />
+            }
+          >
+            <ChevronDownIcon />
           </PopoverTrigger>
           <PopoverContent align={align} className="px-0 py-4 flex flex-col gap-2">
             <CardHeader className="space-y-1.5">

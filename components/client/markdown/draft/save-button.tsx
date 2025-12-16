@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { ButtonGroup } from '@ui/button-group';
 import { Kbd, KbdModifier } from '@ui/kbd';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { SaveIcon, DeleteIcon } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -69,20 +69,23 @@ export default function MarkdownDraftSaveButton({
   }, [easyMDERef, onSave]);
 
   return (
-    <SimpleTooltip content="임시 저장">
-      <ButtonGroup>
-        <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onSave}>
-          <SaveIcon />
-          <Kbd>
-            <KbdModifier /> S
-          </Kbd>
-        </Button>
-        {draftExists && (
-          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDelete}>
-            <DeleteIcon />
+    <SimpleTooltip
+      content="임시 저장"
+      render={
+        <ButtonGroup>
+          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onSave}>
+            <SaveIcon />
+            <Kbd>
+              <KbdModifier /> S
+            </Kbd>
           </Button>
-        )}
-      </ButtonGroup>
-    </SimpleTooltip>
+          {draftExists && (
+            <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDelete}>
+              <DeleteIcon />
+            </Button>
+          )}
+        </ButtonGroup>
+      }
+    />
   );
 }

@@ -31,12 +31,10 @@ export default function ArticleActionMenu({ article }: Readonly<ArticleActionMen
   return (
     session?.id === writer.id && (
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button variant={'ghost'} size={'icon'} className="rounded-full">
-            <EllipsisIcon />
-          </Button>
+        <DropdownMenuTrigger render={<Button variant={'ghost'} size={'icon'} className="rounded-full" />}>
+          <EllipsisIcon />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="flex flex-col gap-1">
+        <DropdownMenuContent className="flex flex-col gap-1 w-fit min-w-auto">
           <ArticleEditLink articleId={article.id} />
           <ArticleDeleteButton articleId={article.id} />
         </DropdownMenuContent>

@@ -28,12 +28,10 @@ interface SeriesChapterActionMenuProps {
 export default function SeriesChapterActionMenu({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
-        <Button variant={'ghost'} size={'icon'} className="rounded-full">
-          <EllipsisIcon />
-        </Button>
+      <DropdownMenuTrigger render={<Button variant={'ghost'} size={'icon'} className="rounded-full" />}>
+        <EllipsisIcon />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="flex flex-col gap-1">
+      <DropdownMenuContent className="flex flex-col gap-1 w-fit min-w-auto">
         <SeriesChapterEditLink seriesId={seriesId} chapterId={chapterId} />
         <SeriesChapterDeleteButton seriesId={seriesId} chapterId={chapterId} />
       </DropdownMenuContent>

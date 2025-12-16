@@ -31,12 +31,10 @@ export default function QuestionAnswerActionMenu({ questionId, answer }: Readonl
   return (
     session?.id === answer.writer.id && (
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button variant={'ghost'} size={'icon'} className="rounded-full">
-            <EllipsisIcon />
-          </Button>
+        <DropdownMenuTrigger render={<Button variant={'ghost'} size={'icon'} className="rounded-full" />}>
+          <EllipsisIcon />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="flex flex-col gap-1">
+        <DropdownMenuContent className="flex flex-col gap-1 w-fit min-w-auto">
           <QuestionEditLink questionId={questionId} answerId={answer.id} />
           <QuestionDeleteButton questionId={questionId} answerId={answer.id} />
         </DropdownMenuContent>

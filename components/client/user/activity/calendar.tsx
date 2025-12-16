@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
-import { SimpleTooltip } from '@ui/tooltip';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import Link from 'next/link';
 import { CSSProperties, type ReactNode, useMemo } from 'react';
 
