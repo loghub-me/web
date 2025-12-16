@@ -64,14 +64,14 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
             </Link>
             <SimpleTooltip
               content={github.verified ? '인증완료' : '미인증'}
-              render={() =>
+              render={
                 github.verified ? (
                   <BadgeCheckIcon className="text-green-500 size-4" />
                 ) : (
                   <BadgeXIcon className="text-muted-foreground size-4" />
                 )
               }
-            ></SimpleTooltip>
+            />
           </div>
         )}
       </div>

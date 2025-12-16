@@ -87,14 +87,18 @@ export default function UserActivityCalendar({ username, summaries }: Readonly<U
       const style = idx === 0 ? ({ gridRowStart: firstDayIndex + 1 } as CSSProperties) : undefined;
 
       return (
-        <SimpleTooltip key={dateString} content={`${dateString} ${activityCount}개의 활동`}>
-          <Link
-            href={{ pathname: `/${username}`, query: { date: dateString } }}
-            prefetch={false}
-            className={cn('size-4 rounded-[4px] transition-colors', colorClass)}
-            style={style}
-          />
-        </SimpleTooltip>
+        <SimpleTooltip
+          key={dateString}
+          content={`${dateString} ${activityCount}개의 활동`}
+          render={
+            <Link
+              href={{ pathname: `/${username}`, query: { date: dateString } }}
+              prefetch={false}
+              className={cn('size-4 rounded-[4px] transition-colors', colorClass)}
+              style={style}
+            />
+          }
+        />
       );
     });
   }, [summaries, username, currentDate]);

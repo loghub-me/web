@@ -64,7 +64,7 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
             </FormItem>
           )}
         />
-        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <div className="flex flex-wrap flex-col-reverse gap-1.5 sm:flex-row sm:justify-end">
           {github.username && (
             <>
               <UserGitHubDeleteButton />
