@@ -5,7 +5,8 @@ import { UserAvatar } from '@/components/client/user';
 import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
 import { cn } from '@/lib/utils';
-import { Button, ButtonLink } from '@ui/button';
+import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import {
   DropdownMenu,
   DropdownMenuContent,

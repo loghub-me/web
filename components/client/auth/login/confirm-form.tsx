@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
 import { Form } from '@ui/form';
 import { LogInIcon } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -23,7 +23,6 @@ interface LoginConfirmSearchParams {
 export default function LoginConfirmForm({ defaultValues }: Readonly<LoginConfirmSearchParams>) {
   const { registerSession } = useAuth();
   const form = useForm<FormType>({ resolver: zodResolver(loginConfirmSchema), defaultValues });
-  const submitRef = useRef<HTMLButtonElement>(null);
 
   function onSubmit(values: FormType) {
     confirmLogin(values)
@@ -35,17 +34,17 @@ export default function LoginConfirmForm({ defaultValues }: Readonly<LoginConfir
   }
 
   useEffect(() => {
-    if (submitRef.current && defaultValues.otp) {
-      submitRef.current.click();
+    if (defaultValues.otp) {
+      form.handleSubmit(onSubmit)();
     }
-  }, [submitRef, defaultValues.otp]);
+  }, [defaultValues.otp]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <EmailFormField control={form.control} readOnly />
         <OTPFormField control={form.control} />
-        <Button ref={submitRef} type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+        <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
           <LogInIcon /> 인증번호 확인
         </Button>
       </form>

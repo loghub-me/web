@@ -2,7 +2,7 @@
 
 import { QUESTION_FILTER_OPTIONS } from '@/constants/options';
 import { questionSearchSchema } from '@/schemas/question';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { useFormStatus } from 'react-dom';
 import { z } from 'zod';
 

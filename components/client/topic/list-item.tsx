@@ -1,5 +1,5 @@
 import { TopicIcon } from '@/components/client/topic';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 
 interface TopicListProps {
   topic: Topic;

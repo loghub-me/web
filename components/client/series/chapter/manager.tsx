@@ -27,11 +27,11 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 import { SimpleTooltip } from '@ui/tooltip';
 import { GlobeLockIcon, ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -132,12 +132,13 @@ function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<
         <ListChevronsUpDownIcon />
       </Button>
       <span className="font-bold text-primary">{chapter.sequence}.</span>
-      <Link
+      <ButtonLink
         href={`/series/${writerUsername}/${series.slug}/${chapter.sequence}`}
-        className="flex-1 whitespace-normal transition-colors hover:text-accent-foreground/50"
+        variant={'link'}
+        className="flex-1 p-0 h-auto justify-start whitespace-normal text-foreground"
       >
         {chapter.title}
-      </Link>
+      </ButtonLink>
       {!chapter.published && (
         <SimpleTooltip content="비공개 챕터입니다.">
           <GlobeLockIcon className="size-4 text-muted-foreground" />

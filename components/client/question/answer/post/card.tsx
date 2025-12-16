@@ -2,7 +2,7 @@
 
 import { QuestionAnswerPostForm } from '@/components/client/question';
 import { useAuth } from '@/hooks/use-auth';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card } from '@ui/card';
 import { LogInIcon } from 'lucide-react';
 

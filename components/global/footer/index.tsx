@@ -4,7 +4,7 @@ import { TopicIcon } from '@/components/client/topic';
 import Logo from '@/components/global/logo';
 import { FOOTER_LINKS, LEGAL_LINKS } from '@/constants/links';
 import { cn } from '@/lib/utils';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Separator } from '@ui/separator';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';

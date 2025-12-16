@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 import { useParams } from 'next/navigation';
@@ -29,7 +29,7 @@ export default function SeriesChapterCard({ series }: Readonly<SeriesChapterCard
               key={id}
               href={href}
               variant={isActive ? 'secondary' : 'ghost'}
-              className="px-2 items-start justify-start gap-1.5 h-auto"
+              className="py-1.5 min-h-9 h-auto justify-start"
             >
               <span className="font-bold text-primary">{sequence}.</span>
               <span className="whitespace-normal">{title}</span>

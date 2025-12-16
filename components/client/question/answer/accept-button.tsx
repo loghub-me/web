@@ -58,7 +58,7 @@ export default function QuestionAnswerAcceptButton({ question, answerId }: Reado
           </DialogHeader>
           <DialogFooter>
             <DialogCloseButton>취소하기</DialogCloseButton>
-            <Button type="submit" variant={'secondary'} className="border" onClick={onAcceptButtonClick}>
+            <Button type="submit" variant={'secondary'} className="border-border" onClick={onAcceptButtonClick}>
               <CheckCircleIcon className={cn(QUESTION_STATUS_OPTIONS['SOLVED'].color)} /> 채택하기
             </Button>
           </DialogFooter>

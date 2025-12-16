@@ -3,7 +3,8 @@
 import { deleteArticle } from '@/apis/client/article';
 import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
-import { Button, ButtonLink } from '@ui/button';
+import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import {
   Dialog,
   DialogCloseButton,

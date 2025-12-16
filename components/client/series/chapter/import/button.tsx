@@ -48,7 +48,7 @@ export default function SeriesChapterImportButton({ seriesId }: Readonly<SeriesC
     session && (
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant={'secondary'} size={'sm'} className="border">
+          <Button variant={'secondary'} size={'sm'} className="border-border">
             <FolderInputIcon /> 아티클 불러오기
           </Button>
         </SheetTrigger>

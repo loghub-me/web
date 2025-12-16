@@ -5,7 +5,8 @@ import { QUESTION_STATUS_OPTIONS } from '@/constants/options';
 import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
 import { cn } from '@/lib/utils';
-import { Button, ButtonLink } from '@ui/button';
+import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import {
   Dialog,
   DialogCloseButton,
@@ -116,7 +117,7 @@ function QuestionCloseButton({ questionId }: Readonly<{ questionId: number }>) {
         </DialogHeader>
         <DialogFooter>
           <DialogCloseButton>취소하기</DialogCloseButton>
-          <Button type="submit" variant={'secondary'} className="border" onClick={onCloseButtonClick}>
+          <Button type="submit" variant={'secondary'} className="border-border" onClick={onCloseButtonClick}>
             <CircleXIcon className={cn(QUESTION_STATUS_OPTIONS['CLOSED'].color)} /> 닫기
           </Button>
         </DialogFooter>

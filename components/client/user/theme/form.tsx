@@ -19,7 +19,7 @@ export default function UserThemeForm() {
             key={key}
             onClick={() => setTheme(key)}
             variant={theme === key ? 'secondary' : 'ghost'}
-            className={cn('flex-1 flex-col gap-3 p-4 h-auto border', theme != key && 'text-muted-foreground')}
+            className={cn('flex-1 flex-col gap-3 p-4 h-auto border-border', theme != key && 'text-muted-foreground')}
           >
             <Icon className="size-6" />
             <span className="font-semibold">{label}</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { usePathname, useSearchParams } from 'next/navigation';
 

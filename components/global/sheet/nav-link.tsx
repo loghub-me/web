@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { usePathname } from 'next/navigation';
 
 interface SheetNavLinkProps {

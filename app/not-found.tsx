@@ -1,5 +1,5 @@
 import { getRandomNotFoundQuote } from '@/constants/quotes';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from '@ui/empty';
 import { HomeIcon, MailIcon } from 'lucide-react';
 

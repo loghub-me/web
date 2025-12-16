@@ -1,7 +1,7 @@
 'use client';
 
 import { useTOC } from '@/hooks/use-toc';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardHeader, CardTitle, CardContent } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 

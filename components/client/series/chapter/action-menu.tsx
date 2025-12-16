@@ -3,7 +3,8 @@
 import { deleteSeriesChapter } from '@/apis/client/series';
 import { handleError } from '@/lib/error';
 import { useQueryClient } from '@tanstack/react-query';
-import { Button, ButtonLink } from '@ui/button';
+import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import {
   Dialog,
   DialogCloseButton,

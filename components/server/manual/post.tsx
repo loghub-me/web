@@ -1,4 +1,4 @@
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Separator } from '@ui/separator';
 import { NotepadTextIcon, ChevronRightIcon, LayersIcon, TagIcon } from 'lucide-react';
 import { Fragment } from 'react/jsx-runtime';

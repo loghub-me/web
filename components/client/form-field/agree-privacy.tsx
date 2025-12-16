@@ -23,10 +23,12 @@ export default function AgreePrivacyFormField<T extends { agreePrivacy: boolean 
             <Checkbox checked={field.value} onCheckedChange={field.onChange} />
           </FormControl>
           <FormLabel>개인정보 처리방침 동의</FormLabel>
-          <Badge variant={'outline'} className="px-1" asChild>
-            <Link href={'/legal#privacy'} className="text-primary">
-              보기
-            </Link>
+          <Badge
+            variant={'outline'}
+            className="px-1"
+            render={<Link href={'/legal#privacy'} className="text-primary" />}
+          >
+            보기
           </Badge>
         </FormItem>
       )}

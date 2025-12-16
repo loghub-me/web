@@ -1,4 +1,4 @@
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { NotepadTextIcon, LayersIcon, MessagesSquareIcon, TagIcon, ChevronRightIcon } from 'lucide-react';
 
 export default function HomeContentsSection() {

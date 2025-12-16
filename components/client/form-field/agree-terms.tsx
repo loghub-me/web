@@ -23,10 +23,8 @@ export default function AgreeTermsFormField<T extends { agreeTerms: boolean }>({
             <Checkbox checked={field.value} onCheckedChange={field.onChange} />
           </FormControl>
           <FormLabel>이용약관 동의</FormLabel>
-          <Badge variant={'outline'} className="px-1" asChild>
-            <Link href={'/legal#terms'} className="text-primary">
-              보기
-            </Link>
+          <Badge variant={'outline'} className="px-1" render={<Link href={'/legal#terms'} className="text-primary" />}>
+            보기
           </Badge>
         </FormItem>
       )}

@@ -4,9 +4,9 @@ import { handleFormError } from '@/lib/error';
 import { seriesReviewEditSchema } from '@/schemas/series';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
-import { Textarea } from '@ui/textarea';
 import { PencilIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -57,7 +57,7 @@ export default function SeriesReviewEditForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="리뷰를 작성해주세요!" className="h-24" {...field} autoHeight={true} />
+                <AutoHeightTextarea placeholder="리뷰를 작성해주세요!" className="h-24" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

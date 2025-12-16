@@ -5,9 +5,9 @@ import { cn } from '@/lib/utils';
 import { articleCommentEditSchema } from '@/schemas/article';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
-import { Textarea } from '@ui/textarea';
 import { PencilIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -54,7 +54,7 @@ export default function ArticleCommentEditForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} autoHeight={true} />
+                  <AutoHeightTextarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

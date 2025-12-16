@@ -1,6 +1,6 @@
 import { QUESTION_STATUS_OPTIONS } from '@/constants/options';
 import { Badge } from '@ui/badge';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 
 interface QuestionStatusCardProps {

@@ -1,6 +1,7 @@
 import { UserAvatar } from '@/components/client/user';
 import { cn } from '@/lib/utils';
-import { ButtonLink, buttonVariants } from '@ui/button';
+import { buttonVariants } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import type { VariantProps } from 'class-variance-authority';
 
 interface UserLinkProps extends VariantProps<typeof buttonVariants> {

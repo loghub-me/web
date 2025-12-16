@@ -1,6 +1,7 @@
-import { Button, ButtonLink } from './button';
-import { ButtonGroup } from './button-group';
 import ThemedImage from '@/components/global/themed-image';
+import { Button } from '@ui/button';
+import { ButtonGroup } from '@ui/button-group';
+import { ButtonLink } from '@ui/button-link';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@ui/dropdown-menu';
 import { Share2Icon } from 'lucide-react';
 

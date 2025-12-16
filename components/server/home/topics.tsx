@@ -1,6 +1,6 @@
 import { TopicIcon } from '@/components/client/topic';
 import { TOPICS } from '@/constants/topics';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { OrbitingCircle } from '@ui/orbiting-circle';
 import { ChevronRightIcon, TagIcon } from 'lucide-react';
 

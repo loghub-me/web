@@ -38,7 +38,7 @@ export default function SeriesChapterCreateButton({ seriesId }: Readonly<SeriesC
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={'secondary'} size={'sm'} className="border">
+        <Button variant={'secondary'} size={'sm'} className="border-border">
           <PlusIcon /> 챕터 추가
         </Button>
       </DialogTrigger>

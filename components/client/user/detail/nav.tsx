@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { LayersIcon, LucideIcon, MessagesSquareIcon, NotepadTextIcon, StarIcon, UserIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 

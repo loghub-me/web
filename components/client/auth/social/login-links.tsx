@@ -1,6 +1,6 @@
 import { TopicIcon } from '@/components/client/topic';
 import { buildAPIUrl } from '@/lib/utils';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 
 export default function SocialLoginLinks() {
   return (

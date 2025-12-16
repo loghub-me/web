@@ -2,7 +2,7 @@
 
 import { UserAvatar } from '@/components/client/user';
 import { useTOC } from '@/hooks/use-toc';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 

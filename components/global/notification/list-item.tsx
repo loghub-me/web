@@ -4,7 +4,7 @@ import { deleteNotification } from '@/apis/client/notifications';
 import { NOTIFICATION_TYPE_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { DropdownMenuItem } from '@ui/dropdown-menu';
 import Timestamp from '@ui/timestamp';
 

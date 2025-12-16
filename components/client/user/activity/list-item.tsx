@@ -1,7 +1,7 @@
 import { USER_ACTIVITY_ACTION_OPTIONS } from '@/constants/options';
 import { Badge } from '@ui/badge';
+import { ButtonLink } from '@ui/button-link';
 import { SimpleTooltip } from '@ui/tooltip';
-import Link from 'next/link';
 
 interface UserActivityListItemProps {
   activity: UserActivity;
@@ -19,9 +19,9 @@ export default function UserActivityListItem({ activity }: Readonly<UserActivity
         </Badge>
       </SimpleTooltip>
       <h3 className="font-medium line-clamp-1">
-        <Link href={href} prefetch={false} className="mr-2 transition-colors hover:text-accent-foreground/50">
+        <ButtonLink href={href} variant={'link'} size={'sm'} className="p-0 h-auto text-foreground">
           {title}
-        </Link>
+        </ButtonLink>
       </h3>
     </div>
   );

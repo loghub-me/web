@@ -1,6 +1,6 @@
 import { TopicLink } from '@/components/client/topic';
 import { parseRelativeTime } from '@/lib/parse';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { ChevronRightIcon, GlobeLockIcon, PencilIcon } from 'lucide-react';
 
 interface ArticleUnpublishedListItemProps {

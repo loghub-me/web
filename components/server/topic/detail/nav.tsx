@@ -1,5 +1,5 @@
 import { TOPIC_DETAIL_LINKS } from '@/constants/links';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { LucideIcon } from 'lucide-react';
 
 interface TopicDetailNavProps {

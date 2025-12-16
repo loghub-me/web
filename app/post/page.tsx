@@ -2,7 +2,7 @@ import { TopicIcon } from '@/components/client/topic';
 import ThemedImage from '@/components/global/themed-image';
 import { POST_LINKS } from '@/constants/links';
 import { cn } from '@/lib/utils';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { ButtonGroup } from '@ui/button-group';
 import { LightRays } from '@ui/light-rays';
 import { LucideIcon, PencilIcon } from 'lucide-react';

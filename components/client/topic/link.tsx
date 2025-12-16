@@ -13,11 +13,9 @@ export default function TopicLink({ topic }: Readonly<TopicLinkProps>) {
       className={
         'h-7 rounded-sm p-1 bg-card transition-colors hover:text-accent-foreground hover:bg-accent cursor-pointer'
       }
-      asChild
+      render={<Link href={`/topics/${topic.slug}`} prefetch={false} />}
     >
-      <Link href={`/topics/${topic.slug}`} prefetch={false}>
-        <TopicIcon {...topic} /> {topic.name}
-      </Link>
+      <TopicIcon {...topic} /> {topic.name}
     </Badge>
   );
 }

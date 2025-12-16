@@ -7,9 +7,10 @@ import { handleFormError } from '@/lib/error';
 import { seriesReviewPostSchema } from '@/schemas/series';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { Button, ButtonLink } from '@ui/button';
+import { AutoHeightTextarea } from '@ui/auto-height-textarea';
+import { Button } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
-import { Textarea } from '@ui/textarea';
 import { MessageSquareIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -65,7 +66,7 @@ export default function SeriesReviewForm({ seriesId, queryKey }: Readonly<Series
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Textarea placeholder="리뷰를 작성해주세요!" {...field} autoHeight={true} />
+                <AutoHeightTextarea placeholder="리뷰를 작성해주세요!" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

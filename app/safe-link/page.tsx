@@ -1,6 +1,6 @@
 import { parseObject } from '@/lib/parse';
 import { safeLinkSchema } from '@/schemas/safe-link';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/card';
 import { ChevronRightIcon, HomeIcon } from 'lucide-react';
 import { Metadata } from 'next';

@@ -1,6 +1,6 @@
 import { InquiryForm } from '@/components/client/support';
 import { TopicIcon } from '@/components/client/topic';
-import { ButtonLink } from '@ui/button';
+import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { Metadata } from 'next';
 
