@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       disallow: ['/edit/', '/settings/', '/notifications/', '/safe-link/'],
     },
     host: webURL.host,
-    sitemap: `${webURL}/sitemap.xml`,
+    sitemap: `${webURL}sitemap.xml`,
   };
 }

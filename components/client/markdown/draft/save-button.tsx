@@ -69,23 +69,24 @@ export default function MarkdownDraftSaveButton({
   }, [easyMDERef, onSave]);
 
   return (
-    <SimpleTooltip
-      content="임시 저장"
-      render={
-        <ButtonGroup>
-          <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onSave}>
-            <SaveIcon />
-            <Kbd>
-              <KbdModifier /> S
-            </Kbd>
-          </Button>
-          {draftExists && (
-            <Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDelete}>
-              <DeleteIcon />
-            </Button>
-          )}
-        </ButtonGroup>
-      }
-    />
+    <ButtonGroup>
+      <SimpleTooltip
+        content="임시 저장"
+        render={<Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onSave} />}
+      >
+        <SaveIcon />
+        <Kbd>
+          <KbdModifier /> S
+        </Kbd>
+      </SimpleTooltip>
+      {draftExists && (
+        <SimpleTooltip
+          content="임시 저장본 삭제"
+          render={<Button type="button" variant={'outline'} className="has-[>svg]:px-2.5" onClick={onDelete} />}
+        >
+          <DeleteIcon />
+        </SimpleTooltip>
+      )}
+    </ButtonGroup>
   );
 }
