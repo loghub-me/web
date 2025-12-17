@@ -1,4 +1,5 @@
 import ThemedImage from '@/components/global/themed-image';
+import { buildAssetsUrl } from '@/lib/utils';
 import { Button } from '@ui/button';
 import { ButtonGroup } from '@ui/button-group';
 import { ButtonLink } from '@ui/button-link';
@@ -34,8 +35,8 @@ function ShareMenu({ shareURLs }: Readonly<ShareMenuProps>) {
             >
               <ThemedImage
                 src={{
-                  light: `/icons/${icon}.svg`,
-                  dark: `/icons/${icon}-dark.svg`,
+                  light: buildAssetsUrl(`icons/${icon}.svg`),
+                  dark: buildAssetsUrl(`icons/${icon}-dark.svg`),
                 }}
                 alt={icon}
                 width={16}

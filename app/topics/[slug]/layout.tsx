@@ -2,6 +2,7 @@ import { getTopicDetail } from '@/apis/server/topic';
 import ThemedImage from '@/components/global/themed-image';
 import { TopicDetailAside, TopicDetailAsideSkeleton } from '@/components/server/topic';
 import { parseObject } from '@/lib/parse';
+import { buildAssetsUrl } from '@/lib/utils';
 import { topicDetailSchema } from '@/schemas/topic';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
@@ -45,8 +46,8 @@ async function TopicDetailAsideContent({ topic }: Readonly<TopicDetailAsideConte
       <div className="relative w-xs aspect-square bg-card border rounded-xl shadow-xs overflow-hidden">
         <ThemedImage
           src={{
-            light: `/icons/${slug}.svg`,
-            dark: `/icons/${slug}-dark.svg`,
+            light: buildAssetsUrl(`icons/${slug}.svg`),
+            dark: buildAssetsUrl(`icons/${slug}-dark.svg`),
           }}
           alt={name}
           fill

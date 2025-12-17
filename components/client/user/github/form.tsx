@@ -5,6 +5,7 @@ import { UserGitHubDeleteButton, UserGitHubVerifyButton } from '@/components/cli
 import { ErrorMessage } from '@/constants/messages';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
+import { buildAssetsUrl } from '@/lib/utils';
 import { userGitHubUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
@@ -72,7 +73,8 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
             </>
           )}
           <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <Image src={'/icons/github-dark.svg'} alt={'GitHub'} width={16} height={16} /> GitHub 업데이트
+            <Image src={buildAssetsUrl('icons/github-dark.svg')} alt={'GitHub'} width={16} height={16} /> GitHub
+            업데이트
           </Button>
         </div>
       </form>

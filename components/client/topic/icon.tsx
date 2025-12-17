@@ -1,4 +1,5 @@
 import ThemedImage from '@/components/global/themed-image';
+import { buildAssetsUrl } from '@/lib/utils';
 
 interface TopicIconProps {
   slug: string;
@@ -13,8 +14,8 @@ export default function TopicIcon({ slug, name, size = 'sm' }: Readonly<TopicIco
   return (
     <ThemedImage
       src={{
-        light: `/icons/${slug}.svg`,
-        dark: `/icons/${slug}-dark.svg`,
+        light: buildAssetsUrl(`icons/${slug}.svg`),
+        dark: buildAssetsUrl(`icons/${slug}-dark.svg`),
       }}
       alt={name}
       width={width}
