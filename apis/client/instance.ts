@@ -1,5 +1,6 @@
 'ues client';
 
+import { refreshToken } from '@/apis/client/auth';
 import { ErrorMessage } from '@/constants/messages';
 import ky, { HTTPError, KyRequest, KyResponse, NormalizedOptions, Options } from 'ky';
 
@@ -22,6 +23,18 @@ function afterResponseHook(
   if (req.method !== 'GET' && locked) {
     locked = false;
   }
+
+  if (res.status === 401) {
+    return refreshToken()
+      .then(() => clientAPI(req))
+      .catch(() => {
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('auth:refresh-failed'));
+        }
+        return res;
+      });
+  }
+
   return res;
 }
 

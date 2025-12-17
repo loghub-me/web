@@ -74,6 +74,16 @@ export default function AuthProvider({ children }: Readonly<{ children: React.Re
     };
   }, [scheduleTokenRefresh]);
 
+  useEffect(() => {
+    const handleRefreshFailed = () => setState({ status: 'unauthenticated' });
+
+    window.addEventListener('auth:refresh-failed', handleRefreshFailed);
+
+    return () => {
+      window.removeEventListener('auth:refresh-failed', handleRefreshFailed);
+    };
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{

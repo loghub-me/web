@@ -24,11 +24,13 @@ export default function NotificationProvider({ children }: Readonly<{ children: 
     queryFn: countNotifications,
     refetchInterval: 30 * 1000, // 30 seconds,
     enabled: status === 'authenticated',
+    retry: false,
   });
   const { data: notifications, refetch } = useQuery({
     queryKey: ['getNotifications'],
     queryFn: getNotifications,
     enabled: status === 'authenticated',
+    retry: false,
   });
 
   return (

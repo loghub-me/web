@@ -1,6 +1,5 @@
 'use client';
 
-import { refreshToken } from '@/apis/client/auth';
 import { ErrorMessage } from '@/constants/messages';
 import { HTTPError } from 'ky';
 import { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form';
@@ -25,7 +24,6 @@ export async function handleFormError<TFieldValues extends FieldValues>(
   }
 
   toast.error(body.message);
-  handleUnauthorizedError(error);
 }
 
 export async function handleError(error: Error) {
@@ -37,7 +35,6 @@ export async function handleError(error: Error) {
   const body = await error.response.json<ErrorResponseBody>();
   if (body.message) {
     toast.error(body.message);
-    handleUnauthorizedError(error);
     return;
   }
   if (body.fieldErrors) {
@@ -50,14 +47,4 @@ export async function handleError(error: Error) {
   }
 
   toast.error(ErrorMessage.UNKNOWN);
-}
-
-function handleUnauthorizedError(error: HTTPError) {
-  if (error.response.status === 401) {
-    toast.promise(() => refreshToken(), {
-      loading: '재인증 중...',
-      success: '재인증에 성공했습니다.',
-      error: '재인증에 실패했습니다. 다시 로그인해주세요.',
-    });
-  }
 }
