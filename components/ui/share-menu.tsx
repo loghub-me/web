@@ -16,10 +16,8 @@ interface ShareMenuProps {
 function ShareMenu({ shareURLs }: Readonly<ShareMenuProps>) {
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger
-        render={<Button variant={'ghost'} size={'icon'} className="size-10 data-[state=open]:[&_svg]:rotate-90" />}
-      >
-        <Share2Icon className="transition-transform" />
+      <DropdownMenuTrigger render={<Button variant={'ghost'} size={'icon'} className="size-10" />}>
+        <Share2Icon />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0 min-w-auto ring-0 bg-transparent">
         <ButtonGroup orientation={'vertical'}>
