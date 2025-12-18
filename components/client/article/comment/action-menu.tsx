@@ -34,14 +34,16 @@ export default function ArticleCommentActionMenu({
     setActionStatus(actionStatus === 'editing' ? null : 'editing');
   }
 
-  function onClickDelete() {
+  async function onClickDelete() {
     setActionStatus(null);
-    deleteArticleComment(articleId, comment.id)
-      .then(async ({ message }) => {
-        toast.success(message);
-        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
-      })
-      .catch(handleError);
+    try {
+      const { message } = await deleteArticleComment(articleId, comment.id);
+      toast.success(message);
+
+      await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+    } catch (err) {
+      handleError(err);
+    }
   }
 
   return (

@@ -32,7 +32,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import ListEmpty from '@ui/list-empty';
 import { SimpleTooltip } from '@ui/simple-tooltip';
 import { GlobeLockIcon, ListCheckIcon, ListChevronsUpDownIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesChapterManagerProps {
@@ -41,6 +41,7 @@ interface SeriesChapterManagerProps {
 
 export default function SeriesChapterManager({ series }: Readonly<SeriesChapterManagerProps>) {
   const [chapters, setChapters] = useState(series.chapters);
+  const [isPending, startTransition] = useTransition();
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
@@ -62,13 +63,17 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
   }
 
   function onClickUpdateSequenceButton() {
-    const sequences = chapters.map((chapter) => chapter.sequence);
-    changeChapterSequence(series.id, sequences)
-      .then(async ({ message }) => {
+    startTransition(async () => {
+      const sequences = chapters.map((chapter) => chapter.sequence);
+      try {
+        const { message } = await changeChapterSequence(series.id, sequences);
         toast.success(message);
+
         await queryClient.invalidateQueries({ queryKey });
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   useEffect(() => {
@@ -104,7 +109,7 @@ export default function SeriesChapterManager({ series }: Readonly<SeriesChapterM
         </DndContext>
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Button size={'sm'} onClick={onClickUpdateSequenceButton}>
+        <Button size={'sm'} onClick={onClickUpdateSequenceButton} disabled={isPending}>
           <ListCheckIcon /> 순서 저장
         </Button>
       </CardFooter>

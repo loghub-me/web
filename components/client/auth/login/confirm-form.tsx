@@ -24,13 +24,14 @@ export default function LoginConfirmForm({ defaultValues }: Readonly<LoginConfir
   const { registerSession } = useAuth();
   const form = useForm<FormType>({ resolver: zodResolver(loginConfirmSchema), defaultValues });
 
-  function onSubmit(values: FormType) {
-    confirmLogin(values)
-      .then(({ body, session }) => {
-        toast.success(body.message);
-        registerSession(session);
-      })
-      .catch((error) => handleFormError(error, form.setError));
+  async function onSubmit(values: FormType) {
+    try {
+      const { body, session } = await confirmLogin(values);
+      toast.success(body.message);
+      registerSession(session);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

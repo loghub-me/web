@@ -31,18 +31,20 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
     defaultValues: { username: github?.username || '' },
   });
 
-  function onSubmit(values: z.infer<typeof userGitHubUpdateSchema>) {
+  async function onSubmit(values: z.infer<typeof userGitHubUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
     }
 
-    updateSelfGitHub(values)
-      .then(({ message }) => {
-        toast.success(message);
-        queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
-      })
-      .catch((err) => handleFormError(err, form.setError));
+    try {
+      const { message } = await updateSelfGitHub(values);
+      toast.success(message);
+
+      await queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

@@ -17,7 +17,7 @@ import {
 } from '@ui/dialog';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@ui/dropdown-menu';
 import { EllipsisIcon, PencilIcon, TrashIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesChapterActionMenuProps {
@@ -49,6 +49,7 @@ function SeriesChapterEditLink({ seriesId, chapterId }: Readonly<SeriesChapterAc
 
 function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapterActionMenuProps>) {
   const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const queryClient = useQueryClient();
   const queryKeys = [
     ['getSeriesForEdit', seriesId],
@@ -56,13 +57,17 @@ function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapt
   ] as const;
 
   function onDeleteButtonClick() {
-    deleteSeriesChapter(seriesId, chapterId)
-      .then(async ({ message }) => {
+    startTransition(async () => {
+      try {
+        const { message } = await deleteSeriesChapter(seriesId, chapterId);
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
+
         await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
         setOpen(false);
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -77,7 +82,7 @@ function SeriesChapterDeleteButton({ seriesId, chapterId }: Readonly<SeriesChapt
         </DialogHeader>
         <DialogFooter>
           <DialogCloseButton>취소하기</DialogCloseButton>
-          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick}>
+          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick} disabled={isPending}>
             <TrashIcon /> 삭제하기
           </Button>
         </DialogFooter>

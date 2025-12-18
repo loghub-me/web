@@ -31,7 +31,7 @@ import {
   UserCircleIcon,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface AuthMenuProps {
@@ -68,6 +68,7 @@ function GuestMenu({ type, closeSheet }: Readonly<AuthMenuProps>) {
 function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { session: Session }>) {
   const [open, setOpen] = useState(false);
   const { unregisterSession } = useAuth();
+  const [isLoggingOut, startTransition] = useTransition();
 
   const navLinks = [
     [{ href: `/${session?.username}`, label: '프로필', icon: UserCircleIcon }],
@@ -83,11 +84,17 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
     ],
   ];
 
-  function onClickLogout() {
-    logout()
-      .then(({ message }) => toast.info(message))
-      .catch(handleError)
-      .finally(unregisterSession);
+  async function onClickLogout() {
+    startTransition(async () => {
+      try {
+        const { message } = await logout();
+        toast.info(message);
+      } catch (err) {
+        handleError(err);
+      } finally {
+        unregisterSession();
+      }
+    });
   }
 
   return (
@@ -149,7 +156,7 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
             <DropdownMenuSeparator />
           </Fragment>
         ))}
-        <DropdownMenuItem className="justify-start" onClick={onClickLogout}>
+        <DropdownMenuItem className="justify-start" onClick={onClickLogout} disabled={isLoggingOut}>
           <LogOutIcon /> 로그아웃
         </DropdownMenuItem>
       </DropdownMenuContent>

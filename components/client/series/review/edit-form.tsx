@@ -31,15 +31,16 @@ export default function SeriesReviewEditForm({
   });
   const queryClient = useQueryClient();
 
-  function onSubmit(values: z.infer<typeof seriesReviewEditSchema>) {
-    editSeriesReview(seriesId, review.id, values)
-      .then(async ({ message }) => {
-        toast.success(message);
-        form.reset();
+  async function onSubmit(values: z.infer<typeof seriesReviewEditSchema>) {
+    try {
+      const { message } = await editSeriesReview(seriesId, review.id, values);
+      toast.success(message);
+      form.reset();
 
-        queryClient.invalidateQueries({ queryKey }).then(closeForm);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+      await queryClient.invalidateQueries({ queryKey }).then(closeForm);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

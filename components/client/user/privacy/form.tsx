@@ -27,18 +27,20 @@ export default function UserPrivacyForm({ privacy }: Readonly<UserPrivacyFormPro
     defaultValues: privacy,
   });
 
-  function onSubmit(values: z.infer<typeof userPrivacyUpdateSchema>) {
+  async function onSubmit(values: z.infer<typeof userPrivacyUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
     }
 
-    updateSelfPrivacy(values)
-      .then(({ message }) => {
-        toast.success(message);
-        queryClient.invalidateQueries({ queryKey: ['getSelfPrivacy'] });
-      })
-      .catch((err) => handleFormError(err, form.setError));
+    try {
+      const { message } = await updateSelfPrivacy(values);
+      toast.success(message);
+
+      await queryClient.invalidateQueries({ queryKey: ['getSelfPrivacy'] });
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

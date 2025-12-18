@@ -6,7 +6,7 @@ import { FieldPath, FieldValues, UseFormSetError } from 'react-hook-form';
 import { toast } from 'sonner';
 
 export async function handleFormError<TFieldValues extends FieldValues>(
-  error: Error,
+  error: unknown,
   setError: UseFormSetError<TFieldValues>
 ) {
   if (!(error instanceof HTTPError)) {
@@ -26,7 +26,7 @@ export async function handleFormError<TFieldValues extends FieldValues>(
   toast.error(body.message);
 }
 
-export async function handleError(error: Error) {
+export async function handleError(error: unknown) {
   if (!(error instanceof HTTPError)) {
     toast.error(ErrorMessage.UNKNOWN);
     return;

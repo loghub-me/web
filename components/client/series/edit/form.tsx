@@ -27,13 +27,16 @@ export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEd
   const queryClient = useQueryClient();
   const [topicSlugs, setTopicSlugs] = useState(new Set(form.getValues('topicSlugs')));
 
-  function onSubmit(values: z.infer<typeof seriesEditSchema>) {
-    editSeries(seriesId, values)
-      .then(({ pathname, message }) => {
-        toast.success(message);
-        queryClient.invalidateQueries({ queryKey }).then(() => router.push(pathname));
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof seriesEditSchema>) {
+    try {
+      const { pathname, message } = await editSeries(seriesId, values);
+      toast.success(message);
+
+      await queryClient.invalidateQueries({ queryKey });
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

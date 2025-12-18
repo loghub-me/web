@@ -23,13 +23,14 @@ export default function JoinRequestForm() {
     defaultValues: { email: '', username: '', nickname: '', agreeTerms: false, agreePrivacy: false },
   });
 
-  function onSubmit(values: FormType) {
-    requestJoin(values)
-      .then(({ message }) => {
-        toast.success(message);
-        router.push(`/join/confirm?email=${encodeURIComponent(values.email)}`);
-      })
-      .catch((error) => handleFormError(error, form.setError));
+  async function onSubmit(values: FormType) {
+    try {
+      const { message } = await requestJoin(values);
+      toast.success(message);
+      router.push(`/join/confirm?email=${encodeURIComponent(values.email)}`);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

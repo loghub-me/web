@@ -25,14 +25,16 @@ export default function SeriesChapterEditForm({ seriesId, chapterId, form }: Rea
   const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, chapterId] as const];
   const queryClient = useQueryClient();
 
-  function onSubmit(values: z.infer<typeof seriesChapterEditSchema>) {
-    editSeriesChapter(seriesId, chapterId, values)
-      .then(async ({ pathname, message }) => {
-        toast.success(message);
-        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
-        router.push(pathname);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof seriesChapterEditSchema>) {
+    try {
+      const { pathname, message } = await editSeriesChapter(seriesId, chapterId, values);
+      toast.success(message);
+
+      await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

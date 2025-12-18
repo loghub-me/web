@@ -18,6 +18,7 @@ import {
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@ui/dropdown-menu';
 import { EllipsisIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface SeriesActionMenuProps {
@@ -53,14 +54,18 @@ function SeriesEditLink({ seriesId }: Readonly<{ seriesId: number }>) {
 
 function SeriesDeleteButton({ seriesId }: Readonly<{ seriesId: number }>) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   function onDeleteButtonClick() {
-    deleteSeries(seriesId)
-      .then(({ message }) => {
+    startTransition(async () => {
+      try {
+        const { message } = await deleteSeries(seriesId);
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.replace('/search/series');
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -75,7 +80,7 @@ function SeriesDeleteButton({ seriesId }: Readonly<{ seriesId: number }>) {
         </DialogHeader>
         <DialogFooter>
           <DialogCloseButton>취소하기</DialogCloseButton>
-          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick}>
+          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick} disabled={isPending}>
             <TrashIcon /> 삭제하기
           </Button>
         </DialogFooter>

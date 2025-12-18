@@ -30,13 +30,15 @@ export default function SeriesReviewActionMenu({
     setEditing((prev) => !prev);
   }
 
-  function onClickDelete() {
-    deleteSeriesReview(seriesId, review.id)
-      .then(async ({ message }) => {
-        toast.success(message);
-        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
-      })
-      .catch(handleError);
+  async function onClickDelete() {
+    try {
+      const { message } = await deleteSeriesReview(seriesId, review.id);
+      toast.success(message);
+
+      await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+    } catch (err) {
+      handleError(err);
+    }
   }
 
   return (

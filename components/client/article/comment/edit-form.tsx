@@ -33,15 +33,16 @@ export default function ArticleCommentEditForm({
   const { session } = useAuth();
   const queryClient = useQueryClient();
 
-  function onSubmit(values: z.infer<typeof articleCommentEditSchema>) {
-    editArticleComment(articleId, comment.id, values)
-      .then(async ({ message }) => {
-        toast.success(message);
-        form.reset();
+  async function onSubmit(values: z.infer<typeof articleCommentEditSchema>) {
+    try {
+      const { message } = await editArticleComment(articleId, comment.id, values);
+      toast.success(message);
+      form.reset();
 
-        await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key }))).then(closeForm);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+      await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key }))).then(closeForm);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

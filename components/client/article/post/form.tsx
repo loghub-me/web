@@ -28,13 +28,14 @@ export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>
   const router = useRouter();
   const [topicSlugs, setTopicSlugs] = useState(new Set<string>());
 
-  function onSubmit(values: z.infer<typeof articlePostSchema>) {
-    postArticle(values)
-      .then(({ pathname, message }) => {
-        toast.success(message);
-        router.push(pathname);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof articlePostSchema>) {
+    try {
+      const { pathname, message } = await postArticle(values);
+      toast.success(message);
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

@@ -20,13 +20,14 @@ export default function InquiryForm() {
     defaultValues: { email: '', title: '', content: '' },
   });
 
-  function onSubmit(values: z.infer<typeof inquirySchema>) {
-    postInquiry(values)
-      .then(({ message }) => {
-        toast.success(message);
-        form.reset();
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof inquirySchema>) {
+    try {
+      const { message } = await postInquiry(values);
+      toast.success(message);
+      form.reset();
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

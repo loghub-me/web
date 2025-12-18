@@ -25,7 +25,7 @@ export default function UsernameForm({ username }: Readonly<UsernameFormProps>) 
     defaultValues: { oldUsername: '', newUsername: '' },
   });
 
-  function onSubmit(values: z.infer<typeof usernameUpdateSchema>) {
+  async function onSubmit(values: z.infer<typeof usernameUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
@@ -36,13 +36,15 @@ export default function UsernameForm({ username }: Readonly<UsernameFormProps>) 
       return;
     }
 
-    updateSelfUsername(values)
-      .then(({ message }) => {
-        toast.success(message);
-        form.reset();
-        registerSession({ ...session, username: values.newUsername });
-      })
-      .catch((err) => handleFormError(err, form.setError));
+    try {
+      const { message } = await updateSelfUsername(values);
+      toast.success(message);
+      form.reset();
+
+      registerSession({ ...session, username: values.newUsername });
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

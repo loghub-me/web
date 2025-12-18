@@ -5,13 +5,13 @@ import { handleError } from '@/lib/error';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
 import { UnplugIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 export default function UserGitHubDeleteButton() {
   const { session } = useAuth();
   const queryClient = useQueryClient();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   function onClickDelete() {
     if (!session) {
@@ -19,19 +19,21 @@ export default function UserGitHubDeleteButton() {
       return;
     }
 
-    setIsSubmitting(true);
-    deleteSelfGitHub()
-      .then(({ message }) => {
+    startTransition(async () => {
+      try {
+        const { message } = await deleteSelfGitHub();
         toast.success(message);
-        queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
-      })
-      .catch(handleError)
-      .finally(() => setIsSubmitting(false));
+
+        await queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
     session && (
-      <Button type={'button'} variant={'destructive'} size={'sm'} disabled={isSubmitting} onClick={onClickDelete}>
+      <Button type={'button'} variant={'destructive'} size={'sm'} onClick={onClickDelete} disabled={isPending}>
         <UnplugIcon /> GitHub 연결 해제
       </Button>
     )

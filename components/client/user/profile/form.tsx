@@ -28,19 +28,21 @@ export default function UserProfileForm({ profile }: Readonly<UserProfileFormPro
     defaultValues: profile,
   });
 
-  function onSubmit(values: z.infer<typeof userProfileUpdateSchema>) {
+  async function onSubmit(values: z.infer<typeof userProfileUpdateSchema>) {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
     }
 
-    updateSelfProfile(values)
-      .then(({ message }) => {
-        toast.success(message);
-        registerSession({ ...session, nickname: values.nickname });
-        queryClient.invalidateQueries({ queryKey: ['getSelfProfile'] });
-      })
-      .catch((err) => handleFormError(err, form.setError));
+    try {
+      const { message } = await updateSelfProfile(values);
+      toast.success(message);
+
+      registerSession({ ...session, nickname: values.nickname });
+      await queryClient.invalidateQueries({ queryKey: ['getSelfProfile'] });
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

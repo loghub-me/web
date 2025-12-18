@@ -33,13 +33,14 @@ export default function SocialJoinConfirmForm({ defaultValues }: Readonly<Social
     },
   });
 
-  function onSubmit(values: FormType) {
-    confirmOAuth2Join(values)
-      .then(({ body, session }) => {
-        toast.success(body.message);
-        registerSession(session);
-      })
-      .catch((error) => handleFormError(error, form.setError));
+  async function onSubmit(values: FormType) {
+    try {
+      const { body, session } = await confirmOAuth2Join(values);
+      toast.success(body.message);
+      registerSession(session);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

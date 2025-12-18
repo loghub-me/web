@@ -22,13 +22,14 @@ export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProp
   const router = useRouter();
   const [topicSlugs, setTopicSlugs] = useState(new Set<string>());
 
-  function onSubmit(values: z.infer<typeof questionPostSchema>) {
-    postQuestion(values)
-      .then(({ pathname, message }) => {
-        toast.success(message);
-        router.push(pathname);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof questionPostSchema>) {
+    try {
+      const { pathname, message } = await postQuestion(values);
+      toast.success(message);
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

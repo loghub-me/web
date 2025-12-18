@@ -20,6 +20,7 @@ import {
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@ui/dropdown-menu';
 import { CircleXIcon, EllipsisIcon, PencilIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface QuestionActionMenuProps {
@@ -56,14 +57,18 @@ function QuestionEditLink({ questionId }: Readonly<{ questionId: number }>) {
 
 function QuestionDeleteButton({ questionId }: Readonly<{ questionId: number }>) {
   const router = useRouter();
+  const [isPending, startTransaction] = useTransition();
 
   function onDeleteButtonClick() {
-    deleteQuestion(questionId)
-      .then(({ message }) => {
+    startTransaction(async () => {
+      try {
+        const { message } = await deleteQuestion(questionId);
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.replace('/search/questions');
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -78,7 +83,7 @@ function QuestionDeleteButton({ questionId }: Readonly<{ questionId: number }>) 
         </DialogHeader>
         <DialogFooter>
           <DialogCloseButton>취소하기</DialogCloseButton>
-          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick}>
+          <Button type="submit" variant="destructive" onClick={onDeleteButtonClick} disabled={isPending}>
             <TrashIcon /> 삭제하기
           </Button>
         </DialogFooter>
@@ -89,14 +94,18 @@ function QuestionDeleteButton({ questionId }: Readonly<{ questionId: number }>) 
 
 function QuestionCloseButton({ questionId }: Readonly<{ questionId: number }>) {
   const router = useRouter();
+  const [isPending, startTransaction] = useTransition();
 
   function onCloseButtonClick() {
-    closeQuestion(questionId)
-      .then(({ message }) => {
+    startTransaction(async () => {
+      try {
+        const { message } = await closeQuestion(questionId);
         toast.success(message, { icon: <CircleXIcon className="size-4" /> });
         router.refresh();
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -111,7 +120,13 @@ function QuestionCloseButton({ questionId }: Readonly<{ questionId: number }>) {
         </DialogHeader>
         <DialogFooter>
           <DialogCloseButton>취소하기</DialogCloseButton>
-          <Button type="submit" variant={'secondary'} className="border-border" onClick={onCloseButtonClick}>
+          <Button
+            type="submit"
+            variant={'secondary'}
+            className="border-border"
+            onClick={onCloseButtonClick}
+            disabled={isPending}
+          >
             <CircleXIcon className={cn(QUESTION_STATUS_OPTIONS['CLOSED'].color)} /> 닫기
           </Button>
         </DialogFooter>

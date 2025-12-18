@@ -68,14 +68,15 @@ function TopicRequestForm({ setOpen }: TopicRequestFormProps) {
     defaultValues: { name: '', description: '' },
   });
 
-  function onSubmit(values: z.infer<typeof topicRequestSchema>) {
-    postTopicRequest(values)
-      .then(({ message }) => {
-        toast.success(message);
-        form.reset();
-        setOpen(false);
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof topicRequestSchema>) {
+    try {
+      const { message } = await postTopicRequest(values);
+      toast.success(message);
+      form.reset();
+      setOpen(false);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

@@ -28,15 +28,16 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
   });
   const router = useRouter();
 
-  function onSubmit(values: z.infer<typeof questionAnswerPostSchema>) {
-    postQuestionAnswer(questionId, values)
-      .then(({ message }) => {
-        toast.success(message);
-        form.reset();
-        easyMDERef.current?.value('');
-        router.refresh();
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof questionAnswerPostSchema>) {
+    try {
+      const { message } = await postQuestionAnswer(questionId, values);
+      toast.success(message);
+      form.reset();
+      easyMDERef.current?.value('');
+      router.refresh();
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

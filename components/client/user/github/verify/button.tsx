@@ -9,7 +9,7 @@ import { ButtonLink } from '@ui/button-link';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@ui/dialog';
 import { DialogHeader, DialogFooter, DialogCloseButton } from '@ui/dialog';
 import { BadgeCheckIcon, ClipboardCopyIcon, CopyIcon, SquareArrowOutUpRightIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface UserGitHubVerifyButtonProps {
@@ -20,23 +20,25 @@ export default function UserGitHubVerifyButton({ github: { verified } }: Readonl
   const { session } = useAuth();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-  function onClickVerify() {
+  async function onClickVerify() {
     if (!session) {
       toast.error(ErrorMessage.LOGIN_REQUIRED);
       return;
     }
 
-    setIsSubmitting(true);
-    verifySelfGitHub()
-      .then(({ message }) => {
+    startTransition(async () => {
+      try {
+        const { message } = await verifySelfGitHub();
         toast.success(message);
-        queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
+
+        await queryClient.invalidateQueries({ queryKey: ['getSelfGitHub'] });
         setOpen(false);
-      })
-      .catch(handleError)
-      .finally(() => setIsSubmitting(false));
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -92,7 +94,7 @@ export default function UserGitHubVerifyButton({ github: { verified } }: Readonl
           </div>
           <DialogFooter>
             <DialogCloseButton>취소하기</DialogCloseButton>
-            <Button type={'button'} size={'sm'} disabled={isSubmitting} onClick={onClickVerify}>
+            <Button type={'button'} size={'sm'} onClick={onClickVerify} disabled={isPending}>
               <BadgeCheckIcon /> 인증하기
             </Button>
           </DialogFooter>

@@ -25,13 +25,16 @@ export default function QuestionAnswerEditForm({ questionId, answerId, form }: R
   const queryKey = ['getQuestionAnswerForEdit', questionId, answerId] as const;
   const queryClient = useQueryClient();
 
-  function onSubmit(values: z.infer<typeof questionAnswerEditSchema>) {
-    editQuestionAnswer(questionId, answerId, values)
-      .then(({ pathname, message }) => {
-        toast.success(message);
-        queryClient.invalidateQueries({ queryKey }).then(() => router.push(pathname));
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof questionAnswerEditSchema>) {
+    try {
+      const { pathname, message } = await editQuestionAnswer(questionId, answerId, values);
+      toast.success(message);
+
+      await queryClient.invalidateQueries({ queryKey });
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

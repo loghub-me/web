@@ -24,13 +24,14 @@ export default function JoinConfirmForm({ defaultValues }: Readonly<JoinConfirmS
   const { registerSession } = useAuth();
   const form = useForm<FormType>({ resolver: zodResolver(joinConfirmSchema), defaultValues });
 
-  function onSubmit(values: FormType) {
-    confirmJoin(values)
-      .then(({ body, session }) => {
-        toast.success(body.message);
-        registerSession(session);
-      })
-      .catch((error) => handleFormError(error, form.setError));
+  async function onSubmit(values: FormType) {
+    try {
+      const { body, session } = await confirmJoin(values);
+      toast.success(body.message);
+      registerSession(session);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

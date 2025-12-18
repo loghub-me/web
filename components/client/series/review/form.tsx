@@ -29,15 +29,16 @@ export default function SeriesReviewForm({ seriesId, queryKey }: Readonly<Series
   const { session } = useAuth();
   const queryClient = useQueryClient();
 
-  function onSubmit(values: z.infer<typeof seriesReviewPostSchema>) {
-    postSeriesReview(seriesId, values)
-      .then(async ({ message }) => {
-        toast.success(message);
-        form.reset();
+  async function onSubmit(values: z.infer<typeof seriesReviewPostSchema>) {
+    try {
+      const { message } = await postSeriesReview(seriesId, values);
+      toast.success(message);
+      form.reset();
 
-        await queryClient.invalidateQueries({ queryKey });
-      })
-      .catch((err) => handleFormError(err, form.setError));
+      await queryClient.invalidateQueries({ queryKey });
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   if (!session) {

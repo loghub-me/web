@@ -19,13 +19,14 @@ export default function LoginRequestForm() {
   const router = useRouter();
   const form = useForm<FormType>({ resolver: zodResolver(loginRequestSchema), defaultValues: { email: '' } });
 
-  function onSubmit(values: FormType) {
-    requestLogin(values)
-      .then(({ message }) => {
-        toast.success(message);
-        router.push(`/login/confirm?email=${encodeURIComponent(values.email)}`);
-      })
-      .catch((error) => handleFormError(error, form.setError));
+  async function onSubmit(values: FormType) {
+    try {
+      const { message } = await requestLogin(values);
+      toast.success(message);
+      router.push(`/login/confirm?email=${encodeURIComponent(values.email)}`);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   return (

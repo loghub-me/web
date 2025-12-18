@@ -32,13 +32,16 @@ export default function ArticleEditForm({ id: articleId, form }: Readonly<Articl
   const queryClient = useQueryClient();
   const [topicSlugs, setTopicSlugs] = useState(new Set(form.getValues('topicSlugs')));
 
-  function onSubmit(values: z.infer<typeof articleEditSchema>) {
-    editArticle(articleId, values)
-      .then(({ pathname, message }) => {
-        toast.success(message);
-        queryClient.invalidateQueries({ queryKey }).then(() => router.push(pathname));
-      })
-      .catch((err) => handleFormError(err, form.setError));
+  async function onSubmit(values: z.infer<typeof articleEditSchema>) {
+    try {
+      const { pathname, message } = await editArticle(articleId, values);
+      toast.success(message);
+
+      await queryClient.invalidateQueries({ queryKey });
+      router.push(pathname);
+    } catch (err) {
+      handleFormError(err, form.setError);
+    }
   }
 
   useEffect(() => {

@@ -35,9 +35,10 @@ export default function SeriesChapterImportButton({ seriesId }: Readonly<SeriesC
   const onImportButtonClick = useCallback(
     (articleId: number) => {
       importSeriesChapter(seriesId, articleId)
-        .then(({ message }) => {
+        .then(async ({ message }) => {
           toast.success(message, { icon: <PlusIcon className="size-4" /> });
-          queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] });
+
+          await queryClient.invalidateQueries({ queryKey: ['getSeriesForEdit', seriesId] });
         })
         .catch(handleError);
     },

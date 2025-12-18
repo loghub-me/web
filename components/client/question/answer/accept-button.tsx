@@ -19,6 +19,7 @@ import {
 import { GlowEffect } from '@ui/glow-effect';
 import { CheckCircleIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 interface QuestionAnswerAcceptButtonProps {
@@ -29,14 +30,18 @@ interface QuestionAnswerAcceptButtonProps {
 export default function QuestionAnswerAcceptButton({ question, answerId }: Readonly<QuestionAnswerAcceptButtonProps>) {
   const { session } = useAuth();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   function onAcceptButtonClick() {
-    acceptQuestionAnswer(question.id, answerId)
-      .then(({ message }) => {
+    startTransition(async () => {
+      try {
+        const { message } = await acceptQuestionAnswer(question.id, answerId);
         toast.success(message, { icon: <TrashIcon className="size-4" /> });
         router.refresh();
-      })
-      .catch(handleError);
+      } catch (err) {
+        handleError(err);
+      }
+    });
   }
 
   return (
@@ -60,7 +65,13 @@ export default function QuestionAnswerAcceptButton({ question, answerId }: Reado
           </DialogHeader>
           <DialogFooter>
             <DialogCloseButton>취소하기</DialogCloseButton>
-            <Button type="submit" variant={'secondary'} className="border-border" onClick={onAcceptButtonClick}>
+            <Button
+              type="submit"
+              variant={'secondary'}
+              className="border-border"
+              onClick={onAcceptButtonClick}
+              disabled={isPending}
+            >
               <CheckCircleIcon className={cn(QUESTION_STATUS_OPTIONS['SOLVED'].color)} /> 채택하기
             </Button>
           </DialogFooter>
