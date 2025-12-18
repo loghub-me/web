@@ -22,7 +22,7 @@ export default function NotificationProvider({ children }: Readonly<{ children: 
   const { data: notificationCount } = useQuery({
     queryKey: ['countNotifications'],
     queryFn: countNotifications,
-    refetchInterval: 30 * 1000, // 30 seconds,
+    refetchInterval: 60 * 1000, // 60 seconds,
     enabled: status === 'authenticated',
     retry: false,
   });
