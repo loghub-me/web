@@ -14,8 +14,8 @@ export default function QuestionDetailHero({ question }: Readonly<QuestionDetail
 
   return (
     <div className="px-4 py-16 space-y-4">
-      <div className="flex justify-center gap-2">
-        <Badge size={'lg'} variant={'outline'}>
+      <div className="flex items-center justify-center gap-2">
+        <Badge variant={'outline'} size={'lg'}>
           <StatusIcon className={statusColor} /> {statusLabel}
         </Badge>
         <Badge variant={'muted'} className="px-1">

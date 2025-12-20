@@ -19,7 +19,7 @@ export default function QuestionAnswerListItem({ answer, question }: Readonly<Qu
       <CardHeader className="sticky top-0 z-10 w-full h-16 flex items-center justify-end gap-2 bg-card/70 backdrop-blur rounded-t-xl border-b">
         <h4 className="flex-1 text-lg font-semibold line-clamp-2">{title}</h4>
         {accepted && (
-          <Badge variant={'secondary'} className="px-1">
+          <Badge variant={'outline'} size={'lg'}>
             <CircleCheckIcon className={QUESTION_STATUS_OPTIONS['SOLVED'].color} /> 채택
           </Badge>
         )}
