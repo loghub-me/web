@@ -1,15 +1,17 @@
 import { editArticleComment } from '@/apis/client/article';
+import { CommentContentField } from '@/components/client/field';
+import { UserLink, UserMention } from '@/components/client/user';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
-import { cn } from '@/lib/utils';
 import { articleCommentEditSchema } from '@/schemas/article';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
+import { FieldError } from '@ui/field';
+import { InputGroup, InputGroupAddon, InputGroupText } from '@ui/input-group';
+import { Separator } from '@ui/separator';
 import { PencilIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
 
@@ -26,6 +28,7 @@ export default function ArticleCommentEditForm({
   queryKeys,
   closeForm,
 }: Readonly<ArticleCommentEditFormProps>) {
+  const { mention } = comment;
   const form = useForm<z.infer<typeof articleCommentEditSchema>>({
     resolver: zodResolver(articleCommentEditSchema),
     defaultValues: comment,
@@ -47,27 +50,39 @@ export default function ArticleCommentEditForm({
 
   return (
     session && (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className={cn('mt-0.5 space-y-2')}>
-          <FormField
+      <form id="article-comment-edit-form" onSubmit={form.handleSubmit(onSubmit)} className="mt-0.5 space-y-2">
+        <InputGroup>
+          {mention && (
+            <InputGroupAddon align="block-start" className="text-primary">
+              <UserMention {...mention} />
+            </InputGroupAddon>
+          )}
+          <CommentContentField
+            id={'article-comment-edit-form-content'}
             control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <AutoHeightTextarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            isReply={Boolean(mention)}
           />
-          <div className="flex items-center justify-end gap-2">
-            <Button type="submit" size={'sm'} disabled={form.formState.isSubmitting}>
-              <PencilIcon /> 수정 완료
+          <InputGroupAddon align="block-end">
+            <UserLink {...session} className="-ml-1" />
+            <Controller
+              name={'content'}
+              control={form.control}
+              render={({ field }) => (
+                <InputGroupText className="ml-auto">{field.value.length}/1024 자 입력</InputGroupText>
+              )}
+            />
+            <Separator orientation="vertical" className="h-6 my-auto" />
+            <Button type={'submit'} size={'icon-sm'} disabled={form.formState.isSubmitting}>
+              <PencilIcon />
             </Button>
-          </div>
-        </form>
-      </Form>
+          </InputGroupAddon>
+        </InputGroup>
+        <Controller
+          name={'content'}
+          control={form.control}
+          render={({ fieldState }) => <FieldError errors={[fieldState.error]} />}
+        />
+      </form>
     )
   );
 }

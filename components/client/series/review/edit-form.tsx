@@ -1,14 +1,15 @@
 import { editSeriesReview } from '@/apis/client/series';
-import { RatingFormField } from '@/components/client/form-field';
+import { ReviewRatingField, ReviewContentField } from '@/components/client/field';
 import { handleFormError } from '@/lib/error';
 import { seriesReviewEditSchema } from '@/schemas/series';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
+import { FieldError } from '@ui/field';
+import { InputGroup, InputGroupAddon, InputGroupText } from '@ui/input-group';
+import { Separator } from '@ui/separator';
 import { PencilIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
 
@@ -44,27 +45,29 @@ export default function SeriesReviewEditForm({
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-0.5 space-y-2">
-        <div className="flex items-center justify-between gap-2">
-          <RatingFormField control={form.control} />
-          <Button type="submit" size={'sm'} disabled={form.formState.isSubmitting}>
-            <PencilIcon /> 리뷰 수정
+    <form id="series-review-edit-form" onSubmit={form.handleSubmit(onSubmit)} className="mt-0.5 space-y-2">
+      <InputGroup>
+        <ReviewContentField id={'series-review-edit-form-content'} control={form.control} />
+        <InputGroupAddon align="block-end">
+          <ReviewRatingField id={'series-review-edit-form-rating'} control={form.control} />
+          <Controller
+            name={'content'}
+            control={form.control}
+            render={({ field }) => (
+              <InputGroupText className="ml-auto">{field.value.length}/1024 자 입력</InputGroupText>
+            )}
+          />
+          <Separator orientation="vertical" className="h-6 my-auto" />
+          <Button type={'submit'} size={'icon-sm'} disabled={form.formState.isSubmitting}>
+            <PencilIcon />
           </Button>
-        </div>
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <AutoHeightTextarea placeholder="리뷰를 작성해주세요!" className="h-24" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+        </InputGroupAddon>
+      </InputGroup>
+      <Controller
+        name={'content'}
+        control={form.control}
+        render={({ fieldState }) => <FieldError errors={[fieldState.error]} />}
+      />
+    </form>
   );
 }

@@ -1,19 +1,20 @@
 'use client';
 
 import { postArticleComment } from '@/apis/client/article';
-import { UserLink } from '@/components/client/user';
+import { CommentContentField } from '@/components/client/field';
+import { UserLink, UserMention } from '@/components/client/user';
 import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
-import { cn } from '@/lib/utils';
 import { articleCommentPostSchema } from '@/schemas/article';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { AutoHeightTextarea } from '@ui/auto-height-textarea';
 import { Button } from '@ui/button';
 import { ButtonLink } from '@ui/button-link';
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
+import { FieldError } from '@ui/field';
+import { InputGroup, InputGroupAddon, InputGroupText } from '@ui/input-group';
+import { Separator } from '@ui/separator';
 import { MessageSquareIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -62,27 +63,34 @@ export default function ArticleCommentForm({
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-3', parent && 'mt-2 rounded-md')}>
-        <div className="flex items-center justify-between gap-2">
-          <UserLink {...session} />
-          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <MessageSquareIcon /> 댓글 작성
+    <form id="article-comment-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+      <InputGroup>
+        {parent && (
+          <InputGroupAddon align="block-start" className="text-primary">
+            <UserMention {...parent.writer} />
+          </InputGroupAddon>
+        )}
+        <CommentContentField id={'article-comment-form-content'} control={form.control} isReply={Boolean(parent)} />
+        <InputGroupAddon align="block-end">
+          <UserLink {...session} className="-ml-1" />
+          <Controller
+            name={'content'}
+            control={form.control}
+            render={({ field }) => (
+              <InputGroupText className="ml-auto">{field.value.length}/1024 자 입력</InputGroupText>
+            )}
+          />
+          <Separator orientation="vertical" className="h-6 my-auto" />
+          <Button type={'submit'} size={'icon-sm'} disabled={form.formState.isSubmitting}>
+            <MessageSquareIcon />
           </Button>
-        </div>
-        <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <AutoHeightTextarea placeholder={`${parent ? '답글' : '댓글'}을 작성해주세요!`} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+        </InputGroupAddon>
+      </InputGroup>
+      <Controller
+        name={'content'}
+        control={form.control}
+        render={({ fieldState }) => <FieldError errors={[fieldState.error]} />}
+      />
+    </form>
   );
 }

@@ -7,7 +7,12 @@ export { default as OTPField } from '@/components/client/field/otp';
 
 export { default as AgreeTermsField } from '@/components/client/field/agree/terms';
 export { default as AgreePrivacyField } from '@/components/client/field/agree/privacy';
+
 export { default as TitleField } from '@/components/client/field/title';
 export { default as ThumbnailField } from '@/components/client/field/thumbnail';
 export { default as TopicSlugsField } from '@/components/client/field/topic-slugs';
 export { default as PublishedField } from '@/components/client/field/published';
+
+export { default as CommentContentField } from '@/components/client/field/comment/content';
+export { default as ReviewContentField } from '@/components/client/field/review/content';
+export { default as ReviewRatingField } from '@/components/client/field/review/rating';
