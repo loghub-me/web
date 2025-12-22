@@ -3,8 +3,10 @@
 import { deleteSeriesReview } from '@/apis/client/series';
 import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
+import { cn } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { DeleteIcon, PencilIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -46,25 +48,26 @@ export default function SeriesReviewActionMenu({
       <div className="ml-2 flex gap-1">
         {session?.id === review.writer.id && (
           <>
-            <Button
-              type={'button'}
-              variant={editing ? 'secondary' : 'ghost'}
-              size={'icon'}
-              className="size-6 rounded-full"
-              onClick={onClickEdit}
+            <SimpleTooltip
+              content="리뷰 수정"
+              render={
+                <Button
+                  type={'button'}
+                  variant={editing ? 'secondary' : 'ghost'}
+                  size={'icon-xs'}
+                  onClick={onClickEdit}
+                />
+              }
             >
-              <PencilIcon className="size-3 text-muted-foreground" />
-            </Button>
+              <PencilIcon className={cn(editing ? 'text-foreground' : 'text-muted-foreground')} />
+            </SimpleTooltip>
             {!editing && (
-              <Button
-                type={'button'}
-                variant={'ghost'}
-                size={'icon'}
-                className="size-6 rounded-full"
-                onClick={onClickDelete}
+              <SimpleTooltip
+                content="리뷰 삭제"
+                render={<Button type={'button'} variant={'ghost'} size={'icon-xs'} onClick={onClickDelete} />}
               >
-                <DeleteIcon className="size-3 text-muted-foreground" />
-              </Button>
+                <DeleteIcon className="text-muted-foreground" />
+              </SimpleTooltip>
             )}
           </>
         )}

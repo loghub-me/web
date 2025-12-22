@@ -3,8 +3,10 @@
 import { deleteArticleComment } from '@/apis/client/article';
 import { useAuth } from '@/hooks/use-auth';
 import { handleError } from '@/lib/error';
+import { cn } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
+import { SimpleTooltip } from '@ui/simple-tooltip';
 import { DeleteIcon, PencilIcon, ReplyIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -50,37 +52,42 @@ export default function ArticleCommentActionMenu({
     status === 'authenticated' && (
       <div className="ml-2 flex gap-1">
         {!comment.deleted && (
-          <Button
-            type={'button'}
-            variant={actionStatus === 'replying' ? 'secondary' : 'ghost'}
-            size={'icon'}
-            className="size-6 rounded-full"
-            onClick={onClickReplying}
+          <SimpleTooltip
+            content="답글 달기"
+            render={
+              <Button
+                type={'button'}
+                variant={actionStatus === 'replying' ? 'secondary' : 'ghost'}
+                size={'icon-xs'}
+                onClick={onClickReplying}
+              />
+            }
           >
-            <ReplyIcon className="size-3 text-muted-foreground" />
-          </Button>
+            <ReplyIcon className={cn(actionStatus === 'replying' ? 'text-foreground' : 'text-muted-foreground')} />
+          </SimpleTooltip>
         )}
         {!comment.deleted && session?.id === comment.writer.id && (
           <>
-            <Button
-              type={'button'}
-              variant={actionStatus === 'editing' ? 'secondary' : 'ghost'}
-              size={'icon'}
-              className="size-6 rounded-full"
-              onClick={onClickEditing}
+            <SimpleTooltip
+              content="댓글 수정"
+              render={
+                <Button
+                  type={'button'}
+                  variant={actionStatus === 'editing' ? 'secondary' : 'ghost'}
+                  size={'icon-xs'}
+                  onClick={onClickEditing}
+                />
+              }
             >
-              <PencilIcon className="size-3 text-muted-foreground" />
-            </Button>
+              <PencilIcon className={cn(actionStatus === 'editing' ? 'text-foreground' : 'text-muted-foreground')} />
+            </SimpleTooltip>
             {actionStatus === null && (
-              <Button
-                type={'button'}
-                className="size-6 rounded-full"
-                variant={'ghost'}
-                size={'icon'}
-                onClick={onClickDelete}
+              <SimpleTooltip
+                content="댓글 삭제"
+                render={<Button type={'button'} variant={'ghost'} size={'icon-xs'} onClick={onClickDelete} />}
               >
-                <DeleteIcon className="size-3 text-muted-foreground" />
-              </Button>
+                <DeleteIcon className="text-muted-foreground" />
+              </SimpleTooltip>
             )}
           </>
         )}
