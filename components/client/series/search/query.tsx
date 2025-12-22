@@ -23,6 +23,7 @@ export default function SeriesSearchQuery({ defaultValue }: Readonly<SeriesSearc
         placeholder={'검색어를 입력해주세요...'}
         defaultValue={defaultValue}
         disabled={pending}
+        className="pl-0!"
       />
       <InputGroupAddon align={'inline-end'}>
         <SeriesSearchSubmit />

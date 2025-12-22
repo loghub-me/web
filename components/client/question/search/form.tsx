@@ -21,7 +21,7 @@ export default function QuestionSearchForm({
     <Form ref={formRef} action={action} className="space-y-3">
       <div className="flex gap-2">
         <QuestionSearchSort defaultValues={defaultValues} action={action} />
-        <QuestionSearchQuery defaultValue={defaultValues.query} />
+        <QuestionSearchQuery defaultValue={defaultValues.query} key={defaultValues.query} />
       </div>
       <QuestionSearchFilter defaultValues={defaultValues} action={action} />
     </Form>

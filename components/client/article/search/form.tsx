@@ -20,7 +20,7 @@ export default function ArticleSearchForm({
   return (
     <Form ref={formRef} action={action} className="flex gap-2">
       <ArticleSearchSort defaultValues={defaultValues} action={action} />
-      <ArticleSearchQuery defaultValue={defaultValues.query} />
+      <ArticleSearchQuery defaultValue={defaultValues.query} key={defaultValues.query} />
     </Form>
   );
 }

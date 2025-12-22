@@ -20,9 +20,11 @@ export default function ArticleSearchQuery({ defaultValue }: Readonly<ArticleSea
       <InputGroupInput
         type={'text'}
         name={'query'}
-        placeholder={'검색어를 입력해주세요...'}
         defaultValue={defaultValue}
         disabled={pending}
+        autoComplete={'off'}
+        placeholder={'검색어를 입력해주세요...'}
+        className="pl-0!"
       />
       <InputGroupAddon align={'inline-end'}>
         <ArticleSearchSubmit />
