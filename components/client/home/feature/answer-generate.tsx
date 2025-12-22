@@ -1,6 +1,6 @@
 'use client';
 
-import { TopicIcon } from '../../topic';
+import { TopicIcon } from '@/components/client/topic';
 import { CHAT_MODEL_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
 import { AutoHeightTextarea } from '@ui/auto-height-textarea';

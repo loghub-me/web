@@ -25,7 +25,7 @@ function InputWithIcon(props: React.ComponentProps<'input'> & { icon: LucideIcon
       <InputGroupAddon align={'inline-start'}>
         <Icon />
       </InputGroupAddon>
-      <InputGroupInput {...props} className={cn(props.className)} />
+      <InputGroupInput {...props} className={cn('pl-0!', props.className)} />
     </InputGroup>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { AutoHeightTextarea } from './auto-height-textarea';
 import { cn } from '@/lib/utils';
 import { Button } from '@ui/button';
 import { Input } from '@ui/input';
@@ -22,15 +23,14 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 const inputGroupAddonVariants = cva(
-  "text-muted-foreground h-auto gap-2 py-1.5 text-sm font-medium group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 flex cursor-text items-center justify-center select-none",
+  "text-muted-foreground h-auto gap-2 p-2 text-sm font-medium group-data-[disabled=true]/input-group:opacity-50 [&>kbd]:rounded-[calc(var(--radius)-5px)] [&>svg:not([class*='size-'])]:size-4 flex cursor-text items-center justify-center select-none",
   {
     variants: {
       align: {
-        'inline-start': 'pl-2 has-[>button]:ml-[-0.25rem] has-[>kbd]:ml-[-0.15rem] order-first',
-        'inline-end': 'pr-2 has-[>button]:mr-[-0.25rem] has-[>kbd]:mr-[-0.15rem] order-last',
-        'block-start':
-          'px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2 order-first w-full justify-start',
-        'block-end': 'px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-2 order-last w-full justify-start',
+        'inline-start': 'has-[>button]:ml-[-0.25rem] has-[>kbd]:ml-[-0.15rem] order-first',
+        'inline-end': 'has-[>button]:mr-[-0.25rem] has-[>kbd]:mr-[-0.15rem] order-last',
+        'block-start': 'pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-2 order-first w-full justify-start',
+        'block-end': 'group-has-[>input]/input-group:pb-2 [.border-t]:pt-2 order-last w-full justify-start',
       },
     },
     defaultVariants: {
@@ -134,4 +134,25 @@ function InputGroupTextarea({ className, ...props }: React.ComponentProps<'texta
   );
 }
 
-export { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea };
+function InputGroupAutoHeightTextarea({ className, ...props }: React.ComponentProps<'textarea'>) {
+  return (
+    <AutoHeightTextarea
+      data-slot="input-group-control"
+      className={cn(
+        'rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 aria-invalid:ring-0 dark:bg-transparent',
+        className
+      )}
+      {...props}
+    />
+  );
+}
+
+export {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupText,
+  InputGroupInput,
+  InputGroupTextarea,
+  InputGroupAutoHeightTextarea,
+};

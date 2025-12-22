@@ -1,10 +1,9 @@
 'use client';
 
-import { TopicSlugsFormField } from '@/components/client/form-field';
+import { TopicSlugsField } from '@/components/client/field';
 import zodFields from '@/schemas/fields';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
-import { Form } from '@ui/form';
 import { CheckIcon, TagIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -32,17 +31,20 @@ export default function HomeFeatureTopic() {
   }, [form, topicSlugs]);
 
   return (
-    <div className="p-4 flex items-center justify-center w-full h-full border rounded-xl">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
-          <TopicSlugsFormField control={form.control} topicSlugs={topicSlugs} setTopicSlugs={setTopicSlugs} />
-          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-            <Button type="submit" disabled={form.formState.isSubmitting}>
-              <CheckIcon /> 선택 완료
-            </Button>
-          </div>
-        </form>
-      </Form>
+    <div className="p-4 min-h-84 flex items-center justify-center w-full h-full border rounded-xl">
+      <form id="home-feature-topic-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        <TopicSlugsField
+          id="home-feature-topic-slugs"
+          control={form.control}
+          topicSlugs={topicSlugs}
+          setTopicSlugs={setTopicSlugs}
+        />
+        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+          <Button type="submit" disabled={form.formState.isSubmitting}>
+            <CheckIcon /> 선택 완료
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
