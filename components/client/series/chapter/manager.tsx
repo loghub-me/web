@@ -137,13 +137,17 @@ function SeriesChapterManagerItem({ chapter, series, writerUsername }: Readonly<
         <ListChevronsUpDownIcon />
       </Button>
       <span className="font-bold text-primary">{chapter.sequence}.</span>
-      <ButtonLink
-        href={`/series/${writerUsername}/${series.slug}/${chapter.sequence}`}
-        variant={'link'}
-        className="flex-1 p-0 h-auto justify-start whitespace-normal text-foreground"
-      >
-        {chapter.title}
-      </ButtonLink>
+      {chapter.published ? (
+        <ButtonLink
+          href={`/series/${writerUsername}/${series.slug}/${chapter.sequence}`}
+          variant={'link'}
+          className="flex-1 p-0 h-auto justify-start whitespace-normal text-foreground"
+        >
+          {chapter.title}
+        </ButtonLink>
+      ) : (
+        <span className="flex-1 whitespace-normal text-foreground">{chapter.title}</span>
+      )}
       {!chapter.published && (
         <SimpleTooltip content="비공개 챕터입니다.">
           <GlobeLockIcon className="size-4 text-muted-foreground" />

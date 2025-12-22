@@ -47,7 +47,7 @@ export default function UserGitHubVerifyButton({ github: { verified } }: Readonl
         <DialogTrigger render={<Button type={'button'} size={'sm'} variant={'outline'} disabled={verified} />}>
           <BadgeCheckIcon /> {verified ? '인증 완료' : 'GitHub 인증하기'}
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>GitHub 계정 인증하기</DialogTitle>
             <DialogDescription>안내에 따라 GitHub 계정 설정을 완료한 후 인증을 시도해주세요.</DialogDescription>
