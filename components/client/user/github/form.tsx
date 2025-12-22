@@ -10,12 +10,12 @@ import { userGitHubUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
+import { Field, FieldError, FieldLabel } from '@ui/field';
 import { InputWithIcon } from '@ui/input';
 import { AtSignIcon } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -52,34 +52,36 @@ export default function UserGitHubForm({ github }: Readonly<UserGitHubFormProps>
   }, [form, github]);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name={'username'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>GitHub 유저네임</FormLabel>
-              <FormControl>
-                <InputWithIcon icon={AtSignIcon} type={'text'} placeholder="GitHub 유저네임 입력해주세요" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-wrap flex-col-reverse gap-1.5 sm:flex-row sm:justify-end">
-          {github.username && (
-            <>
-              <UserGitHubDeleteButton />
-              <UserGitHubVerifyButton github={github} />
-            </>
-          )}
-          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <Image src={buildAssetsUrl('icons/github-dark.svg')} alt={'GitHub'} width={16} height={16} /> GitHub
-            업데이트
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <form id="github-update-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Controller
+        control={form.control}
+        name={'username'}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="github-update-form-username">GitHub 유저네임</FieldLabel>
+            <InputWithIcon
+              {...field}
+              id="username-update-form-username"
+              aria-invalid={fieldState.invalid}
+              icon={AtSignIcon}
+              placeholder="GitHub 유저네임을 입력해주세요"
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <div className="flex flex-wrap flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        {github.username && (
+          <>
+            <UserGitHubDeleteButton />
+            <UserGitHubVerifyButton github={github} />
+          </>
+        )}
+        <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
+          <Image src={buildAssetsUrl('icons/github-dark.svg')} alt={'GitHub'} width={16} height={16} /> GitHub 업데이트
+        </Button>
+      </div>
+    </form>
   );
 }

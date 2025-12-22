@@ -8,12 +8,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
 import { DialogHeader } from '@ui/dialog';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from '@ui/dialog';
-import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from '@ui/form';
-import { Input } from '@ui/input';
-import { Textarea } from '@ui/textarea';
-import { MailIcon } from 'lucide-react';
+import { Field, FieldError, FieldLabel } from '@ui/field';
+import { InputWithIcon } from '@ui/input';
+import { InputGroup, InputGroupAddon, InputGroupText, InputGroupTextarea } from '@ui/input-group';
+import { MailIcon, TagIcon } from 'lucide-react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
 
@@ -80,40 +80,51 @@ function TopicRequestForm({ setOpen }: TopicRequestFormProps) {
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-4">
-        <FormField
-          control={form.control}
-          name={'name'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>토픽 이름</FormLabel>
-              <FormControl>
-                <Input type={'title'} placeholder="토픽 이름을 입력해주세요" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={'description'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>토픽 설명</FormLabel>
-              <FormControl>
-                <Textarea placeholder="토픽 설명을 입력해주세요." className="h-32" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type="submit" disabled={form.formState.isSubmitting}>
-            <MailIcon /> 토픽 요청 보내기
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <form id="topic-request-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Controller
+        name={'name'}
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="topic-request-form-name">토픽 이름</FieldLabel>
+            <InputWithIcon
+              {...field}
+              aria-invalid={fieldState.invalid}
+              icon={TagIcon}
+              id="topic-request-form-name"
+              placeholder="토픽 이름을 입력해주세요"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name={'description'}
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="topic-request-form-description">토픽 설명</FieldLabel>
+            <InputGroup>
+              <InputGroupTextarea
+                {...field}
+                aria-invalid={fieldState.invalid}
+                id="support-inquiry-form-description"
+                placeholder="토픽 설명을 입력해주세요."
+                className="h-32"
+              />
+              <InputGroupAddon align="block-end">
+                <InputGroupText className="ml-auto">{field.value.length}/2048 자 입력</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          <MailIcon /> 토픽 요청 보내기
+        </Button>
+      </div>
+    </form>
   );
 }

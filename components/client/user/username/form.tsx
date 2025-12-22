@@ -7,10 +7,10 @@ import { handleFormError } from '@/lib/error';
 import { usernameUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@ui/form';
-import { Input } from '@ui/input';
-import { IdCardIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Field, FieldError, FieldLabel } from '@ui/field';
+import { InputWithIcon } from '@ui/input';
+import { AtSignIcon, IdCardIcon } from 'lucide-react';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -48,40 +48,48 @@ export default function UsernameForm({ username }: Readonly<UsernameFormProps>) 
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name={'oldUsername'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>이전 유저네임</FormLabel>
-              <FormControl>
-                <Input type={'text'} placeholder={`이전 유저네임을 입력해주세요: ${username}`} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name={'newUsername'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>새 유저네임</FormLabel>
-              <FormControl>
-                <Input type={'text'} placeholder="새로 사용하실 유저네임을 입력해주세요" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <IdCardIcon /> 유저네임 업데이트
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <form id="username-update-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Controller
+        control={form.control}
+        name={'oldUsername'}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="username-update-form-old-username">이전 유저네임</FieldLabel>
+            <InputWithIcon
+              {...field}
+              id="username-update-form-old-username"
+              aria-invalid={fieldState.invalid}
+              icon={AtSignIcon}
+              placeholder={`이전 유저네임을 입력해주세요: ${username}`}
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        control={form.control}
+        name={'newUsername'}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="username-update-form-new-username">새 유저네임</FieldLabel>
+            <InputWithIcon
+              {...field}
+              id="username-update-form-new-username"
+              aria-invalid={fieldState.invalid}
+              icon={AtSignIcon}
+              placeholder="새로 사용하실 유저네임을 입력해주세요"
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
+          <IdCardIcon /> 유저네임 업데이트
+        </Button>
+      </div>
+    </form>
   );
 }

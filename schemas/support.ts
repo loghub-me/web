@@ -1,12 +1,15 @@
 import zodFields from '@/schemas/fields';
 import { z } from 'zod';
 
-const { email, title, content } = zodFields;
+const { email, title } = zodFields;
 
 const inquirySchema = z.object({
   email: z.union([z.literal(''), email]),
   title,
-  content,
+  content: z
+    .string()
+    .min(10, { message: '문의 내용은 10자 이상이어야 합니다.' })
+    .max(2048, { message: '문의 내용은 2048자 이하이어야 합니다.' }),
 });
 
 const topicRequestSchema = z.object({

@@ -8,10 +8,10 @@ import { userPrivacyUpdateSchema } from '@/schemas/user';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@ui/form';
+import { Field, FieldDescription, FieldError, FieldLabel } from '@ui/field';
 import { Switch, SwitchIcon } from '@ui/switch';
 import { CheckIcon, GlobeIcon, GlobeLockIcon } from 'lucide-react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -44,31 +44,33 @@ export default function UserPrivacyForm({ privacy }: Readonly<UserPrivacyFormPro
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 space-y-4">
-        <FormField
-          control={form.control}
-          name={'emailPublic'}
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 space-y-0">
-              <div className="space-y-0.5">
-                <FormLabel>이메일 주소 공개 여부</FormLabel>
-                <FormDescription>다른 사용자에게 이메일 주소를 공개합니다.</FormDescription>
-              </div>
-              <FormControl>
-                <Switch checked={field.value} onCheckedChange={field.onChange}>
-                  <SwitchIcon enabledIcon={GlobeIcon} disabledIcon={GlobeLockIcon} value={field.value} />
-                </Switch>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-          <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
-            <CheckIcon /> 변경사항 저장
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <form id="privacy-update-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <Controller
+        name={'emailPublic'}
+        control={form.control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid} orientation={'horizontal'} className="px-3 py-2 border rounded-md">
+            <div className="flex-1 space-y-0.5">
+              <FieldLabel htmlFor="privacy-update-form-email-public">이메일 주소 공개 여부</FieldLabel>
+              <FieldDescription>프로필에 이메일 주소를 공개합니다.</FieldDescription>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </div>
+            <Switch
+              id="privacy-update-form-email-public"
+              {...field}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            >
+              <SwitchIcon enabledIcon={GlobeIcon} disabledIcon={GlobeLockIcon} value={field.value} />
+            </Switch>
+          </Field>
+        )}
+      />
+      <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <Button type={'submit'} size={'sm'} disabled={form.formState.isSubmitting}>
+          <CheckIcon /> 변경사항 저장
+        </Button>
+      </div>
+    </form>
   );
 }
