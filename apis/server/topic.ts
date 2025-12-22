@@ -1,7 +1,6 @@
 import { serverAPI } from '@/apis/server/instance';
-import { unstable_cache as cache } from 'next/cache';
 
-const getTrendingTopics = cache(() => serverAPI.get('topics/trending').json<Topic[]>(), [], { revalidate: 3600 });
+const getTrendingTopics = async () => serverAPI.get('topics/trending').json<Topic[]>();
 
 const getTopicDetail = (topicSlug: string) => serverAPI.get(`topics/${topicSlug}`).json<TopicDetail>();
 

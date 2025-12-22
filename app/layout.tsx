@@ -11,8 +11,14 @@ import TopicProvider from '@/providers/topic';
 import '@/styles/markdown-it.css';
 import { Toaster } from '@ui/sonner';
 import type { Metadata } from 'next';
+import { unstable_cache as cache } from 'next/cache';
 import { IBM_Plex_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
+
+const getTrendingTopicsCache = cache(getTrendingTopics, ['trending-topics'], {
+  revalidate: 3600,
+  tags: ['topics'],
+});
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
@@ -34,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
-  const trendingTopics = await getTrendingTopics();
+  const trendingTopics = await getTrendingTopicsCache();
 
   return (
     <html lang="ko" suppressHydrationWarning>
