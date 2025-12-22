@@ -15,7 +15,7 @@ function Command({ className, ...props }: React.ComponentProps<typeof CommandPri
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        'bg-popover text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md',
+        'dark:bg-input/30 bg-transparent text-popover-foreground flex h-full w-full flex-col overflow-hidden rounded-md',
         className
       )}
       {...props}
@@ -40,19 +40,16 @@ function CommandDialog({
   filter?: CommandFilter;
 }) {
   return (
-    <Dialog {...props}>
+    <Dialog {...props} modal>
       <DialogHeader className="sr-only">
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
-        className={cn('overflow-hidden p-1.5 gap-1 bg-accent', className)}
+        className={cn('top-92 overflow-hidden p-1.5 gap-1 bg-background/90 backdrop-blur', className)}
         showCloseButton={showCloseButton}
       >
-        <Command
-          filter={filter}
-          className="border [&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-10 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-2 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
-        >
+        <Command filter={filter} className="border">
           {children}
         </Command>
         <div className="flex flex-wrap">
@@ -76,7 +73,7 @@ function CommandInput({
   icon: LucideIcon;
 }) {
   return (
-    <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 px-3">
+    <div data-slot="command-input-wrapper" className="flex h-9 items-center gap-2 px-2">
       <Icon className="size-4 shrink-0 text-muted-foreground" />
       <CommandPrimitive.Input
         data-slot="command-input"
