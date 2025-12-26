@@ -27,7 +27,7 @@ export default async function UserProfilePage({ params, searchParams }: PageProp
           <CardTitle>README</CardTitle>
           {!hasREADME && <CardDescription>아직 README가 작성되지 않았습니다.</CardDescription>}
         </CardHeader>
-        {hasREADME && <CardContent>{user.profile.readme}</CardContent>}
+        {hasREADME && <CardContent className="break-words">{user.profile.readme}</CardContent>}
       </Card>
       <UserActivities userId={user.id} {...parsedParam} {...parsedSearchParam} />
     </div>
