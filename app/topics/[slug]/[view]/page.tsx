@@ -9,7 +9,7 @@ import ListEmpty from '@ui/list-empty';
 import { ComponentType, ReactNode, Suspense } from 'react';
 
 interface ListComponents {
-  list: ComponentType<{ children?: ReactNode; hasAside?: boolean }>;
+  list: ComponentType<{ children?: ReactNode }>;
   listSkeleton: ComponentType<{ size?: number }>;
 }
 
@@ -37,7 +37,7 @@ export default async function TopicTrendingPostPage({ params }: PageProps<'/topi
   return (
     <div className="flex-1 space-y-4">
       <TopicDetailNav {...parsedParam} />
-      <List hasAside={true}>
+      <List>
         <Suspense fallback={<ListSkeleton />}>
           <TopicTrendingListContent posts={posts} view={parsedParam.view} />
         </Suspense>
