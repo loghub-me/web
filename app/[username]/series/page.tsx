@@ -1,8 +1,6 @@
 import { getUserSeries } from '@/apis/server/user';
-import { SeriesListItems, SeriesPageNav } from '@/app/search/series/page';
-import { PageSkeleton } from '@/components/client/page';
 import { SeriesSearchForm } from '@/components/client/series';
-import { SeriesList, SeriesListSkeleton } from '@/components/server/series';
+import { SeriesSearchResult, SeriesSearchSkeleton } from '@/components/server/series';
 import { parseObject } from '@/lib/parse';
 import { seriesSearchSchema } from '@/schemas/series';
 import { userDetailSchema } from '@/schemas/user';
@@ -25,13 +23,8 @@ export default async function UserSeriesSearchPage({ params, searchParams }: Pag
   return (
     <div className="space-y-4">
       <SeriesSearchForm defaultValues={parsedSearchParams} action={`/${parsedParam.username}/series`} />
-      <SeriesList hasAside={true}>
-        <Suspense fallback={<SeriesListSkeleton />}>
-          <SeriesListItems series={series} />
-        </Suspense>
-      </SeriesList>
-      <Suspense fallback={<PageSkeleton />}>
-        <SeriesPageNav currentPage={parsedSearchParams.page} series={series} />
+      <Suspense fallback={<SeriesSearchSkeleton />}>
+        <SeriesSearchResult series={series} searchParams={parsedSearchParams} />
       </Suspense>
     </div>
   );

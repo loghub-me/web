@@ -1,10 +1,8 @@
 import { getArticles } from '@/apis/server/article';
 import { ArticleSearchForm } from '@/components/client/article';
-import { PageNav, PageSkeleton } from '@/components/client/page';
-import { ArticleList, ArticleListItem, ArticleListSkeleton } from '@/components/server/article';
+import { ArticleSearchResult, ArticleSearchSkeleton } from '@/components/server/article';
 import { parseObject } from '@/lib/parse';
 import { articleSearchSchema } from '@/schemas/article';
-import ListEmpty from '@ui/list-empty';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
@@ -20,37 +18,9 @@ export default async function ArticleSearchPage({ searchParams }: PageProps<'/se
   return (
     <main className="container mx-auto px-4 py-20 min-h-screen space-y-4">
       <ArticleSearchForm defaultValues={parsedSearchParams} />
-      <ArticleList>
-        <Suspense fallback={<ArticleListSkeleton />}>
-          <ArticleListItems articles={articles} />
-        </Suspense>
-      </ArticleList>
-      <Suspense fallback={<PageSkeleton />}>
-        <ArticlePageNav currentPage={parsedSearchParams.page} articles={articles} />
+      <Suspense fallback={<ArticleSearchSkeleton />}>
+        <ArticleSearchResult articles={articles} searchParams={parsedSearchParams} />
       </Suspense>
     </main>
   );
-}
-
-interface ArticleListItemsProps {
-  articles: Promise<Page<Article>>;
-}
-
-export async function ArticleListItems({ articles }: Readonly<ArticleListItemsProps>) {
-  const resolvedArticles = await articles;
-
-  if (resolvedArticles.content.length === 0) {
-    return <ListEmpty message={'검색된 아티클이 없습니다.'} className="py-4" />;
-  }
-
-  return resolvedArticles.content.map((article) => <ArticleListItem key={article.id} article={article} />);
-}
-
-interface ArticlePageNavProps extends ArticleListItemsProps {
-  currentPage: number;
-}
-
-export async function ArticlePageNav({ currentPage, articles }: Readonly<ArticlePageNavProps>) {
-  const resolvedArticles = await articles;
-  return <PageNav currentPage={currentPage} totalPages={resolvedArticles.page.totalPages} />;
 }

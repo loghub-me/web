@@ -1,8 +1,6 @@
 import { getUserQuestions } from '@/apis/server/user';
-import { QuestionListItems, QuestionPageNav } from '@/app/search/questions/page';
-import { PageSkeleton } from '@/components/client/page';
 import { QuestionSearchForm } from '@/components/client/question';
-import { QuestionList, QuestionListSkeleton } from '@/components/server/question';
+import { QuestionSearchResult, QuestionSearchSkeleton } from '@/components/server/question';
 import { parseObject } from '@/lib/parse';
 import { questionSearchSchema } from '@/schemas/question';
 import { userDetailSchema } from '@/schemas/user';
@@ -25,13 +23,8 @@ export default async function UserQuestionSearchPage({ params, searchParams }: P
   return (
     <div className="space-y-4">
       <QuestionSearchForm defaultValues={parsedSearchParams} action={`/${parsedParam.username}/questions`} />
-      <QuestionList>
-        <Suspense fallback={<QuestionListSkeleton />}>
-          <QuestionListItems questions={questions} />
-        </Suspense>
-      </QuestionList>
-      <Suspense fallback={<PageSkeleton />}>
-        <QuestionPageNav currentPage={parsedSearchParams.page} questions={questions} />
+      <Suspense fallback={<QuestionSearchSkeleton />}>
+        <QuestionSearchResult questions={questions} searchParams={parsedSearchParams} />
       </Suspense>
     </div>
   );

@@ -1,5 +1,8 @@
 import 'server-only';
 
+export { default as SeriesSearchResult } from '@/components/server/series/search/result';
+export { default as SeriesSearchSkeleton } from '@/components/server/series/search/skeleton';
+
 export { default as SeriesList } from '@/components/server/series/list';
 export { default as SeriesListItem } from '@/components/server/series/list-item';
 export { default as SeriesListSkeleton } from '@/components/server/series/list-skeleton';

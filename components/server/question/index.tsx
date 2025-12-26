@@ -1,5 +1,8 @@
 import 'server-only';
 
+export { default as QuestionSearchResult } from '@/components/server/question/search/result';
+export { default as QuestionSearchSkeleton } from '@/components/server/question/search/skeleton';
+
 export { default as QuestionList } from '@/components/server/question/list';
 export { default as QuestionListItem } from '@/components/server/question/list-item';
 export { default as QuestionListSkeleton } from '@/components/server/question/list-skeleton';
