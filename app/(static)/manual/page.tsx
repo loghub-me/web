@@ -2,9 +2,14 @@ import { PostManual, MarkdownManual } from '@/components/server/manual';
 import { Separator } from '@ui/separator';
 import { Metadata } from 'next';
 
+const title = '매뉴얼';
+const description = '서비스 사용을 위한 매뉴얼 페이지입니다.';
+
 export const metadata: Metadata = {
-  title: '매뉴얼',
-  description: '서비스 사용을 위한 매뉴얼 페이지입니다.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/manual` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default function ManualPage() {

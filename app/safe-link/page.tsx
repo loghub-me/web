@@ -5,9 +5,14 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@ui/ca
 import { ChevronRightIcon, HomeIcon } from 'lucide-react';
 import { Metadata } from 'next';
 
+const title = '안전하게 링크 이동';
+const description = '안전하게 외부 링크로 이동할 수 있도록 도와줍니다.';
+
 export const metadata: Metadata = {
-  title: '안전하게 링크 이동',
-  description: '안전하게 외부 링크로 이동할 수 있도록 도와줍니다.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/safe-link` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function SafeLinkPage({ searchParams }: PageProps<'/safe-link'>) {

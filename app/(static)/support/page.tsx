@@ -4,9 +4,14 @@ import { ButtonLink } from '@ui/button-link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { Metadata } from 'next';
 
+const title = '문의하기';
+const description = '서비스 관련 문의를 위한 페이지입니다.';
+
 export const metadata: Metadata = {
-  title: '문의하기',
-  description: '서비스 관련 문의를 위한 페이지입니다.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/support` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default function SupportPage() {

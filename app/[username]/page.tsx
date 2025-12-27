@@ -6,11 +6,15 @@ import { userActivitySearchSchema, userDetailSchema } from '@/schemas/user';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@ui/card';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: LayoutProps<'/[username]'>): Promise<Metadata> {
-  const parsedParam = parseObject(await params, userDetailSchema);
+export async function generateMetadata({ params }: PageProps<'/[username]'>): Promise<Metadata> {
+  const { username } = parseObject(await params, userDetailSchema);
+  const [title, description] = [`@${username}`, `${username}님의 프로필 페이지입니다.`];
+  const url = `${process.env.WEB_HOST}/${username}`;
   return {
-    title: `@${parsedParam.username}`,
-    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+    title,
+    description,
+    openGraph: { title, description, url },
+    twitter: { card: 'summary', title, description },
   };
 }
 

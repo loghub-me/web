@@ -1,5 +1,10 @@
 import { HomeContentsSection, HomeFeaturesSection, HomeHeroSection, HomeTopicsSection } from '@/components/server/home';
 import { LightRays } from '@ui/light-rays';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  openGraph: { url: `${process.env.WEB_HOST}` },
+};
 
 export default function HomePage() {
   return (

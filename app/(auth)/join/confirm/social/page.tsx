@@ -4,9 +4,14 @@ import { parseObject } from '@/lib/parse';
 import { oauth2JoinConfirmSearchParamsSchema } from '@/schemas/auth';
 import { Metadata } from 'next';
 
+const title = '소셜 계정 회원가입';
+const description = '회원가입을 위해 폼을 입력해주세요.';
+
 export const metadata: Metadata = {
-  title: '소셜 계정 회원가입',
-  description: '회원가입을 위해 폼을 입력해주세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/join/confirm/social` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function JoinConfirmSocialPage({ searchParams }: PageProps<'/join/confirm/social'>) {

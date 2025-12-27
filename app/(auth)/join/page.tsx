@@ -3,9 +3,14 @@ import Symbol from '@/components/global/symbol';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+const title = '회원가입';
+const description = '회원가입을 위해 폼을 입력해주세요.';
+
 export const metadata: Metadata = {
-  title: '회원가입',
-  description: '회원가입을 위해 폼을 입력해주세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/join` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function JoinRequestPage() {

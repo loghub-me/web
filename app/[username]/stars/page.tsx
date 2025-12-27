@@ -7,11 +7,15 @@ import ListEmpty from '@ui/list-empty';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-export async function generateMetadata({ params }: PageProps<'/[username]/series'>): Promise<Metadata> {
-  const parsedParam = parseObject(await params, userDetailSchema);
+export async function generateMetadata({ params }: PageProps<'/[username]/stars'>): Promise<Metadata> {
+  const { username } = parseObject(await params, userDetailSchema);
+  const [title, description] = [`@${username} - 스타`, `${username}님의 스타된 포스트 목록 페이지입니다.`];
+  const url = `${process.env.WEB_HOST}/${username}/stars`;
   return {
-    title: `@${parsedParam.username} - 스타`,
-    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+    title,
+    description,
+    openGraph: { title, description, url },
+    twitter: { card: 'summary', title, description },
   };
 }
 

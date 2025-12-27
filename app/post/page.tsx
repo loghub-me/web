@@ -9,9 +9,14 @@ import { LucideIcon, PencilIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+const title = '포스트';
+const description = '아티클, 시리즈, 질문, 답변 등 다양한 글을 작성하고 공유해보세요.';
+
 export const metadata: Metadata = {
-  title: '포스트',
-  description: '아티클, 시리즈, 질문, 답변 등 다양한 글을 작성하고 공유해보세요.',
+  title,
+  description,
+  openGraph: { title, description },
+  twitter: { card: 'summary', title, description },
 };
 
 export default function PostPortalPage() {

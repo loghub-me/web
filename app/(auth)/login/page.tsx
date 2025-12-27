@@ -3,9 +3,14 @@ import Symbol from '@/components/global/symbol';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+const title = '로그인';
+const description = '로그인을 위해 이메일을 입력해주세요.';
+
 export const metadata: Metadata = {
-  title: '로그인',
-  description: '로그인을 위해 이메일을 입력해주세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/login` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function LoginRequestPage() {

@@ -37,6 +37,23 @@ export const metadata: Metadata = {
     default: '홈 | LogHub',
   },
   description: 'LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.',
+  openGraph: {
+    title: {
+      template: '%s | LogHub',
+      default: '홈 | LogHub',
+    },
+    description: 'LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.',
+    siteName: 'LogHub',
+    locale: 'ko_KR',
+  },
+  twitter: {
+    card: 'summary',
+    title: {
+      template: '%s | LogHub',
+      default: '홈 | LogHub',
+    },
+    description: 'LogHub는 개발자들이 자신의 지식을 공유하고, 서로의 경험을 나누는 공간입니다.',
+  },
 };
 
 export default async function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {

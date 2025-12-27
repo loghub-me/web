@@ -4,9 +4,14 @@ import { parseObject } from '@/lib/parse';
 import { joinConfirmSearchParamsSchema } from '@/schemas/auth';
 import { Metadata } from 'next';
 
+const title = '회원가입 확인';
+const description = '회원가입 확인을 위해 인증번호를 입력해주세요.';
+
 export const metadata: Metadata = {
-  title: '회원가입 확인',
-  description: '회원가입 확인을 위해 인증번호를 입력해주세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/join/confirm` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function JoinConfirmPage({ searchParams }: PageProps<'/join/confirm'>) {

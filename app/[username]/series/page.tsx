@@ -8,10 +8,14 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 export async function generateMetadata({ params }: PageProps<'/[username]/series'>): Promise<Metadata> {
-  const parsedParam = parseObject(await params, userDetailSchema);
+  const { username } = parseObject(await params, userDetailSchema);
+  const [title, description] = [`@${username} - 시리즈`, `${username}님의 시리즈 목록 페이지입니다.`];
+  const url = `${process.env.WEB_HOST}/${username}/series`;
   return {
-    title: `@${parsedParam.username} - 시리즈`,
-    description: `${parsedParam.username}님의 프로필 페이지입니다.`,
+    title,
+    description,
+    openGraph: { title, description, url },
+    twitter: { card: 'summary', title, description },
   };
 }
 

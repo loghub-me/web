@@ -1,11 +1,14 @@
 import { TopicRequest, TopicSearch } from '@/components/client/topic';
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+const title = '토픽 검색';
+const description = 'LogHub에서 다루는 다양한 토픽을 검색해보세요.';
 
 export const metadata: Metadata = {
-  title: '토픽 검색',
-  description: 'LogHub에서 다루는 다양한 토픽을 검색해보세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/topics` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default function TopicSearchPage() {

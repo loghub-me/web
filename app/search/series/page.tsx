@@ -6,9 +6,14 @@ import { seriesSearchSchema } from '@/schemas/series';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
+const title = '시리즈 검색';
+const description = '시리즈는 여러 아티클을 모아 하나의 주제로 구성된 글 모음입니다.';
+
 export const metadata: Metadata = {
-  title: '시리즈 검색',
-  description: '시리즈는 여러 아티클을 모아 하나의 주제로 구성된 글 모음입니다.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/search/series` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function SeriesSearchPage({ searchParams }: PageProps<'/search/series'>) {

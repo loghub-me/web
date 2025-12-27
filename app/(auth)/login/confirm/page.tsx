@@ -4,9 +4,14 @@ import { parseObject } from '@/lib/parse';
 import { loginConfirmSearchParamsSchema } from '@/schemas/auth';
 import { Metadata } from 'next';
 
+const title = '로그인 확인';
+const description = '로그인을 확인을 위해 인증번호를 입력해주세요.';
+
 export const metadata: Metadata = {
-  title: '로그인 확인',
-  description: '로그인을 확인을 위해 인증번호를 입력해주세요.',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/login/confirm` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default async function LoginConfirmPage({ searchParams }: PageProps<'/login/confirm'>) {

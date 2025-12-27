@@ -2,9 +2,14 @@ import { TERMS, PRIVACY_POLICIES } from '@/constants/legals';
 import { Separator } from '@ui/separator';
 import { Metadata } from 'next';
 
+const title = '서비스 이용약관 및 개인정보 처리방침';
+const description = '서비스 이용약관 및 개인정보 처리방침';
+
 export const metadata: Metadata = {
-  title: '정보',
-  description: '서비스 이용약관 및 개인정보 처리방침',
+  title,
+  description,
+  openGraph: { title, description, url: `${process.env.WEB_HOST}/legal` },
+  twitter: { card: 'summary', title, description },
 };
 
 export default function LegalPage() {

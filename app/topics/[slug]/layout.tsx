@@ -8,11 +8,16 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 export async function generateMetadata({ params }: LayoutProps<'/topics/[slug]'>): Promise<Metadata> {
-  const parsedParam = parseObject(await params, topicDetailSchema);
-  const topic = await getTopicDetail(parsedParam.slug);
+  const { slug } = parseObject(await params, topicDetailSchema);
+  const topic = await getTopicDetail(slug);
+  const [title, description] = [topic.name, topic.description];
+  const url = `${process.env.WEB_HOST}/topics/${slug}`;
+  const images = [buildAssetsUrl(`icons/${slug}.svg`)];
   return {
     title: topic.name,
     description: topic.description,
+    openGraph: { title, description, url, images },
+    twitter: { card: 'summary_large_image', title, description, images },
   };
 }
 

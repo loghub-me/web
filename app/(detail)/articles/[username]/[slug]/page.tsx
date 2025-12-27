@@ -8,6 +8,7 @@ import {
   ArticleDetailHero,
 } from '@/components/server/article';
 import { parseObject } from '@/lib/parse';
+import { buildAssetsUrl } from '@/lib/utils';
 import { compositeKeySchema } from '@/schemas/common';
 import { Card } from '@ui/card';
 import { Metadata } from 'next';
@@ -15,9 +16,14 @@ import { Metadata } from 'next';
 export async function generateMetadata({ params }: PageProps<'/articles/[username]/[slug]'>): Promise<Metadata> {
   const { username, slug } = parseObject(await params, compositeKeySchema);
   const article = await getArticleDetail(username, slug);
+  const [title, description] = [article.title, article.content.markdown.slice(0, 160).replace(/\n/g, ' ')];
+  const url = `${process.env.WEB_HOST}/articles/${username}/${slug}`;
+  const images = [buildAssetsUrl(article.thumbnail)];
   return {
-    title: article.title,
-    description: article.content.markdown.slice(0, 160).replace(/\n/g, ' '),
+    title,
+    description,
+    openGraph: { title, description, url, images },
+    twitter: { card: 'summary_large_image', title, description, images },
   };
 }
 
