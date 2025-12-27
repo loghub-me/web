@@ -20,7 +20,7 @@ export default async function SeriesSearchResult({ series, searchParams }: Reado
           <SeriesListItem key={series.id} series={series} />
         ))}
       </SeriesList>
-      Series <PageNav currentPage={searchParams.page} totalPages={resolvedSeries.page.totalPages} />
+      <PageNav currentPage={searchParams.page} totalPages={resolvedSeries.page.totalPages} />
     </>
   );
 }
