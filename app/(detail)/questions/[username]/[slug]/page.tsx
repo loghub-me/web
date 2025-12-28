@@ -19,7 +19,7 @@ import { Suspense } from 'react';
 export async function generateMetadata({ params }: PageProps<'/questions/[username]/[slug]'>): Promise<Metadata> {
   const { username, slug } = parseObject(await params, compositeKeySchema);
   const question = await getQuestionDetail(username, slug);
-  const [title, description] = [question.title, question.content.markdown.slice(0, 160).replace(/\n/g, ' ')];
+  const [title, description] = [question.title, question.content.normalized.slice(0, 200)];
   const url = `${process.env.WEB_HOST}/questions/${username}/${slug}`;
   return {
     title,

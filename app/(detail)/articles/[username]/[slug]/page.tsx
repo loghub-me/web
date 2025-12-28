@@ -16,9 +16,10 @@ import { Metadata } from 'next';
 export async function generateMetadata({ params }: PageProps<'/articles/[username]/[slug]'>): Promise<Metadata> {
   const { username, slug } = parseObject(await params, compositeKeySchema);
   const article = await getArticleDetail(username, slug);
-  const [title, description] = [article.title, article.content.markdown.slice(0, 160).replace(/\n/g, ' ')];
+  const [title, description] = [article.title, article.content.normalized.slice(0, 200)];
   const url = `${process.env.WEB_HOST}/articles/${username}/${slug}`;
   const images = [buildAssetsUrl(article.thumbnail)];
+
   return {
     title,
     description,

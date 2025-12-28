@@ -12,7 +12,7 @@ interface QuestionAnswerListItemProps {
 }
 
 export default function QuestionAnswerListItem({ answer, question }: Readonly<QuestionAnswerListItemProps>) {
-  const { title, content, accepted, writer } = answer;
+  const { title, contentHTML, accepted, writer } = answer;
 
   return (
     <Card id={`answer-${answer.id}`} className="pt-0">
@@ -27,7 +27,7 @@ export default function QuestionAnswerListItem({ answer, question }: Readonly<Qu
         <QuestionAnswerActionMenu questionId={question.id} answer={answer} />
       </CardHeader>
       <CardContent className="pb-4 border-b">
-        <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
+        <div className="markdown-it" dangerouslySetInnerHTML={{ __html: contentHTML }} />
       </CardContent>
       <CardFooter className="flex items-center justify-between gap-2">
         <UserLink {...writer} />

@@ -10,8 +10,8 @@ interface SkeletonProps {
 }
 
 interface Content {
-  markdown: string;
   html: string;
+  normalized: string;
 }
 
 interface Anchor {

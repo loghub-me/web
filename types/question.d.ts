@@ -40,7 +40,7 @@ interface QuestionStats {
 interface QuestionAnswer {
   id: number;
   title: string;
-  content: Content;
+  contentHTML: string;
   accepted: boolean;
   writer: User;
   createdAt: string;

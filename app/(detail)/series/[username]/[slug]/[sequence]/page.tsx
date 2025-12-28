@@ -17,7 +17,7 @@ export async function generateMetadata({
   const { username, slug, sequence } = parseObject(await params, seriesChapterDetailSchema);
   const series = await getSeriesDetail(username, slug);
   const chapter = await getSeriesChapterDetail(series.id, sequence);
-  const [title, description] = [chapter.title, chapter.content.markdown.slice(0, 160).replace(/\n/g, ' ')];
+  const [title, description] = [chapter.title, chapter.content.normalized.slice(0, 200)];
   const images = [buildAssetsUrl(series.thumbnail)];
   const url = `${process.env.WEB_HOST}/series/${username}/${slug}/${sequence}`;
   return {
