@@ -47,7 +47,7 @@ export default function ArticleCommentListItem({
             closeForm={() => setActionStatus(null)}
           />
         ) : (
-          <p className="leading-6 text-sm break-words">
+          <p className="leading-6 text-sm whitespace-pre-wrap">
             {mention && <UserMention {...mention} />}
             <span className={cn(deleted && 'text-muted-foreground')}>{content}</span>
           </p>

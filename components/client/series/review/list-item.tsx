@@ -45,7 +45,7 @@ export default function SeriesReviewListItem({
             closeForm={() => setEditing(false)}
           />
         ) : (
-          <p className="leading-6 text-sm break-words">{content}</p>
+          <p className="leading-6 text-sm whitespace-pre-wrap">{content}</p>
         )}
       </div>
     </div>

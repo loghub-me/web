@@ -1,19 +1,22 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { Textarea } from '@ui/textarea';
-import { useCallback, ChangeEvent } from 'react';
+import { useRef, useEffect } from 'react';
 
-function AutoHeightTextarea({ className, onChange, ...props }: React.ComponentProps<'textarea'>) {
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
-      onChange?.(e);
-      const target = e.target;
-      target.style.height = '0px';
-      target.style.height = `${target.scrollHeight}px`;
-    },
-    [onChange]
+function AutoHeightTextarea({ className, value, ...props }: React.ComponentProps<'textarea'>) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    const target = textareaRef.current;
+    if (!target) return;
+    target.style.height = '0px';
+    target.style.height = `${target.scrollHeight}px`;
+  }, [value]);
+
+  return (
+    <Textarea className={cn(className, 'resize-none overflow-hidden')} value={value} {...props} ref={textareaRef} />
   );
-
-  return <Textarea className={cn(className, 'resize-none overflow-hidden')} onChange={handleChange} {...props} />;
 }
 
 export { AutoHeightTextarea };
