@@ -7,7 +7,7 @@ import { authResponseSchema } from '@/schemas/auth';
 import { createContext, useEffect, useRef, useState } from 'react';
 
 type AuthState =
-  | { status: 'loading'; session?: undefined }
+  | { status: 'loading'; session: Session | undefined }
   | { status: 'unauthenticated'; session?: undefined }
   | { status: 'authenticated'; session: Session };
 
@@ -24,8 +24,14 @@ export const AuthContext = createContext<AuthContextProps>({
 const ACCESS_TOKEN_EXPIRATION = 10 * 60 * 1000; // 10 minutes
 const REFRESH_INTERVAL = ACCESS_TOKEN_EXPIRATION - 1 * 60 * 1000; // 1 minute before expiration
 
-export default function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [state, setState] = useState<AuthState>({ status: 'loading' });
+export default function AuthProvider({
+  initialSession,
+  children,
+}: Readonly<{ initialSession?: Session; children: React.ReactNode }>) {
+  const initialState: AuthState = initialSession
+    ? { status: 'loading', session: initialSession }
+    : { status: 'loading', session: undefined };
+  const [state, setState] = useState<AuthState>(initialState);
   const refreshingRef = useRef(false);
   const refreshIntervalRef = useRef<NodeJS.Timeout>(null);
 

@@ -41,7 +41,7 @@ const loginRequestSchema = z.object({ email });
 const loginConfirmSchema = z.object({ email, otp });
 const loginConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
 
-export { authResponseSchema };
+export { session, authResponseSchema };
 export { joinRequestSchema, joinConfirmSchema, joinConfirmSearchParamsSchema };
 export { oauth2JoinConfirmSchema, oauth2JoinConfirmSearchParamsSchema };
 export { loginRequestSchema, loginConfirmSchema, loginConfirmSearchParamsSchema };

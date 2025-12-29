@@ -8,12 +8,14 @@ import NotificationProvider from '@/providers/notification';
 import ReactQueryProvider from '@/providers/react-query';
 import { ThemeProvider } from '@/providers/theme';
 import TopicProvider from '@/providers/topic';
+import { session as sessionZod } from '@/schemas/auth';
 import '@/styles/markdown-it.css';
 import { Toaster } from '@ui/sonner';
 import type { Metadata } from 'next';
 import { unstable_cache as cache } from 'next/cache';
 import { IBM_Plex_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
+import { cookies } from 'next/headers';
 
 const getTrendingTopicsCache = cache(getTrendingTopics, ['trending-topics'], {
   revalidate: 3600,
@@ -56,15 +58,33 @@ export const metadata: Metadata = {
   },
 };
 
+async function getSessionFromCookie(): Promise<Session | undefined> {
+  const cookieStore = await cookies();
+  const encodedSession = cookieStore.get('session');
+  if (!encodedSession) {
+    return undefined;
+  }
+
+  const decodedSession = Buffer.from(encodedSession.value, 'base64').toString('utf-8');
+  try {
+    const parsedSession = sessionZod.parse(JSON.parse(decodedSession));
+    return parsedSession;
+  } catch (err) {
+    console.error('Failed to parse session from cookie:', err);
+  }
+  return undefined;
+}
+
 export default async function RootLayout({ children }: Readonly<LayoutProps<'/'>>) {
   const trendingTopics = await getTrendingTopicsCache();
+  const initialSession = await getSessionFromCookie();
 
   return (
     <html lang="ko" suppressHydrationWarning>
       <body className={`${pretendard.className} ${ibmPlexMono.variable} antialiased flex flex-col min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ReactQueryProvider>
-            <AuthProvider>
+            <AuthProvider initialSession={initialSession}>
               <NotificationProvider>
                 <TopicProvider trendingTopics={trendingTopics}>
                   <GlobalHeader />

@@ -18,7 +18,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@ui/dropdown-menu';
-import { Skeleton } from '@ui/skeleton';
 import {
   ChevronUpIcon,
   GlobeLockIcon,
@@ -40,16 +39,13 @@ interface AuthMenuProps {
 }
 
 export default function AuthMenu({ type, closeSheet }: Readonly<AuthMenuProps>) {
-  const { status, session } = useAuth();
+  const { session } = useAuth();
 
-  switch (status) {
-    case 'loading':
-      return <Skeleton className={cn('h-9', type === 'header' ? 'w-24' : 'flex-1')} />;
-    case 'unauthenticated':
-      return <GuestMenu type={type} closeSheet={closeSheet} />;
-    case 'authenticated':
-      return <MemberMenu type={type} session={session} closeSheet={closeSheet} />;
+  if (!session) {
+    return <GuestMenu type={type} closeSheet={closeSheet} />;
   }
+
+  return <MemberMenu type={type} session={session} closeSheet={closeSheet} />;
 }
 
 function GuestMenu({ type, closeSheet }: Readonly<AuthMenuProps>) {
