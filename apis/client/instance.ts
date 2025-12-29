@@ -1,4 +1,4 @@
-'ues client';
+'use client';
 
 import { refreshToken } from '@/apis/client/auth';
 import ky, { KyRequest, KyResponse, NormalizedOptions, Options } from 'ky';

@@ -31,14 +31,27 @@ const logout = () =>
     window.dispatchEvent(new CustomEvent('auth:logged-out'));
     return body;
   });
-const refreshToken = async () =>
-  ky
+
+let refreshTokenPromise: Promise<MessageResponseBody> | null = null;
+const refreshToken = async () => {
+  if (refreshTokenPromise) {
+    return refreshTokenPromise;
+  }
+
+  refreshTokenPromise = ky
     .post(buildAPIUrl('auth/refresh'), { credentials: 'include', keepalive: true })
     .then(afterConfirm)
     .catch((err) => {
       window.dispatchEvent(new CustomEvent('auth:refresh-failed'));
       throw err;
+    })
+    .finally(() => {
+      refreshTokenPromise = null;
     });
+
+  return refreshTokenPromise;
+};
+
 async function afterConfirm(res: KyResponse) {
   const body = await res.json<MessageResponseBody>();
   const token = extractTokenFromResponse(res);
