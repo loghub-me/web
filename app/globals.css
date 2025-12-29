@@ -96,6 +96,7 @@
   --color-card: var(--card);
 
   --color-editor: var(--editor);
+  --color-editor-selected: var(--editor-selected);
   --color-code: var(--code);
   --color-code-comment-quote: var(--code-comment-quote);
   --color-code-keyword-name: var(--code-keyword-name);
@@ -149,7 +150,7 @@
   --sidebar-ring: oklch(0.705 0.015 286.067);
 
   --editor: oklch(0.99 0 0);
-  --code: oklch(0.967 0.001 286.375);
+  --editor-selected: oklch(0.92 0.001 286.375);
   --code-comment-quote: #7a7a7a;
   --code-keyword-name: #0077cc;
   --code-template-variable: #b38f00;
@@ -196,6 +197,7 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 
   --editor: oklch(0.21 0.008 274.5332);
+  --editor-selected: oklch(0.324 0.006 286.033);
   --code: oklch(0.324 0.006 286.033);
   --code-comment-quote: #8e99a7;
   --code-keyword-name: #82aaff;

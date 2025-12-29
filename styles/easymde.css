@@ -271,20 +271,36 @@ div.CodeMirror-dragcursors {
   visibility: visible;
 }
 .CodeMirror-selected {
-  @apply bg-primary/30;
+  @apply bg-editor-selected;
 }
-span.CodeMirror-selectedtext {
+.CodeMirror-selectedtext {
   background: 0 0;
 }
-
+span.CodeMirror-selectedtext {
+  background: none;
+}
 .CodeMirror-focused .CodeMirror-selected {
-  @apply bg-primary/30;
+  @apply bg-editor-selected;
 }
 
 .CodeMirror-line::selection,
 .CodeMirror-line > span::selection,
 .CodeMirror-line > span > span::selection {
-  @apply bg-primary/30;
+  @apply bg-editor-selected;
+}
+
+.CodeMirror-line::-moz-selection,
+.CodeMirror-line > span::-moz-selection,
+.CodeMirror-line > span > span::-moz-selection {
+  @apply bg-editor-selected;
+}
+
+.CodeMirror-gutter-wrapper ::selection {
+  background-color: transparent;
+}
+
+.CodeMirror-gutter-wrapper ::-moz-selection {
+  background-color: transparent;
 }
 
 .cm-searching {
