@@ -2,7 +2,6 @@
 
 import { confirmJoin } from '@/apis/client/auth';
 import { EmailField, OTPField } from '@/components/client/field';
-import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
 import { joinConfirmSchema, joinConfirmSearchParamsSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,14 +17,12 @@ interface JoinConfirmSearchParams {
 }
 
 export default function JoinConfirmForm({ defaultValues }: Readonly<JoinConfirmSearchParams>) {
-  const { registerSession } = useAuth();
   const form = useForm<z.infer<typeof joinConfirmSchema>>({ resolver: zodResolver(joinConfirmSchema), defaultValues });
 
   async function onSubmit(values: z.infer<typeof joinConfirmSchema>) {
     try {
-      const { body, session } = await confirmJoin(values);
-      toast.success(body.message);
-      registerSession(session);
+      const { message } = await confirmJoin(values);
+      toast.success(message);
     } catch (err) {
       handleFormError(err, form.setError);
     }

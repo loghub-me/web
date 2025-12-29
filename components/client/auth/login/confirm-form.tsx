@@ -2,7 +2,6 @@
 
 import { confirmLogin } from '@/apis/client/auth';
 import { EmailField, OTPField } from '@/components/client/field';
-import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
 import { loginConfirmSchema, loginConfirmSearchParamsSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,7 +17,6 @@ interface LoginConfirmSearchParams {
 }
 
 export default function LoginConfirmForm({ defaultValues }: Readonly<LoginConfirmSearchParams>) {
-  const { registerSession } = useAuth();
   const form = useForm<z.infer<typeof loginConfirmSchema>>({
     resolver: zodResolver(loginConfirmSchema),
     defaultValues,
@@ -26,9 +24,8 @@ export default function LoginConfirmForm({ defaultValues }: Readonly<LoginConfir
 
   async function onSubmit(values: z.infer<typeof loginConfirmSchema>) {
     try {
-      const { body, session } = await confirmLogin(values);
-      toast.success(body.message);
-      registerSession(session);
+      const { message } = await confirmLogin(values);
+      toast.success(message);
     } catch (err) {
       handleFormError(err, form.setError);
     }

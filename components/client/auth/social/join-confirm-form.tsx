@@ -8,7 +8,6 @@ import {
   NicknameField,
   UsernameField,
 } from '@/components/client/field';
-import { useAuth } from '@/hooks/use-auth';
 import { handleFormError } from '@/lib/error';
 import { oauth2JoinConfirmSchema, oauth2JoinConfirmSearchParamsSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +22,6 @@ interface SocialJoinConfirmSearchParams {
 }
 
 export default function SocialJoinConfirmForm({ defaultValues }: Readonly<SocialJoinConfirmSearchParams>) {
-  const { registerSession } = useAuth();
   const form = useForm<z.infer<typeof oauth2JoinConfirmSchema>>({
     resolver: zodResolver(oauth2JoinConfirmSchema),
     defaultValues: {
@@ -37,9 +35,8 @@ export default function SocialJoinConfirmForm({ defaultValues }: Readonly<Social
 
   async function onSubmit(values: z.infer<typeof oauth2JoinConfirmSchema>) {
     try {
-      const { body, session } = await confirmOAuth2Join(values);
-      toast.success(body.message);
-      registerSession(session);
+      const { message } = await confirmOAuth2Join(values);
+      toast.success(message);
     } catch (err) {
       handleFormError(err, form.setError);
     }

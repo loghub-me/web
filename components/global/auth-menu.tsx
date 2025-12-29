@@ -67,7 +67,6 @@ function GuestMenu({ type, closeSheet }: Readonly<AuthMenuProps>) {
 
 function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { session: Session }>) {
   const [open, setOpen] = useState(false);
-  const { unregisterSession } = useAuth();
   const [isLoggingOut, startTransition] = useTransition();
 
   const navLinks = [
@@ -91,8 +90,6 @@ function MemberMenu({ type, session, closeSheet }: Readonly<AuthMenuProps & { se
         toast.info(message);
       } catch (err) {
         handleError(err);
-      } finally {
-        unregisterSession();
       }
     });
   }

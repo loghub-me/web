@@ -11,12 +11,7 @@ function afterResponseHook(
   if (res.status === 401) {
     return refreshToken()
       .then(() => clientAPI(req))
-      .catch(() => {
-        if (typeof window !== 'undefined') {
-          window.dispatchEvent(new CustomEvent('auth:refresh-failed'));
-        }
-        return res;
-      });
+      .catch(() => res);
   }
 
   return res;

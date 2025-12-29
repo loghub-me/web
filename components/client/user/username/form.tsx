@@ -19,7 +19,7 @@ interface UsernameFormProps {
 }
 
 export default function UsernameForm({ username }: Readonly<UsernameFormProps>) {
-  const { session, registerSession } = useAuth();
+  const { session, updateSession } = useAuth();
   const form = useForm<z.infer<typeof usernameUpdateSchema>>({
     resolver: zodResolver(usernameUpdateSchema),
     defaultValues: { oldUsername: '', newUsername: '' },
@@ -41,7 +41,7 @@ export default function UsernameForm({ username }: Readonly<UsernameFormProps>) 
       toast.success(message);
       form.reset();
 
-      registerSession({ ...session, username: values.newUsername });
+      updateSession({ ...session, username: values.newUsername });
     } catch (err) {
       handleFormError(err, form.setError);
     }

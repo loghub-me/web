@@ -1,7 +1,10 @@
 'use client';
 
 import { refreshToken } from '@/apis/client/auth';
-import { createContext, useCallback, useEffect, useRef, useState } from 'react';
+import { extendClientAPIConfig } from '@/apis/client/instance';
+import { ErrorMessage } from '@/constants/messages';
+import { authResponseSchema } from '@/schemas/auth';
+import { createContext, useEffect, useRef, useState } from 'react';
 
 type AuthState =
   | { status: 'loading'; session?: undefined }
@@ -9,15 +12,13 @@ type AuthState =
   | { status: 'authenticated'; session: Session };
 
 type AuthContextProps = AuthState & {
-  registerSession: (session: Session) => void;
-  unregisterSession: () => void;
+  updateSession: (session: Session) => void;
 };
 
 export const AuthContext = createContext<AuthContextProps>({
   status: 'unauthenticated',
   session: undefined,
-  registerSession: () => {},
-  unregisterSession: () => {},
+  updateSession: () => {},
 });
 
 const ACCESS_TOKEN_EXPIRATION = 10 * 60 * 1000; // 10 minutes
@@ -25,76 +26,77 @@ const REFRESH_INTERVAL = ACCESS_TOKEN_EXPIRATION - 1 * 60 * 1000; // 1 minute be
 
 export default function AuthProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const [state, setState] = useState<AuthState>({ status: 'loading' });
-
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const refreshingRef = useRef(false);
-
-  const clearTimeoutRef = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-  };
-
-  const scheduleTokenRefresh = useCallback(() => {
-    clearTimeoutRef();
-
-    timeoutRef.current = setTimeout(() => {
-      if (refreshingRef.current) return;
-      refreshingRef.current = true;
-
-      refreshToken()
-        .then(({ body, session }) => {
-          console.info(body.message);
-          setState({ status: 'authenticated', session });
-
-          // eslint-disable-next-line react-hooks/immutability
-          scheduleTokenRefresh();
-        })
-        .catch(() => {
-          setState({ status: 'unauthenticated' });
-          clearTimeoutRef();
-        })
-        .finally(() => {
-          refreshingRef.current = false;
-        });
-    }, REFRESH_INTERVAL);
-  }, []);
+  const refreshIntervalRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
-    refreshToken()
-      .then(({ body, session }) => {
-        console.info(body.message);
-        setState({ status: 'authenticated', session });
-        scheduleTokenRefresh();
-      })
-      .catch(() => setState({ status: 'unauthenticated' }));
-    return () => {
-      clearTimeoutRef();
+    const handleAccessTokenGenerated = (event: Event) => {
+      const customEvent = event as CustomEvent<{ token: string; session: Session }>;
+      const { data, success, error } = authResponseSchema.safeParse(customEvent.detail);
+
+      if (!success) {
+        console.error('Invalid token/session data received:', error);
+        return;
+      }
+
+      const { token, session } = data;
+      extendClientAPIConfig({ headers: { Authorization: `Bearer ${token}` } });
+      setState({ status: 'authenticated', session });
     };
-  }, [scheduleTokenRefresh]);
+    const handleRefreshFailed = () => {
+      if (refreshIntervalRef.current) clearInterval(refreshIntervalRef.current);
+      setState({ status: 'unauthenticated' });
+    };
+    const handleLoggedOut = () => {
+      if (refreshIntervalRef.current) clearInterval(refreshIntervalRef.current);
+      setState({ status: 'unauthenticated' });
+    };
 
-  useEffect(() => {
-    const handleRefreshFailed = () => setState({ status: 'unauthenticated' });
-
+    window.addEventListener('auth:access-token-generated', handleAccessTokenGenerated);
     window.addEventListener('auth:refresh-failed', handleRefreshFailed);
+    window.addEventListener('auth:logged-out', handleLoggedOut);
+
+    refreshingRef.current = true;
+    refreshToken()
+      .then(({ message }) => console.info(message))
+      .catch(() => console.info(ErrorMessage.REFRESH_TOKEN_FAILED))
+      .finally(() => (refreshingRef.current = false));
 
     return () => {
+      window.removeEventListener('auth:logged-out', handleLoggedOut);
       window.removeEventListener('auth:refresh-failed', handleRefreshFailed);
+      window.removeEventListener('auth:access-token-generated', handleAccessTokenGenerated);
     };
   }, []);
+
+  useEffect(() => {
+    if (state.status !== 'authenticated') return;
+
+    const intervalId = setInterval(() => {
+      if (refreshingRef.current) return;
+
+      refreshingRef.current = true;
+      refreshToken()
+        .then(({ message }) => console.info(message))
+        .catch(() => console.info(ErrorMessage.REFRESH_TOKEN_FAILED))
+        .finally(() => (refreshingRef.current = false));
+    }, REFRESH_INTERVAL);
+
+    refreshIntervalRef.current = intervalId;
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [state.status]);
 
   return (
     <AuthContext.Provider
       value={{
         ...state,
-        registerSession: (session: Session) => {
-          setState({ status: 'authenticated', session });
-          scheduleTokenRefresh();
-        },
-        unregisterSession: () => {
-          setState({ status: 'unauthenticated' });
-          clearTimeoutRef();
+        updateSession: (session: Session) => {
+          if (state.status === 'authenticated') {
+            setState({ status: 'authenticated', session });
+          }
         },
       }}
     >

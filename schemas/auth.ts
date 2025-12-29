@@ -1,8 +1,9 @@
 import zodFields from '@/schemas/fields';
 import z from 'zod';
 
-const { email, username, nickname } = zodFields;
+const { id, email, username, nickname } = zodFields;
 
+const agree = z.boolean().refine((val) => val === true, { message: '약관에 동의하지 않으면 가입할 수 없습니다.' });
 const otp = z
   .string({ message: '인증번호는 문자열이어야 합니다.' })
   .trim()
@@ -13,8 +14,15 @@ const token = z
   .trim()
   .min(36, '토큰은 36자리여야 합니다.')
   .max(36, '토큰은 36자리여야 합니다.');
+const session = z.object({
+  id,
+  email,
+  username,
+  nickname,
+  role: z.literal(['MEMBER', 'ADMIN', 'BOT'], { message: '잘못된 사용자 역할입니다.' }),
+});
 
-const agree = z.boolean().refine((val) => val === true, { message: '약관에 동의하지 않으면 가입할 수 없습니다.' });
+const authResponseSchema = z.object({ token: z.jwt(), session });
 
 const joinRequestSchema = z.object({
   email,
@@ -33,6 +41,7 @@ const loginRequestSchema = z.object({ email });
 const loginConfirmSchema = z.object({ email, otp });
 const loginConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
 
+export { authResponseSchema };
 export { joinRequestSchema, joinConfirmSchema, joinConfirmSearchParamsSchema };
 export { oauth2JoinConfirmSchema, oauth2JoinConfirmSearchParamsSchema };
 export { loginRequestSchema, loginConfirmSchema, loginConfirmSearchParamsSchema };

@@ -21,7 +21,7 @@ interface UserProfileFormProps {
 }
 
 export default function UserProfileForm({ profile }: Readonly<UserProfileFormProps>) {
-  const { session, registerSession } = useAuth();
+  const { session, updateSession } = useAuth();
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof userProfileUpdateSchema>>({
     resolver: zodResolver(userProfileUpdateSchema),
@@ -38,7 +38,7 @@ export default function UserProfileForm({ profile }: Readonly<UserProfileFormPro
       const { message } = await updateSelfProfile(values);
       toast.success(message);
 
-      registerSession({ ...session, nickname: values.nickname });
+      updateSession({ ...session, nickname: values.nickname });
       await queryClient.invalidateQueries({ queryKey: ['getSelfProfile'] });
     } catch (err) {
       handleFormError(err, form.setError);
