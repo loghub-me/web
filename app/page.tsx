@@ -1,4 +1,9 @@
-import { HomeContentsSection, HomeFeaturesSection, HomeHeroSection, HomeTopicsSection } from '@/components/server/home';
+import {
+  HomeContentsSection,
+  HomeHeroSection,
+  HomeRepositoriesSection,
+  HomeTopicsSection,
+} from '@/components/server/home';
 import { LightRays } from '@ui/light-rays';
 import { Metadata } from 'next';
 
@@ -18,7 +23,7 @@ export default function HomePage() {
       <HomeHeroSection />
       <HomeContentsSection />
       <HomeTopicsSection />
-      <HomeFeaturesSection />
+      <HomeRepositoriesSection />
     </main>
   );
 }

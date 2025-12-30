@@ -43,7 +43,7 @@ export default function HomeContentsSection() {
         {CONTENTS.map(({ link, title, description, icon: Icon }) => (
           <div key={link} className="flex-1 space-y-1">
             <div className="flex flex-row items-center gap-2.5">
-              <Icon className="size-6" />
+              <Icon className="size-5" />
               <h5 className="text-lg font-semibold">{title}</h5>
               <ButtonLink href={link} variant={'ghost'} size={'icon'} className="ml-auto">
                 <ChevronRightIcon />
