@@ -1,8 +1,9 @@
 'use client';
 
 import { useTOC } from '@/hooks/use-toc';
+import { cn } from '@/lib/utils';
 import { ButtonLink } from '@ui/button-link';
-import { Card, CardHeader, CardTitle, CardContent } from '@ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
 
 interface SeriesChapterTOCCardProps {
@@ -25,8 +26,11 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
             key={slug}
             href={`#${encodeURIComponent(slug)}`}
             size={'sm'}
-            variant={activeSlug === slug ? 'secondary' : 'ghost'}
-            className="px-2 py-1.5 min-h-9 h-auto justify-start whitespace-normal"
+            variant={'ghost'}
+            className={cn(
+              'px-2 py-1.5 min-h-9 h-auto justify-start whitespace-normal',
+              activeSlug === slug && 'border-border bg-accent'
+            )}
           >
             {text}
           </ButtonLink>
