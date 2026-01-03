@@ -8,11 +8,8 @@ export default function SeriesDetailLoading() {
         <Skeleton className="w-2/3 h-7" />
       </div>
       <aside className="sticky top-4 hidden xl:block max-w-xs w-full h-fit space-y-3">
-        <div className="p-4 space-y-2">
-          <Skeleton className="w-12 h-5" />
-          <Skeleton className="w-2/3 h-5" />
-        </div>
       </aside>
+        <SeriesChapterTOCSkeleton />
     </>
   );
 }

@@ -28,7 +28,7 @@ export default function ArticleTOCCard({ article }: Readonly<ArticleTOCCardProps
             size={'sm'}
             variant={'ghost'}
             className={cn(
-              'px-2 py-1.5 min-h-9 h-auto justify-start whitespace-normal',
+              'px-2 py-1.5 min-h-7 h-auto justify-start whitespace-normal',
               activeSlug === slug && 'border-border bg-accent'
             )}
             style={{ marginLeft: `${level * 8}px` }}

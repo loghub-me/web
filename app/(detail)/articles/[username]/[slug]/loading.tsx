@@ -35,6 +35,7 @@ export default function ArticleDetailLoading() {
             <Skeleton className="w-2/3 h-5" />
           </div>
         </ArticleDetailAside>
+          <ArticleTOCSkeleton />
       </div>
     </main>
   );
