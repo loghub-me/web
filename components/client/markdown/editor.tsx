@@ -41,6 +41,7 @@ export default function MarkdownEditor({ editor, draft, fullscreen = true, child
   const previewRef = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<EditorMode>('preview-edit');
   const [ready, setReady] = useState(false);
+  const [contentLength, setContentLength] = useState(defaultValue.length);
 
   const onModeChange = useCallback(
     (value: string[]) => {
@@ -83,6 +84,7 @@ export default function MarkdownEditor({ editor, draft, fullscreen = true, child
         if (previewRef && previewRef.current && rendererRef.current) {
           previewRef.current.innerHTML = rendererRef.current.render(markdown);
         }
+        setContentLength(markdown.length);
       });
 
       if (defaultValue) {
@@ -121,23 +123,29 @@ export default function MarkdownEditor({ editor, draft, fullscreen = true, child
           )}
         />
       </div>
-      <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">
-        <ToggleGroup value={[mode]} onValueChange={onModeChange} spacing={0.5}>
-          <ToggleGroupItem value={'edit'} className="size-9">
-            <PencilIcon />
-          </ToggleGroupItem>
-          <ToggleGroupItem value={'preview-edit'} className="size-9">
-            <Columns2Icon />
-          </ToggleGroupItem>
-          <ToggleGroupItem value={'preview'} className="size-9">
-            <EyeIcon />
-          </ToggleGroupItem>
-        </ToggleGroup>
-        <h5 className="text-muted-foreground text-sm absolute left-1/2 -translate-x-1/2 hidden md:block">{title}</h5>
-        <div className="flex gap-2">
-          {ready && <MarkdownImageUploadButton easyMDERef={easyMDERef} />}
-          {ready && draft && <MarkdownDraftSaveButton easyMDERef={easyMDERef} {...draft} />}
-          {children}
+      <div className="flex justify-between gap-4 bg-card border-t px-4 h-16 min-h-16">
+        <div className="flex-1 flex items-center justify-between gap-2">
+          <ToggleGroup value={[mode]} onValueChange={onModeChange} spacing={0.5}>
+            <ToggleGroupItem value={'edit'} className="size-9">
+              <PencilIcon />
+            </ToggleGroupItem>
+            <ToggleGroupItem value={'preview-edit'} className="size-9">
+              <Columns2Icon />
+            </ToggleGroupItem>
+            <ToggleGroupItem value={'preview'} className="size-9">
+              <EyeIcon />
+            </ToggleGroupItem>
+          </ToggleGroup>
+          <span className="text-sm text-muted-foreground hidden md:inline-block">{contentLength}/16384 자 입력</span>
+        </div>
+        <Separator orientation="vertical" className="my-auto h-5 hidden md:inline-block" />
+        <div className="flex-1 flex items-center justify-between gap-2">
+          <h5 className="text-sm hidden md:inline-block">{title}</h5>
+          <div className="flex gap-2">
+            {ready && <MarkdownImageUploadButton easyMDERef={easyMDERef} />}
+            {ready && draft && <MarkdownDraftSaveButton easyMDERef={easyMDERef} {...draft} />}
+            {children}
+          </div>
         </div>
       </div>
     </div>
