@@ -70,7 +70,10 @@ export default function MarkdownManual() {
           문법에 대한 간단한 가이드입니다.
         </p>
         <Card className="mt-4 p-0 overflow-hidden">
-          <MarkdownEditor editor={{ ref: easyMDERef, title: '마크다운 문법 예제', defaultValue: MARKDOWN_EXAMPLE }} />
+          <MarkdownEditor
+            editor={{ ref: easyMDERef, title: '마크다운 문법 예제', defaultValue: MARKDOWN_EXAMPLE }}
+            fullscreen={false}
+          />
         </Card>
       </div>
     </section>

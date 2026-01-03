@@ -60,7 +60,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
           </Field>
         )}
       />
-      <MarkdownEditor editor={{ ref: easyMDERef, title: '답변 작성' }}>
+      <MarkdownEditor editor={{ ref: easyMDERef, title: '답변 작성' }} fullscreen={false}>
         <Button
           type={'button'}
           onClick={() => {

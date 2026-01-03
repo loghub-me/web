@@ -1,9 +1,10 @@
 'use client';
 
-import { MarkdownImageUploadButton, MarkdownDraftSaveButton } from '@/components/client/markdown';
+import { MarkdownDraftSaveButton, MarkdownImageUploadButton } from '@/components/client/markdown';
 import { ErrorMessage } from '@/constants/messages';
 import { cn } from '@/lib/utils';
 import '@/styles/easymde.css';
+import { Separator } from '@ui/separator';
 import { ToggleGroup, ToggleGroupItem } from '@ui/toggle-group';
 import type EasyMDE from 'easymde';
 import { Options as EasyMDEOptions } from 'easymde';
@@ -29,11 +30,12 @@ interface MarkdownEditorProps {
     saveDraft: (draft: string) => Promise<MessageResponseBody>;
     deleteDraft: () => Promise<MessageResponseBody>;
   };
+  fullscreen?: boolean;
   children?: React.ReactNode;
 }
 
-export default function MarkdownEditor({ editor, draft, children }: Readonly<MarkdownEditorProps>) {
-  const { ref: easyMDERef, title, defaultValue } = editor;
+export default function MarkdownEditor({ editor, draft, fullscreen = true, children }: Readonly<MarkdownEditorProps>) {
+  const { ref: easyMDERef, title, defaultValue = '' } = editor;
   const rendererRef = useRef<MarkdownRenderer>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -101,12 +103,22 @@ export default function MarkdownEditor({ editor, draft, children }: Readonly<Mar
   return (
     <div className="w-full h-full max-w-full max-h-full">
       <div className={cn('h-[calc(100%-theme(space.16))] grid min-h-56', mode === 'preview-edit' && 'grid-cols-2')}>
-        <div className={cn('h-full max-h-full overflow-hidden', mode === 'preview' && 'hidden')}>
+        <div
+          className={cn(
+            'h-full max-h-full overflow-hidden',
+            fullscreen && 'fullscreen',
+            mode === 'preview' && 'hidden'
+          )}
+        >
           <textarea className="w-full h-full resize-none border-r" ref={textareaRef} />
         </div>
         <div
           ref={previewRef}
-          className={cn('markdown-it p-6 pb-92 bg-card overflow-auto border-l', mode === 'edit' && 'hidden')}
+          className={cn(
+            'markdown-it p-6 bg-card overflow-auto border-l',
+            fullscreen && 'pb-[80vh]',
+            mode === 'edit' && 'hidden'
+          )}
         />
       </div>
       <div className="relative flex bg-card items-center justify-between border-t px-4 h-16 min-h-16 gap-2">

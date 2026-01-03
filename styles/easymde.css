@@ -3,6 +3,9 @@
 .EasyMDEContainer {
   @apply h-full max-h-full overflow-auto;
 }
+.fullscreen .CodeMirror-lines > div {
+  @apply pb-[80vh]!;
+}
 .CodeMirror-rtl pre {
   direction: rtl;
 }
