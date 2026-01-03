@@ -2,10 +2,12 @@ import { getArticleDetail } from '@/apis/server/article';
 import { ArticleTOCCard } from '@/components/client/article';
 import ArticleComments from '@/components/client/article/comment';
 import {
-  ArticleDetailAside,
+  ArticleAsideLeft,
+  ArticleAsideRight,
   ArticleDetailContent,
   ArticleDetailHeader,
   ArticleDetailHero,
+  ArticleMetaCard,
 } from '@/components/server/article';
 import { parseObject } from '@/lib/parse';
 import { buildAssetsUrl } from '@/lib/utils';
@@ -36,6 +38,9 @@ export default async function ArticleDetailPage({ params }: PageProps<'/articles
     <main className="container mx-auto py-20 min-h-screen space-y-4">
       <ArticleDetailHero article={article} />
       <div className="flex gap-4">
+        <ArticleAsideLeft>
+          <ArticleMetaCard article={article} />
+        </ArticleAsideLeft>
         <div className="w-full min-w-0 space-y-4">
           <Card className="pt-0">
             <ArticleDetailHeader article={article} />
@@ -43,9 +48,9 @@ export default async function ArticleDetailPage({ params }: PageProps<'/articles
           </Card>
           <ArticleComments articleId={article.id} />
         </div>
-        <ArticleDetailAside>
+        <ArticleAsideRight>
           <ArticleTOCCard article={article} />
-        </ArticleDetailAside>
+        </ArticleAsideRight>
       </div>
     </main>
   );

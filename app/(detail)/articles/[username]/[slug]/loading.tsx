@@ -1,4 +1,5 @@
-import { ArticleDetailAside } from '@/components/server/article';
+import { ArticleTOCSkeleton } from '@/components/client/article';
+import { ArticleAsideLeft, ArticleAsideRight, ArticleMetaSkeleton } from '@/components/server/article';
 import { Skeleton } from '@ui/skeleton';
 
 export default function ArticleDetailLoading() {
@@ -13,6 +14,9 @@ export default function ArticleDetailLoading() {
         </div>
       </div>
       <div className="flex gap-4">
+        <ArticleAsideLeft>
+          <ArticleMetaSkeleton />
+        </ArticleAsideLeft>
         <div className="w-full min-w-0 space-y-4">
           <div className="p-4 space-y-8">
             <div className="flex gap-2">
@@ -29,13 +33,9 @@ export default function ArticleDetailLoading() {
             </div>
           </div>
         </div>
-        <ArticleDetailAside>
-          <div className="p-4 space-y-2">
-            <Skeleton className="w-12 h-5" />
-            <Skeleton className="w-2/3 h-5" />
-          </div>
-        </ArticleDetailAside>
+        <ArticleAsideRight>
           <ArticleTOCSkeleton />
+        </ArticleAsideRight>
       </div>
     </main>
   );

@@ -11,17 +11,19 @@ export default function ArticleDetailContent({ article }: Readonly<ArticleDetail
 
   return (
     <CardContent className="space-y-4">
-      {topics.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {topics.map((topic) => (
-            <TopicLink key={topic.slug} topic={topic} />
-          ))}
-        </div>
-      )}
-      <figure>
-        <Thumbnail aspect={'16:9'} src={thumbnail} alt={`${title}-thumbnail`} fill className="mx-auto max-w-2xl" />
-        <figcaption className="mt-2 text-sm text-center text-muted-foreground">{title}</figcaption>
-      </figure>
+      <div className="xl:hidden space-y-4">
+        {topics.length > 0 && (
+          <div className="flex flex-wrap gap-1">
+            {topics.map((topic) => (
+              <TopicLink key={topic.slug} topic={topic} />
+            ))}
+          </div>
+        )}
+        <figure>
+          <Thumbnail aspect={'16:9'} src={thumbnail} alt={`${title}-thumbnail`} fill className="mx-auto max-w-2xl" />
+          <figcaption className="mt-2 text-sm text-center text-muted-foreground">{title}</figcaption>
+        </figure>
+      </div>
       <div className="markdown-it" dangerouslySetInnerHTML={{ __html: content.html }} />
     </CardContent>
   );

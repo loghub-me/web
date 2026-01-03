@@ -1,9 +1,10 @@
 import { getSeriesChapterDetail, getSeriesDetail } from '@/apis/server/series';
 import { SeriesChapterTOCCard } from '@/components/client/series';
 import {
-  SeriesChapterDetailContent,
-  SeriesChapterDetailFooter,
-  SeriesChapterDetailHeader,
+    SeriesAsideRight,
+    SeriesChapterDetailContent,
+    SeriesChapterDetailFooter,
+    SeriesChapterDetailHeader,
 } from '@/components/server/series';
 import { parseObject } from '@/lib/parse';
 import { buildAssetsUrl } from '@/lib/utils';
@@ -47,9 +48,9 @@ export default async function SeriesChapterDetailPage({ params }: PageProps<'/se
           />
         </Card>
       </div>
-      <aside className="sticky top-4 hidden xl:block max-w-xs w-full h-fit space-y-3">
+      <SeriesAsideRight>
         <SeriesChapterTOCCard chapter={chapter} />
-      </aside>
+      </SeriesAsideRight>
     </>
   );
 }
