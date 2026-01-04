@@ -21,7 +21,7 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
       </CardHeader>
       <CardContent className="px-4 flex flex-col gap-0.5">
         {anchors.length === 0 && <ListEmpty className="p-2" message={'목차가 없습니다'} />}
-        {anchors.map(({ slug, text }) => (
+        {anchors.map(({ slug, text, level }) => (
           <ButtonLink
             key={slug}
             href={`#${encodeURIComponent(slug)}`}
@@ -31,6 +31,7 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
               'px-2 py-1.5 min-h-9 h-auto justify-start whitespace-normal',
               activeSlug === slug && 'border-border bg-accent'
             )}
+            style={{ marginLeft: `${(level - 1) * 8}px` }}
           >
             {text}
           </ButtonLink>

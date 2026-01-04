@@ -1,10 +1,10 @@
 import { getSeriesChapterDetail, getSeriesDetail } from '@/apis/server/series';
 import { SeriesChapterTOCCard } from '@/components/client/series';
 import {
-    SeriesAsideRight,
-    SeriesChapterDetailContent,
-    SeriesChapterDetailFooter,
-    SeriesChapterDetailHeader,
+  SeriesAsideRight,
+  SeriesChapterDetailContent,
+  SeriesChapterDetailFooter,
+  SeriesChapterDetailHeader,
 } from '@/components/server/series';
 import { parseObject } from '@/lib/parse';
 import { buildAssetsUrl } from '@/lib/utils';
