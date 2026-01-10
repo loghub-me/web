@@ -17,15 +17,16 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 interface UserProfileFormProps {
+  nickname: string;
   profile: UserProfile;
 }
 
-export default function UserProfileForm({ profile }: Readonly<UserProfileFormProps>) {
+export default function UserProfileForm({ nickname, profile }: Readonly<UserProfileFormProps>) {
   const { session, updateSession } = useAuth();
   const queryClient = useQueryClient();
   const form = useForm<z.infer<typeof userProfileUpdateSchema>>({
     resolver: zodResolver(userProfileUpdateSchema),
-    defaultValues: profile,
+    defaultValues: { nickname, ...profile },
   });
 
   async function onSubmit(values: z.infer<typeof userProfileUpdateSchema>) {

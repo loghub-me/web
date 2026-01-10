@@ -54,7 +54,7 @@ export default function SettingsPage() {
             <CardTitle>프로필 설정</CardTitle>
             <CardDescription>프로필 설정을 변경하려면 아래 폼을 작성해주세요.</CardDescription>
           </div>
-          {profile && <UserProfileForm profile={profile} />}
+          {profile && <UserProfileForm nickname={session.nickname} profile={profile} />}
         </CardContent>
         <CardContent className="space-y-4 pb-4 border-b">
           <div className="space-y-1.5">

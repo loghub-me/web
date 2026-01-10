@@ -7,9 +7,19 @@ interface UserDetail {
   id: number;
   email?: string;
   username: string;
+  nickname: string;
+  role: UserRole;
+  meta: UserMeta;
+}
+
+interface UserMeta {
   profile: UserProfile;
   github: UserGitHub;
-  role: UserRole;
+  stats: UserStats;
+}
+
+interface UserProfile {
+  readme: UserRole;
 }
 
 interface UserGitHub {
@@ -17,9 +27,10 @@ interface UserGitHub {
   verified: boolean;
 }
 
-interface UserProfile {
-  nickname: string;
-  readme: UserRole;
+interface UserStats {
+  totalPostedCount: number;
+  totalAddedStarCount: number;
+  totalGazedStarCount: number;
 }
 
 interface UserPrivacy {

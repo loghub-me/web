@@ -22,7 +22,8 @@ export default async function UserProfilePage({ params, searchParams }: PageProp
   const parsedParam = parseObject(await params, userDetailSchema);
   const parsedSearchParam = parseObject(await searchParams, userActivitySearchSchema);
   const user = await getUserDetail(parsedParam.username);
-  const hasREADME = user.profile.readme.trim().length > 0;
+  const { profile } = user.meta;
+  const hasREADME = profile.readme.trim().length > 0;
 
   return (
     <div className="space-y-4">
@@ -31,7 +32,7 @@ export default async function UserProfilePage({ params, searchParams }: PageProp
           <CardTitle>README</CardTitle>
           {!hasREADME && <CardDescription>아직 README가 작성되지 않았습니다.</CardDescription>}
         </CardHeader>
-        {hasREADME && <CardContent className="break-words">{user.profile.readme}</CardContent>}
+        {hasREADME && <CardContent className="break-words">{profile.readme}</CardContent>}
       </Card>
       <UserActivities userId={user.id} {...parsedParam} {...parsedSearchParam} />
     </div>
