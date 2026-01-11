@@ -40,8 +40,11 @@ const oauth2JoinConfirmSearchParamsSchema = z.object({ email, token });
 const loginRequestSchema = z.object({ email });
 const loginConfirmSchema = z.object({ email, otp });
 const loginConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
+const loginErrorSearchParamsSchema = z.object({
+  error: z.literal(['social_provider_mismatch'], { message: '잘못된 에러 코드입니다.' }).optional(),
+});
 
 export { session, authResponseSchema };
 export { joinRequestSchema, joinConfirmSchema, joinConfirmSearchParamsSchema };
 export { oauth2JoinConfirmSchema, oauth2JoinConfirmSearchParamsSchema };
-export { loginRequestSchema, loginConfirmSchema, loginConfirmSearchParamsSchema };
+export { loginRequestSchema, loginConfirmSchema, loginConfirmSearchParamsSchema, loginErrorSearchParamsSchema };
