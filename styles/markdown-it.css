@@ -59,7 +59,7 @@
     }
 
     table {
-      @apply inline-block max-w-full border-collapse overflow-x-auto;
+      @apply max-w-full border-collapse overflow-x-auto;
 
       th,
       td {
