@@ -62,6 +62,7 @@ const nickname = z
   .min(2, '닉네임은 2글자 이상이어야 합니다.')
   .max(12, '닉네임은 12글자 이하여야 합니다.')
   .regex(nicknameRegex, { message: '닉네임은 영문자, 숫자, 한글, 밑줄(_)로만 이루어져야 합니다.' });
+const agree = z.boolean().refine((val) => val === true, { message: '약관에 동의하지 않으면 가입할 수 없습니다.' });
 
 const zodFields = {
   id,
@@ -81,6 +82,7 @@ const zodFields = {
   email,
   username,
   nickname,
+  agree,
 };
 
 export default zodFields;

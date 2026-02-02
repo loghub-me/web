@@ -27,6 +27,13 @@ const updateSelfAvatar = (file: File) => {
   return clientAPI.put('users/avatar', { body: formData }).json<DataResponseBody<string>>();
 };
 
+const withdraw = () =>
+  clientAPI.post('users/withdraw').then(async (res) => {
+    const body = await res.json<MessageResponseBody>();
+    window.dispatchEvent(new CustomEvent('auth:logged-out'));
+    return body;
+  });
+
 const getSelfGitHub = async () => clientAPI.get('users/github').json<UserGitHub>();
 const updateSelfGitHub = async (json: z.infer<typeof userGitHubUpdateSchema>) =>
   clientAPI.put('users/github', { json }).json<MessageResponseBody>();
@@ -50,6 +57,7 @@ const uploadImage = (file: File) => {
 export { searchUnpublishedArticles, searchArticlesForImport };
 export { getActivitySummaries, getActivities };
 export { updateSelfUsername, updateSelfAvatar };
+export { withdraw };
 export { getSelfGitHub, updateSelfGitHub, deleteSelfGitHub, verifySelfGitHub };
 export { getSelfProfile, updateSelfProfile };
 export { getSelfPrivacy, updateSelfPrivacy };

@@ -2,7 +2,7 @@ import zodFields from '@/schemas/fields';
 import { z } from 'zod';
 
 const { page, coercedDate } = zodFields;
-const { username, nickname } = zodFields;
+const { username, nickname, agree } = zodFields;
 
 const usernameSchema = z.object({ username: z.string({ message: '사용자 이름은 문자열이어야 합니다.' }).trim() });
 const userDetailSchema = usernameSchema;
@@ -26,6 +26,13 @@ const userGitHubUpdateSchema = z.object({
     .max(39, 'GitHub 유저네임은 39자 이하여야 합니다.')
     .regex(githubUsernameRegex, { message: 'GitHub 유저네임은 영문 대소문자, 숫자, 하이픈(-)으로만 입력해주세요.' }),
 });
+const userWithdrawConfirmSchema = z.object({ username, withdrawAgree: agree });
 
 export { usernameSchema, userDetailSchema, userStarSearchSchema, userActivitySearchSchema };
-export { usernameUpdateSchema, userProfileUpdateSchema, userPrivacyUpdateSchema, userGitHubUpdateSchema };
+export {
+  usernameUpdateSchema,
+  userProfileUpdateSchema,
+  userPrivacyUpdateSchema,
+  userGitHubUpdateSchema,
+  userWithdrawConfirmSchema,
+};

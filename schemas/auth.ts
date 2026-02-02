@@ -1,9 +1,8 @@
 import zodFields from '@/schemas/fields';
 import z from 'zod';
 
-const { id, email, username, nickname } = zodFields;
+const { id, email, username, nickname, agree } = zodFields;
 
-const agree = z.boolean().refine((val) => val === true, { message: '약관에 동의하지 않으면 가입할 수 없습니다.' });
 const otp = z
   .string({ message: '인증번호는 문자열이어야 합니다.' })
   .trim()
