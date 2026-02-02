@@ -11,7 +11,7 @@ export default function ArticleDetailContent({ article }: Readonly<ArticleDetail
 
   return (
     <CardContent className="space-y-4">
-      <div className="xl:hidden space-y-4">
+      <div className="space-y-4">
         {topics.length > 0 && (
           <div className="flex flex-wrap gap-1">
             {topics.map((topic) => (
