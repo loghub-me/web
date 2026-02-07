@@ -1,10 +1,12 @@
 import { getUserDetail } from '@/apis/server/user';
 import { TopicIcon } from '@/components/client/topic';
 import { UserAvatar, UserDetailNav } from '@/components/client/user';
+import { TopicUsagesChart } from '@/components/server/topic';
 import { UserDetailAside, UserDetailAsideSkeleton } from '@/components/server/user';
 import { parseObject } from '@/lib/parse';
 import { userDetailSchema } from '@/schemas/user';
 import { Badge } from '@ui/badge';
+import { Separator } from '@ui/separator';
 import { SimpleTooltip } from '@ui/simple-tooltip';
 import { BadgeCheckIcon, BadgeXIcon, InfoIcon, MailIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -16,7 +18,7 @@ export default async function UserDetailLayout({ params, children }: LayoutProps
 
   return (
     <main className="container mx-auto px-4 py-20 min-h-screen space-y-4">
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-8">
         <UserDetailAside>
           <Suspense fallback={<UserDetailAsideSkeleton />}>
             <UserDetailAsideContent user={user} />
@@ -90,22 +92,34 @@ function UserDetailAsideGitHub({ github }: { github: UserGitHub }) {
 }
 
 function UserDetailAsideStats({ stats }: { stats: UserStats }) {
-  const { totalPostedCount, totalAddedStarCount, totalGazedStarCount } = stats;
+  const { totalPostedCount, totalAddedStarCount, totalGazedStarCount, topicUsages } = stats;
 
   return (
-    <div className="flex items-center gap-3 text-sm">
-      <Badge variant={'muted'} className="px-0">
-        작성한 게시물: <span className="font-mono text-foreground">{totalPostedCount}</span>
-      </Badge>
-      <Badge variant={'muted'} className="px-0">
-        추가한 스타: <span className="font-mono text-foreground">{totalAddedStarCount}</span>
-      </Badge>
-      <Badge variant={'muted'} className="px-0">
-        받은 스타: <span className="font-mono text-foreground">{totalGazedStarCount}</span>
-      </Badge>
-      <SimpleTooltip content="매일 자정에 갱신됩니다.">
-        <InfoIcon className="size-3.5 text-muted-foreground" />
-      </SimpleTooltip>
+    <div className="space-y-4">
+      <div className="flex items-center gap-3 text-sm">
+        <Badge variant={'muted'} className="px-0">
+          작성한 게시물: <span className="font-mono text-foreground">{totalPostedCount}</span>
+        </Badge>
+        <Badge variant={'muted'} className="px-0">
+          추가한 스타: <span className="font-mono text-foreground">{totalAddedStarCount}</span>
+        </Badge>
+        <Badge variant={'muted'} className="px-0">
+          받은 스타: <span className="font-mono text-foreground">{totalGazedStarCount}</span>
+        </Badge>
+        <SimpleTooltip content="매일 자정에 갱신됩니다.">
+          <InfoIcon className="size-3.5 text-muted-foreground" />
+        </SimpleTooltip>
+      </div>
+      {topicUsages.length > 0 && (
+        <>
+          <Separator />
+          <div className="space-y-2">
+            <h2 className="font-medium">토픽 사용 현황</h2>
+            <TopicUsagesChart topicUsages={topicUsages} />
+            <p className="text-sm text-right text-muted-foreground">상위 5개까지 확인할 수 있습니다.</p>
+          </div>
+        </>
+      )}
     </div>
   );
 }

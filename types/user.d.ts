@@ -31,6 +31,7 @@ interface UserStats {
   totalPostedCount: number;
   totalAddedStarCount: number;
   totalGazedStarCount: number;
+  topicUsages: TopicUsage[];
 }
 
 interface UserPrivacy {

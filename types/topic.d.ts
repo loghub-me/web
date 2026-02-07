@@ -9,4 +9,10 @@ interface TopicDetail {
   description: string;
 }
 
+interface TopicUsage {
+  name: string;
+  slug: string;
+  count: number;
+}
+
 type TopicDetailView = 'articles' | 'series' | 'questions';
