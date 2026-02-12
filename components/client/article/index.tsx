@@ -18,6 +18,7 @@ export { default as ArticlePostForm } from '@/components/client/article/post/for
 export { default as ArticleUnpublishedHero } from '@/components/client/article/unpublished/hero';
 export { default as ArticleUnpublishedList } from '@/components/client/article/unpublished/list';
 export { default as ArticleUnpublishedListItem } from '@/components/client/article/unpublished/list-item';
+export { default as ArticleUnpublishedActionMenu } from '@/components/client/article/unpublished/action-menu';
 
 export { default as ArticleForImportList } from '@/components/client/article/for-import/list';
 export { default as ArticleForImportListItem } from '@/components/client/article/for-import/list-item';

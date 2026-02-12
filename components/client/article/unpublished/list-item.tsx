@@ -1,8 +1,8 @@
+import { ArticleUnpublishedActionMenu } from '@/components/client/article';
 import { TopicLink } from '@/components/client/topic';
 import { parseRelativeTime } from '@/lib/parse';
-import { ButtonLink } from '@ui/button-link';
 import { SimpleTooltip } from '@ui/simple-tooltip';
-import { ChevronRightIcon, GlobeLockIcon, PencilIcon } from 'lucide-react';
+import { GlobeLockIcon } from 'lucide-react';
 
 interface ArticleUnpublishedListItemProps {
   article: ArticleUnpublished;
@@ -21,14 +21,7 @@ export default function ArticleUnpublishedListItem({ article }: Readonly<Article
             </SimpleTooltip>
             <span className="line-clamp-2 font-medium">{title}</span>
           </h3>
-          <ButtonLink
-            href={`/edit/articles/${id}`}
-            variant={'outline'}
-            size={'sm'}
-            className="ml-auto has-[>svg]:pr-1.5"
-          >
-            <PencilIcon /> 수정하기 <ChevronRightIcon className="text-muted-foreground" />
-          </ButtonLink>
+          <ArticleUnpublishedActionMenu articleId={id} />
         </div>
         <div className="mt-0.5 flex flex-wrap gap-1">
           {topics.map((topic) => (

@@ -9,6 +9,7 @@ import {
 import { useAuth } from '@/hooks/use-auth';
 import { useDebouncedValue } from '@/hooks/use-debounced-value';
 import { useQuery } from '@tanstack/react-query';
+import { ButtonLink } from '@ui/button-link';
 import { InputWithIcon } from '@ui/input';
 import ListEmpty from '@ui/list-empty';
 import { SearchIcon } from 'lucide-react';
@@ -44,6 +45,12 @@ export default function ArticleUnpublishedPage() {
         )}
         {articles && articles.map((article) => <ArticleUnpublishedListItem key={article.id} article={article} />)}
       </ArticleUnpublishedList>
+      <p className="py-2 text-sm text-center text-muted-foreground">
+        <ButtonLink href={'/post/articles'} variant={'link'} className="p-0 h-fit">
+          아티클 작성하기
+        </ButtonLink>{' '}
+        에서 새 아티클을 작성할 수 있습니다.
+      </p>
     </main>
   );
 }
