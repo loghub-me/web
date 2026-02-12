@@ -1,6 +1,6 @@
 import { ButtonLink } from '@ui/button-link';
 import { CardFooter } from '@ui/card';
-import Timestamp from '@ui/timestamp';
+import { Timestamp } from '@ui/timestamp';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
 interface SeriesChapterDetailFooterProps {

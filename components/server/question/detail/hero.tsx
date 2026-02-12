@@ -1,7 +1,7 @@
 import { UserLink } from '@/components/client/user';
 import { QUESTION_STATUS_OPTIONS } from '@/constants/options';
 import { Badge } from '@ui/badge';
-import Timestamp from '@ui/timestamp';
+import { Timestamp } from '@ui/timestamp';
 import { DotIcon, MessagesSquareIcon, StarIcon } from 'lucide-react';
 
 interface QuestionDetailHeroProps {

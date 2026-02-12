@@ -5,7 +5,7 @@ import { NOTIFICATION_TYPE_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
 import { useQueryClient } from '@tanstack/react-query';
 import { ButtonLink } from '@ui/button-link';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 
 interface NotificationListItemProps {
   notification: Notification;
@@ -35,7 +35,7 @@ export default function NotificationListItem({ notification }: Readonly<Notifica
         <TypeIcon className={cn(typeColor)} /> {title}
       </ButtonLink>
       <p className="pl-5 text-sm">{message}</p>
-      <Timestamp createdAt={timestamp} className="ml-auto" />
+      <RelativeTimestamp createdAt={timestamp} className="ml-auto" />
     </div>
   );
 }

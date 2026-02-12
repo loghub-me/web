@@ -3,7 +3,7 @@ import { UserLink } from '@/components/client/user';
 import { QUESTION_STATUS_OPTIONS } from '@/constants/options';
 import { cn } from '@/lib/utils';
 import { Badge } from '@ui/badge';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 import { MessagesSquareIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -44,7 +44,7 @@ export default function QuestionListItem({ question }: Readonly<QuestionListItem
         )}
         <div className="mt-auto flex items-center justify-between gap-2">
           <UserLink {...writer} className="-ml-1.5" />
-          <Timestamp {...question} />
+          <RelativeTimestamp {...question} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { TopicLink } from '@/components/client/topic';
 import { UserLink } from '@/components/client/user';
 import { Badge } from '@ui/badge';
 import { InteractiveThumbnail } from '@ui/thumbnail';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 import { MessagesSquareIcon, StarIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -39,7 +39,7 @@ export default function SeriesListItem({ series }: Readonly<SeriesListItemProps>
       )}
       <div className="mt-auto flex items-center justify-between gap-2">
         <UserLink {...writer} className="-ml-1.5" />
-        <Timestamp {...series} />
+        <RelativeTimestamp {...series} />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { UserLink } from '@/components/client/user';
 import { QUESTION_STATUS_OPTIONS } from '@/constants/options';
 import { Badge } from '@ui/badge';
 import { Card, CardContent, CardFooter, CardHeader } from '@ui/card';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 import { CircleCheckIcon } from 'lucide-react';
 
 interface QuestionAnswerListItemProps {
@@ -31,7 +31,7 @@ export default function QuestionAnswerListItem({ answer, question }: Readonly<Qu
       </CardContent>
       <CardFooter className="flex items-center justify-between gap-2">
         <UserLink {...writer} />
-        <Timestamp {...answer} />
+        <RelativeTimestamp {...answer} />
       </CardFooter>
     </Card>
   );

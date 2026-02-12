@@ -1,5 +1,5 @@
 import { UserLink } from '@/components/client/user';
-import Timestamp from '@ui/timestamp';
+import { Timestamp } from '@ui/timestamp';
 import { DotIcon } from 'lucide-react';
 
 interface ArticleDetailHeroProps {

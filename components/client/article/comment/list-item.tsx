@@ -2,7 +2,7 @@ import { ArticleCommentActionMenu, ArticleCommentEditForm } from '@/components/c
 import ArticleCommentForm from '@/components/client/article/comment/form';
 import { UserLink, UserMention } from '@/components/client/user';
 import { cn } from '@/lib/utils';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 import { DotIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -29,7 +29,7 @@ export default function ArticleCommentListItem({
       <div className="flex items-center">
         <UserLink {...writer} />
         <DotIcon className="text-muted-foreground -ml-1" />
-        <Timestamp {...comment} />
+        <RelativeTimestamp {...comment} />
         <ArticleCommentActionMenu
           articleId={articleId}
           comment={comment}

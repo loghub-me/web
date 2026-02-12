@@ -1,7 +1,7 @@
 import { SeriesReviewActionMenu, SeriesReviewEditForm } from '@/components/client/series';
 import { UserLink } from '@/components/client/user';
 import StarIcon from '@ui/star-icon';
-import Timestamp from '@ui/timestamp';
+import { RelativeTimestamp } from '@ui/timestamp';
 import { DotIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -24,7 +24,7 @@ export default function SeriesReviewListItem({
       <div className="flex items-center">
         <UserLink {...writer} />
         <DotIcon className="text-muted-foreground -ml-1" />
-        <Timestamp {...review} />
+        <RelativeTimestamp {...review} />
         <div className="pl-2.5 flex items-center gap-0.5">
           <StarIcon size={rating} fill={true} className="size-3" />
         </div>

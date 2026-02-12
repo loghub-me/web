@@ -3,7 +3,7 @@ import { TopicLink } from '@/components/client/topic';
 import { UserLink } from '@/components/client/user';
 import { Card, CardContent, CardHeader } from '@ui/card';
 import { Thumbnail } from '@ui/thumbnail';
-import Timestamp from '@ui/timestamp';
+import { Timestamp } from '@ui/timestamp';
 
 interface SeriesMetaCardProps {
   series: Pick<
