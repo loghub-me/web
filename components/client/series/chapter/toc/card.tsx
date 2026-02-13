@@ -2,9 +2,10 @@
 
 import { useTOC } from '@/hooks/use-toc';
 import { cn } from '@/lib/utils';
-import { ButtonLink } from '@ui/button-link';
-import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
+import { MousePointerIcon } from 'lucide-react';
+import Link from 'next/link';
 
 interface SeriesChapterTOCCardProps {
   chapter: Pick<SeriesChapterDetail, 'anchors'>;
@@ -17,24 +18,23 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
   return (
     <Card className="gap-3">
       <CardHeader>
-        <CardTitle className="pl-2 text-sm text-muted-foreground">목차</CardTitle>
+        <CardTitle className="text-sm text-muted-foreground">목차</CardTitle>
       </CardHeader>
-      <CardContent className="px-4 flex flex-col gap-0.5">
+      <CardContent className="px-6 space-y-2">
         {anchors.length === 0 && <ListEmpty className="p-2" message={'목차가 없습니다'} />}
         {anchors.map(({ slug, text, level }) => (
-          <ButtonLink
+          <Link
             key={slug}
             href={`#${encodeURIComponent(slug)}`}
-            size={'sm'}
-            variant={'ghost'}
             className={cn(
-              'px-2 py-1.5 min-h-9 h-auto justify-start whitespace-normal',
-              activeSlug === slug && 'border-border bg-accent'
+              'block w-full text-sm break-all cursor-pointer underline-offset-4 hover:underline transition-all',
+              activeSlug === slug ? 'font-semibold' : 'text-muted-foreground'
             )}
             style={{ marginLeft: `${(level - 1) * 8}px` }}
           >
             {text}
-          </ButtonLink>
+            {activeSlug === slug && <MousePointerIcon className="inline-block size-3 ml-2" />}
+          </Link>
         ))}
       </CardContent>
     </Card>

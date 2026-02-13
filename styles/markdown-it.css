@@ -10,7 +10,7 @@
     h4,
     h5,
     h6 {
-      @apply scroll-mt-20 font-semibold;
+      @apply scroll-mt-20 font-semibold break-all;
     }
 
     h1 {
