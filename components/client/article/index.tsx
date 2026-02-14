@@ -5,6 +5,8 @@ export { default as ArticleSearchQuery } from '@/components/client/article/searc
 export { default as ArticleSearchSort } from '@/components/client/article/search/sort';
 export { default as ArticleSearchSubmit } from '@/components/client/article/search/submit';
 
+export { default as ArticleAsideLeft } from '@/components/client/article/aside/left';
+
 export { default as ArticleActionMenu } from '@/components/client/article/action-menu';
 export { default as ArticleStarToggle } from '@/components/client/article/star/toggle';
 export { default as ArticleTOCCard } from '@/components/client/article/toc/card';

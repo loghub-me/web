@@ -1,6 +1,7 @@
 import { getArticleDetail } from '@/apis/server/article';
 import { ArticleTOCCard } from '@/components/client/article';
 import ArticleComments from '@/components/client/article/comment';
+import ArticleDetailWrapper from '@/components/client/article/detail/wrapper';
 import {
   ArticleAsideRight,
   ArticleDetailContent,
@@ -35,7 +36,7 @@ export default async function ArticleDetailPage({ params }: PageProps<'/articles
   return (
     <main className="container mx-auto py-20 min-h-screen space-y-4">
       <ArticleDetailHero article={article} />
-      <div className="flex gap-4">
+      <ArticleDetailWrapper>
         <div className="w-full min-w-0 space-y-4">
           <Card className="pt-0">
             <ArticleDetailHeader article={article} />
@@ -46,7 +47,7 @@ export default async function ArticleDetailPage({ params }: PageProps<'/articles
         <ArticleAsideRight>
           <ArticleTOCCard article={article} />
         </ArticleAsideRight>
-      </div>
+      </ArticleDetailWrapper>
     </main>
   );
 }

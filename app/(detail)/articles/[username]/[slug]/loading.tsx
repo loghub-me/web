@@ -1,4 +1,5 @@
 import { ArticleTOCSkeleton } from '@/components/client/article';
+import { ArticleAsideLeft } from '@/components/client/article';
 import { ArticleAsideRight } from '@/components/server/article';
 import { Skeleton } from '@ui/skeleton';
 
@@ -14,6 +15,9 @@ export default function ArticleDetailLoading() {
         </div>
       </div>
       <div className="flex gap-4">
+        <ArticleAsideLeft compact={false}>
+          <Skeleton className="w-12 h-18" />
+        </ArticleAsideLeft>
         <div className="w-full min-w-0 space-y-4">
           <div className="p-4 space-y-8">
             <div className="flex gap-2">
