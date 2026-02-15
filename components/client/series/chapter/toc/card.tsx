@@ -16,7 +16,7 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
   const activeSlug = useTOC(anchors);
 
   return (
-    <Card className="gap-3">
+    <Card className="gap-3 max-h-[80vh] overflow-y-auto">
       <CardHeader>
         <CardTitle className="text-sm text-muted-foreground">목차</CardTitle>
       </CardHeader>
@@ -33,7 +33,7 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
             style={{ marginLeft: `${(level - 1) * 8}px` }}
           >
             {text}
-            {activeSlug === slug && <MousePointerIcon className="inline-block size-3 ml-2" />}
+            {activeSlug === slug && <MousePointerIcon className="text-primary inline-block size-3 ml-2" />}
           </Link>
         ))}
       </CardContent>
