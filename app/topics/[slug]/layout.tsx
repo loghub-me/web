@@ -1,4 +1,5 @@
 import { getTopicDetail } from '@/apis/server/topic';
+import { TopicDetailNav } from '@/components/client/topic';
 import ThemedImage from '@/components/global/themed-image';
 import { TopicDetailAside, TopicDetailAsideSkeleton } from '@/components/server/topic';
 import { parseObject } from '@/lib/parse';
@@ -27,13 +28,16 @@ export default async function TopicDetailLayout({ params, children }: LayoutProp
 
   return (
     <main className="container mx-auto px-4 py-20 min-h-screen space-y-4">
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-8">
         <TopicDetailAside>
           <Suspense fallback={<TopicDetailAsideSkeleton />}>
             <TopicDetailAsideContent topic={topic} />
           </Suspense>
         </TopicDetailAside>
-        {children}
+        <div className="flex-1 space-y-4">
+          <TopicDetailNav {...parsedParam} />
+          {children}
+        </div>
       </div>
     </main>
   );

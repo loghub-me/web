@@ -15,4 +15,6 @@ interface TopicUsage {
   count: number;
 }
 
-type TopicDetailView = 'articles' | 'series' | 'questions';
+type TopicArticleSort = 'trending' | 'latest' | 'oldest';
+type TopicSeriesSort = 'trending' | 'latest' | 'oldest';
+type TopicQuestionSort = 'trending' | 'latest' | 'oldest';

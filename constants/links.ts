@@ -83,12 +83,6 @@ const LEGAL_LINKS = [
 ];
 const SUPPORT_LINKS = [{ label: '문의하기', href: '/support' }];
 
-const TOPIC_DETAIL_LINKS = [
-  { label: '아티클', view: 'articles', icon: NotepadTextIcon },
-  { label: '시리즈', view: 'series', icon: LayersIcon },
-  { label: '질문', view: 'questions', icon: MessagesSquareIcon },
-];
-
 const HEADER_LINKS = SEARCH_LINKS;
 const FOOTER_LINKS = [
   { label: '탐색', links: SEARCH_LINKS },
@@ -131,4 +125,4 @@ const COMMAND_LINKS = [
   },
 ];
 
-export { HEADER_LINKS, FOOTER_LINKS, LEGAL_LINKS, TOPIC_DETAIL_LINKS, POST_LINKS, COMMAND_LINKS };
+export { HEADER_LINKS, FOOTER_LINKS, LEGAL_LINKS, POST_LINKS, COMMAND_LINKS };

@@ -53,6 +53,24 @@ const QUESTION_FILTER_OPTIONS: Record<QuestionFilter, { label: string }> = {
   solved: { label: '해결됨' },
 };
 
+const TOPIC_ARTICLE_SORT_OPTIONS: Record<TopicArticleSort, { label: string; icon: LucideIcon }> = {
+  trending: { label: '인기순', icon: TrendingUpIcon },
+  latest: { label: '최신순', icon: CalendarArrowDownIcon },
+  oldest: { label: '오래된순', icon: CalendarArrowUpIcon },
+};
+
+const TOPIC_SERIES_SORT_OPTIONS: Record<TopicSeriesSort, { label: string; icon: LucideIcon }> = {
+  trending: { label: '인기순', icon: TrendingUpIcon },
+  latest: { label: '최신순', icon: CalendarArrowDownIcon },
+  oldest: { label: '오래된순', icon: CalendarArrowUpIcon },
+};
+
+const TOPIC_QUESTION_SORT_OPTIONS: Record<TopicQuestionSort, { label: string; icon: LucideIcon }> = {
+  trending: { label: '인기순', icon: TrendingUpIcon },
+  latest: { label: '최신순', icon: CalendarArrowDownIcon },
+  oldest: { label: '오래된순', icon: CalendarArrowUpIcon },
+};
+
 const USER_STAR_TARGET_OPTIONS: Record<UserStarTarget, { label: string; path: string; icon: LucideIcon }> = {
   ARTICLE: { label: '아티클', path: '/articles', icon: NotepadTextIcon },
   SERIES: { label: '시리즈', path: '/series', icon: LayersIcon },
@@ -92,6 +110,9 @@ export {
   QUESTION_SORT_OPTIONS,
   QUESTION_STATUS_OPTIONS,
   QUESTION_FILTER_OPTIONS,
+  TOPIC_ARTICLE_SORT_OPTIONS,
+  TOPIC_SERIES_SORT_OPTIONS,
+  TOPIC_QUESTION_SORT_OPTIONS,
   USER_STAR_TARGET_OPTIONS,
   USER_ACTIVITY_ACTION_OPTIONS,
   THEME_OPTIONS,
