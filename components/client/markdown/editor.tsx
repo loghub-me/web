@@ -4,11 +4,11 @@ import { MarkdownDraftSaveButton, MarkdownImageUploadButton } from '@/components
 import { ErrorMessage } from '@/constants/messages';
 import { cn } from '@/lib/utils';
 import '@/styles/easymde.css';
+import { MarkdownRenderer } from '@loghub-me/markdown-renderer';
 import { Separator } from '@ui/separator';
 import { ToggleGroup, ToggleGroupItem } from '@ui/toggle-group';
 import type EasyMDE from 'easymde';
 import { Options as EasyMDEOptions } from 'easymde';
-import { MarkdownRenderer } from 'loghub-me-markdown-renderer';
 import { Columns2Icon, EyeIcon, PencilIcon } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
