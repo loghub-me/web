@@ -15,5 +15,6 @@ const getUserQuestions = async (username: string, searchParams: z.infer<typeof q
   serverAPI.get(`users/@${username}/questions`, { searchParams }).json<Page<Question>>();
 const getUserStars = (username: string, searchParams: z.infer<typeof userStarSearchSchema>) =>
   serverAPI.get(`users/@${username}/stars`, { searchParams }).json<Page<UserStar>>();
+const getUserPosts = async (username: string) => serverAPI.get(`users/@${username}/posts`).json<UserPost[]>();
 
-export { getUserDetail, getUserArticles, getUserSeries, getUserQuestions, getUserStars };
+export { getUserDetail, getUserArticles, getUserSeries, getUserQuestions, getUserStars, getUserPosts };

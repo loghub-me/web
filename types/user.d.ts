@@ -49,6 +49,12 @@ interface UserStar {
   target: UserStarTarget;
 }
 
+interface UserPost {
+  title: string;
+  link: string;
+  publishedAt: string;
+}
+
 interface UserActivitySummary {
   date: string;
   count: number;
