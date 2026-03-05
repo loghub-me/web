@@ -4,6 +4,7 @@ import { clientAPI } from '@/apis/client/instance';
 import { buildAPIUrl } from '@/lib/utils';
 import {
   joinConfirmSchema,
+  emailBlockSearchParamsSchema,
   joinRequestSchema,
   loginConfirmSchema,
   loginRequestSchema,
@@ -19,6 +20,8 @@ const confirmJoin = (json: z.infer<typeof joinConfirmSchema>) =>
   clientAPI.post('auth/join/confirm', { json }).then(afterConfirm);
 const confirmOAuth2Join = (json: z.infer<typeof oauth2JoinConfirmSchema>) =>
   clientAPI.post('oauth2/join/confirm', { json }).then(afterConfirm);
+const blockEmail = (json: z.infer<typeof emailBlockSearchParamsSchema>) =>
+  clientAPI.post('auth/email/block', { json }).json<MessageResponseBody>();
 
 const requestLogin = (json: z.infer<typeof loginRequestSchema>) =>
   clientAPI.post('auth/login/request', { json }).json<MessageResponseBody>();
@@ -81,6 +84,6 @@ function extractSessionFromToken(token: string) {
   } as Session;
 }
 
-export { requestJoin, confirmJoin, confirmOAuth2Join };
+export { requestJoin, confirmJoin, confirmOAuth2Join, blockEmail };
 export { requestLogin, confirmLogin };
 export { logout, refreshToken };

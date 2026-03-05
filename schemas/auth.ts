@@ -32,6 +32,7 @@ const joinRequestSchema = z.object({
 });
 const joinConfirmSchema = z.object({ email, otp });
 const joinConfirmSearchParamsSchema = z.object({ email, otp: otp.optional() });
+const emailBlockSearchParamsSchema = z.object({ token });
 
 const oauth2JoinConfirmSchema = z.object({ email, username, nickname, token, agreeTerms: agree, agreePrivacy: agree });
 const oauth2JoinConfirmSearchParamsSchema = z.object({ email, token });
@@ -44,6 +45,6 @@ const loginErrorSearchParamsSchema = z.object({
 });
 
 export { session, authResponseSchema };
-export { joinRequestSchema, joinConfirmSchema, joinConfirmSearchParamsSchema };
+export { joinRequestSchema, joinConfirmSchema, joinConfirmSearchParamsSchema, emailBlockSearchParamsSchema };
 export { oauth2JoinConfirmSchema, oauth2JoinConfirmSearchParamsSchema };
 export { loginRequestSchema, loginConfirmSchema, loginConfirmSearchParamsSchema, loginErrorSearchParamsSchema };
