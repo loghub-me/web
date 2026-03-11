@@ -71,6 +71,9 @@ importers:
       ogl:
         specifier: ^1.0.11
         version: 1.0.11
+      parse-sse:
+        specifier: ^0.1.0
+        version: 0.1.0
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -2247,6 +2250,10 @@ packages:
 
   parse-srcset@1.0.2:
     resolution: {integrity: sha512-/2qh0lav6CmI15FzA3i/2Bzk2zCgQhGMkvhOhKNcBVQ1ldgpbfiNTVslmooUmWJcADi1f1kIeynbDRVzNlfR6Q==}
+
+  parse-sse@0.1.0:
+    resolution: {integrity: sha512-8bObUwtEuLp2Z1gP6iRVMBzmEqaU5ohmofa3WmZVFfFZFKRP/+c03y8NVYzzXmQMotQ6mDS5Mnyk6tT1gKOTcQ==}
+    engines: {node: '>=20'}
 
   parse-statements@1.0.11:
     resolution: {integrity: sha512-HlsyYdMBnbPQ9Jr/VgJ1YF4scnldvJpJxCVx6KgqPL4dxppsWrJHCIIxQXMJrqGnsRkNPATbeMJ8Yxu7JMsYcA==}
@@ -4931,6 +4938,8 @@ snapshots:
       parse-statements: 1.0.11
 
   parse-srcset@1.0.2: {}
+
+  parse-sse@0.1.0: {}
 
   parse-statements@1.0.11: {}
 

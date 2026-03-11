@@ -97,7 +97,7 @@ const CHAT_MODEL_OPTIONS: Record<ChatModel, { label: string; icon: string }> = {
   O3: { label: 'O3', icon: 'openai' },
 };
 
-const NOTIFICATION_TYPE_OPTIONS: Record<NotiifcationType, { icon: LucideIcon; color: string }> = {
+const NOTIFICATION_TYPE_OPTIONS: Record<NotificationType, { icon: LucideIcon; color: string }> = {
   INFO: { icon: InfoIcon, color: 'text-blue-500' },
   SUCCESS: { icon: CircleCheckIcon, color: 'text-green-500' },
   WARNING: { icon: TriangleAlertIcon, color: 'text-yellow-500' },
