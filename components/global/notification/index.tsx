@@ -58,7 +58,7 @@ export default function GlobalNotification() {
             </Button>
           </div>
           <DropdownMenuSeparator />
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-80 overflow-y-auto">
             {notifications.length === 0 && <ListEmpty message={'알림이 없습니다'} className="p-4" />}
             {notifications.map((notification) => (
               <NotificationListItem key={notification.id} notification={notification} closeMenu={closeMenu} />
