@@ -9,7 +9,7 @@ export default function PostManual() {
   return (
     <section id="post" className="space-y-4">
       <div className="space-y-1.5">
-        <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/70 to-primary">
+        <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-primary/70 to-primary">
           포스트 매뉴얼
         </h2>
         <p className="text-secondary-foreground mt-2">

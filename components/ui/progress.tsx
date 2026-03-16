@@ -5,9 +5,9 @@ import { Progress as ProgressPrimitive } from '@base-ui/react/progress';
 
 function Progress({ className, children, value, ...props }: ProgressPrimitive.Root.Props) {
   const getColorClass = (value: number) => {
-    if (value <= 25) return 'from-primary/25 to-primary/50 bg-gradient-to-r';
-    if (value <= 50) return 'from-primary/50 to-primary/75 bg-gradient-to-r';
-    if (value <= 75) return 'from-primary/75 to-primary/90 bg-gradient-to-r';
+    if (value <= 25) return 'from-primary/25 to-primary/50 bg-linear-to-r';
+    if (value <= 50) return 'from-primary/50 to-primary/75 bg-linear-to-r';
+    if (value <= 75) return 'from-primary/75 to-primary/90 bg-linear-to-r';
     return 'bg-primary';
   };
 

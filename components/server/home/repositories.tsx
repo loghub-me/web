@@ -31,7 +31,7 @@ export default function HomeRepositoriesSection() {
         'LogHub의 보조 작업을 처리하는 Task API 서버 레포지토리입니다. Elysia + TypeScript로 작성되었습니다.',
       icon: ServerCogIcon,
       topics: [
-        { slug: 'elysia', name: 'Elysia' },
+        { slug: 'elysiajs', name: 'Elysia' },
         { slug: 'typescript', name: 'TypeScript' },
       ] satisfies Topic[],
     },
@@ -50,10 +50,10 @@ export default function HomeRepositoriesSection() {
   return (
     <section className="mx-auto mt-16 max-w-6xl px-16 space-y-8">
       <div className="space-y-2 md:text-center">
-        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/50 to-primary">
+        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-primary/50 to-primary">
           LogHub는 완전한 오픈소스입니다
         </h3>
-        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 dark:from-gray-400 to-foreground">
+        <p className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-gray-500 dark:from-gray-400 to-foreground">
           언제든지 소스 코드를 확인하고 기여할 수 있습니다. 피드백, PR, 이슈 모두 환영합니다!
         </p>
       </div>

@@ -32,10 +32,10 @@ export default function HomeContentsSection() {
   return (
     <section className="mx-auto max-w-6xl px-16 space-y-8">
       <div className="space-y-2 md:text-center">
-        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/50 to-primary">
+        <h3 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-primary/50 to-primary">
           주요 컨텐츠를 탐색하세요
         </h3>
-        <p className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 dark:from-gray-400 to-foreground">
+        <p className="text-lg font-bold text-transparent bg-clip-text bg-linear-to-r from-gray-500 dark:from-gray-400 to-foreground">
           다양한 주제의 아티클, 시리즈, 질문을 통해 지식을 확장하고 커뮤니티와 소통하세요.
         </p>
       </div>

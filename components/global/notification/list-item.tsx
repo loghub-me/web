@@ -10,7 +10,6 @@ import { SimpleTooltip } from '@ui/simple-tooltip';
 import { RelativeTimestamp } from '@ui/timestamp';
 import { DeleteIcon } from 'lucide-react';
 import Link from 'next/link';
-import { toast } from 'sonner';
 
 interface NotificationListItemProps {
   notification: NotificationDTO;

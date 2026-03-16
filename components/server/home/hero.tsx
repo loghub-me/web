@@ -24,10 +24,10 @@ export default function HomeHeroSection() {
         </OrbitingCircle>
       ))}
       <Logo width={256} height={64} className="w-48 md:w-56" />
-      <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary/50 to-primary">
+      <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-primary/50 to-primary">
         개발자들을 위한 지식 공유 플랫폼
       </h2>
-      <h3 className="text-xl md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-500 dark:from-gray-400 to-foreground">
+      <h3 className="text-xl md:text-xl font-bold text-transparent bg-clip-text bg-linear-to-r from-gray-500 dark:from-gray-400 to-foreground">
         LogHub와 함께 당신의 지식을 나누세요!
       </h3>
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mt-4">
