@@ -54,10 +54,5 @@
     "tailwindcss": "^4.1.18",
     "tw-animate-css": "^1.3.8",
     "typescript": "^5"
-  },
-  "pnpm": {
-    "overrides": {
-      "minimatch": ">=9.0.7"
-    }
   }
 }
