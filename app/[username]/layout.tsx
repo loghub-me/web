@@ -2,7 +2,7 @@ import { getUserDetail } from '@/apis/server/user';
 import { TopicIcon } from '@/components/client/topic';
 import { UserAvatar, UserDetailNav } from '@/components/client/user';
 import { TopicUsagesChart } from '@/components/server/topic';
-import { UserDetailAside, UserDetailAsideSkeleton } from '@/components/server/user';
+import { UserDetailAside, UserDetailAsideSkeleton, UserRoleBadge } from '@/components/server/user';
 import { parseObject } from '@/lib/parse';
 import { userDetailSchema } from '@/schemas/user';
 import { Badge } from '@ui/badge';
@@ -39,7 +39,7 @@ interface UserDetailAsideContentProps {
 
 async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentProps>) {
   const resolvedUser = await user;
-  const { email, username, nickname, meta } = resolvedUser;
+  const { email, username, nickname, role, meta } = resolvedUser;
   const { github, stats } = meta;
 
   return (
@@ -48,6 +48,7 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
       <div className="w-full space-y-1.5">
         <h3 className="text-lg font-semibold">@{username}</h3>
         <p className="text-muted-foreground">{nickname}</p>
+        <UserRoleBadge role={role} color={role} />
       </div>
       <div className="space-y-1.5 w-full">
         {email && <UserDetailAsideEmail email={email} />}
