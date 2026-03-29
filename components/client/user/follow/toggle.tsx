@@ -45,7 +45,7 @@ export default function UserFollowToggle({ followeeId }: Readonly<UserFollowTogg
     mutate(Boolean(exists));
   }
 
-  if (session?.id === followeeId) return null;
+  if (status !== 'authenticated' || session.id === followeeId) return null;
 
   return (
     <Button variant="outline" className="w-full" onClick={onButtonClick} disabled={existsLoading || isPending}>

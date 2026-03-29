@@ -50,7 +50,7 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
         <p className="text-muted-foreground">{nickname}</p>
         <UserRoleBadge role={role} color={role} />
       </div>
-      <div className="space-y-1.5 w-full">
+      <div className="space-y-2 w-full">
         {email && <UserDetailAsideEmail email={email} />}
         {github.username && <UserDetailAsideGitHub github={github} />}
         <UserFollowToggle followeeId={resolvedUser.id} />
