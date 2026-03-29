@@ -6,6 +6,8 @@ export { default as UserMention } from '@/components/client/user/mention';
 
 export { default as UserDetailNav } from '@/components/client/user/detail/nav';
 
+export { default as UserFollowToggle } from '@/components/client/user/follow/toggle';
+
 export { default as UserActivityCalendar } from '@/components/client/user/activity/calendar';
 export { default as UserActivityList } from '@/components/client/user/activity/list';
 export { default as UserActivityListItem } from '@/components/client/user/activity/list-item';

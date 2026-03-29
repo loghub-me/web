@@ -1,6 +1,6 @@
 import { getUserDetail } from '@/apis/server/user';
 import { TopicIcon } from '@/components/client/topic';
-import { UserAvatar, UserDetailNav } from '@/components/client/user';
+import { UserAvatar, UserDetailNav, UserFollowToggle } from '@/components/client/user';
 import { TopicUsagesChart } from '@/components/server/topic';
 import { UserDetailAside, UserDetailAsideSkeleton, UserRoleBadge } from '@/components/server/user';
 import { parseObject } from '@/lib/parse';
@@ -53,6 +53,7 @@ async function UserDetailAsideContent({ user }: Readonly<UserDetailAsideContentP
       <div className="space-y-1.5 w-full">
         {email && <UserDetailAsideEmail email={email} />}
         {github.username && <UserDetailAsideGitHub github={github} />}
+        <UserFollowToggle followeeId={resolvedUser.id} />
         <UserDetailAsideStats stats={stats} />
       </div>
     </>
@@ -93,10 +94,19 @@ function UserDetailAsideGitHub({ github }: { github: UserGitHub }) {
 }
 
 function UserDetailAsideStats({ stats }: { stats: UserStats }) {
+  const { followersCount, followingCount } = stats;
   const { totalPostedCount, totalAddedStarCount, totalGazedStarCount, topicUsages } = stats;
 
   return (
-    <div className="space-y-4">
+    <div>
+      <div className="flex items-center gap-3 text-sm">
+        <Badge variant={'muted'} className="px-0">
+          팔로워: <span className="font-mono text-foreground">{followersCount}</span>
+        </Badge>
+        <Badge variant={'muted'} className="px-0">
+          팔로잉: <span className="font-mono text-foreground">{followingCount}</span>
+        </Badge>
+      </div>
       <div className="flex items-center gap-3 text-sm">
         <Badge variant={'muted'} className="px-0">
           작성한 게시물: <span className="font-mono text-foreground">{totalPostedCount}</span>
@@ -113,7 +123,7 @@ function UserDetailAsideStats({ stats }: { stats: UserStats }) {
       </div>
       {topicUsages.length > 0 && (
         <>
-          <Separator />
+          <Separator className="my-2" />
           <div className="space-y-2">
             <h2 className="font-medium">토픽 사용 현황</h2>
             <TopicUsagesChart topicUsages={topicUsages} />

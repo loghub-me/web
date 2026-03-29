@@ -34,6 +34,17 @@ const withdraw = () =>
     return body;
   });
 
+const getFollowers = async (followeeId: number, page: number) =>
+  clientAPI.get(`users/follows/${followeeId}`, { searchParams: { page } }).json<Page<User>>();
+const getFollowees = async (followerId: number, page: number) =>
+  clientAPI.get(`users/followees/${followerId}`, { searchParams: { page } }).json<Page<User>>();
+const existsFollow = async (followeeId: number) =>
+  clientAPI.get(`users/follows/${followeeId}`).json<DataResponseBody<boolean>>();
+const followUser = async (followeeId: number) =>
+  clientAPI.post(`users/follows/${followeeId}`).json<MessageResponseBody>();
+const unfollowUser = async (followeeId: number) =>
+  clientAPI.delete(`users/follows/${followeeId}`).json<MessageResponseBody>();
+
 const getSelfGitHub = async () => clientAPI.get('users/github').json<UserGitHub>();
 const updateSelfGitHub = async (json: z.infer<typeof userGitHubUpdateSchema>) =>
   clientAPI.put('users/github', { json }).json<MessageResponseBody>();
@@ -58,6 +69,7 @@ export { searchUnpublishedArticles, searchArticlesForImport };
 export { getActivitySummaries, getActivities };
 export { updateSelfUsername, updateSelfAvatar };
 export { withdraw };
+export { getFollowers, getFollowees, existsFollow, followUser, unfollowUser };
 export { getSelfGitHub, updateSelfGitHub, deleteSelfGitHub, verifySelfGitHub };
 export { getSelfProfile, updateSelfProfile };
 export { getSelfPrivacy, updateSelfPrivacy };

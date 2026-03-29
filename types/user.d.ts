@@ -28,6 +28,8 @@ interface UserGitHub {
 }
 
 interface UserStats {
+  followersCount: number;
+  followingCount: number;
   totalPostedCount: number;
   totalAddedStarCount: number;
   totalGazedStarCount: number;
