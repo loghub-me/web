@@ -4,7 +4,7 @@ import { useTOC } from '@/hooks/use-toc';
 import { cn } from '@/lib/utils';
 import { Card, CardHeader, CardTitle, CardContent } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
-import { MousePointerIcon } from 'lucide-react';
+import { CornerDownLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
 interface SeriesChapterTOCCardProps {
@@ -33,7 +33,7 @@ export default function SeriesChapterTOCCard({ chapter }: Readonly<SeriesChapter
             style={{ marginLeft: `${(level - 1) * 8}px` }}
           >
             {text}
-            {activeSlug === slug && <MousePointerIcon className="text-primary inline-block size-3 ml-2" />}
+            {activeSlug === slug && <CornerDownLeftIcon className="text-primary inline-block size-3 ml-2 -mt-1" />}
           </Link>
         ))}
       </CardContent>

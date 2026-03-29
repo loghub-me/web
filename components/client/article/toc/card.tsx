@@ -4,7 +4,7 @@ import { useTOC } from '@/hooks/use-toc';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@ui/card';
 import ListEmpty from '@ui/list-empty';
-import { MousePointerIcon } from 'lucide-react';
+import { CornerDownLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
 interface ArticleTOCCardProps {
@@ -33,7 +33,7 @@ export default function ArticleTOCCard({ article }: Readonly<ArticleTOCCardProps
             style={{ marginLeft: `${(level - 1) * 8}px` }}
           >
             {text}
-            {activeSlug === slug && <MousePointerIcon className="text-primary inline-block size-3 ml-2" />}
+            {activeSlug === slug && <CornerDownLeftIcon className="text-primary inline-block size-3 ml-2 -mt-1" />}
           </Link>
         ))}
       </CardContent>
