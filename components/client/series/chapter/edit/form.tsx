@@ -2,6 +2,7 @@
 
 import { editSeriesChapter } from '@/apis/client/series';
 import { PublishedField, TitleField } from '@/components/client/field';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { seriesChapterEditSchema } from '@/schemas/series';
 import { useQueryClient } from '@tanstack/react-query';
@@ -22,6 +23,7 @@ interface SeriesChapterEditFormProps {
 
 export default function SeriesChapterEditForm({ seriesId, chapterId, form }: Readonly<SeriesChapterEditFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const queryKeys = [['getSeriesForEdit', seriesId], ['getSeriesChapterForEdit', seriesId, chapterId] as const];
   const queryClient = useQueryClient();
 
@@ -31,6 +33,7 @@ export default function SeriesChapterEditForm({ seriesId, chapterId, form }: Rea
       toast.success(message);
 
       await Promise.all(queryKeys.map((key) => queryClient.invalidateQueries({ queryKey: key })));
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

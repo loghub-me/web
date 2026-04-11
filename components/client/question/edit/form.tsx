@@ -2,6 +2,7 @@
 
 import { editQuestion } from '@/apis/client/question';
 import { TitleField, TopicSlugsField } from '@/components/client/field';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { questionEditSchema } from '@/schemas/question';
 import { useQueryClient } from '@tanstack/react-query';
@@ -22,6 +23,7 @@ interface QuestionEditFormProps {
 
 export default function QuestionEditForm({ id: questionId, form }: Readonly<QuestionEditFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const queryKey = ['getQuestionForEdit', questionId] as const;
   const queryClient = useQueryClient();
   const [topicSlugs, setTopicSlugs] = useState(new Set(form.getValues('topicSlugs')));
@@ -32,6 +34,7 @@ export default function QuestionEditForm({ id: questionId, form }: Readonly<Ques
       toast.success(message);
 
       await queryClient.invalidateQueries({ queryKey });
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

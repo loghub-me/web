@@ -1,3 +1,4 @@
+import ExitGuard from '@/guard/exit';
 import MemberGuard from '@/guard/member';
 import { Metadata } from 'next';
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function ArticlePostLayout({ children }: Readonly<LayoutProps<'/post/articles'>>) {
-  return <MemberGuard>{children}</MemberGuard>;
+  return (
+    <MemberGuard>
+      <ExitGuard>{children} </ExitGuard>
+    </MemberGuard>
+  );
 }

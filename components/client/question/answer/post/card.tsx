@@ -1,5 +1,6 @@
 'use client';
 
+import ExitGuard from '@/guard/exit';
 import { QuestionAnswerPostForm } from '@/components/client/question';
 import { useAuth } from '@/hooks/use-auth';
 import { ButtonLink } from '@ui/button-link';
@@ -32,7 +33,9 @@ export default function QuestionAnswerPostCard({ question }: Readonly<QuestionAn
     </Card>
   ) : (
     <Card className="p-0 overflow-hidden">
-      <QuestionAnswerPostForm questionId={question.id} />
+      <ExitGuard>
+        <QuestionAnswerPostForm questionId={question.id} />
+      </ExitGuard>
     </Card>
   );
 }

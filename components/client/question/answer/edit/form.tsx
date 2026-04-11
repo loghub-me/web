@@ -2,6 +2,7 @@
 
 import { editQuestionAnswer } from '@/apis/client/question';
 import { TitleField } from '@/components/client/field';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { questionAnswerEditSchema } from '@/schemas/question';
 import { useQueryClient } from '@tanstack/react-query';
@@ -22,6 +23,7 @@ interface QuestionAnswerEditFormProps {
 
 export default function QuestionAnswerEditForm({ questionId, answerId, form }: Readonly<QuestionAnswerEditFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const queryKey = ['getQuestionAnswerForEdit', questionId, answerId] as const;
   const queryClient = useQueryClient();
 
@@ -31,6 +33,7 @@ export default function QuestionAnswerEditForm({ questionId, answerId, form }: R
       toast.success(message);
 
       await queryClient.invalidateQueries({ queryKey });
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

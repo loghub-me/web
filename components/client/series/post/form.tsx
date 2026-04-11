@@ -3,6 +3,7 @@
 import { postSeries } from '@/apis/client/series';
 import { TitleField, ThumbnailField, TopicSlugsField } from '@/components/client/field';
 import { DEFAULT_SERIES_THUMBNAIL } from '@/constants/default-values';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { seriesPostSchema } from '@/schemas/series';
 import { Button } from '@ui/button';
@@ -21,12 +22,14 @@ interface SeriesPostFormProps {
 
 export default function SeriesPostForm({ form }: Readonly<SeriesPostFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const [topicSlugs, setTopicSlugs] = useState(new Set<string>());
 
   async function onSubmit(values: z.infer<typeof seriesPostSchema>) {
     try {
       const { pathname, message } = await postSeries(values);
       toast.success(message);
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

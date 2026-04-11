@@ -3,6 +3,7 @@
 import { postArticle } from '@/apis/client/article';
 import { TitleField, ThumbnailField, TopicSlugsField, PublishedField } from '@/components/client/field';
 import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { articlePostSchema } from '@/schemas/article';
 import { Button } from '@ui/button';
@@ -21,12 +22,14 @@ interface ArticlePostFormProps {
 
 export default function ArticlePostForm({ form }: Readonly<ArticlePostFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const [topicSlugs, setTopicSlugs] = useState(new Set<string>());
 
   async function onSubmit(values: z.infer<typeof articlePostSchema>) {
     try {
       const { pathname, message } = await postArticle(values);
       toast.success(message);
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

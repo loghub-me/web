@@ -2,6 +2,7 @@
 
 import { postQuestion } from '@/apis/client/question';
 import { TitleField, TopicSlugsField } from '@/components/client/field';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { questionPostSchema } from '@/schemas/question';
 import { Button } from '@ui/button';
@@ -20,12 +21,14 @@ interface QuestionPostFormProps {
 
 export default function QuestionPostForm({ form }: Readonly<QuestionPostFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const [topicSlugs, setTopicSlugs] = useState(new Set<string>());
 
   async function onSubmit(values: z.infer<typeof questionPostSchema>) {
     try {
       const { pathname, message } = await postQuestion(values);
       toast.success(message);
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

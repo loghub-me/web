@@ -2,6 +2,7 @@
 
 import { postQuestionAnswer } from '@/apis/client/question';
 import { MarkdownEditor } from '@/components/client/markdown';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { questionAnswerPostSchema } from '@/schemas/question';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,6 +23,7 @@ interface QuestionAnswerPostFormProps {
 
 export default function QuestionAnswerPostForm({ questionId }: Readonly<QuestionAnswerPostFormProps>) {
   const easyMDERef = useRef<EasyMDE>(null);
+  const { disableExitGuard } = useExitGuard();
   const form = useForm<z.infer<typeof questionAnswerPostSchema>>({
     resolver: zodResolver(questionAnswerPostSchema),
     defaultValues: { title: '', content: '' },
@@ -34,6 +36,7 @@ export default function QuestionAnswerPostForm({ questionId }: Readonly<Question
       toast.success(message);
       form.reset();
       easyMDERef.current?.value('');
+      disableExitGuard();
       router.refresh();
     } catch (err) {
       handleFormError(err, form.setError);

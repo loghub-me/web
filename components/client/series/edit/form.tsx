@@ -3,6 +3,7 @@
 import { editSeries } from '@/apis/client/series';
 import { TitleField, ThumbnailField, TopicSlugsField } from '@/components/client/field';
 import { DEFAULT_SERIES_THUMBNAIL } from '@/constants/default-values';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { seriesEditSchema } from '@/schemas/series';
 import { useQueryClient } from '@tanstack/react-query';
@@ -23,6 +24,7 @@ interface SeriesEditFormProps {
 
 export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEditFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const queryKey = ['getSeriesForEdit', seriesId] as const;
   const queryClient = useQueryClient();
   const [topicSlugs, setTopicSlugs] = useState(new Set(form.getValues('topicSlugs')));
@@ -33,6 +35,7 @@ export default function SeriesEditForm({ id: seriesId, form }: Readonly<SeriesEd
       toast.success(message);
 
       await queryClient.invalidateQueries({ queryKey });
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);

@@ -3,6 +3,7 @@
 import { editArticle } from '@/apis/client/article';
 import { TitleField, ThumbnailField, TopicSlugsField, PublishedField } from '@/components/client/field';
 import { DEFAULT_ARTICLE_THUMBNAIL } from '@/constants/default-values';
+import { useExitGuard } from '@/hooks/use-exit-guard';
 import { handleFormError } from '@/lib/error';
 import { articleEditSchema } from '@/schemas/article';
 import { useQueryClient } from '@tanstack/react-query';
@@ -23,6 +24,7 @@ interface ArticleEditFormProps {
 
 export default function ArticleEditForm({ id: articleId, form }: Readonly<ArticleEditFormProps>) {
   const router = useRouter();
+  const { disableExitGuard } = useExitGuard();
   const queryKey = ['getArticleForEdit', articleId] as const;
   const queryClient = useQueryClient();
   const [topicSlugs, setTopicSlugs] = useState(new Set(form.getValues('topicSlugs')));
@@ -33,6 +35,7 @@ export default function ArticleEditForm({ id: articleId, form }: Readonly<Articl
       toast.success(message);
 
       await queryClient.invalidateQueries({ queryKey });
+      disableExitGuard();
       router.push(pathname);
     } catch (err) {
       handleFormError(err, form.setError);
