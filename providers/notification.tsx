@@ -250,7 +250,7 @@ export default function NotificationProvider({ children }: Readonly<{ children: 
         }
       } catch {
         if (!abortController.signal.aborted) {
-          console.error('Notification stream disconnected:');
+          console.warn('Notification stream disconnected');
         }
       } finally {
         if (cancelled || abortController.signal.aborted) {

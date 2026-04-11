@@ -56,7 +56,7 @@ export default function TopicUsagesChart({ topicUsages }: Readonly<TopicUsagesCh
             >
               {topic.name}
             </Link>
-            <span className="text-foreground tabular-nums">{topic.percentageLabel}%</span>
+            <span className="tabular-nums text-foreground">{topic.percentageLabel}%</span>
             <span className="tabular-nums text-xs text-muted-foreground/80">
               {topic.count.toLocaleString('ko-KR')}건
             </span>
