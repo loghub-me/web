@@ -1,7 +1,7 @@
 # LogHub - web
 
-![Node.js](https://img.shields.io/badge/node-20-green?style=plastic)
-![pnpm](https://img.shields.io/badge/pnpm-10-orange?style=plastic)
+![Node.js](https://img.shields.io/badge/node-24-green?style=plastic)
+![pnpm](https://img.shields.io/badge/pnpm-11-orange?style=plastic)
 
 ![GitHub License](https://img.shields.io/github/license/loghub-me/web?style=plastic&logo=github&color=white)
 ![GitHub Release](https://img.shields.io/github/release/loghub-me/web?style=plastic&logo=github&color=white)
