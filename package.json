@@ -1,6 +1,6 @@
 {
   "name": "loghub-web",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -14,7 +14,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^5.2.1",
-    "@loghub-me/markdown-renderer": "^0.2.5",
+    "@loghub-me/markdown-renderer": "^0.2.7",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.3",
     "@tanstack/react-query": "^5.87.1",
