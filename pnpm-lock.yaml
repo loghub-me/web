@@ -24,8 +24,8 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1(react-hook-form@7.62.0(react@19.2.6))
       '@loghub-me/markdown-renderer':
-        specifier: ^0.2.7
-        version: 0.2.7(@types/markdown-it@14.1.2)
+        specifier: ^0.2.8
+        version: 0.2.8(@types/markdown-it@14.1.2)
       '@radix-ui/react-select':
         specifier: ^2.2.6
         version: 2.2.6(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -527,8 +527,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@loghub-me/markdown-renderer@0.2.7':
-    resolution: {integrity: sha512-UOONzioEVD8W7amDLhpfxkqX6e9Kohjnl15oK5RYuffqqn6TFSZTzslmRD2lWz5zhUjWKeCroaLlKNHWHl9BHw==}
+  '@loghub-me/markdown-renderer@0.2.8':
+    resolution: {integrity: sha512-YX1hwAN5rcsJs+WZKm47nBA8nrC8di/rieCXrA0Syd4a7n5+q2RePU/rlj72rlhwYpueqSREiuGFjaXh7Q6yfQ==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -3208,7 +3208,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@loghub-me/markdown-renderer@0.2.7(@types/markdown-it@14.1.2)':
+  '@loghub-me/markdown-renderer@0.2.8(@types/markdown-it@14.1.2)':
     dependencies:
       highlight.js: 11.11.1
       markdown-it: 14.1.1
