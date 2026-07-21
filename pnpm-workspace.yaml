@@ -1,6 +1,8 @@
 allowBuilds:
   sharp: true
   unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@loghub-me/markdown-renderer@0.2.9'
 onlyBuiltDependencies:
   - sharp
   - unrs-resolver
