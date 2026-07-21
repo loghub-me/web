@@ -7,14 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export type RaysOrigin =
-  | 'top-center'
-  | 'top-left'
-  | 'top-right'
-  | 'right'
-  | 'left'
-  | 'bottom-center'
-  | 'bottom-right'
-  | 'bottom-left';
+  'top-center' | 'top-left' | 'top-right' | 'right' | 'left' | 'bottom-center' | 'bottom-right' | 'bottom-left';
 
 interface LightRaysProps {
   raysOrigin?: RaysOrigin;

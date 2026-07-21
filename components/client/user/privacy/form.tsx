@@ -57,9 +57,11 @@ export default function UserPrivacyForm({ privacy }: Readonly<UserPrivacyFormPro
             </div>
             <Switch
               id="privacy-update-form-email-public"
-              {...field}
+              name={field.name}
               checked={field.value}
               onCheckedChange={field.onChange}
+              onBlur={field.onBlur}
+              disabled={fieldState.invalid}
             >
               <SwitchIcon enabledIcon={GlobeIcon} disabledIcon={GlobeLockIcon} value={field.value} />
             </Switch>

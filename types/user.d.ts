@@ -72,8 +72,4 @@ interface UserActivity {
 type UserRole = 'MEMBER' | 'ADMIN' | 'BOT';
 type UserStarTarget = 'ARTICLE' | 'SERIES' | 'QUESTION';
 type UserActivityAction =
-  | 'PUBLISH_ARTICLE'
-  | 'POST_SERIES'
-  | 'PUBLISH_SERIES_CHAPTER'
-  | 'POST_QUESTION'
-  | 'POST_QUESTION_ANSWER';
+  'PUBLISH_ARTICLE' | 'POST_SERIES' | 'PUBLISH_SERIES_CHAPTER' | 'POST_QUESTION' | 'POST_QUESTION_ANSWER';

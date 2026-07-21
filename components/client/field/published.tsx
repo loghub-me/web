@@ -23,7 +23,14 @@ export default function PublishedField<T extends { published: boolean }>({ id, c
             <FieldDescription>다른 사용자에게 포스트를 공개합니다.</FieldDescription>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </div>
-          <Switch id={id} {...field} checked={field.value} onCheckedChange={field.onChange}>
+          <Switch
+            id={id}
+            name={field.name}
+            checked={field.value}
+            onCheckedChange={field.onChange}
+            onBlur={field.onBlur}
+            disabled={fieldState.invalid}
+          >
             <SwitchIcon enabledIcon={GlobeIcon} disabledIcon={GlobeLockIcon} value={field.value} />
           </Switch>
         </Field>
